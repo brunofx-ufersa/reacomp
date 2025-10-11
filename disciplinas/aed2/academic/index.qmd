@@ -1,0 +1,48 @@
+---
+title: "Algoritmos e Estruturas de Dados 2"
+lang: pt
+toc: false
+---
+
+Esta é a versão mais próxima do estilo acadêmica de estudos em **{{< meta title >}}**. O portal está organizado conforme o conteúdo abaixo.
+
+
+::: {.grid}
+
+::: {.g-col-6}
+::: {.card .bg-success .text-white .text-center .p-4}
+<i class="bi bi-tree"></i>   
+**[Árvores](){.stretched-link .text-white}**
+:::
+:::
+
+::: {.g-col-6}
+::: {.card .bg-primary .text-white .text-center .p-4}
+<i class="bi bi-emoji-neutral"></i>  
+**[Estruturas Genéricas](unidade2/1-ponteiros.qmd){.stretched-link .text-white}**
+:::
+:::
+
+
+::: {.g-col-6}
+::: {.card .bg-warning .text-white .text-center .p-4}
+<i class="bi bi-hash"></i>  
+**[Tabela de Dispersão](){.stretched-link .text-white}**
+:::
+:::
+
+::: {.g-col-6}
+::: {.card .bg-info .text-white .text-center .p-4}
+<i class="bi bi-card-checklist"></i>  
+**[Lista de Prioridade](){.stretched-link .text-white}**
+:::
+:::
+
+::: {.g-col-12}
+::: {.card .bg-danger .text-white .text-center .p-4}
+<i class="bi bi-bounding-box-circles"></i>  
+**[Grafos](){.stretched-link .text-white}**
+:::
+:::
+
+:::

@@ -1,0 +1,74 @@
+/* ======== Barra de progresso (topo) ======== */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 6px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  z-index: 9999;
+  transition: width 0.3s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* ======== Callouts Gamificados ======== */
+
+/* DICA / MISSÃO */
+.callout-tip {
+  border-left: 6px solid #00b894;
+  background: #e8fdf2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.callout-tip .callout-title {
+  color: #008a5e;
+  font-weight: 700;
+}
+
+/* DESAFIO */
+.callout-note {
+  border-left: 6px solid #0984e3;
+  background: #ecf5ff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.callout-note .callout-title {
+  color: #065cb0;
+  font-weight: 700;
+}
+
+/* REFLEXÃO */
+.callout-caution {
+  border-left: 6px solid #e17055;
+  background: #fff3e0;
+}
+
+.callout-caution .callout-title {
+  color: #d35400;
+}
+
+/* SPOILER / RECOMPENSA */
+.callout-important {
+  border-left: 6px solid #9b59b6;
+  background: #f9f0ff;
+}
+
+.callout-important .callout-title {
+  color: #6c3483;
+  font-weight: 700;
+}
+
+
+/* ======== Animações ======== */
+.callout {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+}
+
+.callout:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.badge:hover {
+  filter: brightness(1.15);
+}

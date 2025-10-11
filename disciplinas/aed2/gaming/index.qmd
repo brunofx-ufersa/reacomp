@@ -1,0 +1,125 @@
+---
+title: "Algoritmos e Estruturas de Dados 2"
+lang: pt
+toc: false
+format:
+  html:
+    css: [styles/gamify.css, styles/turtlemap.css]
+---
+
+Bem-vindo ao portal de REA sobre **{{< meta title >}}**. Aqui você encontrará informações sobre a bibliografia, aulas ministradas e muito mais.  Nesta empreitada, não estaremos sozinhos, vamos conhecer quem trilhará conosco e nos ajudará a compreender melhor alguns conceitos importantes desta matéria.
+
+
+## Companheiros de Jornada
+
+![ShellSort e Hashy](../img/avatars/shell_hashy.png){width=70% style="display:block; margin:auto;"}
+
+<div class="chat-container">
+
+<div class="chat-line shell">
+  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">Olá, pessoal! Eu sou o ShellSort, mas podem me chamar de Shell!</div>
+</div>
+
+
+<div class="chat-line hashy">
+ <img src="../img/avatars/hashy_avatar.png" class="chat-avatar" alt="Hashy">
+  <div class="chat-bubble">E eu sou a Hashy!</div>
+ </div>
+
+<div class="chat-line shell">
+  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">Vamos te auxiliar na jornada pelos Algoritmos e Estruturas de Dados. Como podem ver, levo minha 'estrutura de dados' (meu casco) por onde ando. Mas não se enganem: por dentro, sou cheio de nós e referências, pronto para guiar vocês pelo universo da programação!</div>
+</div>
+
+<div class="chat-line hashy">
+ <img src="../img/avatars/hashy_avatar.png" class="chat-avatar" alt="Hashy">
+  <div class="chat-bubble">Shellzinho, você é realmente ótimo em colocar as coisas em ordem com paciência, mas eu sou a especialista em organização rápida e busca eficiente.</div>
+ </div>
+
+<div class="chat-line shell">
+ <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">É verdade Hashy, a gente se completa. Nossa missão é simples: mostrar que, com paciência e método, até os conceitos mais complexos se tornam fáceis de dominar.<br><em>“Devagar e sempre avante, esse é o meu algoritmo!”</em></div>
+</div>
+
+
+<div class="chat-line hashy">
+  <img src="../img/avatars/hashy_avatar.png" class="chat-avatar" alt="Hashy">
+  <div class="chat-bubble">Meu casco pode parecer um só, mas por dentro é uma rede superorganizada, pronta para armazenar conhecimento e referências. Podem contar comigo para entender como otimizar seus códigos em C e resolver problemas com velocidade!<br><em>“Seja rápida, seja precisa. Ache a chave!”</em></div>
+</div>
+
+<div class="chat-line both">
+  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">Vamos juntos nessa jornada de aprendizado!</div>
+  <img src="../img/avatars/hashy_avatar.png" class="chat-avatar" alt="Hashy">
+</div>
+
+</div>
+
+Juntos com Shell e Hashy, vamos explorar o mundo das estruturas de dados e seus algoritmos. Prepare-se para um jornada desafiadora e divertida enfrentando os diversos desafios que nos tornarão melhores programadores.
+
+## Portal dos Mundos
+
+
+:::{.chat-container}
+:::{.chat-line .hashy}
+![](../img/avatars/hashy_avatar.png){.chat-avatar alt="Hashy"}
+
+:::{.chat-bubble}
+Explore o mundo das estruturas de dados e desbloqueie novos desafios de aprendizado!
+:::
+:::
+:::
+
+
+
+```{=html}
+<div class="world-menu">
+ <details class="world world-arvores">
+    <summary>🌳 Arquipélago das Árvores</summary>
+   <div class="phases">
+      <a class="phase" href=""><span class="icon">🌱</span> Árvores</a>
+      <a class="phase" href=""><span class="icon">🌲</span> Árvores Binárias</a>
+      <a class="phase" href=""><span class="icon">🔍</span> Árvore Binária de Busca</a>
+      <a class="phase" href=""><span class="icon">⚖️</span> Árvore AVL</a>
+    </div>
+  </details>
+
+  <details class="world world-generica">
+    <summary>🧩 Planície Genérica</summary>
+    <div class="phases">
+      <a class="phase" href="unidade2/fundamentos.qmd"><span class="icon">🏝️</span> Fundamentos e Ferramentas Genéricas</a>
+      <a class="phase" href=""><span class="icon">⚙️</span> Aplicação: A Calculadora Genérica</a>
+      <a class="phase" href=""><span class="icon">🌳</span> Listas e Árvores Genéricas</a>
+    </div>
+  </details>
+
+  <details class="world world-dispersao" open>
+    <summary>💠 Deserto da Dispersão</summary>
+    <div class="phases">
+      <a class="phase" href=""><span class="icon">🔢</span> Tabela de Dispersão</a>
+      <a class="phase" href=""><span class="icon">💥</span> Tratamento de Colisão</a>
+      <a class="phase" href=""><span class="icon">🌀</span> Tabela de Dispersão Dinâmica</a>
+    </div>
+  </details>
+
+  <details class="world world-prioridades">
+    <summary>🏔️ Montanha de Prioridades</summary>
+    <div class="phases">
+      <a class="phase" href=""><span class="icon">📦</span> Representação por Vetor</a>
+      <a class="phase" href=""><span class="icon">🏗️</span> Construção</a>
+      <a class="phase" href=""><span class="icon">🧱</span> Estrutura Heap e Algoritmo HeapSort</a>
+    </div>
+   </details>
+
+  <details class="world world-grafos">
+    <summary>🕸️ Labirinto dos Grafos</summary>
+    <div class="phases">
+      <a class="phase" href=""><span class="icon">🔗</span> Introdução a Grafos</a>
+      <a class="phase" href=""><span class="icon">🚶</span> Busca em Largura e Profundidade</a>
+      <a class="phase" href=""><span class="icon">🗺️</span> Caminho Mínimo</a>
+    </div>
+  </details>
+
+</div>
+```

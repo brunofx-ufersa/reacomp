@@ -1,0 +1,8 @@
+---
+title: "Algoritmos"
+lang: pt
+---
+
+Bem-vindo ao portal de REA sobre **Algoritmos**. Aqui você encontrará informações sobre a bibliografia, aulas ministradas e muito mais.
+
+**EM CONSTRUÇÂO**

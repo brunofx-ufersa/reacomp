@@ -1,0 +1,486 @@
+---
+title: "🏝️ Ilha dos Ponteiros"
+lang: pt
+toc-title: Conteúdo
+toc: false
+format:
+  html:
+    css: [../styles/gamify.css, ../styles/turtlemap.css]
+---
+
+Saudações!
+
+<i class="fa-solid fa-island-tropical"></i>
+Infelizmente, naufragamos na traiçoeira Ilha dos Ponteiros. Este lugar é uma prisão natural, cheia de referências complexas e caminhos que se perdem se não forem gerenciados corretamente.
+
+Juntamente com Shell, usaremos nossas habilidades para escapar.
+ 
+
+## Declaração e Desreferenciação {#sec-dec}
+
+Quando declaramos uma variável e atribuímos um valor, esse valor é armazenado em um endereço de memória. Quando escrevemos `int x = 10;`, ocorrem dois passos conceituais:
+
+- **Declaração**: o programa reserva um espaço na memória para armazenar um inteiro.
+- **Atribuição**: o valor `10` é gravado nesse espaço de memória, que possui um endereço.
+
+A variável `x` é apenas um rótulo usado pelo programador.
+
+| Variável | Endereço | Conteúdo |
+|--------|----------|-------|
+|   `x`    |   0x75   |  10   |
+
+Um **ponteiro** também é uma variável, mas sempre armazena o **endereço de memória** de outra variável. Essa habilidade é essencial para criar estruturas de dados dinâmicas.
+
+O princípio básico é a **compatibilidade de tipo**, ou seja, um ponteiro deve ser do mesmo tipo do dado que ele aponta.
+
+```{.c}
+double meta = 7.5;
+double *meta_ptr = &meta; // O operador & retorna o endereço na memória
+printf("*meta_ptr: %.2f\n", *meta_ptr); // *meta_ptr: 7.50
+```
+
+💡 Na linha 2, `meta_ptr` guarda o endereço da variável `meta`. Na linha 3, o operador `*` serve para desreferenciar, isto é, acessar o valor no endereço armazenado.
+
+🧮 Memória ilustrada
+
+| Variável	| Endereço	| Conteúdo | 
+|------|----------|-------|
+| `meta`	| [0x55]{.mark} | 7.5 |
+| `meta_ptr`	| 0x58 |	[0x55]{.mark} |
+
+Estamos usando endereços fictícios. Note que `meta_ptr` guarda o endereço de `meta`. Ao usar `*meta_ptr` na impressão, o C acessa o valor armazenado nesse endereço (7.5).
+
+
+::: {.callout-tip icon="false" title="⚡ Dica do Mentor"}
+
+O `*` tem dupla função:
+
+- Declarar um ponteiro (`double *p`)
+- Desreferenciar um ponteiro (`*p`)
+
+:::
+
+<div class="chat-container">
+<div class="chat-line shell">
+  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">Podemos ir um pouco devagar aqui, pois é crucial entender como funciona esse mecanismo. Para isso, eu criei a seguinte ilustração.</div>
+</div>
+</div>
+
+
+```{mermaid}
+flowchart RL
+    %% Nós de variáveis e ponteiros
+    X["📦 <b>x</b><br/>Endereço: <code>0x100</code><br/>Conteúdo: <b>42</b>"]
+    Y["📦 <b>y</b><br/>Endereço: <code>0x200</code><br/>Conteúdo: <b>137</b>"]
+    P["🎯 <b>p</b><br/>Endereço: <code>0x300</code><br/>Conteúdo: <code>0x100</code>"]
+    PP["🎯 <b>pp</b><br/>Endereço: <code>0x400</code><br/>Conteúdo: <code>0x300</code>"]
+
+    %% Conexões
+    PP -->|"aponta para"| P
+    P -->|"aponta para"| X
+    P ~~~ Y
+    Y ~~~ X
+
+    %% Estilos de formatação
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px;
+    classDef ptr fill:#FFD3B6,stroke:#E65100,color:#000,stroke-width:1px;
+    class X,Y var
+    class P,PP ptr
+```
+
+As variáveis `x` e `y` carregam dados que estão armazenados nos endereços `0x100` e `0x200`, respectivamente. A variável `p` é um ponteiro cujo conteúdo é `0x100`, portanto aponta para `x`. A variável `pp` é outro ponteiro, mas com conteúdo `0x300`, ou seja, aponta para o local com endereço `0x300`, que seria `p`. Isso mesmo um ponteiro de ponteiro. O código que representa esse diagrama poder ser o seguinte.
+
+```{.c code-line-numbers="false"}
+int x = 42;
+int y = 137;
+int *p = &x;
+int **pp = &p;
+```
+
+:::{.chat-container}
+:::{.chat-line .shell}
+:::{.chat-avatar}
+  ![](../img/avatars/shell_avatar.png)
+::: 
+:::{.chat-bubble}
+Resumindo
+
+- x → contém 42 e está no endereço `0x100`;
+- y → contém 137 e está no endereço `0x200`;
+- p → contém `0x100` (o endereço de x);
+- pp → contém `0x300` (o endereço de p).
+:::
+:::
+:::
+
+
+
+
+Podemos declarar ponteiros de várias formas:
+
+```{.c code-line-numbers="false"}
+double *meta_ptr = &meta;
+double* meta_ptr = &meta;
+double * meta_ptr = &meta;
+```
+
+No entanto, a primeira é mais recomendada: `tipo *ponteiro = &variavel`.
+
+✅ +5 XP : Você agora entende a sintaxe dos ponteiros!
+
+
+## Modificando Valores Indiretamente {#sec-mod}
+
+Além de ler, você também pode modificar valores indiretamente usando ponteiros:
+
+```{.c code-line-numbers="false"}
+double meta = 7.5;
+double *meta_ptr = &meta; 
+
+*meta_ptr = 10;
+printf("meta: %.2f\n", meta); // meta: 10.00
+```
+
+<div class="chat-container">
+<div class="chat-line shell">
+  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">Mudamos o valor de `meta` sem acessá-la diretamente. Isso é o poder dos ponteiros!</div>
+</div>
+</div>
+
+::: {.callout-note icon="false" title="🎯 Desafio de Código"}
+
+- Crie um ponteiro `int *p` que aponte para uma variável `x = 5`.
+- Use `*p` para alterar `x` para `42`.
+- Depois, exiba o valor e o endereço de `x` no console.
+:::
+
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+```{.c}
+#include <stdio.h> 
+
+int main(){
+    int x = 5;
+    int *p = &x;
+    *p = 42;
+
+    printf("x: %d\n", x);
+    printf("&x: %p\n", &x);
+
+    return 0;
+}
+```
+:::
+
+::: {.callout-note icon="false" title="🎯 Desafio de Código"}
+
+- Passo 1: Declare um ponteiro `ponteiro_chave` que aponte para a `chave_secreta`.
+- Passo 2: Mude o valor da `chave_secreta` para 99 usando o ponteiro.
+- Passo 3: Imprima o valor da chave secreta.
+    
+```{.c}
+#include <stdio.h>
+
+int main() {
+    int chave_secreta = 10;
+    // SEU CÓDIGO
+
+    return 0;
+}
+```
+:::
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+```{.c}
+#include <stdio.h> 
+
+int main() {
+    int chave_secreta = 10;
+    int *ponteiro_chave = &chave_secreta;
+    *ponteiro_chave = 99;
+
+    printf("chave_secreta: %d\n", chave_secreta);
+    return 0;
+}
+```
+:::
+
+🏅 +10 XP : Você dominou a manipulação indireta de valores!
+
+## Ponteiros como Parâmetros {#sec-par}
+
+Acredito que estamos perto de deixar esta ilha. Por enquanto, a situação está calma, mas não podemos subestimar este local. Parece que encontramos algo que exige a nossa atenção imetata.
+
+Em C, os parâmetros são passados por valor. Portanto, a função recebe uma cópia do argumento.
+
+```{.c code-line-numbers="false"}
+void dobrar_meta (double meta){ 
+    meta = 2*meta; 
+}
+```
+
+Na `main`:
+
+```{.c code-line-numbers="false"}
+double meta = 7.5;
+printf("meta: %.2f\n", meta);
+dobrar_meta(meta);
+printf("meta: %.2f\n", meta);
+```
+
+
+Saída:
+
+```{.console code-line-numbers="false"}
+meta: 7.50
+meta: 7.50
+```
+
+Nada mudou, pois a função alterou apenas a cópia local.
+
+<div class="chat-container">
+<div class="chat-line shell">
+  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">A variável `meta` na função `main` é global, já na função `dobrar_meta` é local. Significa que quando esta função termina, as variáveis são descartadas.</div>
+</div>
+</div>
+
+
+💡 Vamos imprimir os endereços
+
+```{.c code-line-numbers="false"}
+void dobrar_meta (double meta){ 
+    printf("local &meta: %x\n", &meta);
+    meta = 2*meta; 
+}
+```
+
+Na `main`:
+
+```{.c code-line-numbers="false"}
+double meta = 7.5;
+printf("main &meta: %x\n", &meta);
+dobrar_meta(meta);
+```
+
+Saída:
+
+```{.console code-line-numbers="false"}
+main &meta: 0xe8
+local &meta: 0xc0
+```
+
+🧮 Memória ilustrada
+
+| Variável	| Endereço	| Conteúdo |
+| ----------|-----------|-------|
+| main `meta` | 0xe8	| 7.5 |
+| local `meta` | 0xc0	| 7.5 |
+
+<div class="chat-container">
+<div class="chat-line shell">
+  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">Como eu suspeitava, os endereços são diferentes. Logo, não são as mesmas variáveis que estamos manipulando.</div>
+</div>
+</div>
+
+A variável interna em `dobrar_meta` é criada em outra região de memória e recebe uma cópia do valor passado como argumento. Esse valor é dobrado em seguida, mas não reflete na variável da função `main`, pois ela está alocada em outro local.
+
+```{mermaid}
+flowchart LR
+ subgraph s1[" "]
+        X["📦 <b>meta</b><br>Endereço: <code>0xe8</code><br>Conteúdo: <b>7.5</b>"]
+        Y["📦 <b>meta</b><br>Endereço: <code>0xc0</code><br>Conteúdo: <b>7.5</b>"]
+  end
+
+ subgraph s2[" "]
+        A["📦 <b>meta</b><br>Endereço: <code>0xe8</code><br>Conteúdo: <b>7.5</b>"]
+        B["📦 <b>meta</b><br>Endereço: <code>0xc0</code><br>Conteúdo: <b>15</b>"]
+  end
+
+    s1 --dobrar_meta--> s2
+    
+     X:::var
+     Y:::var
+     A:::var
+     B:::var
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px
+    style s1 fill:transparent
+    style s2 fill:transparent
+
+```
+
+<div class="chat-container">
+<div class="chat-line shell">
+  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">E se, ao invés de passarmos o conteúdo armazenado, a gente passar o endereço ?</div>
+</div>
+</div>
+
+Shell, isso é conhecido como passagem por referência. Na verdade, ainda será feita uma cópia do valor passado, mas como esse valor copiado é um endereço (o ponteiro), esse artifício será suficiente para manipularmos os dados originais. 
+
+```{.c}
+#include <stdio.h>
+
+void dobrar_meta (double *meta){ 
+    *meta = 2*(*meta); // Desreferenciação 
+}
+
+int main (){
+    double meta = 7.5;
+    
+    printf("meta: %.2f\n", meta);
+    dobrar_meta(&meta); // Passando o endereço
+    printf("meta: %.2f\n", meta);
+
+    return 0;
+}
+```
+
+Saída:
+
+```{.console code-line-numbers="false"}
+meta: 7.50
+meta: 15.00
+```
+
+🎉 Agora sim!
+A função modificou a variável original, pois passamos a referência.
+
+<div class="chat-container">
+<div class="chat-line shell">
+  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">Nossa! que mágica foi essa?</div>
+</div>
+</div>
+
+🧮 Memória ilustrada
+
+| Variável	| Endereço	| Valor |
+| ----------|-----------|-------|
+| main `meta` | [0xe8]{.mark}	| 7.5 |
+| local `meta` | 0xc0	| [0xe8]{.mark} |
+
+Dentro da função, quando fazemos `*meta`, o C vai na linha de endereço com o valor de `meta` (0xe8). Neste local, ele efetua a operação de dobrar.
+
+| Variável	| Endereço	| Valor |
+| ----------|-----------|-------|
+| main `meta` | [0xe8]{.mark}	| 15 |
+| local `meta` | 0xc0	| [0xe8]{.mark} |
+
+Ao finalizar, a `meta` da função `main` sofreu a alteração.
+
+```{mermaid}
+flowchart LR
+ subgraph s1[" "]
+        X["📦 <b>meta</b><br>Endereço: <code>0xe8</code><br>Conteúdo: <b>7.5</b>"]
+        Y["🎯 <b>meta</b><br>Endereço: <code>0xc0</code><br>Conteúdo: <b>0xe8</b>"]
+  end
+ subgraph s2[" "]
+        A["📦 <b>meta</b><br>Endereço: <code>0xe8</code><br>Conteúdo: <b>15</b>"]
+        B["🎯 <b>meta</b><br>Endereço: <code>0xc0</code><br>Conteúdo: <b>0xe8</b>"]
+  end
+    s1 -- dobrar_meta --> s2
+
+     X:::var
+     Y:::ptr
+     A:::var
+     B:::ptr
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px
+    classDef ptr fill:#FFD3B6,stroke:#E65100,color:#000,stroke-width:1px;
+    style s1 fill:transparent
+    style s2 fill:transparent
+```
+
+
+::: {.callout-note icon="false" title="🎯 Desafio de Código"}
+Implemente uma função `swap` que troque os valores de duas variáveis.
+Teste na `main` com:
+
+```{.c code-line-numbers="false"}
+int x = 10, y = 20;
+swap(&x, &y);
+printf("x = %d, y = %d\n", x, y);
+```
+
+Saída esperada: `x = 20, y = 10`
+:::
+
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+```{.c}
+#include <stdio.h> 
+
+void swap(int *a, int *b){
+    int aux = *a;
+    a* = *b;
+    b* = aux;
+}
+
+int main(){
+    int x = 10, y = 20;
+    swap(&x, &y);
+    printf("x = %d, y = %d\n", x, y);
+
+    return 0;
+}
+```
+:::
+
+🎖️ +20 XP: Você aplicou a passagem por referência 
+
+::: {.callout-caution icon="false" title="Conquista Desbloqueada"}
+<i class="bi bi-arrow-down-right-square"></i> Manipulador de Ponteiros
+:::
+
+::: {.callout-important icon="false" title="🏆 Checkpoint"}
+
+Você aprendeu:
+
+✅ A declarar e desreferenciar ponteiros
+
+✅ A modificar valores via ponteiros
+
+✅ A passar variáveis por referência
+
+Recompensas:
+
+🏅 +35 XP
+
+💥Título: Manipulador de Ponteiros
+:::
+
+<div class="chat-container">
+<div class="chat-line shell">
+  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <div class="chat-bubble">Ihuuu! conseguimos passar com êxito por todos os desafios da ilha. Precisamos resgatar a Hashy no Deserto dos Callbacks.</div>
+</div>
+</div>
+
+---
+
+::: {.callout-caution icon="false"}
+### 🏁 Fase Concluída!
+ A palavra-chave para desbloquear a próxima fase é:  
+ **CHAVE: callback**
+:::
+
+
+<!-- <a href='fundamentos.html#sec-mapa' ><button class="button"><i class="bi bi-globe-americas"></i> Voltar</button></a> -->
+
+
+
+```{=html}
+ <div class="progress-bar" id="progressBar"></div>
+
+<script>
+window.addEventListener("scroll", function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById("progressBar").style.width = scrollPercent + "%";
+});
+</script>
+```

@@ -1,0 +1,99 @@
+---
+title: "Fundamentos e Ferramentas Genéricas"
+lang: pt
+toc-title: Conteúdo
+toc: false
+format:
+  html:
+    css: ../styles/turtlemap.css
+---
+
+Nesta unidade do curso, iremos estudar as **estruturas genéricas**. Imagine poder criar uma lista ou uma árvore que funciona com qualquer tipo de dado, sem precisar mudar uma única linha do código principal. As estruturas genéricas permitem criar códigos flexíveis usando conceitos como **listas genéricas**, o uso de **_callbacks_** para operações personalizadas, e a construção de **árvores de busca genéricas**. 
+
+Antes de tudo, precisamos preparar o terreno para que não nenhuma ponta solta. Iniciaremos com um pequena   revisão sobre ponteiros. Em seguida, introduzir os _callbacks_, seguido por gerenciamento de memória.
+
+
+<script>
+// === CONFIGURAÇÃO DAS FASES ===
+const fases = [
+  { id: 1, nome: "Ilha dos Ponteiros", chave: "endereco", url: "1-ponteiros.html"},
+  { id: 2, nome: "Deserto dos Callbacks", chave: "callback", url: "" },
+  { id: 3, nome: "Vale da Memória", chave: "malloc", url: "" }
+];
+
+// === RECUPERA PROGRESSO DO LOCALSTORAGE ===
+let progresso = JSON.parse(localStorage.getItem("progressoTurtC")) || [];
+
+// === FUNÇÃO PARA SALVAR ===
+function salvarProgresso() {
+  localStorage.setItem("progressoTurtC", JSON.stringify(progresso));
+}
+
+// === DESENHA O MAPA DE FASES ===
+function mostrarFases() {
+  const container = document.getElementById("mapa-fases");
+  container.innerHTML = "";
+  fases.forEach(fase => {
+    const desbloqueada = progresso.includes(fase.id);
+    const div = document.createElement("div");
+    div.className = "fase";
+    div.innerHTML = `
+      <span class="emoji">${desbloqueada ? "🟢" : "🔒"}</span>
+      <strong><a  href="${fase.url}">${fase.nome}</a></strong>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// === DESBLOQUEAR NOVA FASE ===
+function tentarDesbloquear() {
+  const input = document.getElementById("chave-input").value.trim().toLowerCase();
+  const fase = fases.find(f => f.chave === input);
+  if (fase && !progresso.includes(fase.id)) {
+    progresso.push(fase.id);
+    salvarProgresso();
+    alert(`✅ Fase "${fase.nome}" desbloqueada!`);
+    mostrarFases();
+  } else {
+    alert("❌ Palavra incorreta ou fase já desbloqueada!");
+  }
+}
+
+// === RESETA PROGRESSO ===
+function resetarProgresso() {
+  if (confirm("Deseja reiniciar sua jornada?")) {
+    progresso = [];
+    salvarProgresso();
+    mostrarFases();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", mostrarFases);
+</script>
+
+
+## 🗺️ Mapa da Jornada {#sec-mapa}
+
+![](img/mapa-gen.png){width="480" fig-align="center"}
+
+
+<div id="mapa-fases"></div>
+
+**Digite a palavra-chave para desbloquear uma fase:**
+<div class="input-group">
+<input id="chave-input" class="input" placeholder="ex: endereco" />
+<button class="button" onclick="tentarDesbloquear()"><i class="bi bi-unlock"></i></button>
+<button class="button" onclick="resetarProgresso()"><i class="bi bi-arrow-clockwise"></i></button>
+</div>
+
+:::{.chat-container}
+:::{.chat-line .shell}
+![](../img/avatars/shell_avatar.png){.chat-avatar alt="Shell"}
+
+:::{.chat-bubble}
+ Ao completar desafios ou uma fase, você encontrará a palavra-chave para desbloquear a próxima. 
+
+ _Fique atento às nossas dicas!_
+:::
+:::
+:::

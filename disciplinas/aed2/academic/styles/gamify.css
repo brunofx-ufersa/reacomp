@@ -1,0 +1,104 @@
+/* ======== Barra de progresso (topo) ======== */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 6px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  z-index: 9999;
+  transition: width 0.3s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+
+/* ======== Badges de Conquista ======== */
+
+.badge {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  border-radius: 0.6em;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  margin-right: 0.5em;
+  letter-spacing: 0.5px;
+}
+
+.badge-xp {
+  background: linear-gradient(45deg, #00b894, #00cec9);
+}
+
+.badge-desafio {
+  background: linear-gradient(45deg, #0984e3, #6c5ce7);
+}
+
+.badge-checkpoint {
+  background: linear-gradient(45deg, #f39c12, #e67e22);
+}
+
+.badge-mestre {
+  background: linear-gradient(45deg, #9b59b6, #8e44ad);
+}
+
+/* ======== XP Blockquote ======== */
+blockquote {
+  border-left: 4px solid #f1c40f;
+  background: #fffbe6;
+  padding: 0.8em 1.2em;
+  border-radius: 0.5em;
+  font-style: italic;
+  position: relative;
+}
+
+blockquote::before {
+  content: "🏅 ";
+  font-weight: bold;
+}
+
+/* ======== Códigos ======== */
+code {
+  background-color: #f1f3f4;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-size: 0.95em;
+}
+
+pre.console {
+  background: #1e1e2f;
+  color: #00ff99;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* ======== Tabelas ======== */
+table {
+  border-collapse: collapse;
+  margin: 1em 0;
+  width: 100%;
+}
+
+table th {
+  background-color: #44475a;
+  color: white;
+}
+
+table td, table th {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+
+/* ======== Rodapé de XP ======== */
+.footer-xp {
+  margin-top: 2em;
+  text-align: center;
+  font-weight: 600;
+  color: #555;
+}
+
+.footer-xp::before {
+  content: "⭐ ";
+}

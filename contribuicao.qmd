@@ -1,0 +1,30 @@
+---
+title: "Participe"
+lang: pt
+toc: false 
+---
+
+Nosso projeto de Recursos Educacionais Abertos (REA) é colaborativo e está sempre aberto à participação da comunidade. Se você é estudante, docente ou profissional da área de Computação e deseja contribuir com melhorias nos materiais — como correções, atualizações, novos exemplos ou conteúdos complementares — sua colaboração será muito bem-vinda!
+
+Todo o código-fonte e os materiais deste portal estão disponíveis em um repositório público no GitHub. Para contribuir, siga os passos abaixo:
+
+1. **Acesse o repositório**: [Link para o GitHub]
+2. Faça um **fork** do repositório em sua conta GitHub.
+3. Realize as alterações desejadas (correções, melhorias ou adições).
+4. Envie um **Pull Request** com uma breve descrição das modificações propostas.
+5. Nossa equipe revisará sua contribuição e dará retorno o mais breve possível.
+
+Se você identificar erros ou quiser apenas deixar sugestões, também pode abrir uma **issue** diretamente no repositório.
+
+## Como posso contribuir?
+
+- Corrigindo erros nos materiais (ortografia, lógica, código, etc.);
+- Sugerindo novos exercícios ou conteúdos;
+- Adicionando recursos complementares (vídeos, slides, links úteis);
+- Sinalizando pontos que precisam de mais clareza ou revisão.
+
+---
+
+Todo o conteúdo aceito será publicado sob uma licença aberta (Creative Commons), garantindo a reutilização e o compartilhamento livre, com os devidos créditos às contribuições.
+
+**Junte-se a nós nessa construção coletiva de conhecimento!**

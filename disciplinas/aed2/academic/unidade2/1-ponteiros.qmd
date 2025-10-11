@@ -1,0 +1,703 @@
+---
+title: "Ponteiros (Revisão)"
+lang: pt
+toc-title: Conteúdo
+format:
+  html:
+    css: ../styles/academic.css
+---
+
+Por muito tempo, construir estruturas de dados, como listas e árvores, exigia que os desenvolvedores as reescrevessem para cada tipo de dado. Era uma batalha constante: uma lista para números inteiros, outra para textos, outra para dados de usuários, e assim por diante. Essa repetição não apenas consumia tempo, mas também abria portas para erros e inconsistências.
+
+A ideia de estruturas genéricas é poder construir estruturas universais que podem ser aplicadas em qualquer projeto. Embora a linguagem C não tenha suporte nativo a "genéricos", como C++ ou Java, a solução tradicional e elegante é usar ponteiros `void*` e funções de _callback_. 
+
+Antes de explorarmos essas estruturas, é fundamental revisar e aprofundar dois conceitos cruciais: **ponteiros** e **ponteiros de função**.
+
+Como você deve ter visto em **Algoritmos e Estruturas de Dados 1**, um **ponteiro** é uma variável que armazena o **endereço de memória** de outra variável. Essa capacidade é a base para criar estruturas de dados com tamanho dinâmico (que crescem ou diminuem em tempo de execução).
+
+
+## Declaração {#sec-dec}
+
+Quando declaramos uma variável e atribuímos um valor, esse valor é armazenado em um endereço de memória. Quando escrevemos `int x = 10;`, ocorrem dois passos conceituais:
+
+- **Declaração**: o programa reserva um espaço na memória para armazenar um inteiro.
+- **Atribuição**: o valor `10` é gravado nesse espaço de memória, que possui um endereço.
+
+A variável `x` é apenas um rótulo usado pelo programador.
+
+| Variável | Endereço | Conteúdo |
+|--------|----------|-------|
+|   `x`    |   0x75   |  10   |
+
+
+O princípio básico de um ponteiro é a **compatibilidade de tipo**, ou seja, um ponteiro deve ser do mesmo tipo do dado que ele aponta.
+
+```{.c}
+double meta = 7.5;
+double *meta_ptr = &meta; // O operador & retorna o endereço na memória
+```
+
+Na linha 2, `meta_ptr` guarda o endereço da variável `meta`. 
+
+O quadro abaixo ilustra a memória depois das declarações do trecho de código anterior.
+
+| Variável	| Endereço	| Conteúdo | 
+|------|----------|-------|
+| `meta`	| [0x55]{.mark} | 7.5 |
+| `meta_ptr`	| 0x58 |	[0x55]{.mark} |
+
+Estamos usando endereços fictícios. Note que `meta_ptr` guarda o endereço de `meta`. Neste caso, dizemos que `meta_ptr` **aponta** para `meta`. 
+
+Vamos explorar outro exemplo usando um diagrama que ilustra uma memória.
+
+```{mermaid}
+flowchart RL
+    %% Nós de variáveis e ponteiros
+    X["📦 <b>x</b><br/>Endereço: <code>0x100</code><br/>Conteúdo: <b>42</b>"]
+    Y["📦 <b>y</b><br/>Endereço: <code>0x200</code><br/>Conteúdo: <b>137</b>"]
+    P["🎯 <b>p</b><br/>Endereço: <code>0x300</code><br/>Conteúdo: <code>0x100</code>"]
+    PP["🎯 <b>pp</b><br/>Endereço: <code>0x400</code><br/>Conteúdo: <code>0x300</code>"]
+
+    %% Conexões
+    PP -->|"aponta para"| P
+    P -->|"aponta para"| X
+    P ~~~ Y
+    Y ~~~ X
+
+    %% Estilos de formatação
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px;
+    classDef ptr fill:#FFD3B6,stroke:#E65100,color:#000,stroke-width:1px;
+    class X,Y var
+    class P,PP ptr
+```
+
+As variáveis `x` e `y` carregam dados que estão armazenados nos endereços `0x100` e `0x200`, respectivamente. A variável `p` é um ponteiro cujo conteúdo é `0x100`, portanto aponta para `x`. A variável `pp` é outro ponteiro, mas com conteúdo `0x300`, ou seja, aponta para o local com endereço `0x300`, que seria `p`. Isso mesmo um ponteiro de ponteiro. O código que representa esse diagrama poder ser o seguinte.
+
+```{.c code-line-numbers="false"}
+int x = 42;
+int y = 137;
+int *p = &x;
+int **pp = &p;
+```
+
+Resumindo
+
+- x → contém 42 e está no endereço `0x100`;
+- y → contém 137 e está no endereço `0x200`;
+- p → contém `0x100` (o endereço de x);
+- pp → contém `0x300` (o endereço de p).
+
+
+Há declarações de ponteiros ligeiramente diferentes:
+
+```{.c code-line-numbers="false"}
+double *meta_ptr = &meta;
+double* meta_ptr = &meta;
+double * meta_ptr = &meta;
+```
+
+No entanto, a primeira é mais recomendada: `tipo *ponteiro = &variavel`.
+
+
+## Desreferenciação {#sec-des}
+
+Uma operação importante com ponteiros é a **desreferenciação** (ou dereferencing). Ela ocorre quando acessamos o conteúdo armazenado no endereço que o ponteiro aponta. Por exemplo,
+
+```{.c}
+double meta = 7.5;
+double *meta_ptr = &meta; // O operador & retorna o endereço na memória
+printf("*meta_ptr: %.2f\n", *meta_ptr); // *meta_ptr: 7.50
+```
+
+Na linha 3, o operador `*` serve para desreferenciar. Ao usar `*meta_ptr` na impressão, o C acessa o valor armazenado nesse endereço (7.5). 
+
+::: {.callout-tip}
+
+O `*` tem dupla função:
+
+- Declarar um ponteiro (`double *p`)
+- Desreferenciar um ponteiro (`*p`)
+:::
+
+É válido mencionar que, em uma variável que guarda um dado, podemos acessar o dado e o endereço. Já em um ponteiro, podemos acessar seu endereço, o conteúdo (outro endereço) e o dado armazenado pela variável que ele aponta:
+
+```{.c code-line-numbers="false"}
+int idade = 12;
+int *idade_ptr = &idade;
+
+printf("idade: %d\n", idade);
+printf("&idade: %x\n", &idade);
+
+printf("&idade_ptr: %x\n", &idade_ptr); // Endereço do ponteiro
+printf("idade_ptr: %x\n", idade_ptr);   // Endereço de idade
+printf("*idade_ptr: %d\n", *idade_ptr); // Conteúdo de idade
+```
+
+Além de ler o conteúdo de uma variável, também podemos modificá-lo indiretamente usando ponteiros:
+
+```{.c code-line-numbers="false"}
+double meta = 7.5;
+double *meta_ptr = &meta; 
+
+*meta_ptr = 10;
+printf("meta: %.2f\n", meta); // meta: 10.00
+```
+Mudamos o valor de `meta` sem acessá-la diretamente. Isso é o poder dos ponteiros!
+
+
+::: {.callout-note icon="false" title="🎯 Desafio de Código"}
+
+- Crie um ponteiro `int *p` que aponte para uma variável `x = 5`.
+- Use `*p` para alterar `x` para `42`.
+- Depois, exiba o valor e o endereço de `x` no console.
+:::
+
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+```{.c}
+#include <stdio.h> 
+
+int main(){
+    int x = 5;
+    int *p = &x;
+    *p = 42;
+
+    printf("x: %d\n", x);
+    printf("&x: %p\n", &x);
+
+    return 0;
+}
+```
+:::
+
+::: {.callout-note icon="false" title="🎯 Desafio de Código"}
+
+- Passo 1: Declare um ponteiro `ponteiro_chave` que aponte para a `chave_secreta`.
+- Passo 2: Mude o valor da `chave_secreta` para 99 usando o ponteiro.
+- Passo 3: Imprima o valor da chave secreta.
+    
+```{.c}
+#include <stdio.h>
+
+int main() {
+    int chave_secreta = 10;
+    // SEU CÓDIGO
+
+    return 0;
+}
+```
+:::
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+```{.c}
+#include <stdio.h> 
+
+int main() {
+    int chave_secreta = 10;
+    int *ponteiro_chave = &chave_secreta;
+    *ponteiro_chave = 99;
+
+    printf("chave_secreta: %d\n", chave_secreta);
+    return 0;
+}
+```
+:::
+
+
+## Ponteiros como parâmetros {#sec-par}
+
+
+Em C, os parâmetros são passados por valor. Portanto, a função recebe uma cópia do argumento.
+
+```{.c code-line-numbers="false"}
+void dobrar_meta (double meta){ 
+    meta = 2*meta; 
+}
+```
+
+Na `main`:
+
+```{.c code-line-numbers="false"}
+double meta = 7.5;
+printf("meta: %.2f\n", meta);
+dobrar_meta(meta);
+printf("meta: %.2f\n", meta);
+```
+
+Saída:
+
+```{.console code-line-numbers="false"}
+meta: 7.50
+meta: 7.50
+```
+
+Esperavámos que no exemplo acima, o valor de `meta` tivesse sido dobrado, mas nada mudou. A razão é que a função alterou apenas a cópia local. A variável `meta` na função `main` é global, já na função `dobrar_meta` é local. Significa que quando esta função termina, as variáveis são descartadas.
+
+Imprimindo os endereços, vamos constatar que trata-se de variáveis diferentes.
+
+```{.c code-line-numbers="false"}
+void dobrar_meta (double meta){ 
+    printf("local &meta: %x\n", &meta);
+    meta = 2*meta; 
+}
+```
+
+Na `main`:
+
+```{.c code-line-numbers="false"}
+double meta = 7.5;
+printf("main &meta: %x\n", &meta);
+dobrar_meta(meta);
+```
+
+Saída:
+
+```{.console code-line-numbers="false"}
+main &meta: 0xe8
+local &meta: 0xc0
+```
+Os endereços são diferentes. Logo, não são as mesmas variáveis que estamos manipulando
+
+A variável interna em `dobrar_meta` é criada em outra região de memória e recebe uma cópia do valor passado como argumento. Esse valor é dobrado em seguida, mas não reflete na variável da função `main`, pois ela está alocada em outra posição.
+
+
+```{mermaid}
+flowchart LR
+ subgraph s1[" "]
+        X["📦 <b>meta</b><br>Endereço: <code>0xe8</code><br>Conteúdo: <b>7.5</b>"]
+        Y["📦 <b>meta</b><br>Endereço: <code>0xc0</code><br>Conteúdo: <b>7.5</b>"]
+  end
+
+ subgraph s2[" "]
+        A["📦 <b>meta</b><br>Endereço: <code>0xe8</code><br>Conteúdo: <b>7.5</b>"]
+        B["📦 <b>meta</b><br>Endereço: <code>0xc0</code><br>Conteúdo: <b>15</b>"]
+  end
+
+    s1 --dobrar_meta--> s2
+    
+     X:::var
+     Y:::var
+     A:::var
+     B:::var
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px
+    style s1 fill:transparent
+    style s2 fill:transparent
+
+```
+
+
+Para solucionar isso, invés de passarmos o conteúdo armazenado, podemos passar o endereço. Isso é conhecido como passagem por referência. Na verdade, ainda será feita uma cópia do valor passado, mas como esse valor copiado é um endereço (o ponteiro), esse artifício será suficiente para manipularmos os dados originais. 
+
+```{.c}
+#include <stdio.h>
+
+void dobrar_meta (double *meta){ 
+    *meta = 2*(*meta); // Desreferenciação 
+}
+
+int main (){
+    double meta = 7.5;
+    
+    printf("meta: %.2f\n", meta);
+    dobrar_meta(&meta); // Passando o endereço
+    printf("meta: %.2f\n", meta);
+
+    return 0;
+}
+```
+
+Saída:
+
+```{.console code-line-numbers="false"}
+meta: 7.50
+meta: 15.00
+```
+
+Dessa vez, a função modificou a variável original, pois passamos a referência. Vamos ilustrar como isso aconteceu.
+
+| Variável	| Endereço	| Conteúdo |
+| ----------|-----------|-------|
+| main `meta` | [0xe8]{.mark}	| 7.5 |
+| local `meta` | 0xc0	| [0xe8]{.mark} |
+
+Dentro da função, quando fazemos `*meta`, o C faz a desreferenciação, ou seja, retorna o conteúdo do local cujo o endereço é 0xe8. Neste local, a operação de dobrar é efetuada.
+
+| Variável	| Endereço	| Valor |
+| ----------|-----------|-------|
+| main `meta` | [0xe8]{.mark}	| 15 |
+| local `meta` | 0xc0	| [0xe8]{.mark} |
+
+Ao finalizar, a variável `meta` da função `main` sofreu a alteração.
+
+```{mermaid}
+flowchart LR
+ subgraph s1[" "]
+        X["📦 <b>meta</b><br>Endereço: <code>0xe8</code><br>Conteúdo: <b>7.5</b>"]
+        Y["🎯 <b>meta</b><br>Endereço: <code>0xc0</code><br>Conteúdo: <b>0xe8</b>"]
+  end
+ subgraph s2[" "]
+        A["📦 <b>meta</b><br>Endereço: <code>0xe8</code><br>Conteúdo: <b>15</b>"]
+        B["🎯 <b>meta</b><br>Endereço: <code>0xc0</code><br>Conteúdo: <b>0xe8</b>"]
+  end
+    s1 -- dobrar_meta --> s2
+
+     X:::var
+     Y:::ptr
+     A:::var
+     B:::ptr
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px
+    classDef ptr fill:#FFD3B6,stroke:#E65100,color:#000,stroke-width:1px;
+    style s1 fill:transparent
+    style s2 fill:transparent
+```
+
+
+::: {.callout-important}
+Quando passamos o endereço (`&meta`) para a função `dobrar_meta`, a variável `meta` interna vai armazenar em seu conteúdo um endereço de memória. Ou seja, ela é um ponteiro e, portanto, podemos desreferenciar.
+:::
+
+::: {.callout-note icon="false" title="🎯 Desafio de Código"}
+Implemente uma função `swap` que troque os valores de duas variáveis.
+Teste na `main` com:
+
+```{.c code-line-numbers="false"}
+int x = 10, y = 20;
+swap(&x, &y);
+printf("x = %d, y = %d\n", x, y);
+```
+
+Saída esperada: `x = 20, y = 10`
+:::
+
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+```{.c}
+#include <stdio.h> 
+
+void swap(int *a, int *b){
+    int aux = *a;
+    a* = *b;
+    b* = aux;
+}
+
+int main(){
+    int x = 10, y = 20;
+    swap(&x, &y);
+    printf("x = %d, y = %d\n", x, y);
+
+    return 0;
+}
+```
+:::
+
+
+Nesta unidade, você aprendeu
+
+✅ a declarar e desreferenciar ponteiros
+
+✅ a modificar valores via ponteiros
+
+✅ a passar variáveis por referência
+
+
+
+::: {.callout-tip}
+Se você quiser aprofundar mais seu conhecimento sobre ponteiros, revise materiais sobre aritmética de ponteiros e a relação entre _arrays_ e ponteiros.
+:::
+
+### Ponteiros de Função
+
+A boa notícia é que um ponteiro também pode armazenar o endereço de uma função. O raciocínio é o mesmo, mas a sintaxe para a declaração é mais específica, pois ela precisa descrever a assinatura completa da função: seu tipo de retorno e seus parâmetros.
+
+Vamos tomar a função `media` como exemplo:
+
+```{.c code-line-numbers="false"}
+double media (double n1, double n2){
+  return (n1+n2)/2
+};
+
+// Declaração de um ponteiro de função:
+double (*mediaPtr)(double, double) = media;
+```
+
+A sintaxe de declaração deve ser lida da seguinte forma:
+
+- `double`: O tipo de retorno da função que será apontada.
+
+- `(*mediaPtr)`: Declara mediaPtr como um ponteiro. Os parênteses são obrigatórios para diferenciá-lo de uma função que retorna um ponteiro.
+
+- `(double, double)`: Os tipos dos parâmetros de entrada da função.
+
+::: {.callout-note }
+Diferentemente das variáveis, ao atribuir o endereço de uma função a um ponteiro de função, não é necessário usar o operador & (o nome da função sozinho já representa seu endereço).
+:::
+
+Note que a função `media` obedece ao **contrato** estabelecido pelo ponteiro de função `mediaPtr`, ou seja, possui o mesmo **tipo de retorno** e os mesmos **tipos de parâmetros de entrada** (`double, double`) Portanto, devemos manter a **compatibilidade** de tipos.
+
+Com esse artíficio, podemos contruir funções paramétricas. 
+
+### Funções Paramétricas
+
+O verdadeiro poder dos ponteiros de função reside na capacidade de passar uma função como argumento para outra. Essa técnica, conhecida como **funções de ordem superior** ou _callbacks_, permite criar um código **paramétrico** e **flexível**.
+
+Abaixo, um exemplo de uma calculadora de inteiros. A função `operacao` é o nosso _callback_ que decide qual operação aritmética será executada:
+
+```{.c filename=calculadora_param.c}
+#include <stdio.h>
+
+// Funções concretas
+int soma (int a, int b)     { return a + b; }
+int subtracao (int a, int b){ return a - b; }
+int produto (int a, int b)  { return a * b; }
+int divisao (int a, int b)  { return a / b; }
+
+// Função Coordenadora (paramétrica)
+int calcular(int a, int b, int (*operacao)(int, int)) {
+  // A função 'operacao' passada como parâmetro é invocada aqui
+  return operacao(a, b);
+}
+
+int main(){
+
+  int n1 = 10;
+  int n2 = 2;
+  
+  printf("Soma:      %d\n", calcular(n1, n2, soma));
+  printf("Subtração: %d\n", calcular(n1, n2, subtracao));
+  printf("Produto:   %d\n", calcular(n1, n2, produto));
+  printf("Divisão:   %d\n", calcular(n1, n2, divisao));  
+  
+  return 0;
+}
+```
+
+A saída desse programa será
+
+```{.console code-line-numbers="false"}
+  Soma:      12
+  Subtração: 8
+  Produto:   20
+  Divisão:   5 
+```
+Ao **passar a função como parâmetro**, tornamos o código de C extremamente **poderoso e reutilizável**. A função `calcular` não se importa como o cálculo é feito, apenas que a função fornecida (o _callback_) respeite o contrato de tipos (`int` para retorno, e `int`, `int` para parâmetros).
+
+Será que podemos melhorar essa reutilização? Sim, mas atingimos o limite do **{{< glossary polimorfismo >}}** simples em C. Imagine que você queira adicionar uma operação com números de ponto flutuante:
+
+
+```{.c code-line-numbers="false"}
+double somad (double a, double b) { return a + b; }
+```
+
+O problema é que não podemos passar `somad` para a função `calcular` e nem a usar para operar com `double`, pois o _callback_ `int (*operacao)(int, int)` e os parâmetros fixos em `calcular(int a, int b, ...)` tornam essa função totalmente incompatível com o tipo `double`.
+
+Para resolver esse problema e criar uma única função verdadeiramente genérica que aceite qualquer tipo de dado, precisamos abandonar os tipos concretos (`int`, `double`) e generalizar usando o ponteiro sem tipo (`void*`).
+
+
+Antes de darmos o salto para o código verdadeiramente genérico usando `void*`, vamos usar o `typedef` para melhorar a legibilidade de nosso código.
+
+A sintaxe de um ponteiro de função (`int (*operacao)(int, int)`) é complexa e pode dificultar a leitura do código. O `typedef` permite que você crie um apelido para essa assinatura complexa, tratando-a como um novo tipo de dado simples.
+
+Ao definir o tipo do _callback_, tornamos a função `calcular` muito mais limpa:
+
+
+```c
+// Definimos 'Operacao' como o tipo para qualquer função
+// que retorna int e aceita dois int como parâmetros.
+typedef int (*Operacao)(int, int);
+
+// A função 'calcular' agora usa o tipo 'Operacao', 
+// simplificando sua assinatura.
+int calcular(int a, int b, Operacao operacao); 
+```
+O código final ficaria assim:
+
+```{.c filename=calculadora_typedef.c}
+#include <stdio.h>
+
+// Definição do TIPO de ponteiro de função
+typedef int (*Operacao)(int, int);
+
+// Funções concretas (omitidas para brevidade)
+int soma (int a, int b) { return a + b; }
+// ...
+
+// A Função Coordenadora agora é mais legível
+int calcular(int a, int b, Operacao operacao) {
+  return operacao(a, b);
+}
+
+int main(){
+
+  int n1 = 10;
+  int n2 = 2;
+  
+  printf("Soma: %d\n", calcular(n1, n2, soma));
+  
+  return 0;
+}
+```
+
+### Funções Genéricas
+
+Agora que limpamos um pouco o código, voltemos ao nosso problema principal. Lembre-se que a função `calcular` e, por consequência, o tipo `Operacao` que definimos, estão estritamente ligados ao tipo `int`.
+
+Para que nossa calculadora suporte operações com qualquer tipo (como `double` ou até mesmo estruturas complexas), precisamos de um novo contrato. Esse novo contrato não pode mais especificar `int` ou `double`. A solução para esse problema é utilizar os ponteiros genéricos (`void*`), que são ponteiros sem tipo. O `void*` nos permitirá criar um novo `typedef` e uma nova função genérica que aceitará qualquer tipo de dado.
+
+Primeiramente, vamos definir um arquivo de cabeçalho (a interface). Isso é uma prática fundamental em C e reforça o conceito de que a função `main` só precisa conhecer o contrato (a interface `.h`) para usar o código genérico, sem se preocupar com os detalhes da implementação.
+
+
+```{.c filename=calculadora.h}
+// O typedef agora define o contrato genérico:
+typedef void* (*Operacao)(void*, void*);
+
+// O protótipo da função coordenadora
+void* calcular(void *a, void *b, Operacao operacao); 
+
+// Protótipos das funções callback
+void* soma (void *a, void *b);
+void* somad (void *a, void *b);
+```
+
+Agora, partimos para a **implementação** da calculadora, onde a mágica dos ponteiros genéricos acontece.
+
+```{.c filename=calculadora.c}
+#include "calculadora.h"
+#include <stdlib.h>
+
+// 1. Função Coordenadora
+// Ela apenas chama o callback (operacao) com os ponteiros de dados.
+void* calcular(void *a, void *b, Operacao operacao){
+  return operacao(a, b);
+} 
+
+// 2. Callbacks Genéricos
+
+// Callback para Soma de Inteiros 
+void* soma (void *a, void *b){
+    int *resultado = malloc(sizeof(int));
+     *resultado = *(int*)a + *(int*)b;
+ 
+    return (void*)resultado; 
+}
+
+// Callback para Soma de Ponto Flutuante
+void* somad (void *a, void *b){
+    double *resultado = malloc(sizeof(double));
+     *resultado = *(double*)a + *(double*)b;
+ 
+    return (void*)resultado; 
+}
+```
+
+Por que essas funções precisam do `malloc`? É fundamental notar que, nessa abordagem, as funções `soma` e `somad` não podem simplesmente retornar o valor (como fizemos nas funções anteriores).
+
+- Elas precisam retornar um endereço de memória (`void*`).
+- Elas precisam garantir que esse endereço de memória **persista** após o término da função.
+
+O `malloc()` garante que o resultado seja armazenado na _heap_ (memória dinâmica), permitindo que a função `calcular` e a função `main` acessem esse resultado posteriormente. Isso, no entanto, torna a função `main` responsável por liberar essa memória com `free()`, para evitar vazamento de memória (_memory leak_).
+
+Nas funções de _callback_, alocamos memória para armazenar o NOVO resultado. Depois desreferenciamos (_cast_) os ponteiros `void*`, somamos os valores e armazenamos o resultado na nova área de memória. Por fim, retornamos o endereço (`void*`) da nova memória alocada.
+
+Finalmente, a função para testar nossa implementação pode ser construída.
+
+```{.c filename=main.c}
+#include "calculadora.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+  int a = 10;
+  int b = 2;
+  double ad = 10.5;
+  double bd = 2.2;
+    
+  // 1. Chamada Genérica para Inteiros
+  // Passamos os ENDEREÇOS (&a, &b) e a função soma
+  void *resultado_ptr = calcular(&a, &b, soma); 
+  
+  // 2. Chamada Genérica para Doubles
+  // Passamos os ENDEREÇOS (&ad, &bd) e a função somad
+  void *resultadod_ptr = calcular(&ad, &bd, somad); 
+
+  // 3. Impressão e Desreferenciação
+  // Fazemos o CAST do ponteiro void* de volta para o tipo original
+  printf("Soma Int: %d\n", *(int*)resultado_ptr);
+  printf("Soma double: %.2f\n", *(double*)resultadod_ptr);
+    
+  // 4. Liberação de Memória (Crucial!)
+  // Liberamos a memória alocada dentro das funções soma e somad
+  free(resultado_ptr);
+  free(resultadod_ptr);
+
+  return 0;
+}
+```
+
+Para compilar nosso projeto execute o comando abaixo.
+
+```{.console code-line-numbers="false"}
+$ gcc calculadora.c main.c -o calculadora
+```
+
+Para executar o programa faça:
+
+- Windows:
+
+```{.console code-line-numbers="false"}
+$ .\calculadora
+```
+- Linux/macOS
+
+```{.console code-line-numbers="false"}
+$ ./calculadora
+```
+
+O programa deve rodar e produzir a saída correta, provando que nossa implementação genérica funciona:
+
+```{.console code-line-numbers="false"}
+  Soma Int: 12
+  Soma double: 12.70
+```
+
+::: {.callout-important}
+Se você foi com muita sede ao pote, apenas clicando no botão de _play_ no seu ambiente de desenvolvimento, notou que deu tudo errado. O erro acontece porque, quando usamos mais de um arquivo `.c` (como no nosso caso, com `calculadora.c` e `main.c`), é necessário que o compilador realize a **linkagem** de todos os componentes para que a compilação funcione.
+
+À medida que os projetos C crescem, digitar comandos de compilação longos e repetir o processo após cada pequena alteração se torna ineficiente. Busque o conceito de `Makefile` e o utilitário `make`. Essas ferramentas são essenciais para automatizar a compilação e garantir que apenas as partes alteradas do código sejam recompiladas, acelerando drasticamente o seu ciclo de desenvolvimento.
+
+Com `make`, você simplifica o processo de compilação para um único comando no terminal.
+:::
+
+### Digressão
+
+Neste momento, vamos mudar nosso foco para apresentar um estilo de programação mais profissional. A primeira boa prática é usar a palavra-chave `const` para parâmetros de funções que não serão modificados.
+
+Por exemplo, sabemos que os parâmetros de entrada da função `soma` são usados apenas para leitura. Por **segurança** e **clareza**, devemos adicionar o modificador `const`.
+
+Ao aplicar `const` a ponteiros genéricos (`void*`), indicamos que o conteúdo da memória apontada não será alterado:
+
+```{.c code-line-numbers="false"}
+void* soma (const void *a, const void *b){
+    // implementação 
+}
+```
+
+Usar a palavra-chave `const` em parâmetros de funções em C melhora drasticamente a **segurança** e a **clareza** do seu código. 
+
+- **Segurança**: Você está prometendo ao compilador (e a outros programadores) que a função não modificará o conteúdo do ponteiro que está sendo passado. O compilador reforça essa promessa, impedindo modificações acidentais (proteção de dados).
+
+- **Clareza da Intenção**: Fica imediatamente claro para quem lê a assinatura da função quais parâmetros são apenas para leitura, reduzindo a necessidade de consultar a documentação interna da função para entender seu comportamento.
+
+- **Otimização do Compilador**: O compilador pode usar essa informação de "somente leitura" para realizar otimizações de código, como manter a variável em um registro do processador, o que pode levar a um desempenho marginalmente melhor.
+
+Outra boa prática é usar tipo `size_t` para representar tamanhos e contagens de objetos na memória. Ele é o tipo de dado inteiro sem sinal (_unsigned integer_) recomendado e padronizado em C. Podemos listar como razões para a escolha de `size_t` ao invès de `int`:
+
+- **Garantia de Não-Negatividade**: Tamanhos e contagens (como o número de elementos em uma lista ou o tamanho de um _buffer_) nunca podem ser negativos. O `size_t` é um tipo sem sinal, o que elimina a possibilidade de erros causados por valores negativos acidentais.
+
+- **Padrão de API**: Funções padrão da biblioteca C, como `malloc`, `sizeof`, `memcpy`, `strlen`, e `calloc`, usam e esperam argumentos do tipo `size_t` para tamanhos e contagens. Usar `size_t` garante consistência e evita avisos (_warnings_) ou _casts_ desnecessários.
+
+Em resumo, use `size_t` para qualquer variável que represente uma quantidade, um tamanho em _bytes_, ou um índice de _array_/estrutura. Por exemplo, em uma implementação de lista, podemos usar `size_t` para contagem dos nós, tamanho em _bytes_ do dado que é armazenado e para representar o indice de uma iteração. 
+
+Outro abordagem é armazenar os _callbacks_ dentro da estrutura. Isso coloca nosso design de código em um alto nível. Vamos modificar nosso projeto da calculadora para demonstrar como ficaria a implementação com tais mudanças.
+
+
+{{< include /_includes/progress-bar.qmd >}}

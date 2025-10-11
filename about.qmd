@@ -1,5 +1,12 @@
 ---
-title: "About"
+title: "Sobre"
+lang: pt
+toc: false 
 ---
 
-About this site
+
+Este portal reúne Recursos Educacionais Abertos (REA) desenvolvidos para apoiar o ensino e a aprendizagem em Computação no campus da UFERSA em Pau dos Ferros. A iniciativa tem como foco três áreas fundamentais da formação em Computação: **Algoritmos**, **Programação** e **Estruturas de Dados**.
+
+Todo o conteúdo disponibilizado aqui é aberto, **gratuito** e pode ser reutilizado, adaptado e compartilhado conforme as necessidades de estudantes, docentes e demais interessados. O objetivo é promover o acesso democrático ao conhecimento, estimular a autonomia no aprendizado e fortalecer a educação pública de qualidade.
+
+Este projeto faz parte do compromisso da UFERSA com a inovação pedagógica, a inclusão digital e a promoção da ciência aberta.

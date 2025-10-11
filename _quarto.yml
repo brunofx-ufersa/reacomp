@@ -3,20 +3,41 @@ project:
   output-dir: docs
 
 website:
-  title: "reacom"
+  title: "REAComp"
   navbar:
     left:
       - href: index.qmd
         text: Home
+      - disciplinas.qmd
+      - contribuicao.qmd
       - about.qmd
+  page-footer: 
+    left: "" 
+    center: 
+      - text: Licença
+      - text: CC BY-SA 4.0
+        href: http://creativecommons.org/licenses/by-sa/4.0/
+      - text: — Portal construído com 
+      - text: "Quarto"
+        href: https://quarto.org/
+    right: "" 
 
 format:
   html:
     theme:
-      - cosmo
-      - brand
-    css: styles.css
+      light: 
+      - flatly
+      dark: 
+      - darkly
     toc: true
+    code-line-numbers: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
 
+execute:      # Freezing Computations
+  freeze: auto
 
-
+glossary:
+  path: glossary.yml
+  popup: hover
+  show: true
