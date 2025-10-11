@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>🏝️ Ilha dos Ponteiros – REAComp</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-c0c9cae1f1aeee3c19b650ad169af17e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-f55520a7af8743f533f862a45d08b57b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-c0c9cae1f1aeee3c19b650ad169af17e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../styles/gamify.css">
+<link rel="stylesheet" href="../styles/turtlemap.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">REAComp</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../disciplinas.html"> 
+<span class="menu-text">Recursos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../contribuicao.html"> 
+<span class="menu-text">Participe</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">Sobre</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo escuro"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">🏝️ Ilha dos Ponteiros</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Saudações!</p>
+<p><i class="fa-solid fa-island-tropical"></i> Infelizmente, naufragamos na traiçoeira Ilha dos Ponteiros. Este lugar é uma prisão natural, cheia de referências complexas e caminhos que se perdem se não forem gerenciados corretamente.</p>
+<p>Juntamente com Shell, usaremos nossas habilidades para escapar.</p>
+<section id="sec-dec" class="level2">
+<h2 class="anchored" data-anchor-id="sec-dec">Declaração e Desreferenciação</h2>
+<p>Quando declaramos uma variável e atribuímos um valor, esse valor é armazenado em um endereço de memória. Quando escrevemos <code>int x = 10;</code>, ocorrem dois passos conceituais:</p>
+<ul>
+<li><strong>Declaração</strong>: o programa reserva um espaço na memória para armazenar um inteiro.</li>
+<li><strong>Atribuição</strong>: o valor <code>10</code> é gravado nesse espaço de memória, que possui um endereço.</li>
+</ul>
+<p>A variável <code>x</code> é apenas um rótulo usado pelo programador.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variável</th>
+<th>Endereço</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x</code></td>
+<td>0x75</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<p>Um <strong>ponteiro</strong> também é uma variável, mas sempre armazena o <strong>endereço de memória</strong> de outra variável. Essa habilidade é essencial para criar estruturas de dados dinâmicas.</p>
+<p>O princípio básico é a <strong>compatibilidade de tipo</strong>, ou seja, um ponteiro deve ser do mesmo tipo do dado que ele aponta.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">double</span> meta <span class="op">=</span> <span class="fl">7.5</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="dt">double</span> <span class="op">*</span>meta_ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span> <span class="co">// O operador &amp; retorna o endereço na memória</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>printf<span class="op">(</span><span class="st">"*meta_ptr: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>meta_ptr<span class="op">);</span> <span class="co">// *meta_ptr: 7.50</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>💡 Na linha 2, <code>meta_ptr</code> guarda o endereço da variável <code>meta</code>. Na linha 3, o operador <code>*</code> serve para desreferenciar, isto é, acessar o valor no endereço armazenado.</p>
+<p>🧮 Memória ilustrada</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variável</th>
+<th>Endereço</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>meta</code></td>
+<td><mark>0x55</mark></td>
+<td>7.5</td>
+</tr>
+<tr class="even">
+<td><code>meta_ptr</code></td>
+<td>0x58</td>
+<td><mark>0x55</mark></td>
+</tr>
+</tbody>
+</table>
+<p>Estamos usando endereços fictícios. Note que <code>meta_ptr</code> guarda o endereço de <code>meta</code>. Ao usar <code>*meta_ptr</code> na impressão, o C acessa o valor armazenado nesse endereço (7.5).</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="⚡ Dica do Mentor">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>⚡ Dica do Mentor
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O <code>*</code> tem dupla função:</p>
+<ul>
+<li>Declarar um ponteiro (<code>double *p</code>)</li>
+<li>Desreferenciar um ponteiro (<code>*p</code>)</li>
+</ul>
+</div>
+</div>
+<div class="chat-container">
+<div class="chat-line shell">
+<img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+<div class="chat-bubble">
+Podemos ir um pouco devagar aqui, pois é crucial entender como funciona esse mecanismo. Para isso, eu criei a seguinte ilustração.
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart RL
+    %% Nós de variáveis e ponteiros
+    X["📦 &lt;b&gt;x&lt;/b&gt;&lt;br/&gt;Endereço: &lt;code&gt;0x100&lt;/code&gt;&lt;br/&gt;Conteúdo: &lt;b&gt;42&lt;/b&gt;"]
+    Y["📦 &lt;b&gt;y&lt;/b&gt;&lt;br/&gt;Endereço: &lt;code&gt;0x200&lt;/code&gt;&lt;br/&gt;Conteúdo: &lt;b&gt;137&lt;/b&gt;"]
+    P["🎯 &lt;b&gt;p&lt;/b&gt;&lt;br/&gt;Endereço: &lt;code&gt;0x300&lt;/code&gt;&lt;br/&gt;Conteúdo: &lt;code&gt;0x100&lt;/code&gt;"]
+    PP["🎯 &lt;b&gt;pp&lt;/b&gt;&lt;br/&gt;Endereço: &lt;code&gt;0x400&lt;/code&gt;&lt;br/&gt;Conteúdo: &lt;code&gt;0x300&lt;/code&gt;"]
+
+    %% Conexões
+    PP --&gt;|"aponta para"| P
+    P --&gt;|"aponta para"| X
+    P ~~~ Y
+    Y ~~~ X
+
+    %% Estilos de formatação
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px;
+    classDef ptr fill:#FFD3B6,stroke:#E65100,color:#000,stroke-width:1px;
+    class X,Y var
+    class P,PP ptr
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>As variáveis <code>x</code> e <code>y</code> carregam dados que estão armazenados nos endereços <code>0x100</code> e <code>0x200</code>, respectivamente. A variável <code>p</code> é um ponteiro cujo conteúdo é <code>0x100</code>, portanto aponta para <code>x</code>. A variável <code>pp</code> é outro ponteiro, mas com conteúdo <code>0x300</code>, ou seja, aponta para o local com endereço <code>0x300</code>, que seria <code>p</code>. Isso mesmo um ponteiro de ponteiro. O código que representa esse diagrama poder ser o seguinte.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="dv">137</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">**</span>pp <span class="op">=</span> <span class="op">&amp;</span>p<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="chat-container">
+<div class="chat-line shell">
+<div class="chat-avatar">
+<p><img src="../img/avatars/shell_avatar.png" class="img-fluid"></p>
+</div>
+<div class="chat-bubble">
+<p>Resumindo</p>
+<ul>
+<li>x → contém 42 e está no endereço <code>0x100</code>;</li>
+<li>y → contém 137 e está no endereço <code>0x200</code>;</li>
+<li>p → contém <code>0x100</code> (o endereço de x);</li>
+<li>pp → contém <code>0x300</code> (o endereço de p).</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Podemos declarar ponteiros de várias formas:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span>meta_ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">*</span> meta_ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> meta_ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No entanto, a primeira é mais recomendada: <code>tipo *ponteiro = &amp;variavel</code>.</p>
+<p>✅ +5 XP : Você agora entende a sintaxe dos ponteiros!</p>
+</section>
+<section id="sec-mod" class="level2">
+<h2 class="anchored" data-anchor-id="sec-mod">Modificando Valores Indiretamente</h2>
+<p>Além de ler, você também pode modificar valores indiretamente usando ponteiros:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> meta <span class="op">=</span> <span class="fl">7.5</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span>meta_ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>meta_ptr <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"meta: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> meta<span class="op">);</span> <span class="co">// meta: 10.00</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="chat-container">
+<div class="chat-line shell">
+<img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+<div class="chat-bubble">
+Mudamos o valor de <code>meta</code> sem acessá-la diretamente. Isso é o poder dos ponteiros!
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="🎯 Desafio de Código">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>🎯 Desafio de Código
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Crie um ponteiro <code>int *p</code> que aponte para uma variável <code>x = 5</code>.</li>
+<li>Use <code>*p</code> para alterar <code>x</code> para <code>42</code>.</li>
+<li>Depois, exiba o valor e o endereço de <code>x</code> no console.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solução (clique para ver)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Solução (clique para ver)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span><span class="pp"> </span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="op">*</span>p <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a>    printf<span class="op">(</span><span class="st">"x: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>    printf<span class="op">(</span><span class="st">"&amp;x: </span><span class="sc">%p\n</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>x<span class="op">);</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="🎯 Desafio de Código">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>🎯 Desafio de Código
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Passo 1: Declare um ponteiro <code>ponteiro_chave</code> que aponte para a <code>chave_secreta</code>.</li>
+<li>Passo 2: Mude o valor da <code>chave_secreta</code> para 99 usando o ponteiro.</li>
+<li>Passo 3: Imprima o valor da chave secreta.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="dt">int</span> chave_secreta <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="co">// SEU CÓDIGO</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solução (clique para ver)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Solução (clique para ver)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span><span class="pp"> </span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="dt">int</span> chave_secreta <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="dt">int</span> <span class="op">*</span>ponteiro_chave <span class="op">=</span> <span class="op">&amp;</span>chave_secreta<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="op">*</span>ponteiro_chave <span class="op">=</span> <span class="dv">99</span><span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    printf<span class="op">(</span><span class="st">"chave_secreta: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> chave_secreta<span class="op">);</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>🏅 +10 XP : Você dominou a manipulação indireta de valores!</p>
+</section>
+<section id="sec-par" class="level2">
+<h2 class="anchored" data-anchor-id="sec-par">Ponteiros como Parâmetros</h2>
+<p>Acredito que estamos perto de deixar esta ilha. Por enquanto, a situação está calma, mas não podemos subestimar este local. Parece que encontramos algo que exige a nossa atenção imetata.</p>
+<p>Em C, os parâmetros são passados por valor. Portanto, a função recebe uma cópia do argumento.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> dobrar_meta <span class="op">(</span><span class="dt">double</span> meta<span class="op">){</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    meta <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>meta<span class="op">;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Na <code>main</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> meta <span class="op">=</span> <span class="fl">7.5</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"meta: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> meta<span class="op">);</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>dobrar_meta<span class="op">(</span>meta<span class="op">);</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"meta: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> meta<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída:</p>
+<pre class="console"><code>meta: 7.50
+meta: 7.50</code></pre>
+<p>Nada mudou, pois a função alterou apenas a cópia local.</p>
+<div class="chat-container">
+<div class="chat-line shell">
+<img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+<div class="chat-bubble">
+A variável <code>meta</code> na função <code>main</code> é global, já na função <code>dobrar_meta</code> é local. Significa que quando esta função termina, as variáveis são descartadas.
+</div>
+</div>
+</div>
+<p>💡 Vamos imprimir os endereços</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> dobrar_meta <span class="op">(</span><span class="dt">double</span> meta<span class="op">){</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"local &amp;meta: </span><span class="sc">%x\n</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>meta<span class="op">);</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    meta <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>meta<span class="op">;</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Na <code>main</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> meta <span class="op">=</span> <span class="fl">7.5</span><span class="op">;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"main &amp;meta: </span><span class="sc">%x\n</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>meta<span class="op">);</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>dobrar_meta<span class="op">(</span>meta<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída:</p>
+<pre class="console"><code>main &amp;meta: 0xe8
+local &amp;meta: 0xc0</code></pre>
+<p>🧮 Memória ilustrada</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variável</th>
+<th>Endereço</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>main <code>meta</code></td>
+<td>0xe8</td>
+<td>7.5</td>
+</tr>
+<tr class="even">
+<td>local <code>meta</code></td>
+<td>0xc0</td>
+<td>7.5</td>
+</tr>
+</tbody>
+</table>
+<div class="chat-container">
+<div class="chat-line shell">
+<img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+<div class="chat-bubble">
+Como eu suspeitava, os endereços são diferentes. Logo, não são as mesmas variáveis que estamos manipulando.
+</div>
+</div>
+</div>
+<p>A variável interna em <code>dobrar_meta</code> é criada em outra região de memória e recebe uma cópia do valor passado como argumento. Esse valor é dobrado em seguida, mas não reflete na variável da função <code>main</code>, pois ela está alocada em outro local.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        X["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xe8&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;7.5&lt;/b&gt;"]
+        Y["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xc0&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;7.5&lt;/b&gt;"]
+  end
+
+ subgraph s2[" "]
+        A["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xe8&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;7.5&lt;/b&gt;"]
+        B["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xc0&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;15&lt;/b&gt;"]
+  end
+
+    s1 --dobrar_meta--&gt; s2
+    
+     X:::var
+     Y:::var
+     A:::var
+     B:::var
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px
+    style s1 fill:transparent
+    style s2 fill:transparent
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="chat-container">
+<div class="chat-line shell">
+<img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+<div class="chat-bubble">
+E se, ao invés de passarmos o conteúdo armazenado, a gente passar o endereço ?
+</div>
+</div>
+</div>
+<p>Shell, isso é conhecido como passagem por referência. Na verdade, ainda será feita uma cópia do valor passado, mas como esse valor copiado é um endereço (o ponteiro), esse artifício será suficiente para manipularmos os dados originais.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="dt">void</span> dobrar_meta <span class="op">(</span><span class="dt">double</span> <span class="op">*</span>meta<span class="op">){</span> </span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="op">*</span>meta <span class="op">=</span> <span class="dv">2</span><span class="op">*(*</span>meta<span class="op">);</span> <span class="co">// Desreferenciação </span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="op">}</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="dt">int</span> main <span class="op">(){</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="dt">double</span> meta <span class="op">=</span> <span class="fl">7.5</span><span class="op">;</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>    </span>
+<span id="cb14-10"><a href="#cb14-10"></a>    printf<span class="op">(</span><span class="st">"meta: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> meta<span class="op">);</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a>    dobrar_meta<span class="op">(&amp;</span>meta<span class="op">);</span> <span class="co">// Passando o endereço</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>    printf<span class="op">(</span><span class="st">"meta: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> meta<span class="op">);</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a></span>
+<span id="cb14-14"><a href="#cb14-14"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída:</p>
+<pre class="console"><code>meta: 7.50
+meta: 15.00</code></pre>
+<p>🎉 Agora sim! A função modificou a variável original, pois passamos a referência.</p>
+<div class="chat-container">
+<div class="chat-line shell">
+<img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+<div class="chat-bubble">
+Nossa! que mágica foi essa?
+</div>
+</div>
+</div>
+<p>🧮 Memória ilustrada</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variável</th>
+<th>Endereço</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>main <code>meta</code></td>
+<td><mark>0xe8</mark></td>
+<td>7.5</td>
+</tr>
+<tr class="even">
+<td>local <code>meta</code></td>
+<td>0xc0</td>
+<td><mark>0xe8</mark></td>
+</tr>
+</tbody>
+</table>
+<p>Dentro da função, quando fazemos <code>*meta</code>, o C vai na linha de endereço com o valor de <code>meta</code> (0xe8). Neste local, ele efetua a operação de dobrar.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variável</th>
+<th>Endereço</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>main <code>meta</code></td>
+<td><mark>0xe8</mark></td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>local <code>meta</code></td>
+<td>0xc0</td>
+<td><mark>0xe8</mark></td>
+</tr>
+</tbody>
+</table>
+<p>Ao finalizar, a <code>meta</code> da função <code>main</code> sofreu a alteração.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        X["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xe8&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;7.5&lt;/b&gt;"]
+        Y["🎯 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xc0&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;0xe8&lt;/b&gt;"]
+  end
+ subgraph s2[" "]
+        A["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xe8&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;15&lt;/b&gt;"]
+        B["🎯 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xc0&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;0xe8&lt;/b&gt;"]
+  end
+    s1 -- dobrar_meta --&gt; s2
+
+     X:::var
+     Y:::ptr
+     A:::var
+     B:::ptr
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px
+    classDef ptr fill:#FFD3B6,stroke:#E65100,color:#000,stroke-width:1px;
+    style s1 fill:transparent
+    style s2 fill:transparent
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="🎯 Desafio de Código">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>🎯 Desafio de Código
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Implemente uma função <code>swap</code> que troque os valores de duas variáveis. Teste na <code>main</code> com:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>swap<span class="op">(&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y<span class="op">);</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"x = </span><span class="sc">%d</span><span class="st">, y = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">,</span> y<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída esperada: <code>x = 20, y = 10</code></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solução (clique para ver)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Solução (clique para ver)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span><span class="pp"> </span></span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="dt">void</span> swap<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>b<span class="op">){</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="dt">int</span> aux <span class="op">=</span> <span class="op">*</span>a<span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>    a<span class="op">*</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>    b<span class="op">*</span> <span class="op">=</span> aux<span class="op">;</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="op">}</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a>    swap<span class="op">(&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y<span class="op">);</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a>    printf<span class="op">(</span><span class="st">"x = </span><span class="sc">%d</span><span class="st">, y = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">,</span> y<span class="op">);</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a></span>
+<span id="cb17-14"><a href="#cb17-14"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>🎖️ +20 XP: Você aplicou a passagem por referência</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled" title="Conquista Desbloqueada">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Cuidado</span>Conquista Desbloqueada
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><i class="bi bi-arrow-down-right-square"></i> Manipulador de Ponteiros</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="🏆 Checkpoint">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>🏆 Checkpoint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Você aprendeu:</p>
+<p>✅ A declarar e desreferenciar ponteiros</p>
+<p>✅ A modificar valores via ponteiros</p>
+<p>✅ A passar variáveis por referência</p>
+<p>Recompensas:</p>
+<p>🏅 +35 XP</p>
+<p>💥Título: Manipulador de Ponteiros</p>
+</div>
+</div>
+<div class="chat-container">
+<div class="chat-line shell">
+<img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+<div class="chat-bubble">
+Ihuuu! conseguimos passar com êxito por todos os desafios da ilha. Precisamos resgatar a Hashy no Deserto dos Callbacks.
+</div>
+</div>
+</div>
+<hr>
+<div class="callout callout-style-default callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Cuidado</span>🏁 Fase Concluída!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A palavra-chave para desbloquear a próxima fase é:<br>
+<strong>CHAVE: callback</strong></p>
+</div>
+</div>
+<!-- <a href='fundamentos.html#sec-mapa' ><button class="button"><i class="bi bi-globe-americas"></i> Voltar</button></a> -->
+ <div class="progress-bar" id="progressBar"></div>
+
+<script>
+window.addEventListener("scroll", function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById("progressBar").style.width = scrollPercent + "%";
+});
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/brunofx-ufersa\.github\.io\/reacomp\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Licença
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<p>CC BY-SA 4.0</p>
+</a>
+  </li>  
+    <li class="nav-item">
+ — Portal construído com
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://quarto.org/">
+<p>Quarto</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
