@@ -27,8 +27,10 @@ format:
     theme:
       light: 
       - flatly
+      - styles.css
       dark: 
       - darkly
+      - styles.css
     toc: true
     code-line-numbers: true
     code-block-bg: true

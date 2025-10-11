@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", mostrarFases);
 
 ## 🗺️ Mapa da Jornada {#sec-mapa}
 
-![](img/mapa-gen.png){width="480" fig-align="center"}
+![](../../img/mapas/mapa-gen.png){width="480" fig-align="center"}
 
 
 <div id="mapa-fases"></div>
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", mostrarFases);
 
 :::{.chat-container}
 :::{.chat-line .shell}
-![](../img/avatars/shell_avatar.png){.chat-avatar alt="Shell"}
+![](../../img/avatars/shell_avatar.png){.chat-avatar alt="Shell"}
 
 :::{.chat-bubble}
  Ao completar desafios ou uma fase, você encontrará a palavra-chave para desbloquear a próxima. 

@@ -62,7 +62,7 @@ O `*` tem dupla função:
 
 <div class="chat-container">
 <div class="chat-line shell">
-  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <img src="../../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
   <div class="chat-bubble">Podemos ir um pouco devagar aqui, pois é crucial entender como funciona esse mecanismo. Para isso, eu criei a seguinte ilustração.</div>
 </div>
 </div>
@@ -101,7 +101,7 @@ int **pp = &p;
 :::{.chat-container}
 :::{.chat-line .shell}
 :::{.chat-avatar}
-  ![](../img/avatars/shell_avatar.png)
+  ![](../../img/avatars/shell_avatar.png)
 ::: 
 :::{.chat-bubble}
 Resumindo
@@ -144,7 +144,7 @@ printf("meta: %.2f\n", meta); // meta: 10.00
 
 <div class="chat-container">
 <div class="chat-line shell">
-  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <img src="../../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
   <div class="chat-bubble">Mudamos o valor de `meta` sem acessá-la diretamente. Isso é o poder dos ponteiros!</div>
 </div>
 </div>
@@ -242,7 +242,7 @@ Nada mudou, pois a função alterou apenas a cópia local.
 
 <div class="chat-container">
 <div class="chat-line shell">
-  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <img src="../../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
   <div class="chat-bubble">A variável `meta` na função `main` é global, já na função `dobrar_meta` é local. Significa que quando esta função termina, as variáveis são descartadas.</div>
 </div>
 </div>
@@ -281,7 +281,7 @@ local &meta: 0xc0
 
 <div class="chat-container">
 <div class="chat-line shell">
-  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <img src="../../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
   <div class="chat-bubble">Como eu suspeitava, os endereços são diferentes. Logo, não são as mesmas variáveis que estamos manipulando.</div>
 </div>
 </div>
@@ -314,7 +314,7 @@ flowchart LR
 
 <div class="chat-container">
 <div class="chat-line shell">
-  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <img src="../../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
   <div class="chat-bubble">E se, ao invés de passarmos o conteúdo armazenado, a gente passar o endereço ?</div>
 </div>
 </div>
@@ -351,7 +351,7 @@ A função modificou a variável original, pois passamos a referência.
 
 <div class="chat-container">
 <div class="chat-line shell">
-  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <img src="../../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
   <div class="chat-bubble">Nossa! que mágica foi essa?</div>
 </div>
 </div>
@@ -454,7 +454,7 @@ Recompensas:
 
 <div class="chat-container">
 <div class="chat-line shell">
-  <img src="../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
+  <img src="../../img/avatars/shell_avatar.png" class="chat-avatar" alt="ShellSort">
   <div class="chat-bubble">Ihuuu! conseguimos passar com êxito por todos os desafios da ilha. Precisamos resgatar a Hashy no Deserto dos Callbacks.</div>
 </div>
 </div>
