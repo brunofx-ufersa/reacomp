@@ -65,6 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../">
+<link href="../../../../disciplinas/aed2/academic/unidade2/1-ponteiros.html" rel="prev">
+<link href="../../../../img/logo.png" rel="icon" type="image/png">
 <script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -77,9 +79,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-c0c9cae1f1aeee3c19b650ad169af17e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-f55520a7af8743f533f862a45d08b57b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-c0c9cae1f1aeee3c19b650ad169af17e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-a3508ca507676472fbcc2360244a2547.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="../../../../site_libs/quarto-contrib/glossary/glossary.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -111,6 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../../../styles.css">
+<link rel="stylesheet" href="../styles/academic.css">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -314,6 +317,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo escuro"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo de leitor">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -322,20 +330,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Conteúdo</h2>
-   
-  <ul>
-  <li><a href="#sec-fun" id="toc-sec-fun" class="nav-link active" data-scroll-target="#sec-fun">Ponteiros de Funções</a></li>
-  <li><a href="#sec-cal" id="toc-sec-cal" class="nav-link" data-scroll-target="#sec-cal">Introdução aos Callbacks</a></li>
-  <li><a href="#sec-gen" id="toc-sec-gen" class="nav-link" data-scroll-target="#sec-gen">Ponteiro genérico</a></li>
-  <li><a href="#sec-siz" id="toc-sec-siz" class="nav-link" data-scroll-target="#sec-siz">O papel de <code>size_t</code></a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -357,23 +355,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Nossa jornada pelos ponteiros não acabou. Nesta unidade vamos estudar o uso de ponteiros com funções. Poderemos chamar funções indiretamente e passar funções como paramêtros para outras funções.</p>
+<p>Nossa jornada pelos ponteiros ainda não acabou. Nesta unidade vamos estudar o uso de ponteiros com funções. Isso mesmo, uma função também possui um endereço de memória. Poderemos chamar funções indiretamente e passar funções como paramêtros para outras funções.</p>
 <section id="sec-fun" class="level2">
 <h2 class="anchored" data-anchor-id="sec-fun">Ponteiros de Funções</h2>
 <p>Um ponteiro também pode armazenar o endereço de uma função. O raciocínio é o mesmo de antes, mas a sintaxe para a declaração é mais específica, pois ela precisa descrever a <strong>assinatura</strong> completa da função: seu tipo de retorno e seus parâmetros.</p>
 <p>A sintaxe de declaração pode parecer confusa no início, mas pode ser lida assim:</p>
 <p><code>tipo_de_retorno (*nome_do_ponteiro)(tipos_de_parametros);</code></p>
-<p>Vamos tomar a função <code>media</code> como exemplo:</p>
+<p>Vamos tomar a função <code>media</code> como exemplo. Ela recebe dois valores e retorna a média aritmética deles.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> media <span class="op">(</span><span class="dt">double</span> n1<span class="op">,</span> <span class="dt">double</span> n2<span class="op">){</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(</span>n1 <span class="op">+</span> n2<span class="op">)/</span><span class="dv">2</span><span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Declaração de um ponteiro de função:</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">(*</span>media_ptr<span class="op">)(</span><span class="dt">double</span><span class="op">,</span> <span class="dt">double</span><span class="op">)</span> <span class="op">=</span> media<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A sintaxe de declaração deve ser lida da seguinte forma:</p>
+<p>A sintaxe de declaração do ponteiro <code>media_prt</code> deve ser lida da seguinte forma:</p>
 <ul>
 <li><p><code>double</code>: é o tipo de retorno;</p></li>
-<li><p><code>(*media_ptr)</code>: indica que <code>media_ptr</code> é um ponteiro para função. Os parênteses são obrigatórios para diferenciá-lo de uma função que retorna um ponteiro;</p></li>
+<li><p><code>(*media_ptr)</code>: indica que <code>media_ptr</code> é um ponteiro para função. Os parênteses são <strong>obrigatórios</strong> para diferenciá-lo de uma função que retorna um ponteiro;</p></li>
 <li><p><code>(double, double)</code>: são os tipos dos parâmetros da função apontada.</p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -389,13 +387,13 @@ Nota
 <p>Diferentemente das variáveis, ao atribuir o endereço de uma função a um ponteiro de função, não é necessário usar o operador &amp; (o nome da função sozinho já representa seu endereço).</p>
 </div>
 </div>
-<p>Note que a função <code>media</code> obedece a <strong>assinatura</strong> (ou contrato) estabelecido pelo ponteiro de função <code>media_ptr</code>, ou seja, possui o mesmo <strong>tipo de retorno</strong> e os mesmos <strong>tipos de parâmetros de entrada</strong> (<code>double, double</code>). Portanto, devemos manter a <strong>compatibilidade</strong> de tipos.</p>
+<p>Note que a função <code>media</code> obedece a <strong>assinatura</strong> (ou contrato) estabelecido pelo ponteiro de função <code>media_ptr</code>, ou seja, possui o mesmo <strong>tipo de retorno</strong> e os mesmos <strong>tipos de parâmetros de entrada</strong> (<code>double, double</code>). Portanto, devemos manter a <strong>compatibilidade</strong> de tipos, como fizemos com as variáveis na seção anterior.</p>
 </section>
-<section id="sec-cal" class="level2">
+<section id="sec-cal" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-cal">Introdução aos Callbacks</h2>
 <p>O verdadeiro poder dos ponteiros de função aparece quando uma função é passada como argumento para outra. Nesse caso, a função que recebe outra função é chamada de <strong>função de ordem superior</strong>, enquanto a função fornecida como argumento é chamada de <strong><em>callback</em></strong>.</p>
 <p>Essa técnica permite que um trecho de código delegue parte de seu comportamento a outro, tornando o programa mais flexível, modular e paramétrico.</p>
-<p>Abaixo, um exemplo de uma calculadora de inteiros, onde <code>calcular</code> é uma função de ordem superior, pois recebe outra função como parâmetro. As funções <code>soma</code>, <code>subtracao</code>, <code>produto</code> e <code>divisao</code> são <em>callbacks</em>, pois são passadas para <code>calcular</code> para que ela decida qual comportamento executar.</p>
+<p>Abaixo, um exemplo de uma calculadora de inteiros, onde <code>calcular</code> é uma função de ordem superior, pois recebe outra função como parâmetro. As funções <code>soma</code>, <code>subtracao</code>, <code>produto</code> e <code>divisao</code> são <em>callbacks</em>, pois são passadas para <code>calcular</code>.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>calculadora_param.c</strong></pre>
@@ -409,7 +407,7 @@ Nota
 <span id="cb2-7"><a href="#cb2-7"></a><span class="dt">int</span> divisao <span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span>  <span class="op">{</span> <span class="cf">return</span> a <span class="op">/</span> b<span class="op">;</span> <span class="op">}</span></span>
 <span id="cb2-8"><a href="#cb2-8"></a></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="co">// Função coordenadora (de ordem superior)</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">// Recebe duas variáveis e uma função como parâmetro</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">// Recebe duas variáveis e um ponteior de função como parâmetros</span></span>
 <span id="cb2-11"><a href="#cb2-11"></a><span class="dt">int</span> calcular<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">,</span> <span class="dt">int</span> <span class="op">(*</span>operacao<span class="op">)(</span><span class="dt">int</span><span class="op">,</span> <span class="dt">int</span><span class="op">))</span> <span class="op">{</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a>  <span class="cf">return</span> operacao<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="op">}</span></span>
@@ -427,8 +425,10 @@ Nota
 <span id="cb2-25"><a href="#cb2-25"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb2-26"><a href="#cb2-26"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>A função <code>calcular</code> não sabe qual operação será executada, ela apenas invoca o comportamento recebido como parâmetro. Isso é o que chamamos de <strong>abstração de comportamento</strong>.</p>
-<p>A saída desse programa será</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> A função <code>calcular</code> não sabe qual operação será executada, ela apenas invoca o comportamento recebido como parâmetro. Isso é o que chamamos de <strong>abstração de comportamento</strong>.</p>
+</div></div><p>A saída desse programa será</p>
 <pre class="console"><code>  Soma:      12
   Subtração: 8
   Produto:   20
@@ -439,7 +439,7 @@ Nota
 <p>O problema é que não podemos passar <code>somad</code> para a função <code>calcular</code> e nem a usar para operar com <code>double</code>, pois o <em>callback</em> <code>int (*operacao)(int, int)</code> e os parâmetros fixos em <code>calcular(int a, int b, ...)</code> tornam essa função totalmente incompatível com o tipo <code>double</code>.</p>
 <p>Para resolver esse problema e criar uma única função verdadeiramente genérica que aceite qualquer tipo de dado, precisamos abandonar os tipos concretos (<code>int</code>, <code>double</code>) e generalizar usando o ponteiro sem tipo (<code>void*</code>).</p>
 <p>Antes de darmos o salto para o código verdadeiramente genérico usando <code>void*</code>, vamos usar o <code>typedef</code> para melhorar a legibilidade de nosso código.</p>
-<p>A sintaxe de um ponteiro de função (<code>int (*operacao)(int, int)</code>) é complexa e pode dificultar a leitura do código. O <code>typedef</code> permite que você crie um apelido para essa assinatura complexa, tratando-a como um novo tipo de dado simples.</p>
+<p>A sintaxe de um ponteiro de função (por exemplo, <code>int (*operacao)(int, int)</code>) pode dificultar a leitura do código, principalmente como argumentos de função. O <code>typedef</code> permite que você crie um apelido para essa assinatura complexa, tratando-a como um novo tipo de dado simples.</p>
 <p>Ao definir o tipo do <em>callback</em>, tornamos a função <code>calcular</code> muito mais limpa:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">// Definimos 'Operacao' como o tipo para qualquer função</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="co">// que retorna int e aceita dois int como parâmetros.</span></span>
@@ -477,11 +477,21 @@ Nota
 <span id="cb6-22"><a href="#cb6-22"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb6-23"><a href="#cb6-23"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> Com <code>typedef</code>, ganhamos mais clareza no código. A função <code>calcular</code> se torna muito mais limpa e legível.</p>
+</div></div><p>Com essa abrodardagem, ganhamos:</p>
+<ul>
+<li><strong>Reutilização</strong>: A função <code>calcular</code> é reutilizada para todas as operações.</li>
+<li><strong>Fácil extensão</strong>: Para adicionar uma nova operação, basta criar a função e passá-la para <code>calcular</code>. Não precisamos de blocos <code>if/else</code> ou <code>switch</code> dentro de <code>calcular</code>.</li>
+<li><strong>Baixo acoplamento</strong>: <code>calcular</code> não precisa saber como a operação é feita (se é soma ou subtração), apenas que a função passada segue o contrato definido pelo tipo <code>Operacao</code>.</li>
+</ul>
+<p>Dessa maneira, <code>calcular</code> se comporta de várias formas (polimorfismo).</p>
 </section>
-<section id="sec-gen" class="level2">
+<section id="sec-gen" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-gen">Ponteiro genérico</h2>
-<p>Agora que compreendemos o funcionamento dos ponteiros e a passagem por referência, podemos dar um passo além, como representar qualquer tipo de dado usando ponteiros genéricos.</p>
-<p>Em C, o tipo <code>void*</code> é conhecido como ponteiro genérico (<em>generic pointer</em>). Ele é um tipo especial de ponteiro que pode armazenar o endereço de qualquer tipo de dado, por exemplo <code>int</code>, <code>double</code>, <code>char</code>, <code>struct</code> etc.</p>
+<p>Agora que compreendemos o funcionamento dos ponteiros, passagem por referência e <em>callbacks</em>, podemos dar um passo além. Vamos estudar um método para representar qualquer tipo de dado.</p>
+<p>Em C, o tipo <code>void *</code> é conhecido como ponteiro genérico (<em>generic pointer</em>). Ele é um tipo especial de ponteiro que pode armazenar o endereço de qualquer tipo de dado, por exemplo <code>int</code>, <code>double</code>, <code>char</code>, <code>struct</code> etc.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> idade <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> meta <span class="op">=</span> <span class="fl">8.5</span><span class="op">;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> letra <span class="op">=</span> <span class="ch">'A'</span><span class="op">;</span></span>
@@ -489,17 +499,20 @@ Nota
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="op">*</span>ptr<span class="op">;</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ptr <span class="op">=</span> <span class="op">&amp;</span>idade<span class="op">;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"idade: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">int</span><span class="op">*)</span>ptr<span class="op">);</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"idade: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">int</span> <span class="op">*)</span>ptr<span class="op">);</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"meta: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">double</span><span class="op">*)</span>ptr<span class="op">);</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"meta: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">double</span> <span class="op">*)</span>ptr<span class="op">);</span></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>ptr <span class="op">=</span> <span class="op">&amp;</span>letra<span class="op">;</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"letra: </span><span class="sc">%c\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">char</span><span class="op">*)</span>ptr<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Repare que, embora <code>ptr</code> sempre seja do tipo <code>void*</code>, precisamos fazer um <em>cast</em> (conversão explícita) para o tipo correto antes de acessar o valor. Isso ocorre porque o compilador não sabe qual é o tipo real do dado armazenado e, portanto, não pode fazer aritmética de ponteiros nem desreferenciação direta.</p>
-<p>Essa característica é o que permite criar estruturas de dados genéricas em C, como listas, pilhas ou filas capazes de armazenar qualquer tipo. Essas estruturas irão guardar apenas endereços genéricos (<code>void*</code>) e não se importar com o tipo concreto do dado. A responsabilidade de interpretar corretamente o tipo será de quem usar a estrutura.</p>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"letra: </span><span class="sc">%c\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">char</span> <span class="op">*)</span>ptr<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> Não podemos desreferenciar diretamente um ponteiro <code>void *</code> , pois o compilador não sabe quantos <em>bytes</em> ele deve ler. Devemos sempre fazer um <em>cast</em> (conversão) do <code>void *</code> para o tipo específico de ponteiro que desejamos, antes de poder usá-lo.</p>
+</div></div><p>Repare que, embora <code>ptr</code> sempre seja do tipo <code>void *</code>, precisamos fazer um <em>cast</em> (conversão explícita) para o tipo correto antes de acessar o valor. Isso ocorre porque o compilador não sabe qual é o tipo real do dado armazenado e, portanto, não pode fazer aritmética de ponteiros nem desreferenciação direta.</p>
+<p>Essa característica é o que permite criar estruturas de dados genéricas em C, como listas, pilhas ou filas capazes de armazenar qualquer tipo. Essas estruturas irão guardar apenas endereços genéricos (<code>void *</code>) e não se importar com o tipo concreto do dado. A responsabilidade de interpretar corretamente o tipo será de quem usar a estrutura.</p>
 </section>
-<section id="sec-siz" class="level2">
+<section id="sec-siz" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-siz">O papel de <code>size_t</code></h2>
 <p>Ao manipular dados de tipos diferentes, precisamos também saber quanto de memória reservar ou copiar. É aí que entra o tipo <code>size_t</code>, definido no cabeçalho <code>&lt;stddef.h&gt;</code> (ou implicitamente incluído via <code>&lt;stdlib.h&gt;</code> ou <code>&lt;stdio.h&gt;</code>).</p>
 <p>Como um tipo numérico sem sinal (<em>unsigned</em>), <code>size_t</code> é usado para representar tamanhos e quantidades de <em>bytes</em>. Ele é o tipo de retorno de funções como <code>sizeof</code>, <code>malloc</code>, <code>calloc</code> e <code>strlen</code>.</p>
@@ -510,7 +523,7 @@ Nota
 <span id="cb8-5"><a href="#cb8-5"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
 <span id="cb8-6"><a href="#cb8-6"></a>    <span class="dt">double</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span></span>
 <span id="cb8-7"><a href="#cb8-7"></a></span>
-<span id="cb8-8"><a href="#cb8-8"></a>    printf<span class="op">(</span><span class="st">"sizeof(int): </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>    printf<span class="op">(</span><span class="st">"sizeof(int)   : </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
 <span id="cb8-9"><a href="#cb8-9"></a>    printf<span class="op">(</span><span class="st">"sizeof(double): </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">));</span></span>
 <span id="cb8-10"><a href="#cb8-10"></a></span>
 <span id="cb8-11"><a href="#cb8-11"></a>    <span class="dt">void</span> <span class="op">*</span>ptr <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">));</span></span>
@@ -519,18 +532,24 @@ Nota
 <span id="cb8-14"><a href="#cb8-14"></a>    free<span class="op">(</span>ptr<span class="op">);</span></span>
 <span id="cb8-15"><a href="#cb8-15"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb8-16"><a href="#cb8-16"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Saída típica:</p>
-<pre class="console"><code>sizeof(int): 4 bytes
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong></p>
+<ul>
+<li><code>z</code> é um modificador de comprimento que especifica que o argumento é do tipo <code>size_t</code></li>
+<li><code>u</code> é o código de conversão para inteiro decimal sem sinal (<code>unsigned</code>).</li>
+</ul>
+</div></div><p>Saída típica:</p>
+<pre class="console"><code>sizeof(int)   : 4 bytes
 sizeof(double): 8 bytes
 Alocado 8 bytes em 0x7ffee1</code></pre>
-<p>A combinação de <code>void*</code> e <code>size_t</code> é fundamental para criar estruturas genéricas, pois usaremos <code>void*</code> para representar o dado, independentemente de tipo e <code>size_t</code> para indicar o tamanho desse dado, permitindo cópia, alocação e manipulação seguras.</p>
-<p>Falta pouco para criarmos nossas estruturas genéricas com comportamentos também genéricos. Antes, precisamos entender como generalizar ações, ou seja, como permitir que uma estrutura chame funções que mudam conforme o tipo de dado.</p>
-<p>E é aqui que entra o próximo conceito fundamental, a abstração de comportamento. Para isso, devemos estudar os ponteiros para função e <em>callbacks</em>.</p>
+<p>A combinação de <code>void *</code> e <code>size_t</code> é fundamental para criar estruturas genéricas, pois usaremos <code>void *</code> para representar o dado, independentemente de tipo e <code>size_t</code> para indicar o tamanho desse dado, permitindo cópia, alocação e manipulação seguras.</p>
+<p>Falta pouco para criarmos nossas estruturas genéricas com comportamentos também genéricos. Porém, ainda precisamos pontuar algumas questões sobre o gerenciamento de memória.</p>
 
 
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -944,6 +963,15 @@ Alocado 8 bytes em 0x7ffee1</code></pre>
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../disciplinas/aed2/academic/unidade2/1-ponteiros.html" class="pagination-link" aria-label="Ponteiros (Revisão)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Ponteiros (Revisão)</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
