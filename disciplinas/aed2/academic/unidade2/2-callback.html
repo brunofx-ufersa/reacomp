@@ -544,6 +544,73 @@ Nota
 sizeof(double): 8 bytes
 Alocado 8 bytes em 0x7ffee1</code></pre>
 <p>A combinação de <code>void *</code> e <code>size_t</code> é fundamental para criar estruturas genéricas, pois usaremos <code>void *</code> para representar o dado, independentemente de tipo e <code>size_t</code> para indicar o tamanho desse dado, permitindo cópia, alocação e manipulação seguras.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="🎯 Desafio de Código">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>🎯 Desafio de Código
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Crie uma função <code>aplicar</code> que recebe um vetor de inteiros e uma função <em>callback</em> que é aplicada a cada elemento do vetor. Para as funções de callback, implemente:</p>
+<ul>
+<li><code>dobra</code>: dobra o valor de cada elemento do vetor</li>
+<li><code>zerar</code>: Define cada elemento como zero</li>
+<li><code>incrementar</code>: soma um a cada elemento do vetor</li>
+</ul>
+<p>Segue a declação da funções de callback e ordem superior, além de um exemplo de uso.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="dt">void</span> dobrar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">);</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="dt">void</span> zerar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">);</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="dt">void</span> incrementar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">);</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="dt">void</span> aplicar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>vetor<span class="op">,</span> <span class="dt">int</span> tamanho<span class="op">,</span> <span class="dt">void</span> <span class="op">(*</span>funcao<span class="op">)(</span><span class="dt">int</span> <span class="op">*));</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>    <span class="dt">int</span> numeros<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">};</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>    aplicar<span class="op">(</span>numeros<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> dobrar<span class="op">);</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a></span>
+<span id="cb10-13"><a href="#cb10-13"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st"> "</span><span class="op">,</span> numeros<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>    <span class="op">}</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-17"><a href="#cb10-17"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solução (clique para ver)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Solução (clique para ver)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1"></a><span class="dt">void</span> dobrar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">){</span> <span class="op">*</span>x <span class="op">=</span> <span class="op">*</span>x <span class="op">*</span> <span class="dv">2</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="dt">void</span> zerar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">){</span> <span class="op">*</span>x <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="dt">void</span> incrementar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">){</span> <span class="op">*</span>x <span class="op">=</span> <span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="dt">void</span> aplicar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>vetor<span class="op">,</span> <span class="dt">int</span> tamanho<span class="op">,</span> <span class="dt">void</span> <span class="op">(*</span>funcao<span class="op">)(</span><span class="dt">int</span> <span class="op">*)){</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> tamanho<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>        funcao<span class="op">(&amp;</span>vetor<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="op">}</span>    </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>Nesta unidade, você aprendeu</p>
+<p>✅ a declarar um ponteiro de função</p>
+<p>✅ a criar funções de ordem superior e de <em>callbacks</em></p>
+<p>✅ a usar ponteiros sem tipo (<code>void *</code>)</p>
+<p>✅ a usar <code>site_t</code> para designar tamanho ou quantidade de <em>bytes</em></p>
 <p>Falta pouco para criarmos nossas estruturas genéricas com comportamentos também genéricos. Porém, ainda precisamos pontuar algumas questões sobre o gerenciamento de memória.</p>
 
 
