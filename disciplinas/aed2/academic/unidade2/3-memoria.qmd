@@ -1,7 +1,8 @@
 ---
-title: "⛰️ Vale da Memória"
+title: "Gerenciamento da Memória"
 lang: pt
 toc-title: Conteúdo
+sidebar: false
 toc: false
 ---
  

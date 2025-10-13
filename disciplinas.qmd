@@ -4,7 +4,7 @@ format: html
 toc: false 
 ---
 
-Explore nossos materiais sobre Algoritmos, Programação em C e Estruturas de Dados. Clique em um card para começar! 
+Explore nossos materiais sobre Algoritmos, Programação em C e Estruturas de Dados. 
 
 ::: {.grid}
 
@@ -38,4 +38,5 @@ Explore nossos materiais sobre Algoritmos, Programação em C e Estruturas de Da
 :::
 
 :::
-
+---
+_Clique em uma opção para começar!_ 

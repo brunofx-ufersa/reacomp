@@ -2,9 +2,15 @@
 title: "Callbacks"
 lang: pt
 toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
 ---
 
-Nossa jornada pelos ponteiros não acabou. Nesta unidade vamos estudar o uso de ponteiros com funções. Poderemos chamar funções indiretamente e passar funções como paramêtros para outras funções. 
+Nossa jornada pelos ponteiros ainda não acabou. Nesta unidade vamos estudar o uso de ponteiros com funções. Isso mesmo, uma função também possui um endereço de memória. Poderemos chamar funções indiretamente e passar funções como paramêtros para outras funções. 
 
 
 ## Ponteiros de Funções {#sec-fun}
@@ -15,7 +21,7 @@ A sintaxe de declaração pode parecer confusa no início, mas pode ser lida ass
 
 `tipo_de_retorno (*nome_do_ponteiro)(tipos_de_parametros);`
 
-Vamos tomar a função `media` como exemplo:
+Vamos tomar a função `media` como exemplo. Ela recebe dois valores e retorna a média aritmética deles.
 
 ```{.c code-line-numbers="false"}
 double media (double n1, double n2){
@@ -26,11 +32,11 @@ double media (double n1, double n2){
 double (*media_ptr)(double, double) = media;
 ```
 
-A sintaxe de declaração deve ser lida da seguinte forma:
+A sintaxe de declaração do ponteiro `media_prt` deve ser lida da seguinte forma:
 
 - `double`: é o tipo de retorno;
 
-- `(*media_ptr)`: indica que `media_ptr` é um ponteiro para função. Os parênteses são obrigatórios para diferenciá-lo de uma função que retorna um ponteiro;
+- `(*media_ptr)`: indica que `media_ptr` é um ponteiro para função. Os parênteses são **obrigatórios** para diferenciá-lo de uma função que retorna um ponteiro;
 
 - `(double, double)`: são os tipos dos parâmetros da função apontada.
 
@@ -38,7 +44,7 @@ A sintaxe de declaração deve ser lida da seguinte forma:
 Diferentemente das variáveis, ao atribuir o endereço de uma função a um ponteiro de função, não é necessário usar o operador & (o nome da função sozinho já representa seu endereço).
 :::
 
-Note que a função `media` obedece a **assinatura** (ou contrato) estabelecido pelo ponteiro de função `media_ptr`, ou seja, possui o mesmo **tipo de retorno** e os mesmos **tipos de parâmetros de entrada** (`double, double`). Portanto, devemos manter a **compatibilidade** de tipos.
+Note que a função `media` obedece a **assinatura** (ou contrato) estabelecido pelo ponteiro de função `media_ptr`, ou seja, possui o mesmo **tipo de retorno** e os mesmos **tipos de parâmetros de entrada** (`double, double`). Portanto, devemos manter a **compatibilidade** de tipos, como fizemos com as variáveis na seção anterior.
 
 
 ## Introdução aos Callbacks {#sec-cal}
@@ -48,7 +54,7 @@ Nesse caso, a função que recebe outra função é chamada de **função de ord
 
 Essa técnica permite que um trecho de código delegue parte de seu comportamento a outro, tornando o programa mais flexível, modular e paramétrico.
 
-Abaixo, um exemplo de uma calculadora de inteiros, onde `calcular` é uma função de ordem superior, pois recebe outra função como parâmetro. As funções `soma`, `subtracao`, `produto` e `divisao` são _callbacks_, pois são passadas para `calcular` para que ela decida qual comportamento executar.
+Abaixo, um exemplo de uma calculadora de inteiros, onde `calcular` é uma função de ordem superior, pois recebe outra função como parâmetro. As funções `soma`, `subtracao`, `produto` e `divisao` são _callbacks_, pois são passadas para `calcular`.
 
 ```{.c filename=calculadora_param.c}
 #include <stdio.h>
@@ -60,7 +66,7 @@ int produto (int a, int b)  { return a * b; }
 int divisao (int a, int b)  { return a / b; }
 
 // Função coordenadora (de ordem superior)
-// Recebe duas variáveis e uma função como parâmetro
+// Recebe duas variáveis e um ponteior de função como parâmetros
 int calcular(int a, int b, int (*operacao)(int, int)) {
   return operacao(a, b);
 }
@@ -79,7 +85,12 @@ int main(){
 }
 ```
 
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
 A função `calcular` não sabe qual operação será executada, ela apenas invoca o comportamento recebido como parâmetro. Isso é o que chamamos de **abstração de comportamento**.
+:::
+
+
 
 A saída desse programa será
 
@@ -105,7 +116,7 @@ Para resolver esse problema e criar uma única função verdadeiramente genéric
 
 Antes de darmos o salto para o código verdadeiramente genérico usando `void*`, vamos usar o `typedef` para melhorar a legibilidade de nosso código.
 
-A sintaxe de um ponteiro de função (`int (*operacao)(int, int)`) é complexa e pode dificultar a leitura do código. O `typedef` permite que você crie um apelido para essa assinatura complexa, tratando-a como um novo tipo de dado simples.
+A sintaxe de um ponteiro de função (por exemplo, `int (*operacao)(int, int)`) pode dificultar a leitura do código, principalmente como argumentos de função. O `typedef` permite que você crie um apelido para essa assinatura complexa, tratando-a como um novo tipo de dado simples.
 
 Ao definir o tipo do _callback_, tornamos a função `calcular` muito mais limpa:
 
@@ -146,12 +157,24 @@ int main(){
   return 0;
 }
 ```
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Com `typedef`, ganhamos mais clareza no código. A função `calcular` se torna muito mais limpa e legível. 
+:::
+
+Com essa abrodardagem, ganhamos:
+
+- **Reutilização**: A função `calcular` é reutilizada para todas as operações.
+- **Fácil extensão**:	Para adicionar uma nova operação, basta criar a função e passá-la para `calcular`. Não precisamos de blocos `if/else` ou `switch` dentro de `calcular`.
+- **Baixo acoplamento**:	`calcular` não precisa saber como a operação é feita (se é soma ou subtração), apenas que a função passada segue o contrato definido pelo tipo `Operacao`.
+
+Dessa maneira, `calcular` se comporta de várias formas (polimorfismo).
 
 ## Ponteiro genérico {#sec-gen}
 
-Agora que compreendemos o funcionamento dos ponteiros e a passagem por referência, podemos dar um passo além, como representar qualquer tipo de dado usando ponteiros genéricos.
+Agora que compreendemos o funcionamento dos ponteiros, passagem por referência e _callbacks_, podemos dar um passo além. Vamos estudar um método para representar qualquer tipo de dado.
 
-Em C, o tipo `void*` é conhecido como ponteiro genérico (_generic pointer_). Ele é um tipo especial de ponteiro que pode armazenar o endereço de qualquer tipo de dado, por exemplo `int`, `double`, `char`, `struct` etc.
+Em C, o tipo `void *` é conhecido como ponteiro genérico (_generic pointer_). Ele é um tipo especial de ponteiro que pode armazenar o endereço de qualquer tipo de dado, por exemplo `int`, `double`, `char`, `struct` etc.
 
 ```{.c code-line-numbers="false"}
 int idade = 20;
@@ -161,18 +184,23 @@ char letra = 'A';
 void *ptr;
 
 ptr = &idade;
-printf("idade: %d\n", *(int*)ptr);
+printf("idade: %d\n", *(int *)ptr);
 
 ptr = &meta;
-printf("meta: %.2f\n", *(double*)ptr);
+printf("meta: %.2f\n", *(double *)ptr);
 
 ptr = &letra;
-printf("letra: %c\n", *(char*)ptr);
+printf("letra: %c\n", *(char *)ptr);
 ```
 
-Repare que, embora `ptr` sempre seja do tipo `void*`, precisamos fazer um _cast_ (conversão explícita) para o tipo correto antes de acessar o valor. Isso ocorre porque o compilador não sabe qual é o tipo real do dado armazenado e, portanto, não pode fazer aritmética de ponteiros nem desreferenciação direta.
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Não podemos desreferenciar diretamente um ponteiro `void *` , pois o compilador não sabe quantos _bytes_ ele deve ler. Devemos sempre fazer um _cast_ (conversão) do `void *` para o tipo específico de ponteiro que desejamos, antes de poder usá-lo.
+:::
 
-Essa característica é o que permite criar estruturas de dados genéricas em C, como listas, pilhas ou filas capazes de armazenar qualquer tipo. Essas estruturas irão guardar apenas endereços genéricos (`void*`) e não se importar com o tipo concreto do dado. A responsabilidade de interpretar corretamente o tipo será de quem usar a estrutura.
+Repare que, embora `ptr` sempre seja do tipo `void *`, precisamos fazer um _cast_ (conversão explícita) para o tipo correto antes de acessar o valor. Isso ocorre porque o compilador não sabe qual é o tipo real do dado armazenado e, portanto, não pode fazer aritmética de ponteiros nem desreferenciação direta.
+
+Essa característica é o que permite criar estruturas de dados genéricas em C, como listas, pilhas ou filas capazes de armazenar qualquer tipo. Essas estruturas irão guardar apenas endereços genéricos (`void *`) e não se importar com o tipo concreto do dado. A responsabilidade de interpretar corretamente o tipo será de quem usar a estrutura.
 
 ## O papel de `size_t` {#sec-siz}
 
@@ -189,7 +217,7 @@ int main() {
     int x = 10;
     double y = 3.14;
 
-    printf("sizeof(int): %zu bytes\n", sizeof(int));
+    printf("sizeof(int)   : %zu bytes\n", sizeof(int));
     printf("sizeof(double): %zu bytes\n", sizeof(double));
 
     void *ptr = malloc(sizeof(double));
@@ -200,16 +228,21 @@ int main() {
 }
 ```
 
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+
+- `z` é um modificador de comprimento que especifica que o argumento é do tipo `size_t`
+- `u`	é o código de conversão para inteiro decimal sem sinal (`unsigned`).
+:::
+
 Saída típica:
 
 ```{.console code-line-numbers="false"}
-sizeof(int): 4 bytes
+sizeof(int)   : 4 bytes
 sizeof(double): 8 bytes
 Alocado 8 bytes em 0x7ffee1
 ```
 
-A combinação de `void*` e `size_t` é fundamental para criar estruturas genéricas, pois usaremos `void*` para representar o dado, independentemente de tipo e `size_t` para indicar o tamanho desse dado, permitindo cópia, alocação e manipulação seguras.
+A combinação de `void *` e `size_t` é fundamental para criar estruturas genéricas, pois usaremos `void *` para representar o dado, independentemente de tipo e `size_t` para indicar o tamanho desse dado, permitindo cópia, alocação e manipulação seguras.
 
-Falta pouco para criarmos nossas estruturas genéricas com comportamentos também genéricos. Antes, precisamos entender como generalizar ações, ou seja, como permitir que uma estrutura chame funções que mudam conforme o tipo de dado.
-
-E é aqui que entra o próximo conceito fundamental, a abstração de comportamento. Para isso, devemos estudar os ponteiros para função e _callbacks_.
+Falta pouco para criarmos nossas estruturas genéricas com comportamentos também genéricos. Porém, ainda precisamos pontuar algumas questões sobre o gerenciamento de memória.

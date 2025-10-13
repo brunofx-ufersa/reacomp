@@ -2,8 +2,11 @@
 title: "Ponteiros (Revisão)"
 lang: pt
 toc-title: Conteúdo
+toc: false
+sidebar: false
 format:
   html:
+    reference-location: margin
     css: ../styles/academic.css
 ---
 
@@ -25,10 +28,20 @@ Quando declaramos uma variável e atribuímos um valor, esse valor é armazenado
 
 A variável `x` é apenas um rótulo usado pelo programador.
 
-| Variável | Endereço | Conteúdo |
-|--------|----------|-------|
-|   `x`    |   0x75   |  10   |
 
+::: {style="width: 60%; margin: auto;"}
+| Variável | Endereço | Conteúdo |
+|----------|----------|----------|
+|   `x`    |   0x75   |  10      |
+
+: Ilustração da memória para uma variável do tipo `int`
+:::
+
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+A memória em si é ilustrada pelo endereço e conteúdo armazenado. A variável é apenas um rótulo que representa este par.
+:::
 
 O princípio básico de um ponteiro é a **compatibilidade de tipo**, ou seja, um ponteiro deve ser do mesmo tipo do dado que ele aponta.
 
@@ -41,14 +54,18 @@ Na linha 2, `meta_ptr` guarda o endereço da variável `meta`.
 
 O quadro abaixo ilustra a memória depois das declarações do trecho de código anterior.
 
+::: {style="width: 60%; margin: auto;"}
 | Variável	| Endereço	| Conteúdo | 
 |------|----------|-------|
 | `meta`	| [0x55]{.mark} | 7.5 |
 | `meta_ptr`	| 0x58 |	[0x55]{.mark} |
 
+: Ilustração da memória para um ponteiro
+:::
+
 Estamos usando endereços fictícios. Note que `meta_ptr` guarda o endereço de `meta`. Neste caso, dizemos que `meta_ptr` **aponta** para `meta`. 
 
-Vamos explorar outro exemplo usando um diagrama que ilustra uma memória.
+Vamos explorar outro exemplo usando um diagrama que ilustra uma memória. 
 
 ```{mermaid}
 flowchart RL
@@ -71,7 +88,13 @@ flowchart RL
     class P,PP ptr
 ```
 
-As variáveis `x` e `y` carregam dados que estão armazenados nos endereços `0x100` e `0x200`, respectivamente. A variável `p` é um ponteiro cujo conteúdo é `0x100`, portanto aponta para `x`. A variável `pp` é outro ponteiro, mas com conteúdo `0x300`, ou seja, aponta para o local com endereço `0x300`, que seria `p`. Isso mesmo um ponteiro de ponteiro. O código que representa esse diagrama poder ser o seguinte.
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Cada quadro é um bloco de memória que possui um endereço e um valor. Os ponteiros estão em laranja.
+:::
+
+
+As variáveis `x` e `y` carregam dados que estão armazenados nos endereços `0x100` e `0x200`, respectivamente. A variável `p` é um ponteiro cujo conteúdo é `0x100`, portanto aponta para `x`. A variável `pp` é outro ponteiro, mas com conteúdo `0x300`, ou seja, aponta para o local com endereço `0x300`, que seria `p`. Isso mesmo que você pensou, um ponteiro de ponteiro. O código que representa esse diagrama pode ser o seguinte.
 
 ```{.c code-line-numbers="false"}
 int x = 42;
@@ -88,13 +111,18 @@ Resumindo
 - pp → contém `0x300` (o endereço de p).
 
 
-Há declarações de ponteiros ligeiramente diferentes:
+Vale salientar que há três declarações de ponteiros ligeiramente diferentes:
 
 ```{.c code-line-numbers="false"}
 double *meta_ptr = &meta;
 double* meta_ptr = &meta;
 double * meta_ptr = &meta;
 ```
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Essas declarações dizem respeito ao local do símbolo `*`. 
+:::
 
 No entanto, a primeira é mais recomendada: `tipo *ponteiro = &variavel`.
 
@@ -109,7 +137,7 @@ double *meta_ptr = &meta; // O operador & retorna o endereço na memória
 printf("*meta_ptr: %.2f\n", *meta_ptr); // *meta_ptr: 7.50
 ```
 
-Na linha 3, o operador `*` serve para desreferenciar. Ao usar `*meta_ptr` na impressão, o C acessa o valor armazenado nesse endereço (7.5). 
+Na segunda linha, criamos um ponteiro que aponta para `meta`. Na linha 3, o operador `*` serve para desreferenciar, ou seja, ao usar `*meta_ptr` na impressão, o C acessa o valor armazenado no endereço que `meta_ptr` aponta (7.5). 
 
 ::: {.callout-tip}
 
@@ -117,6 +145,11 @@ O `*` tem dupla função:
 
 - Declarar um ponteiro (`double *p`)
 - Desreferenciar um ponteiro (`*p`)
+:::
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Os operadores `*` e `&` se anulam, ou seja, `*&p` ou `&*p` é o mesmo que `p`. 
 :::
 
 É válido mencionar que, em uma variável que guarda um dado, podemos acessar o dado e o endereço. Já em um ponteiro, podemos acessar seu endereço, o conteúdo (outro endereço) e o dado armazenado pela variável que ele aponta:
@@ -133,7 +166,7 @@ printf("idade_ptr: %x\n", idade_ptr);   // Endereço de idade
 printf("*idade_ptr: %d\n", *idade_ptr); // Conteúdo de idade
 ```
 
-Além de ler o conteúdo de uma variável, também podemos modificá-lo indiretamente usando ponteiros:
+Além de ler o conteúdo de uma variável, também podemos modificá-lo **indiretamente** usando ponteiros:
 
 ```{.c code-line-numbers="false"}
 double meta = 7.5;
@@ -147,8 +180,8 @@ Mudamos o valor de `meta` sem acessá-la diretamente. Isso é o poder dos pontei
 
 ::: {.callout-note icon="false" title="🎯 Desafio de Código"}
 
-- Crie um ponteiro `int *p` que aponte para uma variável `x = 5`.
-- Use `*p` para alterar `x` para `42`.
+- Crie um ponteiro `p` que aponte para uma variável `x = 5`.
+- Use o ponteiro para alterar `x` para `42`.
 - Depois, exiba o valor e o endereço de `x` no console.
 :::
 
@@ -158,9 +191,9 @@ Mudamos o valor de `meta` sem acessá-la diretamente. Isso é o poder dos pontei
 #include <stdio.h> 
 
 int main(){
-    int x = 5;
-    int *p = &x;
-    *p = 42;
+    int x = 5;   
+    int *p = &x; // Ponteiro apontando para x (ambos do mesmo tipo)
+    *p = 42;     // Modificação indireta
 
     printf("x: %d\n", x);
     printf("&x: %p\n", &x);
@@ -231,7 +264,9 @@ meta: 7.50
 meta: 7.50
 ```
 
-Esperavámos que no exemplo acima, o valor de `meta` tivesse sido dobrado, mas nada mudou. A razão é que a função alterou apenas a cópia local. A variável `meta` na função `main` é global, já na função `dobrar_meta` é local. Significa que quando esta função termina, as variáveis são descartadas.
+Esperavámos que no exemplo acima, o valor de `meta` tivesse sido dobrado, mas nada mudou. A razão é que a função alterou apenas a cópia local. A variável `meta` na função `main` é global, já na função `dobrar_meta` é local. Significa que quando esta função termina, as variáveis são descartadas.[^sidenote]
+
+[^sidenote]: Se você declarar uma variável local com o mesmo nome de uma variável global, a variável local prevalece dentro do seu escopo, ocultando temporariamente a global.
 
 Imprimindo os endereços, vamos constatar que trata-se de variáveis diferentes.
 
@@ -286,7 +321,7 @@ flowchart LR
 ```
 
 
-Para solucionar isso, invés de passarmos o conteúdo armazenado, podemos passar o endereço. Isso é conhecido como passagem por referência. Na verdade, ainda será feita uma cópia do valor passado, mas como esse valor copiado é um endereço (o ponteiro), esse artifício será suficiente para manipularmos os dados originais. 
+Para solucionar isso, ao invés de passarmos o conteúdo armazenado, podemos passar o endereço. Isso é conhecido como passagem por referência. Na verdade, ainda será feita uma cópia do valor passado, mas como esse valor copiado é um endereço (o ponteiro), esse artifício será suficiente para manipularmos os dados originais. 
 
 ```{.c}
 #include <stdio.h>
@@ -315,17 +350,21 @@ meta: 15.00
 
 Dessa vez, a função modificou a variável original, pois passamos a referência. Vamos ilustrar como isso aconteceu.
 
+::: {style="width: 60%; margin: auto;"}
 | Variável	| Endereço	| Conteúdo |
 | ----------|-----------|-------|
-| main `meta` | [0xe8]{.mark}	| 7.5 |
+| _main_ `meta` | [0xe8]{.mark}	| 7.5 |
 | local `meta` | 0xc0	| [0xe8]{.mark} |
+:::
 
 Dentro da função, quando fazemos `*meta`, o C faz a desreferenciação, ou seja, retorna o conteúdo do local cujo o endereço é 0xe8. Neste local, a operação de dobrar é efetuada.
 
-| Variável	| Endereço	| Valor |
+::: {style="width: 60%; margin: auto;"}
+| Variável	| Endereço	| Conteúdo |
 | ----------|-----------|-------|
-| main `meta` | [0xe8]{.mark}	| 15 |
+| _main_ `meta` | [0xe8]{.mark}	| 15 |
 | local `meta` | 0xc0	| [0xe8]{.mark} |
+:::
 
 Ao finalizar, a variável `meta` da função `main` sofreu a alteração.
 
@@ -353,7 +392,15 @@ flowchart LR
 
 
 ::: {.callout-important}
-Quando passamos o endereço (`&meta`) para a função `dobrar_meta`, a variável `meta` interna vai armazenar em seu conteúdo um endereço de memória. Ou seja, ela é um ponteiro e, portanto, podemos desreferenciar.
+Quando passamos o endereço (`&meta`) para a função `dobrar_meta`, a variável `meta` interna vai armazenar em seu conteúdo um endereço de memória. Ou seja, ela é um ponteiro e, portanto, podemos desreferenciar. Por exemplo, considere as seguintes assinaturas de funções:
+
+```{.c code-line-numbers="false"}
+void foo(int a);
+void bar(int* a);
+```
+
+Quando fazemos `foo(x)`, internamente é feita uma cópia do valor de `x`, ou seja, é criado `int a = x`.
+Do mesmo modo, quando fazemos `bar(&x)`, então é criado `int *a = &x`. Se usarmos os mesmos nomes, o C consegue diferenciar a variável da função da que vem como argumento.
 :::
 
 ::: {.callout-note icon="false" title="🎯 Desafio de Código"}
@@ -402,7 +449,7 @@ Nesta unidade, você aprendeu
 
 
 ::: {.callout-tip}
-Se você quiser aprofundar mais seu conhecimento sobre ponteiros, revise materiais sobre aritmética de ponteiros e a relação entre _arrays_ e ponteiros.
+Se você quiser aprofundar mais seu conhecimento sobre ponteiros, revise materiais sobre ponteiros para _structs_, aritmética de ponteiros, ponteiros para _strings_ e a relação entre _arrays_ e ponteiros.
 :::
 
 
