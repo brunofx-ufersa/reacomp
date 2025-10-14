@@ -2,96 +2,14 @@
 title: "Gerenciamento da Memória"
 lang: pt
 toc-title: Conteúdo
-sidebar: false
 toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
 ---
  
-<button id="theme-toggle">Trocar Tema</button>
-<div id="chat-container" class="chat-container">
-</div>
-
-<style>
-    /* 1. Cores Padrão (Tema Claro) */
-:root {
-  --background-color: #f0f0f0; /* Fundo bem claro */
-  --text-color: #333333;       /* Texto escuro */
-  --bubble-color: #ffffff;     /* Balão de fala claro */
-  --bubble-text: #000000;
-}
-
-/* 2. Cores para o Tema Escuro */
-.dark-theme {
-  --background-color: #121212; /* Fundo escuro */
-  --text-color: #e0e0e0;       /* Texto claro */
-  --bubble-color: #333333;     /* Balão de fala escuro */
-  --bubble-text: #ffffff;
-}
-
-/* 3. Aplicação das Variáveis nos Elementos */
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s; /* Transição suave */
-}
-
-.chat-container {
-  /* Opcional: aplica as cores de texto e fundo aqui também */
-  background-color: var(--background-color);
-}
-
-.chat-bubble {
-  /* Nota: mantenha as cores específicas dos personagens aqui, */
-  /* mas use as variáveis para outros balões ou fundo do chat */
-  color: var(--bubble-text);
-}
-
-</style>
-
-<script>
-    const toggleButton = document.getElementById('theme-toggle');
-const body = document.body;
-const themeKey = 'user-theme';
-
-// 1. FUNÇÃO PARA APLICAR O TEMA
-function applyTheme(theme) {
-    if (theme === 'dark') {
-        body.classList.add('dark-theme');
-        body.classList.remove('light-theme');
-    } else {
-        body.classList.add('light-theme');
-        body.classList.remove('dark-theme');
-    }
-    // Salva a escolha do usuário para a próxima visita
-    localStorage.setItem(themeKey, theme);
-}
-
-// 2. LÓGICA DO BOTÃO TOGGLE
-toggleButton.addEventListener('click', () => {
-    const currentTheme = localStorage.getItem(themeKey);
-    
-    // Troca o tema: se for dark, vira light; se não, vira dark.
-    if (currentTheme === 'dark') {
-        applyTheme('light');
-    } else {
-        applyTheme('dark');
-    }
-});
-
-// 3. INICIALIZAÇÃO (Carregar o Tema na Abertura da Página)
-document.addEventListener('DOMContentLoaded', () => {
-    // Tenta obter o tema salvo pelo usuário
-    let savedTheme = localStorage.getItem(themeKey);
-    
-    // Se o usuário nunca escolheu um tema, usa o padrão 'light'
-    if (!savedTheme) {
-        savedTheme = 'light'; 
-    }
-    
-    // Aplica o tema salvo (ou o padrão)
-    applyTheme(savedTheme);
-});
-</script>
-
 
 Até aqui, vimos como generalizar dados e comportamentos em C usando ponteiros e _callbacks_.
 No entanto, toda essa flexibilidade traz a responsabilidade de gerenciar manualmente a memória.
@@ -110,7 +28,7 @@ A alocação dinâmica oferece flexibilidade, mas também exige disciplina. O pr
 
 ### Alocação simples 
 
-A função `malloc` (de _memory allocation_) reserva um bloco contínuo de memória de tamanho especificado em _bytes_.
+A função `malloc` (de _memory allocation_) reserva um bloco contíguo de memória de tamanho especificado em _bytes_.
 
 ```{.c code-line-numbers="false"}
 int *v = malloc(5 * sizeof(int));
@@ -118,8 +36,9 @@ int *v = malloc(5 * sizeof(int));
 
 O argumento é o número total de _bytes_ a serem alocados. No trecho acima, estamos alocando o espaço suficiente para cinco inteiros. O retorno é um ponteiro genérico (`void*`) para o início do bloco. Caso a alocação falhe, `malloc` retorna `NULL`.
 
-::: {.callout-note}
-Em C, ao contrário de C++, não há necessidade de fazer o _cast_ do ponteiro genérico. 
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Em C, ao contrário de C++, não há necessidade de fazer o _cast_ do ponteiro genérico neste caso. 
 :::
 
 Como não temos garantia que a memória foi alocada, precisamos tratar quando `malloc` falha. Isso é geramente feito com um bloco `if`.
@@ -134,6 +53,11 @@ if (v == NULL) {
 ```
 
 No trecho acima, poderíamos ter usado `printf` ao invés de `fprintf`. A escolha, por `fprintf` se dá por ser o padrão para erros. Ele permite especificar exatamente para onde a saída deve ir. Ao usarmos `stderr` (de _standard error_), estamos dizendo ao sistema que esta mensagem é um erro e deve ser tratada como tal.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+A função `perror` imprime uma mensagem de erro em `stderr` também e é muito usada para depuração.
+:::
 
 Quando usamos `printf` a saída é armazenada em _buffer_, portanto a mensagem de erro poderia ficar presa e nunca ser exibida antes do programa abortar. Já quando optamos por `fprintf`, a saída é _unbuffered_, ou seja, é exibida imediatamente no terminal.
 
@@ -152,19 +76,21 @@ A função `calloc` (de _contiguous allocation_) funciona como `malloc`, mas com
 int *v = calloc(5, sizeof(int));
 ```
 
-Assim, todo o vetor começa zerado, o que evita leituras de lixo de memória.
+Assim, todo as posições começam zeradas, o que evita leituras de lixo de memória.
 
 ### Redimensionamento de bloco 
 
 A função `realloc` permite ajustar o tamanho de um bloco de memória já alocado.
 
 ```{.c code-line-numbers="false"}
+int *v = calloc(5, sizeof(int));
 int *novo = realloc(v, 10 * sizeof(int));
 ```
 
 Se houver espaço contíguo suficiente, o bloco é expandido no mesmo local. Caso contrário, um novo bloco é alocado e o conteúdo antigo é copiado automaticamente. Em caso de falha, retorna `NULL` e não desaloca o bloco de memória original. Por isso, é recomendado sempre usar um ponteiro temporário:
 
 ```{.c code-line-numbers="false"}
+int *v = calloc(5, sizeof(int));
 int *temp = realloc(v, 10 * sizeof(int));
 if (temp == NULL) {
     fprintf(stderr, "Erro ao realocar memória!\n");
@@ -203,22 +129,22 @@ flowchart LR
 - Invalidar o ponteiro (`ptr = NULL`)
 
 
-Com essas funções, temos total controle sobre a vida útil de cada dado em memória. No entanto, esse poder vem acompanhado de riscos: acessos indevidos, vazamentos e corrupção de memória são erros comuns quando o ciclo de alocação não é seguido corretamente.
+Com essas funções, temos total controle sobre a vida útil de cada dado em memória. No entanto, esse poder vem acompanhado de riscos. Podemos citar os acessos indevidos, vazamentos e corrupção de memória como erros comuns quando o ciclo de alocação não é seguido corretamente.
 
 Na próxima seção, vamos explorar as funções de manipulação de blocos de memória e entender como operá-las com segurança antes de mergulhar nos erros clássicos de memória.
 
 
 ## Manipulação de blocos de memória {#sec-man}
 
-Quando trabalhamos com alocação dinâmica, frequentemente precisamos copiar dados de uma região de memória para outra. O C oferece um conjunto de funções na biblioteca <string.h> para manipular blocos de memória de forma genérica, usando ponteiros do tipo `void*`.
+Quando trabalhamos com alocação dinâmica, frequentemente precisamos copiar dados de uma região de memória para outra. O C oferece um conjunto de funções na biblioteca `<string.h>` para manipular blocos de memória de forma genérica, usando ponteiros do tipo `void *`.
 
 Essas funções operam diretamente em _bytes_, e não conhecem o tipo de dado armazenado. Por isso, exigem atenção com o tamanho dos blocos manipulados (geralmente expresso com `size_t`).
 
 As três funções principais para manipulação de blocos de memória são:
 
-- memcpy: copia _bytes_ de uma origem para um destino
-- memmove: copia _bytes_ com segurança mesmo se houver sobreposição
-- memset: preenche uma área de memória com um valor constante
+- `memcpy`: copia _bytes_ de uma origem para um destino
+- `memmove`: copia _bytes_ com segurança mesmo se houver sobreposição
+- `memset`: preenche uma área de memória com um valor constante
 
 ### Copiando blocos de memória
 
@@ -277,7 +203,7 @@ int main() {
 
     // Copiando parte sobreposta
     memmove(texto + 2, texto, 4);
-    texto[6] = '\0';
+    texto[6] = '\0'; // Caracter de fim de string
 
     printf("%s\n", texto); // Resultado: "ABABCD"
     return 0;
@@ -310,6 +236,12 @@ int main() {
     return 0;
 }
 ```
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+O valor passado a `memset` é interpretado como um _byte_, e não como um inteiro completo.
+Por exemplo, `memset(v, 1, sizeof(int)*5)` preencherá todos os _bytes_ com `0x01`, não com o inteiro `1`.
+:::
+
 
 Saída:
 
@@ -317,34 +249,31 @@ Saída:
 0 0 0 0 0
 ```
 
+
 ::: {.callout-important}
-O valor passado a `memset` é interpretado como um _byte_, e não como um inteiro completo.
-Por exemplo, `memset(v, 1, sizeof(int)*5)` preencherá todos os _bytes_ com `0x01`, não com o inteiro `1`.
-:::
-
-
-## Cuidados e boas práticas {#sec-cui}
+Os seguintes cuidados são recomendados quando estamos programando com uso de memória dinâmica.
 
 - Sempre use `sizeof` para calcular o número correto de _bytes_.
   + Evite expressões mágicas como `memcpy(dest, src, 20)`.
-  + Use `memcpy(dest, src, n * sizeof(T))`.
+  + Ao invés, use `memcpy(dest, src, n * sizeof(T))`.
 - Prefira `memmove` quando houver dúvida sobre sobreposição.
 - Zere estruturas antes de usá-las (por exemplo, _buffers_ de _strings_).
 - Evite manipular memória de tipos complexos (estruturas com ponteiros internos) com `memcpy` 
   + Isso pode quebrar o encapsulamento e gerar cópias superficiais perigosas.
+:::
 
 Com essas funções, temos ferramentas poderosas para manipular diretamente a memória. Isso é um recurso essencial para implementar estruturas genéricas e operações de baixo nível. Entretanto, o uso incorreto dessas funções é uma das principais causas de erros sutis e difíceis de depurar em C.
 
 Na próxima seção, estudaremos exatamente esses erros, os erros clássicos de memória, como _dangling pointers_, _buffer overflow_ e _double free_, e como evitá-los com boas práticas.
 
 
-### Erros clássicos de memória
+## Erros clássicos
 
 Gerenciar memória manualmente é uma das maiores responsabilidades (e riscos) ao programar em C. Ao lidar com ponteiros e alocação dinâmica, pequenos descuidos podem causar comportamentos indefinidos, travamentos ou até falhas de segurança.
 
 Nesta seção, veremos os erros mais comuns, seus sintomas e como evitá-los.
 
-#### Ponteiros não inicializados (wild pointers)
+### Ponteiros não inicializados (_wild pointers_)
 
 Um _wild pointer_ é um ponteiro que não foi inicializado antes do uso. Ele contém um valor de endereço aleatório, podendo apontar para qualquer lugar da memória.
 
@@ -353,7 +282,7 @@ Um _wild pointer_ é um ponteiro que não foi inicializado antes do uso. Ele con
 
 int main() {
     int *p;       // não inicializado!
-    *p = 42;      // comportamento indefinido!
+    *p = 42;      // ❌ comportamento indefinido!
     printf("%d\n", *p);
     return 0;
 }
@@ -368,116 +297,10 @@ Como boa prática, sempre inicialize ponteiros:
 ```{.c code-line-numbers="false"}
 int *p = NULL;
 ```
-
-#### Ponteiros pendentes (dangling pointers)
-
-Um _dangling pointer_ ocorre quando o ponteiro ainda referencia uma região de memória já liberada.
-
-```{.c}
-#include <stdlib.h>
-
-int main() {
-    int *p = malloc(sizeof(int));
-    *p = 10;
-    free(p);
-    printf("%d\n", *p); // uso após liberação — ERRO
-    return 0;
-}
-```
-
-::: {.callout-caution}
-O bloco de memória foi liberado, mas o ponteiro ainda "acha" que é válido. Acessar ou modificar essa região causa comportamento indefinido.
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Um ponteiro deve sempre apontar para algo válido, ou para `NULL`. Isso é chamado de **inicialização defensiva**.
 :::
-
-Como boa prática, após `free(p)`, defina `p = NULL`; para evitar acessos acidentais.
-
-#### Vazamentos de memória (memory leaks)
-
-Um _memory leak_ acontece quando um programa perde a referência para uma região de memória alocada, sem chamá-la com `free()`.
-
-```{.c}
-#include <stdlib.h>
-
-int main() {
-    int *p = malloc(100 * sizeof(int));
-    p = NULL;  // perdemos a referência — vazamento!
-    return 0;
-}
-```
-
-::: {.callout-caution}
-A memória continua alocada, mas inacessível. Em programas longos, isso pode acumular e exaurir a memória do sistema.
-:::
-
-Como boas prática, sempre emparelhe `malloc` e `free`. Em funções complexas, adote o princípio "quem aloca, libera".
-
-#### Liberação duplicada (double free)
-
-Um _double free_ ocorre quando tentamos liberar o mesmo bloco de memória mais de uma vez.
-
-```{.c}
-#include <stdlib.h>
-
-int main() {
-    int *p = malloc(sizeof(int));
-    free(p);
-    free(p); // ERRO: double free
-    return 0;
-}
-```
-
-::: {.callout-caution}
-Isso causa corrupção da estrutura interna do heap e frequentemente resulta em segmentation fault.
-:::
-
-Como boa prática, após liberar, defina `p = NULL`.
-
-#### Acesso fora dos limites (buffer overflow e underrun)
-
-Um _buffer overflow_ ocorre quando se escreve além do final (ou antes do início) de um bloco de memória.
-
-
-```{.c}
-#include <stdio.h>
-
-int main() {
-    int v[3] = {1, 2, 3};
-    v[3] = 99; // índice inválido — overflow
-    printf("%d\n", v[3]); // comportamento indefinido
-    return 0;
-}
-```
-
-::: {.callout-caution}
-Esse tipo de erro é grave: pode corromper variáveis adjacentes, causar travamentos ou vulnerabilidades de segurança (exploração de stack overflow).
-:::
-
-Como boas prática, sempre verifique limites de vetores. Além disso, prefira funções seguras (ex: `strncpy` no lugar de `strcpy`). Ao usar `malloc`, garanta que o tamanho esteja correto com `sizeof`.
-
-Podemos resumir os tipos de erros abordados por meio da seguinte tabela.
-
-
-| Tipo de Erro	| Causa	| Sintoma	| Prevenção|
-|---------------|-------|-----------|----------|
-| _Wild Pointer_	|Ponteiro não inicializado | _Crash_ aleatório | Inicializar com `NULL` | 
-| _Dangling Pointer_ | Uso após `free` | _Segmentation fault_ | `p = NULL` após `free` | 
-| _Memory Leak_ | Perda de referência | Aumento de uso de memória | Sempre liberar | 
-| _Double Free_ | Liberação repetida | Corrupção do _heap_ | Controle de _ownership_ | 
-| _Buffer Overflow_ | Escrita fora dos limites | Corrupção de memória | Verificar limites | 
-
-Erros de memória estão entre os mais sutis e perigosos em C. Eles não apenas causam falhas, mas podem introduzir vulnerabilidades de segurança sérias. Com boas práticas e ferramentas adequadas, é possível evitá-los e desenvolver sistemas robustos e confiáveis.
-
-## Boas práticas e padrões {#sec-boa}
-
-Gerenciar memória em C exige disciplina. A responsabilidade é totalmente do programador, pois o compilador não faz verificações automáticas. A seguir, apresentamos um conjunto de princípios e padrões que ajudam a escrever código seguro, previsível e fácil de manter.
-
-### Inicialização defensiva
-
-Sempre inicialize ponteiros, mesmo quando você ainda não sabe qual endereço eles terão.
-
-```{.c code-line-numbers="false"}
-int *p = NULL;
-```
 
 Essa prática evita comportamentos indefinidos quando o ponteiro é usado antes de ser atribuído.
 Ela também facilita verificações de segurança:
@@ -488,16 +311,83 @@ if (p != NULL) {
 }
 ```
 
-::: {.callout-tip}
-Um ponteiro deve sempre apontar para algo válido, ou para `NULL`.
+### Ponteiros pendentes (_dangling pointers_)
+
+Um _dangling pointer_ ocorre quando o ponteiro ainda referencia uma região de memória já liberada.
+
+```{.c}
+#include <stdlib.h>
+
+int main() {
+    int *p = malloc(sizeof(int));
+    *p = 10;
+    free(p);
+    printf("%d\n", *p); // ❌ uso após liberação
+    return 0;
+}
+```
+
+::: {.callout-caution}
+O bloco de memória foi liberado, mas o ponteiro ainda "acha" que é válido. Acessar ou modificar essa região causa comportamento indefinido.
 :::
 
-### O princípio da propriedade (ownership)
+Como boa prática, após `free(p)`, defina `p = NULL`; para evitar acessos acidentais.
 
-Em programas maiores, é comum que uma função aloca memória e outra a utilize.
+### Vazamentos de memória (_memory leaks_)
+
+Um _memory leak_ acontece quando um programa perde a referência para uma região de memória alocada, sem chamá-la com `free`.
+
+```{.c}
+#include <stdlib.h>
+
+int main() {
+    int *p = malloc(100 * sizeof(int));
+    p = NULL;  // ❌ perdemos a referência — vazamento!
+    return 0;
+}
+```
+
+::: {.callout-caution}
+A memória continua alocada, mas inacessível. Em programas longos, isso pode acumular e exaurir a memória do sistema.
+:::
+
+Como boas prática, sempre emparelhe `malloc` e `free`. Pois, cada chamada de alocação dinâmica deve ter uma contrapartida de liberação. Evite fluxos de execução que impeçam o `free` de ser chamado.
+
+```{.c code-line-numbers="false"}
+char *p = malloc(100);
+if (!p) return;  // ❌ erro de alocação
+// ...
+free(p);
+```
+
+::: {.callout-tip}
+Centralize liberações num único ponto de saída, especialmente em funções longas.
+:::
+
+
+### Liberação duplicada (_double free_)
+
+Um _double free_ ocorre quando tentamos liberar o mesmo bloco de memória mais de uma vez.
+
+```{.c}
+#include <stdlib.h>
+
+int main() {
+    int *p = malloc(sizeof(int));
+    free(p);
+    free(p); // ❌ ERRO: double free
+    return 0;
+}
+```
+
+::: {.callout-caution}
+Isso causa corrupção da estrutura interna do _heap_ e frequentemente resulta em _segmentation fault_.
+:::
+
+Como boa prática, após liberar, defina `p = NULL`.
+
+Em programas maiores, é comum que uma função faça alocação de memória e outra a utilize.
 Para evitar vazamentos ou liberações incorretas, defina quem é o dono (_owner_) de cada bloco alocado.
-
-🔸 Quem aloca é responsável por liberar.
 
 Exemplo:
 
@@ -515,21 +405,49 @@ int main() {
 }
 ```
 
-### Par malloc e free
+### Acesso fora dos limites (_buffer overflow_ e _underrun_)
 
-Cada chamada de alocação dinâmica deve ter uma contrapartida de liberação. Evite fluxos de execução que impeçam o `free` de ser chamado.
+Um _buffer overflow_ ocorre quando se escreve além do final (ou antes do início) de um bloco de memória.
 
-```{.c code-line-numbers="false"}
-char *p = malloc(100);
-if (!p) return;   // erro de alocação
-// ...
-free(p);
+
+```{.c}
+#include <stdio.h>
+
+int main() {
+    int v[3] = {1, 2, 3};
+    v[3] = 99; // índice inválido — overflow
+    printf("%d\n", v[3]); // ❌ comportamento indefinido
+    return 0;
+}
 ```
 
-::: {.callout-tip}
-Centralize liberações num único ponto de saída, especialmente em funções longas.
+::: {.callout-caution}
+Esse tipo de erro é grave: pode corromper variáveis adjacentes, causar travamentos ou vulnerabilidades de segurança.
 :::
 
+Como boas prática, sempre verifique limites de vetores. Ao usar `malloc`, garanta que o tamanho esteja correto com `sizeof`.
+
+Podemos resumir os tipos de erros abordados por meio da seguinte tabela.
+
+
+| Tipo de Erro	| Causa	| Sintoma	| Prevenção|
+|---------------|-------|-----------|----------|
+| _Wild Pointer_	|Ponteiro não inicializado | _Crash_ aleatório | Inicializar com `NULL` | 
+| _Dangling Pointer_ | Uso após `free` | _Segmentation fault_ | `p = NULL` após `free` | 
+| _Memory Leak_ | Perda de referência | Aumento de uso de memória | Sempre liberar | 
+| _Double Free_ | Liberação repetida | Corrupção do _heap_ | Controle de _ownership_ | 
+| _Buffer Overflow_ | Escrita fora dos limites | Corrupção de memória | Verificar limites | 
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+_Ownership_ se refere ao proprietário do ponteiro. Se duas regiões estão liberando o ponteiro (_double free_), então estão compartilhando a guarda. Evite isso!
+:::
+
+Erros de memória estão entre os mais sutis e perigosos em C. Eles não apenas causam falhas, mas podem introduzir vulnerabilidades de segurança sérias. Com boas práticas e ferramentas adequadas, é possível evitá-los e desenvolver sistemas robustos e confiáveis.
+
+## Boas práticas  {#sec-boa}
+
+A seguir, algumas sugestões de boas práticas quando gerenciamos a memória em C.
 
 ### Evite operações parciais
 
@@ -564,13 +482,15 @@ void* safe_malloc(size_t n) {
     void *p = malloc(n);
     if (p == NULL) {
         fprintf(stderr, "Erro: malloc falhou\n");
-        exit(EXIT_FAILURE);
+        return 1;
     }
     return p;
 }
 ```
-
-🔹 Com esse padrão, você garante que toda alocação seja verificada.
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+ Com esse padrão, você garante que toda alocação seja verificada.
+:::
 
 Gerenciar memória em C é uma arte de equilíbrio entre controle total e responsabilidade absoluta.
 Com disciplina e padrões bem definidos, é possível construir sistemas robustos, performáticos e seguros.

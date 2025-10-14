@@ -37,6 +37,7 @@ website:
       contents:
         - disciplinas/aed2/academic/unidade2/1-ponteiros.qmd
         - disciplinas/aed2/academic/unidade2/2-callback.qmd
+        - disciplinas/aed2/academic/unidade2/3-memoria.qmd
 
     - title: "How-To"
       contents:
