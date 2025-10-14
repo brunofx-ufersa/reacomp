@@ -1,0 +1,10 @@
+---
+title: "REAComp Blog"
+lang: pt
+listing:
+  contents: posts
+  sort: "date desc"
+  type: grid
+  categories: true
+  fields: [date, title, image, description, categories]
+---

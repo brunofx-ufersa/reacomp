@@ -1,0 +1,192 @@
+---
+title: "Compilar Programas em C - Linux"
+lang: pt-BR
+toc-title: Conteúdo
+description: "Tutorial de compilação de programas em C no Linux"
+author: "Bruno Xavier"
+date: "2025-10-14"
+categories:
+  - compilação
+  - linux
+  - make
+image: ../img-blog/GCC.svg  
+---
+
+
+# Instalação do Compilador
+
+Vamos instalar o compilador em sistemas baseados no Ubuntu. Primeiro, atualize o repositório de pacotes:
+
+```{.console code-line-numbers="false"}
+$ sudo apt update
+```
+
+Em seguida, instale o pacote _build-essential_
+
+```{.console code-line-numbers="false"}
+$ sudo apt install build-essential
+```
+
+Este pacote inclui o compilador GCC e outras ferramentas de desenvolvimento necessárias.
+
+Para a verificar a instalação, faça:
+
+```{.console code-line-numbers="false"}
+$ gcc --version
+```
+
+# Compilação Simples
+
+Para compilar um programa em C, use o comando 
+
+```{.console code-line-numbers="false"}
+$ gcc file.c -o file
+```
+
+Onde `file.c` é o nome do seu arquivo de código fonte. Você pode escolher qualquer nome para o terceiro argumento. No caso acima, escolhemos `file`. Para executar o programa, faça:
+
+```{.console code-line-numbers="false"}
+$ ./file
+```
+
+# Compilação Múltipla
+
+Nesta abordagem, estamos tratando de um projeto com mais de um arquivo `.c`. Vamos exemplificar dessa maneira:
+
+Primeiro o arquivo de cabeçalho contendo a interface das funções e outras definições:
+
+```{.c code-line-numbers="false" filename=interface.h}
+#ifndef INTERFACE_H
+#define INTERFACE_H
+
+// Includes necessários
+// Declarações
+
+#endif
+```
+Esse arquivo é apenas um prototipagem, não há código executável.
+
+Em seguida, o arquivo com as implementações reais:
+
+```{.c code-line-numbers="false" filename=interface.c}
+// Includes
+#include "interface.h"
+// Implementação das funções declaradas em interface.h
+```
+
+Todas as funções aqui que foram declaradas no `.h`, então estão visíveis para outros arquivos que incluírem `interface.h`. Caso criemos funções auxiliares não declaradas no `.h`, então elas ficam privadas a este módulo (invisíveis fora dele).
+
+Finalmente, o arquivo principal (contém a `main`) que usará a implementação dos arquivos anteriores.
+
+```{.c code-line-numbers="false" filename=programa.c}
+// Includes
+#include "interface.h"
+// Uso
+```
+
+Observe que `programa.c` não precisa incluir `interface.c`, apenas o cabeçalho.
+
+Para compilar esse projeto, use o comando 
+
+```{.console code-line-numbers="false"}
+$ gcc interface.c programa.c -o programa
+```
+
+Para executar o programa, faça:
+
+```{.console code-line-numbers="false"}
+$ ./programa
+```
+
+Também podemos compilar em duas etapas (útil em projetos maiores):
+
+```{.console code-line-numbers="false"}
+$ gcc -c interface.c -o interface.o
+$ gcc -c programa.c -o programa.o
+$ gcc interface.o programa.o -o programa
+```
+
+A _flag_ `-c` indica para o gcc que compile o código-fonte (`.c`) em código objeto (`.o`). Ele não faz o _linking_, ou seja, não gera o executável final ainda. No último comando, o compilador faz o _linking_ para gerar o executável. Nessa abordagem, se algum arquivo for modificado, só será necessário recompilar ele e não todo o projeto.
+
+# Automatização
+
+Um dos utilitários que o pacote _build-essential_ traz é o **_make_**. O _make_ evita recompilar manualmente tudo. Além de ser um processo automatizado, ele recompila apenas o que mudou, mantendo o nosso projeto organizado e escalável. Para essa abordagem é necessário criar um arquivo na pasta do nosso projeto chamado `Makefile` (sem extensão). 
+
+```{mermaid}
+graph TD
+    A["Projeto/"]:::folder
+    A --> B["interface.h"]:::file
+    A --> C["interface.c"]:::file
+    A --> D["programa.c"]:::file
+    A --> E["Makefile"]:::file
+
+    classDef folder fill:#e6f7ff,stroke:#0077b6,stroke-width:2px,color:#023e8a,font-weight:bold;
+    classDef file fill:#fff,stroke:#999,stroke-width:1px,color:#333;
+```
+
+Um exemplo de arquivo `Makefile` seria esse:
+
+```{.makefile filename=Makefile}
+# Nome do executável final
+PROG = programa
+
+# Compilador
+CC = gcc
+
+# Arquivos fonte e objetos
+SRC = interface.c programa.c
+OBJ = $(SRC:.c=.o)
+
+# Regra padrão (executada quando você roda apenas `make`)
+all: $(PROG)
+
+# Regra para gerar o executável
+$(PROG): $(OBJ)
+	$(CC) $(OBJ) -o $(PROG)
+
+# Regra genérica para compilar cada .c em .o
+%.o: %.c
+	$(CC) -c $< -o $@
+
+# Limpeza dos arquivos temporários
+clean:
+	rm -f $(OBJ) $(PROG)
+```
+
+Ao executar o comando `make` no terminal, vamos obter a saída:
+
+```{.console code-line-numbers="false"}
+$ make
+gcc -c interface.c -o interface.o
+gcc -c programa.c -o programa.o
+gcc interface.o programa.o -o programa
+```
+
+Agora imagine que `programa.c` foi modificado. Então somente ele será recompilado e tudo será "linkado" novamente no final.
+
+```{.console code-line-numbers="false"}
+$ make
+gcc -c programa.c -o programa.o
+gcc interface.o programa.o -o programa
+```
+
+O comando `make clean` irá apagar o arquivo binário e os arquivos objeto.
+
+```{.console code-line-numbers="false"}
+$ make clean
+rm -f interface.o programa.o programa
+```
+
+---
+
+Nesta tutorial, você aprendeu
+
+✅ a instalar o compilador GCC
+
+✅ a compilar um programa em C
+
+✅ a compilar um projeto em C usando um ou múltiplos comandos 
+
+✅ a usar o utilitário make para automatizar o processo de compilação
+
+Tudo isso em um sistema operacional baseado no Ubuntu.
