@@ -170,6 +170,32 @@ Com essa abrodardagem, ganhamos:
 
 Dessa maneira, `calcular` se comporta de várias formas (polimorfismo).
 
+
+Uma das grandes vantagens de usar ponteiros para funções é a possibilidade de criar um menu interativo, permitindo ao usuário escolher qual operação deseja executar.
+
+```c
+Operacao escolha(){
+  printf("Esolha a Operação Desejada\n");
+  printf("1 - Soma\n");
+  printf("2 - Subtração\n");
+  printf("3 - Multiplicação\n");
+  printf("4 - Divisão\n");
+    
+  int s = 0;
+  scanf("%d", &s);
+
+  if (s == 1) return soma;
+  if (s == 2) return subtracao;
+  if (s == 3) return produto;
+  if (s == 4) return divisao;
+  
+  return NULL;  // Retorna NULL se a escolha for inválida
+}
+```
+
+Na versão acima, a possibilidade de repetir o menu, em caso de entrada inválida, não está implementado. Todavia, podemos modificar para um problema específico. O que notamos de mais problemático é que a função `escolha` possui duas responsabilidades e devemos evitar isso no futuro para deixar o código mais modular e facilitar a manutenção.
+
+
 ## Ponteiro genérico {#sec-gen}
 
 Agora que compreendemos o funcionamento dos ponteiros, passagem por referência e _callbacks_, podemos dar um passo além. Vamos estudar um método para representar qualquer tipo de dado.

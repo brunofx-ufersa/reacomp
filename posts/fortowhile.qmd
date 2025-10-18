@@ -1,0 +1,130 @@
+---
+title: "For e While"
+lang: pt-BR
+toc-title: Conteúdo
+description: "Tutorial de como transformar um laço **for** em **while**"
+author: "Bruno Xavier"
+date: "2025-10-15"
+categories:
+  - algoritmo
+---
+
+# Introdução
+
+Os laços de repetição são ferramentas fundamentais em qualquer linguagem de programação. Eles permitem executar blocos de código várias vezes sem precisar reescrevê-los. Em C, os dois tipos mais comuns são o `for` e o `while`.
+
+Muitos programadores têm preferência por um ou outro, mas ambos têm seu papel.
+O laço `for` é mais usado quando sabemos quantas vezes o código deve ser repetido, enquanto o `while` é ideal para situações em que a repetição depende de uma condição.
+
+Embora possamos criar _loops_ infinitos com o `for`, o `while` geralmente é a melhor escolha quando não sabemos o número exato de repetições.
+
+# Sintaxe Básica
+
+A estrutura de um `for` pode ser escrita assim:
+
+```pseudocode
+for (inicialização; condição; incremento){
+    // código que será executado repeditamente
+}
+```
+
+Já o mesmo comportamento pode ser obtido com um `while`:
+
+```pseudocode
+inicialização
+while (condição){
+    // código que será executado repeditamente
+    incremento
+}
+```
+
+💡 Exemplo prático
+
+A seguir, veja um exemplo simples que imprime uma frase 42 vezes usando `for`:
+
+
+```c
+for (int i = 0; i < 42; i++){
+    puts("Volta o cão arrependido, 
+          com orelhas fartas, seu osso roido 
+          e o rabo entre as patas");
+}
+```
+
+O mesmo comportamento pode ser obtido com `while`:
+
+```c
+int i = 0;
+while (i < 42){
+    puts("Volta o cão arrependido, 
+          com orelhas fartas, seu osso roido 
+          e o rabo entre as patas");
+    i++;      
+}
+```
+
+Assim, transformar um `for` em `while` é apenas uma questão de reposicionar as três partes: inicialização, condição e incremento.
+
+# Laços infinitos
+
+Um laço infinito é aquele que nunca termina, o programa fica preso executando o mesmo bloco de código repetidamente, até que algo o interrompa (por exemplo, com `break`, `return`, ou encerrando o programa manualmente).
+
+Laços infinitos podem parecer um erro de programação, mas eles têm usos práticos, como em:
+
+- programas que ficam "rodando para sempre”, como servidores, jogos ou sistemas embarcados;
+- loops de espera, que ficam verificando uma condição até que algo aconteça.
+
+🔁 Exemplo com `while`
+
+A forma mais comum de criar um laço infinito em C é com `while`:
+
+```c
+while (1) {
+    printf("Executando para sempre...\n");
+}
+```
+
+Aqui, a condição é sempre verdadeira (1 significa _true_), então o loop nunca termina.
+
+🔁 Exemplo com `for`
+
+Também podemos criar um laço infinito com `for`, deixando os três argumentos vazios:
+
+```c
+for (;;) {
+    printf("Executando para sempre...\n");
+}
+```
+
+Esse é o equivalente exato ao `while(1)`. O compilador entende que não há inicialização, nem condição de parada, nem incremento, então o loop continua indefinidamente.
+
+⚠️ Cuidados importantes
+
+Cuidado com _loops_ sem saída, pois se não houver um `break` ou uma condição de parada dentro do _loop_, o programa pode travar ou consumir muito processamento.
+
+Use `break` para encerrar o _loop_ quando uma condição interna for atendida:
+
+```c
+while (1) {
+    int opcao;
+    printf("Digite 0 para sair: ");
+    scanf("%d", &opcao);
+    if (opcao == 0)
+        break; // encerra o laço
+}
+```
+
+Evite _loops_ infinitos acidentais, especialmente ao converter `for` para `while`.
+Se esquecer de atualizar a variável de controle (`i++`, por exemplo), o programa pode nunca sair do loop.
+
+💡 Dica de prática
+
+Tente modificar o exemplo anterior do “Cão arrependido” para rodar infinitamente, e depois adicione uma condição de saída com `break`. Assim você entende bem como o controle de fluxo funciona.
+
+---
+
+Nesta tutorial, você aprendeu
+
+✅ a transformar um laço `for` em `while` e vice-versa
+
+✅ como criar lações infinitos

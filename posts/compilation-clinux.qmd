@@ -2,7 +2,7 @@
 title: "Compilar Programas em C - Linux"
 lang: pt-BR
 toc-title: Conteúdo
-description: "Tutorial de compilação de programas em C no Linux"
+description: "Tutorial de **compilação** de programas em C no Linux"
 author: "Bruno Xavier"
 date: "2025-10-14"
 categories:
@@ -11,7 +11,6 @@ categories:
   - make
 image: ../img-blog/GCC.svg  
 ---
-
 
 # Instalação do Compilador
 

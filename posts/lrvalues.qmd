@@ -1,0 +1,115 @@
+---
+title: "LValues e RValues"
+lang: pt-BR
+toc-title: Conteúdo
+description: "Entendendo o que são lvalue e rvalue em C"
+author: "Bruno Xavier"
+date: "2025-10-18"
+categories:
+  - algoritmo
+---
+
+
+# Introdução
+
+Se você já levou uma bronca do compilador com uma mensagem parecida com esta:
+
+```{.console code-line-numbers="false"}
+error: lvalue required as left operand of assignment
+```
+
+… então parabéns 😅 você acabou de esbarrar em um dos conceitos fundamentais da linguagem C: _lvalue_ e _rvalue_.
+
+Esses dois nomes parecem saídos de um feitiço do Harry Potter, mas são bem mais simples do que parecem.
+Eles estão ligados a como o C enxerga o que pode ou não receber um valor.
+
+## O que é um lvalue?
+
+A palavra **lvalue** vem de "left value", ou "valor que pode estar à esquerda", do sinal de igual (=).
+Em outras palavras, um lvalue é algo que tem um endereço na memória e pode armazenar um valor.
+
+Pense no lvalue como uma caixinha com nome, onde o programa guarda um dado.
+
+```{.c code-line-numbers="false"}
+int x = 10;  // x é um lvalue
+x = 20;      // tudo certo, estamos mudando o valor de x
+```
+
+
+Aqui, `x` é um _lvalue_. Ele existe em algum lugar da memória e pode receber outro valor quando quisermos.
+
+## E o rvalue?
+
+O **rvalue**, por outro lado, vem de "right value", ou "valor que fica à direita" do sinal de igual.
+Ele é o valor em si, não um local da memória.
+
+```{.c code-line-numbers="false"}
+int x = 10;
+int y = x + 5; // x + 5 é um rvalue
+```
+
+A expressão `x + 5` é um _rvalue_. Ela é apenas o resultado de uma conta, um número temporário que "nasce e morre" dentro dessa linha. Ele não mora em lugar nenhum, então não dá pra armazenar nada nele.
+
+## Ligando os pontos
+
+Em toda atribuição, temos a mesma estrutura:
+
+- lvalue = rvalue;
+- O lvalue está à esquerda e precisa ser algo que possa receber um valor.
+- O rvalue está à direita e é o valor que será guardado.
+
+✅ Exemplo certo:
+
+```{.c code-line-numbers="false"}
+int a, b;
+a = b + 2;
+```
+
+(`a` é lvalue, `b + 2` é rvalue)
+
+❌ Exemplo errado:
+
+```{.c code-line-numbers="false"}
+int a, b;
+a + b = 2;
+```
+
+O compilador vai dizer:
+
+```{.console code-line-numbers="false"}
+error: lvalue required as left operand of assignment
+```
+
+Porque `a + b` não é um "lugar" da memória, mas apenas o resultado de uma soma.
+
+🧠 Mais exemplos rápidos
+
+| Código	| Pode compilar?	| Por quê |
+|---------|-----------------|---------|
+| `x = 5;` |	✅	| `x` é lvalue, `5` é rvalue |
+| `5 = x;` |	❌	| Literal `5` não pode receber valor |
+| `*ptr = 10;` |	✅	| `*ptr` é um lvalue (aponta pra um endereço) |
+| `ptr + 1 = x;` |	❌	| Resultado de `ptr + 1` é temporário |
+| `++x;` |	✅	| `x` tem endereço, pode ser alterado |
+| `++(x + 1);` |	❌	| `x + 1` é rvalue, não existe na memória |
+
+
+
+Resumindo
+
+| Tipo	| Pode estar à esquerda do =?	| Tem endereço? |
+|-------|-----------------------------|----------------|
+| lvalue |	✅ Sim	| ✅ Sim |
+| rvalue |	❌ Não	| ⚠️ Não acessível |
+
+
+---
+
+Nesta tutorial, você aprendeu
+
+✅ os conceitos de lvalue e rvalue
+
+✅ a evitar erros de compilação envolvendo lvalue
+
+✅ como o C pensa internamente 
+

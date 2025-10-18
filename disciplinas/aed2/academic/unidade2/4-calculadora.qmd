@@ -1,0 +1,298 @@
+---
+title: "Projeto de Calculadora"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+---
+
+Vamos usar os conhecimentos adquiridos até aqui para desenvolver uma calculadora simples. Nosso projeto será composto pelo arquivo de cabeçalho (`calculator.h`), a implementação (`calculator.c`) e o programa que usa nossa calculadora (`main_calculator.c`). 
+
+Até aqui, usamos muitas palavras em português, visto que os ponteiros para função podem causar confusão no início. Agora, vamos usar mais o inglês nas implementações, pois o ecossistema de programação C (bibliotecas, documentação, e _frameworks_) utiliza predominantemente o inglês. Adotar o inglês em nomes de variáveis, funções e estruturas é crucial para aderir às boas práticas da indústria e facilitar a colaboração e a leitura global do código.
+
+:::{.callout-note}
+Se você possui um pouco de dificuldade com o inglês, mantenha um **glóssario** com as palavras mais usadas em programação. Consumir conteúdo de programação em inglês ajudará bastante nesta empreitada também.  
+:::
+
+## Interface da API
+
+A interface da calculadora contém um novo tipo `Operation` que representa uma função binária. Como já mencionamos é um ponteiro para uma função genérica que recebe dois paramêtros. Definimos a estrtura calculadora que contém os campos `data_size` para o tamanho em _bytes_ do tipo de dados que iremos trabalhar, `n_operations` para o número de operações que a calculadora suporta e um ponteiro `operations` que contém as operações da calculadora.
+
+```{.c filename=calculator.h}
+#include <stddef.h> // Necessário para o tipo size_t
+
+typedef void* (*Operation)(const void*, const void*);
+
+typedef struct calculator {
+    size_t data_size;
+    size_t n_operations;
+    Operation *operations; 
+} Calculator;
+```
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+A palavra chave `const` indica que os valores passados para a operação não podem ser modificados internamente.
+:::
+
+Em seguida, temos protótipos das funções para criar e destruir uma calculadora. A função `evaluation` já é conhecida e ela coordenda qual _callback_ usar para calcular. Além dela, temos quatro funções de _callback_ para adicionar e multiplicar inteiros ou números em ponto flutuante.
+
+```{.c filename=calculator.h}
+#include <stddef.h>
+
+Calculator *calculator_create(size_t dataSize, 
+                              size_t n_operations, 
+                              const Operation *operations);
+void calculator_destroy(Calculator *calc);
+
+void* evaluation(const void *a, const void *b, Operation operation); 
+
+void* add_int (const void *a, const void *b);
+void* add_double (const void *a, const void *b);
+void* multiply_int (const void *a, const void *b);
+void* multiply_double (const void *a, const void *b);
+
+Operation selectOperationInt();
+Operation selectOperationDouble();
+```
+
+Em resumo:
+
+| Componente	| Função	| Design é Sólido |
+|---------------|-----------|---------------------------|
+| `typedef Operation`	| O contrato binário de todas as funções de cálculo. |	O uso de `const void*` protege os dados de entrada, garantindo que os _callbacks_ apenas leiam. |
+| `struct Calculator`	| O contêiner para metadados e operações. | Os campos `data_size` e `n_operations` (ambos `size_t`) tornam a estrutura robusta e configurável para qualquer tipo de dado. | 
+| `calculator_create/destroy`	| Gerenciamento de ciclo de vida.	| Define claramente como a memória é alocada e, mais importante, como deve ser liberada.| 
+`evaluation` | 	A função coordenadora.	| Mantém o código principal limpo, delegando a lógica complexa (o _callback_). | 
+_Callbacks_ | 	As funções de soma e multiplicação.	| Estão prontas para serem implementadas com a lógica de alocação de memória e _casting_ de tipos. |
+`selectOperationInt` | Função de fábrica/seleção de _callback_. | Permite ao usuário selecionar dinamicamente a operação para inteiros em tempo de execução, desacoplando a escolha da lógica de execução. |
+`selectOperationDouble` | Função de fábrica/seleção de _callback_. | Permite ao usuário selecionar dinamicamente a operação para reais em tempo de execução, desacoplando a escolha da lógica de execução. |
+
+## Implementação da API
+
+Agora partiremos para a implementação das funções da nossa interface. Primeiramente, vamos estabelecer quais bibliotecas padrão C e quais arquivos de interface precisamos importar.
+
+```{.c filename=calculator.c}
+#include "calculator.h"
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include <stdio.h>
+```
+
+Na primeira linha, estamos importando nossa interface `calculator.h`. Como ela não faz parte da biblioteca padrão de C, usamos aspas duplas (`"..."`) designando o caminho (basta o nome, pois ela está na mesma pasta).
+
+Em seguida, importamos quatro bibliotecas padrão:
+
+- `<stdlib.h>`: Essencial para o gerenciamento de memória (`malloc` e `free`).
+
+- `<string.h>`: Necessária para o método `memcpy`, que utilizaremos para realizar a cópia segura de dados e dos ponteiros de função em um contexto genérico.
+
+- `<assert.h>`: Usada para a macro `assert`, que insere verificações de segurança no código e garante que as pré-condições das funções sejam atendidas.
+
+- `<stdio.h>`: Usada para imprimir mensagem na tela e receber dados do usuário.
+
+Com as dependências definidas, podemos começar a implementação das funções, começando pelo construtor `calculator_create`.
+
+```{.c filename=calculator.c}
+Calculator *calculator_create(size_t dataSize, 
+                              size_t n_operations, 
+                              const Operation *operations) {
+	assert(dataSize > 0);
+    assert(n_operations > 0); 	
+    assert(operations != NULL); 
+    
+	Calculator *calc = (Calculator *)malloc(sizeof(Calculator));
+	calc->data_size = dataSize;
+    calc->n_operations = n_operations;
+    calc->operations = (Operation *)malloc(sizeof(Operation) * n_operations);
+
+    if (calc->operations == NULL) {
+        free(calc);
+        return NULL;
+    }
+
+    memcpy(calc->operations, operations, sizeof(Operation) * n_operations);
+
+    return calc;
+}
+```
+
+O primeiro ato é verificar as pré-condições com `assert`. Caso a pré-condição seja falsa, o programa é abortado, especificando qual condição falhou e em qual linha ela se encontra.
+
+- `assert(dataSize > 0)`: Esta verificação garante que a calculadora tenha recebido um tamanho de dado válido. Não faz sentido alocar memória para um dado com 0 _bytes_, o que é fundamental para a função `memcpy` funcionar corretamente.
+
+- `assert(n_operations > 0)` e `assert(operations != NULL)`: Esses _asserts_ trabalham em conjunto para garantir que a calculadora possa de fato operar. Eles verificam que há pelo menos uma função de _callback_ para a calculadora utilizar e que o ponteiro para o _array_ de _callbacks_ não é nulo.
+
+O restante da função executa a alocação para `Calculator`, inicializa os campos e usa o tratamento de erro (_rollback_) para liberar corretamente a memória se algo falhar na alocação do _array_ de operações. O uso de `memcpy` finaliza a função, garantindo que a estrutura `Calculator` é dona de sua própria tabela de _callbacks_. Ela copia o _array_ de operações passado de forma segura, _byte a byte_.
+
+
+Para cada construtor, implemente um destrutor (ou, mais precisamente, para cada `malloc` deve haver um `free` correspondente). Use esse princípio para programar em C e evitar vazamentos de memória (_memory leaks_). Uma vez que criamos o construtor da calculadora, vamos criar seu destrutor, `calculator_destroy`.
+
+Primeiro, devemos liberar a memória alocada para as operações. Depois, a memória alocada para a estrutura principal da calculadora. É uma boa prática verificar se o ponteiro é válido antes de tentar liberar.
+
+
+```{.c filename=calculator.c}
+void calculator_destroy(Calculator *calc) {
+    if (calc == NULL) {
+        return;
+    }
+
+    // 1. Libera o array de operações (operations).
+    if (calc->operations != NULL) {
+        free(calc->operations);
+        calc->operations = NULL; 
+    }
+    
+    // 2. Libera a estrutura Calculator principal.
+    free(calc);
+}
+```
+
+A ordem de liberação é crucial: se a gente liberasse a estrutura principal `free(calc)` primeiro, o endereço de `calc->operations` (que está dentro de `calc`) seria perdido para sempre. Isso resultaria em um vazamento de memória (_memory leak_), pois você não conseguiria liberar o _array_ de operações.
+
+Depois de liberar a memória, é uma boa prática atribuir o valor `NULL` ao ponteiro a fim de evitar ponteiros pendentes (_dangling pointers_). No entanto, note que não fazemos isso com o ponteiro `calc`, porque ele foi passado por valor. A variável `calc` dentro desta função é apenas uma cópia do endereço; o ponteiro original (por exemplo, `calculator_int`) no `main` não é alterado.
+
+A função coordenadora (`evaluation`) é a parte mais simples da nossa implementação. Ela não precisa saber qual operação está sendo executada, apenas delega a responsabilidade para a função de _callback_ que foi passada:
+
+```{.c filename=calculator.c}
+void* evaluation(const void *a, const void *b, Operation operation){
+  return operation(a, b);
+} 
+```
+
+As funções que realmente realizam o cálculo seguem um protocolo rigoroso para garantir a generalidade e o gerenciamento de memória. Cada _callback_ deve:
+
+- Alocar Memória: Usar `malloc` para reservar espaço para o resultado na memória _heap_.
+- Fazer o _Casting_: Converter o ponteiro genérico de entrada (`const void*`) para o tipo de dado correto (ex: `int*` ou `double*`) para que a operação possa ser realizada.
+- Desreferenciar e Calcular: Acessar o valor real (`*`) do ponteiro para realizar a operação.
+- Retornar: Reverter o ponteiro do resultado para o tipo genérico (`void*`).
+
+Observe nos exemplos de soma como o _casting_ é usado para transformar o ponteiro genérico (`a`, `b`) no tipo esperado:
+
+```{.c filename=calculator.c}
+// Callback para Soma de Inteiros 
+void* add_int (const void *a, const void *b){
+    int *result = malloc(sizeof(int));
+    
+    // Casting de (const void*) para (int*), seguido pela desreferência (*)
+    *result = *(int*)a + *(int*)b; 
+    
+    return (void*)result; 
+}
+
+// Callback para Soma de Ponto Flutuante
+void* add_double (const void *a, const void *b){
+    double *result = malloc(sizeof(double));
+    
+    // Casting de (const void*) para (double*), seguido pela desreferência (*)
+    *result = *(double*)a + *(double*)b; 
+    
+    return (void*)result; 
+}
+```
+
+As outras funções de _callback_ para multiplicação (`multiply_int` e `multiply_double`) seguirão exatamente o mesmo padrão de alocação e _casting_.
+
+Os **ponteiros de função** nos permitem criar interfaces dinâmicas, como um menu interativo, permitindo que o usuário selecione qual _callback_ deve ser executado em tempo de execução. A função `selectOperationInt` é o nosso exemplo de **função de fábrica** para _callbacks_ de inteiros. Seu objetivo é mapear a entrada numérica do usuário para o endereço de memória da função de _callback_ correspondente.
+
+```{.c filename=calculator.c}
+Operation selectOperationInt() {
+    int c = 0;
+    printf("Escolha sua operação:\n");
+    printf("1. Soma\n");
+    printf("2. Multiplicação\n");
+    printf("Digite:\n");
+    scanf("%d", &c);
+
+    if (c == 1) return add_int;
+    else if (c == 2) return multiply_int;
+    else return NULL; // Retorna NULL como ponteiro de função inválido
+}
+```
+
+O bloco de controle de fluxo `if-else` é a parte central da função. Ele mapeia o inteiro `c` diretamente para o **endereço de memória** da função de _callback_ desejada. Dessa forma, a função está pronta para ser usada no nosso `main` para selecionar dinamicamente a operação!
+
+Do mesmo modo, a função `selectOperationDouble()` é implementada.
+
+## Uso da API
+
+Nossa calculadora simples está finalmente finalizada. Prosseguiremos exemplificando o uso da mesma.
+
+```{.c filename=main_calculator.c}
+#include "calculator.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    
+    Operation operations[] = {add_int, multiply_int};
+    size_t n_operations = sizeof(operations) / sizeof(operations[0]); 
+    
+    // 1. CRIAÇÃO E TRATAMENTO DE ERRO
+    Calculator* calculator_int = calculator_create(sizeof(int), 
+                                                   n_operations, 
+                                                   operations);
+    
+    if (calculator_int == NULL) {
+        fprintf(stderr, "Erro: Falha ao alocar a estrutura Calculator.\n");
+        return 1;
+    }
+    
+    // Dados para teste
+    int a = 10;
+    int b = 2;
+    
+    // 2. SELEÇÃO E EXECUÇÃO
+    Operation selected_op = selectOperactionInt(); 
+    
+    if (selected_op == NULL) {
+        fprintf(stderr, "Erro: Operação inválida selecionada.\n");
+        calculator_destroy(calculator_int); // Limpa o que foi criado
+        return 1;
+    }
+
+    // Chama evaluation, que aloca o resultado na heap
+    void *result_ptr = evaluation(&a, &b, selected_op);
+    
+    if (result_ptr == NULL) {
+        fprintf(stderr, "Erro: Falha ao alocar memória para o resultado.\n");
+        calculator_destroy(calculator_int); // Limpa o que foi criado
+        return 1;
+    }
+    
+    printf("Resultado: %d\n", *(int*)result_ptr);
+
+    // 3. LIMPEZA DA MEMÓRIA
+    
+    // 3.1 Libera a memória alocada DENTRO do callback
+    free(result_ptr); 
+    
+    // 3.2 Libera a estrutura Calculator e suas operações internas
+    calculator_destroy(calculator_int); 
+    calculator_int = NULL; // Boa prática: anular o ponteiro
+    
+    return 0;
+}
+```
+
+Lembrando que para compilar nossa calculadora, garantindo que ambos os arquivos de implementação sejam processado, devemos executar o seguinte comando no terminal:
+
+```{.console code-line-numbers="false"}
+$ gcc calculator.c main_calculator.c -o calc
+```
+Isso irá gerar um executável chamado `calc` na sua pasta.
+
+Finalizamos a implementação da nossa **Calculadora Genérica**. Ela pode não estar perfeita, mas conseguimos aplicar e solidificar conceitos avançados que dão um grande _up_ em nossa jornada na programação C. Em particular, a manipulação de **ponteiros genéricos** (`void*`) e o uso de **ponteiros para funções** como _callbacks_ são ferramentas poderosíssimas que devem ser exploradas com afinco.
+
+Como sugestão de aprimoramento e prática adicional, você pode tentar modularizar o sistema e refinar a interface do usuário:
+
+- **Modularização da UI**: Mova as funções `selectOperationInt` e `selectOperationDouble` para um novo par de arquivos de utilitário (por exemplo, `ui.c`/`ui.h`). Isso ajuda a manter o arquivo principal (`calculator.c`) focado apenas na lógica de cálculo, separando a **Interface do Usuário** da **Lógica de Negócios**.
+- **Refinamento do Tipo**: Refine a UI criando uma função inicial que permita ao usuário escolher entre os tipos (`int` ou `double`) antes de chamar as funções de seleção de operação.
+
+Com isso, a arquitetura se torna ainda mais flexível e organizada.
+
