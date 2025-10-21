@@ -42,9 +42,7 @@ A palavra chave `const` indica que os valores passados para a operação não po
 Em seguida, temos protótipos das funções para criar e destruir uma calculadora. A função `evaluation` já é conhecida e ela coordenda qual _callback_ usar para calcular. Além dela, temos quatro funções de _callback_ para adicionar e multiplicar inteiros ou números em ponto flutuante.
 
 ```{.c filename=calculator.h}
-#include <stddef.h>
-
-Calculator *calculator_create(size_t dataSize, 
+Calculator *calculator_create(size_t data_size, 
                               size_t n_operations, 
                               const Operation *operations);
 void calculator_destroy(Calculator *calc);
@@ -56,8 +54,8 @@ void* add_double (const void *a, const void *b);
 void* multiply_int (const void *a, const void *b);
 void* multiply_double (const void *a, const void *b);
 
-Operation selectOperationInt();
-Operation selectOperationDouble();
+Operation select_operation_int();
+Operation select_operation_double();
 ```
 
 Em resumo:
@@ -69,8 +67,8 @@ Em resumo:
 | `calculator_create/destroy`	| Gerenciamento de ciclo de vida.	| Define claramente como a memória é alocada e, mais importante, como deve ser liberada.| 
 `evaluation` | 	A função coordenadora.	| Mantém o código principal limpo, delegando a lógica complexa (o _callback_). | 
 _Callbacks_ | 	As funções de soma e multiplicação.	| Estão prontas para serem implementadas com a lógica de alocação de memória e _casting_ de tipos. |
-`selectOperationInt` | Função de fábrica/seleção de _callback_. | Permite ao usuário selecionar dinamicamente a operação para inteiros em tempo de execução, desacoplando a escolha da lógica de execução. |
-`selectOperationDouble` | Função de fábrica/seleção de _callback_. | Permite ao usuário selecionar dinamicamente a operação para reais em tempo de execução, desacoplando a escolha da lógica de execução. |
+`select_operation_int` | Função de fábrica/seleção de _callback_. | Permite ao usuário selecionar dinamicamente a operação para inteiros em tempo de execução, desacoplando a escolha da lógica de execução. |
+`select_operation_double` | Função de fábrica/seleção de _callback_. | Permite ao usuário selecionar dinamicamente a operação para reais em tempo de execução, desacoplando a escolha da lógica de execução. |
 
 ## Implementação da API
 
@@ -99,15 +97,15 @@ Em seguida, importamos quatro bibliotecas padrão:
 Com as dependências definidas, podemos começar a implementação das funções, começando pelo construtor `calculator_create`.
 
 ```{.c filename=calculator.c}
-Calculator *calculator_create(size_t dataSize, 
+Calculator *calculator_create(size_t data_size, 
                               size_t n_operations, 
                               const Operation *operations) {
-	assert(dataSize > 0);
+	assert(data_size > 0);
     assert(n_operations > 0); 	
     assert(operations != NULL); 
     
 	Calculator *calc = (Calculator *)malloc(sizeof(Calculator));
-	calc->data_size = dataSize;
+	calc->data_size = data_size;
     calc->n_operations = n_operations;
     calc->operations = (Operation *)malloc(sizeof(Operation) * n_operations);
 
@@ -198,15 +196,15 @@ void* add_double (const void *a, const void *b){
 
 As outras funções de _callback_ para multiplicação (`multiply_int` e `multiply_double`) seguirão exatamente o mesmo padrão de alocação e _casting_.
 
-Os **ponteiros de função** nos permitem criar interfaces dinâmicas, como um menu interativo, permitindo que o usuário selecione qual _callback_ deve ser executado em tempo de execução. A função `selectOperationInt` é o nosso exemplo de **função de fábrica** para _callbacks_ de inteiros. Seu objetivo é mapear a entrada numérica do usuário para o endereço de memória da função de _callback_ correspondente.
+Os **ponteiros de função** nos permitem criar interfaces dinâmicas, como um menu interativo, permitindo que o usuário selecione qual _callback_ deve ser executado em tempo de execução. A função `select_operation_int` é o nosso exemplo de **função de fábrica** para _callbacks_ de inteiros. Seu objetivo é mapear a entrada numérica do usuário para o endereço de memória da função de _callback_ correspondente.
 
 ```{.c filename=calculator.c}
-Operation selectOperationInt() {
+Operation select_operation_int() {
     int c = 0;
     printf("Escolha sua operação:\n");
     printf("1. Soma\n");
     printf("2. Multiplicação\n");
-    printf("Digite:\n");
+    printf("Digite: ");
     scanf("%d", &c);
 
     if (c == 1) return add_int;
@@ -217,7 +215,7 @@ Operation selectOperationInt() {
 
 O bloco de controle de fluxo `if-else` é a parte central da função. Ele mapeia o inteiro `c` diretamente para o **endereço de memória** da função de _callback_ desejada. Dessa forma, a função está pronta para ser usada no nosso `main` para selecionar dinamicamente a operação!
 
-Do mesmo modo, a função `selectOperationDouble()` é implementada.
+Do mesmo modo, a função `select_operation_double()` é implementada.
 
 ## Uso da API
 
@@ -248,7 +246,7 @@ int main() {
     int b = 2;
     
     // 2. SELEÇÃO E EXECUÇÃO
-    Operation selected_op = selectOperactionInt(); 
+    Operation selected_op = select_operation_int(); 
     
     if (selected_op == NULL) {
         fprintf(stderr, "Erro: Operação inválida selecionada.\n");
