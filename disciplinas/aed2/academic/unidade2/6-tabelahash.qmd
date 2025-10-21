@@ -1,0 +1,505 @@
+---
+title: "Tabela de Dispersão"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+---
+
+Nesta unidade do curso, iremos estudar as **tabelas de dispersão** (_hash table_). Pense em uma busca que não demora, que não precisa de caminhadas longas por uma lista ou descidas por uma árvore. Imagine que você pode encontrar qualquer dado em um instante, de forma quase mágica. Essa é a promessa de uma tabela de dispersão.
+
+Vamos explorar o conceito de **função de hash**, que é o coração dessa estrutura, e aprenderemos a lidar com as **colisões**. Ao final, você terá em mãos uma das ferramentas mais rápidas e eficientes para a manipulação de grandes volumes de dados desde dicionários de programação até _caches_ de navegador e bancos de dados. 
+
+
+## Problematização
+
+Você está desenvolvendo um RPG retrô com restrições severas de memória, limitando seu catálogo mestre de itens a um array de apenas 10 slots (índices de 0 a 9).
+
+No entanto, o jogo tem muito mais do que 10 itens no total, e cada um tem um ID inteiro único (a chave).
+
+| Item	            | ID (chave) | Cor (valor) |
+|-------------------|------------|-------------|
+| Poção de Vida     | 12         | Vermelho    |
+| Amuleto Raro      | 18         | Ouro        |
+| Espada Longa      | 21         | Aço         |
+| Pão Velho         | 3          |  Marrom     |
+| Armadura de Couro | 15         | Couro       |
+
+O desafio é como mapear IDs muito maiores que 9 (12, 22, 13) para um slot que só vai de 0 a 9, e ainda assim conseguir encontrá-los rapidamente?
+
+
+## Proposta de solução
+
+A ideia é usar uma função que transforma qualquer ID em um número entre 0 e 9, reaproveitando o mesmo espaço de forma controlada.
+
+Essa função é o módulo (resto da divisão):
+
+$$h(id) = id\bmod 10$$
+
+Como o divisor é $10$, os únicos valores de resto possíveis são os números de 0 a 9, como desejamos.
+
+Aplicando a função aos nossos itens:
+
+- $h(12) = 12 \bmod 10 = 2$
+- $h(18) = 18 \bmod 10 = 8$
+- $h(21) = 21 \bmod 10 = 1$
+- $h(3)\,\,\,= 3\,\,\,\bmod 10 = 3$
+- $h(15) = 15 \bmod 10 = 5$
+
+Dessa maneira, nosso vetor resultante seria:
+
+
+|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| id  | ❌ | Espada Longa  | Poção de Vida  | Pão Velho | ❌ | Armadura de Couro | ❌ | ❌ | Amuleto Raro | ❌ |
+
+Agora, para verificar se o jogador possui o Amuleto Raro, basta aplicar novamente a mesma função: $h(18) = 18 \bmod 10 = 8$.
+
+Sem precisar percorrer todo o _array_, o jogo já sabe que o item (se existir) estará na posição $8$.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Essa técnica permite economizar memória e acessar elementos em tempo constante, O(1).
+:::
+
+Um questionamento comum acontece quando a função retorna o mesmo valor para duas chaves distintas. Por exemplo, com uma chave $25$, teremos $f(25)=25\bmod 10=5$, mas a posição $5$ já está ocupada e o vetor não está totalmente preenchido. Hesse caso, dizemos que ocorreu uma colisão.
+
+Colisões são indesejáveis! Precisamos de funções bem definidas para evitar esse tipo de problema.
+
+
+## Função Hash
+
+A função que escolhemos anteriormente é chamada de função de hash. Existem várias versões, mas a que mostramos é uma das mais simples.
+
+
+### Características da Função Hash
+	
+- Fácil de ser calculada;
+- Distribuição uniforme dos dados;
+- Minimiza as colisões;
+- Capaz de resolver possíveis colisões.
+
+A vantagem da tabela hash é a velocidade de busca, uma função muito complicada para calcular é incoveniente, pois pode demorar mais que uma busca em uma árvore binária, por exemplo. Além disso, se a função não distribui as chaves de maneira uniforme, muitas delas irão se concentrar em um local do vetor, aumentando a probabilidade de colisões.
+
+
+### Método da Divisão
+	
+  No método da divisão, usamos o resultado do resto da divisão do valor da chave pelo tamanho da tabela.
+ $$h(k) = k \bmod m$$
+
+O ideal é que $m$ seja um número primo e não muito próximo de potências de $2$.
+	
+Por exemplo, se $k=12345$ e $m=101$, então
+$$h(k) = h(12345)= 12345 \bmod 101 = 22$$
+
+A chave $12345$ deve ser alocada na posição $22$ do vetor de $101$ posições.	
+	
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Nem sempre trateremos com chaves inteiras simples como as vistas até aqui. Nesses casos, precisamos de um mecanismo para transformar em um valor inteiro antes de processar a função hash. Veremos isso à frente.
+:::
+
+
+Este é o método mais simples e fácil de gerar um valor de hash. A função hash divide o valor $k$ (chave) por $m$ (tamanho da tabela) e, em seguida, usa o resto obtido. É mais adequado que $m$ seja um número primo, pois isso pode garantir que as chaves sejam distribuídas de forma mais uniforme. 
+
+Embora simples, o método da divisão leva a um desempenho ruim, uma vez que chaves consecutivas mapeiam para valores de hash consecutivos na tabela de hash.
+	
+::: {.callout-note icon="false" title="Exercício"}
+Dada a função hash $h(k) = k^2\bmod 7$, calcule os valores hash para as chaves $$4, 17, 13, 35, 25, 11, 2, 10, 32$$.
+:::
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+- $h(4)\,\,\,=\,\,\,4^2\bmod 7=16\bmod 7\,\,\,\,\,\,=2$
+- $h(17)=17^2\bmod 7=289\bmod 7\,\,\,=2$
+- $h(13)=13^2\bmod 7=169\bmod 7\,\,\,=1$
+- $h(35)=35^2\bmod 7=1225\bmod 7=0$
+- $h(25)=25^2\bmod 7=625\bmod 7\,\,\,=2$
+- $h(11)=11^2\bmod 7=121\bmod 7\,\,\,=2$
+- $h(2)\,\,\,=\,\,\,2^2\bmod 7=4\bmod 7\,\,\,\,\,\,\,\,\,=4$
+- $h(10)=10^2\bmod 7=100\bmod 7\,\,\,=2$
+- $h(32)=32^2\bmod 7=1024\bmod 7=2$
+
+Muitas colisões ocorreram! Era evidente que haveria sobreposição de chaves, pois temos somentes sete espaços. 
+:::
+
+### Método da Multiplicação
+
+No método da multiplicação, realizamos os seguintes passos:
+
+- Multiplicamos a chave ($k$) por uma constate $A$ entre $0$ e $1$;
+- Extraímos a parte fracionária de $kA$;
+- Multiplicamos esse valor por $m$ (tamanho da tabela);
+- Arredondamos para baixo;
+
+Ou seja,
+
+$$h(k) = \lfloor m (kA \bmod 1) \rfloor, \text{ com } 0 < A < 1$$
+
+Por exemplo, considere $k = 123$, $m = 1000$, e $A \approx 0,618$.
+
+$$h(k) = \lfloor 1000 (123 \cdot 0,618 \bmod 1) \rfloor=\lfloor 1000 (76,014 \bmod 1) \rfloor=\lfloor 1000\cdot 0.014 \rfloor=14$$
+	
+	
+A vantagem do método de multiplicação é que ele pode trabalhar com qualquer valor entre 0 e 1. 
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+O método de multiplicação é geralmente adequado quando o tamanho da tabela é uma potência de dois.	
+:::
+
+::: {.callout-note icon="false" title="Exercício"}
+Seja a chave $k = 12345$, a constante $A = 0,357840$ e o tamanho da tabela $m = 100$, calcule o valor hash usando o método da multiplicação.
+:::
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+$$h(k) = \lfloor m (kA \bmod 1) \rfloor$$
+$h(12345) = \lfloor 100 (12345\cdot 0,357840 \bmod 1) \rfloor=\lfloor 100 (4417,5348 \bmod 1) \rfloor=\lfloor 100 (0,5348) \rfloor=\lfloor 53,48 \rfloor=53$
+:::
+
+### Hashing Universal
+
+O hash universal tenta resolver o problema das colisões usando uma família de funções de hash, $\mathcal{H}$, que possui uma propriedade matemática crucial:
+
+> Para quaisquer duas chaves distintas, $k_1$ e $k_2$, a probabilidade de que a função de hash $h \in \mathcal{H}$ escolhida aleatoriamente cause uma colisão é no máximo igual à probabilidade de colisão aleatória, que é $1/m$, onde $m$ é o número de posições na tabela hash.
+
+Uma das famílias universais mais usadas para chaves que são números inteiros e uma tabela de tamanho $m$ é definida da seguinte forma:
+
+Seja $p$ um número primo maior que qualquer chave possível, e $m$ o tamanho da tabela hash. A família $\mathcal{H}$ é o conjunto de funções $h_{a,b}$ dadas pela fórmula:
+$$h_{a,b}(k) = ((ak + b) \bmod p) \bmod m$$
+
+Onde $a$ e $b$ são parâmetros **inteiros** aleatórios escolhidos no início, com $a\in[1, p-1]$ e $b\in[0, p-1]$.
+  
+Os parâmetros aleatórios ajudam a dispersar o valor da chave. Já a operação de módulo por um primo $p$ ajuda a garantir que a distribuição do resultado seja uniforme no intervalo $[0, p-1]$. Finalmente, o resultado final é mapeado para o índice da tabela hash, no intervalo $[0, m-1]$. 
+  
+Por exemplo, digamos uma tabela com $m=10$ slots e escolhamos $p=103$.
+
+- Sorteamos $a$ entre $1$ e $p-1$, ou seja, no intervalo $[1, 102]$ 
+- Sorteamos $b$ entre $0$ e $p-1$, ou seja, no intervalo $[0, 102]$ 
+
+Digamos que $a=5$ e $b=13$, então nossa função sorteada da família universal será:
+$$h_{5,13}(k)=((5k+13)\bmod103)\bmod 10$$
+
+Vamos calcular alguns valores de hash para fixação.
+
+- $h(4)\,\,\,=\,\,\,((5\cdot4+13)\bmod103)\bmod 10=\,\,\,(33\bmod103)\bmod 10=33 \bmod 10=3$
+- $h(17)=((5\cdot17+13)\bmod103)\bmod 10=\,\,\,(98\bmod103)\bmod 10= 98\bmod 10=8$
+- $h(25)=((5\cdot25+13)\bmod103)\bmod 10=(138\bmod103)\bmod 10=35\bmod 10=5$
+- $h(32)=((5\cdot32+13)\bmod103)\bmod 10=(173\bmod103)\bmod 10=70\bmod 10=0$
+
+
+Mesmo com os melhores métodos, é impossível evitar colisões. Quando acontece, devemos tratá-la de modo que o desempenho da busca não seja muito afetado. No entanto, antes de estudarmos os tratamentos de colições, iremos abordar as estratégias para mapeamento de chaves em inteiros.
+
+
+## Estratégias para Mapeamento
+
+Quando falamos em mapeamento de chaves em inteiros, estamos nos referindo a um pré-processamento que transforma uma chave (como uma string ou um número muito grande) em um inteiro mais adequado para ser usado por uma função de hash.
+
+Embora seja possível criar suas próprias estratégias, apresentamos a seguir alguns métodos clássicos encontrados na literatura.
+
+### 🔠 Chaves do tipo _string_
+
+Os métodos clássicos para tratar strings usam o fato de cada letra ter um inteiro correspondente na tabela ASCII.
+
+#### Soma
+
+Muitas vezes, as chaves que estamos trabalhando são _strings_. Uma forma simples de convertê-las em inteiros é somar os valores ASCII de cada caractere:
+$$k=\sum_{i=0}^{n-1}s[i]=s[0]+s[1]+s[2]+\cdots+s[n-1]$$
+
+onde $n$ é o tamanho da palavra.
+
+Por exemplo, a palavra "PAI" (P = 80, A = 65 e I = 73):
+$$k=\sum_{i=0}^{3-1}s[i]=\sum_{i=0}^{2}s[i]=s[0]+s[1]+s[2]=80+65+73=218$$
+
+Esse método é simples, mas apresenta má distribuição, ou seja, palavras com as mesmas letras em ordem diferente geram o mesmo valor.
+
+#### Multiplicação Polinomial
+
+Um método mais robusto é o da **multiplicação polinomial**. Aqui, tratamos a _string_ como um número em uma base $\beta$ (β (geralmente um número primo pequeno):
+$$k=s[0]\cdot\beta^{n-1}+s[1]\cdot\beta^{n-2}+\cdots+s[n-1]\cdot\beta^{0}$$
+
+Por exemplo, a palavra "PAI" (P = 80, A = 65 e I = 73) e $\beta=13$:
+$$k=s[0]\cdot 13^{3-1}+s[1]\cdot 13^{3-2}+\cdots+s[2]\cdot 13^{0}=80\cdot13^2+65\cdot13^1+73\cdot13^0=14438$$
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+A multiplicação por um número primo ajuda a espalhar os valores de forma mais uniforme do que se usássemos um número composto.
+:::
+
+Essa técnica é superior à soma simples, pois considera a ordem dos caracteres. Para palavras como "cama" e "maca", a soma simples irá retornar os mesmos valores, enquanto que a multiplicação polinomial não.
+
+Exemplo simples: 
+
+- $BA : 66\cdot13^1 + 65\cdot13^0 = 923$.
+- $AB : 65\cdot13^1 + 66\cdot13^0 = 911$.
+
+Dessa forma, "BA" e "AB" produzem resultados distintos, evitando colisões triviais.
+
+### 🔢 Chaves do tipo _int_ grandes
+
+Quando lidamos com inteiros muito grandes, precisamos reduzi-los para evitar estouro de capacidade (overflow) ou para encaixá-los em um intervalo menor. A seguir, apresentamos três métodos comuns: dobramento (folding), XOR e quadrado central (mid-square).
+
+#### Dobramento (Folding)
+
+Consiste em dividir a chave em partes menores e, em seguida, somá-las ou aplicar XOR entre elas para gerar um número reduzido. Por exemplo, suponha $k = 83.529.170$, vamos dividir a chave assim:
+
+- $k_1 = 835$
+- $k_2 = 291$
+- $k_3 = 70$
+
+O dobramento por soma resulta em $k_1+k_2+k_3=835+291+70=1196$.
+
+No dobramento por XOR, as partes são combinadas usando a operação lógica OU exclusivo (XOR), muito comum em funções de hash criptográficas. Primeiro, convertemos as partes para binário (aqui, usando 10 bits para simplificar):
+
+
+| Parte | Decimal | Binário (10 bits)|
+| -----| -----| -----|  
+| $k_1$ | 835 | 1101000011| 
+| $k_2$ | 291 | 0100100011| 
+| $k_3$ | 70  | 0001000110| 
+
+Realizamos a operação XOR bit a bit entre as partes.
+$$k_1 \oplus k_2 \oplus k_3$$$$\begin{array}{r l l} & 1101000011 & (k_1) \\ \oplus & 0100100011 & (k_2) \\ \hline & 1001100000 & (k_1 \oplus k_2) \\ \oplus & 0001000110 & (k_3) \\ \hline & \mathbf{1000100110} & (\text{Resultado}) \end{array}$$
+
+Transformando 1000100110 de volta para decimal:
+$$1000100110_2=512+64+8+4+2=590$$
+
+O método XOR tende a preservar melhor as características de todas as partes da chave, ainda que seja um pouco mais complexo de implementar do que a soma simples.
+
+#### Mid-Square
+
+O método do quadrado central é uma técnica clássica de extração. A chave é elevada ao quadrado, e então o hash é formado pelos dígitos centrais do resultado. A quantidade de dígitos extraídos é indicada por $d$.
+
+Apesar de ser simples, ele pode gerar um código hash razoavelmente bem distribuído. Como exemplo, considere uma $k=931$ e $d=3$.
+$$k^2=931^2=866761$$
+Assim, podemos selecionar $676$, ou até $667$.
+
+Esses métodos apresentados podem ser combinados ou até mesmo utilizados como substitutos de uma função hash. Em sistemas mais complexos, essas abordagens costumam ser empregadas como etapas auxiliares dentro de funções de hash mais sofisticadas.
+
+## Tratamento de Colisões
+
+Sabemos que uma colisão ocorre quando a função hash produz o mesmo valor para duas ou mais chaves
+distintas.
+$$h(k1) = h(k2)$$
+
+Uma colisão é praticamente inevitável, por isso devemos tratá-la. As principais
+abordagens são endereçamento aberto e encadeamento separado.
+
+- **Endereçamento aberto**: percorrer a tabela em busca de um local não ocupado.
+- **Encadeamento separado**: uso de listas ligadas para armazenar as colisões.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Endereçamento aberto: procura um endereço aberto, um slot vazio.
+Encadeamento separado: usa listas encadeadas separadas, uma para cada slot.
+:::
+
+### Endereçamento aberto
+
+A técnica de endereçamento aberto tenta resolver o problema de colisão buscando
+um outro lugar vazio para armazenar a chave que colidiu. As maneiras principais de sondar um espaço vazio são:
+
+- Sondagem linear;
+- Sondagem quadrática;
+- Duplo hash
+
+#### Sondagem linear
+
+A sondagem linear procura pela próxima posição vazia do vetor. A função de hash possui uma nova variável iterativa que permitirá a procura por esse lugar vazio:
+$$h(k,i) = (h(k)+i)\bmod n$$
+onde $i=0,1,2,3,\ldots$
+
+Sempre que ocorre um colisão, esta variável ($i$) é incrementada em uma unidade.
+
+
+Por exemplo, considere o vetor abaixo:
+
+|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| chave  | ❌ | 21  | 42  | 63 | ❌ | ❌ | ❌ | ❌ | ❌ | 69 |
+
+E a função de hash $h(k)=k\bmod 10$.
+
+Vamos adicionar a chave 81:
+
+- $h(81,0) = (h(81) + 0) \bmod 10 = (1+0) \bmod 10 = 1$, colisão com 21
+- $h(81,1) = (h(81) + 1) \bmod 10 = (1+1) \bmod 10 = 2$, colisão com 42
+- $h(81,2) = (h(81) + 2) \bmod 10 = (1+2) \bmod 10 = 3$, colisão com 63
+- $h(81,3) = (h(81) + 3) \bmod 10 = (1+3) \bmod 10 = 4$
+
+Como a posição 4 está vazia, a chave 81 será alocada lá.
+
+
+|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| chave  | ❌ | 21  | 42  | 63 | 81 | ❌ | ❌ | ❌ | ❌ | 69 |
+
+
+
+#### Sondagem quadrática
+
+A sondagem quadrática procura pela próxima posição vazia usando uma função quadrática. 
+$$h(k,i) = (h(k)+c_1i+c_2i^2)\bmod n$$
+onde $c_1,c_2$ são constantes e $i=0,1,2,3,\ldots$
+
+Considere o exemplo anterior com sondagem quadrática ($c_1=0$ e $c_2=1$).
+
+- $h(81,0) = (h(81) + 0^2) \bmod 10 = (1+0) \bmod 10 = 1$, colisão com 21
+- $h(81,1) = (h(81) + 1^2) \bmod 10 = (1+1) \bmod 10 = 2$, colisão com 42
+- $h(81,2) = (h(81) + 2^2) \bmod 10 = (1+4) \bmod 10 = 5$
+
+
+Como a posição 5 está vazia, a chave 81 será alocada lá.
+
+
+|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| chave  | ❌ | 21  | 42  | 63 | ❌ | 81 | ❌ | ❌ | ❌ | 69 |
+
+#### Duplo hash
+
+Como o nome sugere, o tratamento de colisão usa duas funções hash ($h_1$ e $h_2$). 
+$$h(k,i) = (h_1(k) + i\cdot h_2(k)) \bmod n$$
+onde $i=0,1,2,3,\ldots$
+
+Por exemplo, suponha
+$h_1(k) = k \bmod 10$ e $h_2(k) = 5 − (k \bmod 5)$. 
+
+No exemplo anterior teremos:
+
+- $h(81,0) = (h_1(81) + 0 \cdot h_2(81)) \bmod 10 = (1+0) \bmod 10 = 1$, colisão com 21
+- $h(81,1) = (h_1(81) + 1 \cdot h_2(81)) \bmod 10 = (1 + 4) \bmod 10 = 5$
+
+Ou seja,
+
+
+|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| chave  | ❌ | 21  | 42  | 63 | ❌ | 81 | ❌ | ❌ | ❌ | 69 |
+
+### Encadeamento separado
+
+A técnica de encadeamento separado é bastante simples. Ao invés de tratar a colisão procurando um lugar vazio, iremos colocar as colisões em uma lista encadeada. Logo, não teremos um vetor de chaves, mas sim um vetor de ponteiros que apontam para listas encadeadas separadamente. 
+
+No exemplo anterior, quando houve a colisão da chave 81 com 21, a posição 1 iria apontar para uma lista ligada com dois componentes.
+
+
+```{mermaid}
+flowchart TD
+ subgraph s1["Array"]
+        A0["❌"]
+        A1["prt_1"]
+        A2["prt_2"]
+        A3["prt_3"]
+        A4["❌"]
+        A5["❌"]
+        A6["❌"]
+        A7["❌"]
+        A8["❌"]
+        A9["prt_9"]
+  end
+    A1 -.-> B1["21"]
+    B1 --> B2["81"]
+    A2 -.-> B3["42"]
+    A3 -.-> B4["63"]
+    A9 -.-> B5["69"]
+    B2 --> n1["Filled Circle"]
+    B3 --> n2["Filled Circle"]
+    B4 --> n3["Filled Circle"]
+    B5 --> n4["Filled Circle"]
+
+    n1@{ shape: f-circ}
+    n2@{ shape: f-circ}
+    n3@{ shape: f-circ}
+    n4@{ shape: f-circ}
+    style A1 fill:#fff
+    style A2 fill:#fff
+    style A3 fill:#fff
+    style A9 fill:#fff
+```
+
+## Tabela de Dispersão Dinâmica
+
+Imagine que você possui um pequeno móvel com quatro compartimentos:
+
+- No compartimento 1, você guarda um relógio **Ferrari**.
+- No compartimento 2, um relógio **Casio**.
+- No compartimento 3, um relógio **Xing-ling**.
+
+Com o tempo, você percebe que o móvel está ficando cheio e decide comprar um novo móvel com o dobro do tamanho, para ter mais espaço e organização.
+
+No novo móvel, os relógios podem ficar em posições diferentes, por exemplo, o Ferrari agora pode ser guardado no compartimento 6. Além disso, você adquire um novo relógio **Rolex** e o coloca no compartimento 5.
+
+Mais tarde, você decide presentear seu melhor amigo com o relógio **Xing-ling** e vender o **Casio**. Para completar, um dos relógios acaba sendo roubado. Agora, dos oito compartimentos, apenas um está ocupado. Um grande desperdício de espaço.
+
+Diante disso, você decide trocar novamente de móvel, voltando a um modelo menor, com quatro compartimentos, mais adequado à sua nova coleção.
+
+Esse comportamento de aumentar ou diminuir o número de compartimentos conforme a quantidade de itens é exatamente o que ocorre em uma tabela hash dinâmica.
+
+Em resumo, ela funciona como um "guarda-roupa inteligente" que se adapta automaticamente:
+
+- Expande (aumenta) quando está ficando cheia, evitando que as "gavetas" fiquem apertadas (muitas colisões).
+- Contrai (diminui) quando está quase vazia, economizando espaço e memória.
+
+Essa capacidade de ajustar dinamicamente o tamanho permite que a tabela hash mantenha alto desempenho e uso eficiente de memória, independentemente do número de elementos armazenados.
+
+### Fator de Carga
+
+O fator de carga (load factor) determina quando uma tabela hash deve ser expandida ou contraída.
+Ele é definido como a razão entre o número de elementos armazenados e o número total de buckets (ou posições disponíveis na tabela):
+$$\lambda = \frac{n}{m}$$
+onde $n$ é o número de itens atualmente armazenados e $m$ o tamanho da tabela.
+
+
+O desempenho ideal de uma tabela hash depende de duas condições principais:
+
+- uma função hash eficiente, que distribua os elementos de forma uniforme;
+- um fator de carga baixo, que mantenha o número de colisões sob controle.
+
+Se o fator de carga $\lambda$ for muito alto, o número de colisões tende a crescer, e as operações de busca, inserção e remoção podem degradar de O(1) para O(n). Por outro lado, se $\lambda$ for muito baixo, haverá desperdício de espaço, pois a tabela ficará com muitos buckets vazios.
+
+O coração de uma tabela hash dinâmica é justamente o processo de redimensionamento, que ajusta o tamanho da tabela conforme o fator de carga ultrapassa (ou cai abaixo de) determinados limites predefinidos. Por exemplo,
+
+- expansão: quando $\lambda>0.7$ ou  $\lambda>0.75$;
+- contração: quando $\lambda<0.25$.
+
+
+O processo de redimensionamento normalmente envolve três etapas principais:
+
+
+- **Criação de uma nova tabela**: Uma nova tabela é alocada, geralmente com o dobro (em caso de expansão) ou metade (em caso de contração) do tamanho atual.
+- **Re-hashing dos elementos**: Todos os elementos da tabela antiga são reprocessados por uma nova função hash e inseridos na nova tabela, agora com índices recalculados conforme o novo tamanho.
+- **Substituição**: A tabela antiga é descartada, e a nova tabela passa a ser usada nas próximas operações de inserção, busca e remoção.
+
+Finalmente, podemos citar como vantagens e desvantagens da tabela hash dinâmica:
+
+::: {.panel-tabset}
+
+## Vantagens
+
+- **Otimização do espaço**: A tabela se ajusta à quantidade de dados, evitando
+desperdício de memória quando há poucos itens e garantindo espaço
+suficiente para muitos itens.
+- **Desempenho consistente**: Ajuda a manter o fator de carga em níveis ótimos,
+garantindo que as operações de O(1) sejam mantidas na média.
+- **Facilidade de uso**: O desenvolvedor não precisa se preocupar em prever o
+tamanho da tabela, simplificando o desenvolvimento.
+
+## Desvantagens
+
+- **Custo do redimensionamento**: A operação de redimensionamento pode ser
+custosa, pois envolve a criação de uma nova tabela e o re-hashing de todos os
+elementos. Isso pode levar a picos de latência inesperados.
+- **Complexidade de implementação**: É mais complexa de implementar do que
+uma tabela hash estática.
+- **Cache ineficiente durante redimensionamento**: Durante o re-hashing, os
+dados podem se espalhar por novas posições de memória, o que pode impactar
+o desempenho do cache da CPU temporariamente.
+:::
+
+
+
+
