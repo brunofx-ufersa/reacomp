@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Bruno Xavier">
-<meta name="description" content="Tutorial de compilação de programas em C no Linux">
+<meta name="description" content="Tutorial de como transformar um laço for em while">
 
-<title>Compilar Programas em C - Linux – REAComp</title>
+<title>For e While – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,9 +110,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Procurar"
   }
 }</script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -341,10 +338,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Conteúdo</h2>
    
   <ul>
-  <li><a href="#instalação-do-compilador" id="toc-instalação-do-compilador" class="nav-link active" data-scroll-target="#instalação-do-compilador">Instalação do Compilador</a></li>
-  <li><a href="#compilação-simples" id="toc-compilação-simples" class="nav-link" data-scroll-target="#compilação-simples">Compilação Simples</a></li>
-  <li><a href="#compilação-múltipla" id="toc-compilação-múltipla" class="nav-link" data-scroll-target="#compilação-múltipla">Compilação Múltipla</a></li>
-  <li><a href="#automatização" id="toc-automatização" class="nav-link" data-scroll-target="#automatização">Automatização</a></li>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a></li>
+  <li><a href="#sintaxe-básica" id="toc-sintaxe-básica" class="nav-link" data-scroll-target="#sintaxe-básica">Sintaxe Básica</a></li>
+  <li><a href="#laços-infinitos" id="toc-laços-infinitos" class="nav-link" data-scroll-target="#laços-infinitos">Laços infinitos</a></li>
   </ul>
 </nav>
     </div>
@@ -354,17 +350,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Compilar Programas em C - Linux</h1>
+<h1 class="title">For e While</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">compilação</div>
-    <div class="quarto-category">linux</div>
-    <div class="quarto-category">make</div>
+    <div class="quarto-category">algoritmo</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Tutorial de <strong>compilação</strong> de programas em C no Linux
+    Tutorial de como transformar um laço <strong>for</strong> em <strong>while</strong>
   </div>
 </div>
 
@@ -381,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">14 de outubro de 2025</p>
+      <p class="date">15 de outubro de 2025</p>
     </div>
   </div>
   
@@ -393,142 +387,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="instalação-do-compilador" class="level1">
-<h1>Instalação do Compilador</h1>
-<p>Vamos instalar o compilador em sistemas baseados no Ubuntu. Primeiro, atualize o repositório de pacotes:</p>
-<pre class="console"><code>$ sudo apt update</code></pre>
-<p>Em seguida, instale o pacote <em>build-essential</em></p>
-<pre class="console"><code>$ sudo apt install build-essential</code></pre>
-<p>Este pacote inclui o compilador GCC e outras ferramentas de desenvolvimento necessárias.</p>
-<p>Para a verificar a instalação, faça:</p>
-<pre class="console"><code>$ gcc --version</code></pre>
+<section id="introdução" class="level1">
+<h1>Introdução</h1>
+<p>Os laços de repetição são ferramentas fundamentais em qualquer linguagem de programação. Eles permitem executar blocos de código várias vezes sem precisar reescrevê-los. Em C, os dois tipos mais comuns são o <code>for</code> e o <code>while</code>.</p>
+<p>Muitos programadores têm preferência por um ou outro, mas ambos têm seu papel. O laço <code>for</code> é mais usado quando sabemos quantas vezes o código deve ser repetido, enquanto o <code>while</code> é ideal para situações em que a repetição depende de uma condição.</p>
+<p>Embora possamos criar <em>loops</em> infinitos com o <code>for</code>, o <code>while</code> geralmente é a melhor escolha quando não sabemos o número exato de repetições.</p>
 </section>
-<section id="compilação-simples" class="level1">
-<h1>Compilação Simples</h1>
-<p>Para compilar um programa em C, use o comando</p>
-<pre class="console"><code>$ gcc file.c -o file</code></pre>
-<p>Onde <code>file.c</code> é o nome do seu arquivo de código fonte. Você pode escolher qualquer nome para o terceiro argumento. No caso acima, escolhemos <code>file</code>. Para executar o programa, faça:</p>
-<pre class="console"><code>$ ./file</code></pre>
+<section id="sintaxe-básica" class="level1">
+<h1>Sintaxe Básica</h1>
+<p>A estrutura de um <code>for</code> pode ser escrita assim:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>for (inicialização; condição; incremento){</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    // código que será executado repeditamente</span>
+<span id="cb1-3"><a href="#cb1-3"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Já o mesmo comportamento pode ser obtido com um <code>while</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>inicialização</span>
+<span id="cb2-2"><a href="#cb2-2"></a>while (condição){</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    // código que será executado repeditamente</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    incremento</span>
+<span id="cb2-5"><a href="#cb2-5"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>💡 Exemplo prático</p>
+<p>A seguir, veja um exemplo simples que imprime uma frase 42 vezes usando <code>for</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">42</span><span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>    puts<span class="op">(</span><span class="st">"Volta o cão arrependido, </span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>          com orelhas fartas<span class="op">,</span> seu osso roido </span>
+<span id="cb3-4"><a href="#cb3-4"></a>          e o rabo entre as patas<span class="st">");</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O mesmo comportamento pode ser obtido com <code>while</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="cf">while</span> <span class="op">(</span>i <span class="op">&lt;</span> <span class="dv">42</span><span class="op">){</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    puts<span class="op">(</span><span class="st">"Volta o cão arrependido, </span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>          com orelhas fartas<span class="op">,</span> seu osso roido </span>
+<span id="cb4-5"><a href="#cb4-5"></a>          e o rabo entre as patas<span class="st">");</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    i<span class="op">++;</span>      </span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Assim, transformar um <code>for</code> em <code>while</code> é apenas uma questão de reposicionar as três partes: inicialização, condição e incremento.</p>
 </section>
-<section id="compilação-múltipla" class="level1">
-<h1>Compilação Múltipla</h1>
-<p>Nesta abordagem, estamos tratando de um projeto com mais de um arquivo <code>.c</code>. Vamos exemplificar dessa maneira:</p>
-<p>Primeiro o arquivo de cabeçalho contendo a interface das funções e outras definições:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>interface.h</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="interface.h"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef INTERFACE_H</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define INTERFACE_H</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Includes necessários</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Declarações</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Esse arquivo é apenas um prototipagem, não há código executável.</p>
-<p>Em seguida, o arquivo com as implementações reais:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>interface.c</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-filename="interface.c"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Includes</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"interface.h"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Implementação das funções declaradas em interface.h</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Todas as funções aqui que foram declaradas no <code>.h</code>, então estão visíveis para outros arquivos que incluírem <code>interface.h</code>. Caso criemos funções auxiliares não declaradas no <code>.h</code>, então elas ficam privadas a este módulo (invisíveis fora dele).</p>
-<p>Finalmente, o arquivo principal (contém a <code>main</code>) que usará a implementação dos arquivos anteriores.</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>programa.c</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="programa.c"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Includes</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"interface.h"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Uso</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Observe que <code>programa.c</code> não precisa incluir <code>interface.c</code>, apenas o cabeçalho.</p>
-<p>Para compilar esse projeto, use o comando</p>
-<pre class="console"><code>$ gcc interface.c programa.c -o programa</code></pre>
-<p>Para executar o programa, faça:</p>
-<pre class="console"><code>$ ./programa</code></pre>
-<p>Também podemos compilar em duas etapas (útil em projetos maiores):</p>
-<pre class="console"><code>$ gcc -c interface.c -o interface.o
-$ gcc -c programa.c -o programa.o
-$ gcc interface.o programa.o -o programa</code></pre>
-<p>A <em>flag</em> <code>-c</code> indica para o gcc que compile o código-fonte (<code>.c</code>) em código objeto (<code>.o</code>). Ele não faz o <em>linking</em>, ou seja, não gera o executável final ainda. No último comando, o compilador faz o <em>linking</em> para gerar o executável. Nessa abordagem, se algum arquivo for modificado, só será necessário recompilar ele e não todo o projeto.</p>
-</section>
-<section id="automatização" class="level1">
-<h1>Automatização</h1>
-<p>Um dos utilitários que o pacote <em>build-essential</em> traz é o <strong><em>make</em></strong>. O <em>make</em> evita recompilar manualmente tudo. Além de ser um processo automatizado, ele recompila apenas o que mudou, mantendo o nosso projeto organizado e escalável. Para essa abordagem é necessário criar um arquivo na pasta do nosso projeto chamado <code>Makefile</code> (sem extensão).</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">graph TD
-    A["Projeto/"]:::folder
-    A --&gt; B["interface.h"]:::file
-    A --&gt; C["interface.c"]:::file
-    A --&gt; D["programa.c"]:::file
-    A --&gt; E["Makefile"]:::file
-
-    classDef folder fill:#e6f7ff,stroke:#0077b6,stroke-width:2px,color:#023e8a,font-weight:bold;
-    classDef file fill:#fff,stroke:#999,stroke-width:1px,color:#333;
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p>Um exemplo de arquivo <code>Makefile</code> seria esse:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Makefile</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-filename="Makefile"><pre class="sourceCode numberSource makefile number-lines code-with-copy"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Nome do executável final</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="dt">PROG</span> <span class="ch">=</span><span class="st"> programa</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Compilador</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="dt">CC</span> <span class="ch">=</span><span class="st"> gcc</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co"># Arquivos fonte e objetos</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="dt">SRC</span> <span class="ch">=</span><span class="st"> interface.c programa.c</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="dt">OBJ</span> <span class="ch">=</span><span class="st"> </span><span class="ch">$(</span><span class="dt">SRC</span><span class="kw">:</span><span class="ss">.c</span><span class="kw">=</span><span class="ss">.o</span><span class="ch">)</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="co"># Regra padrão (executada quando você roda apenas `make`)</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="dv">all:</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">PROG</span><span class="ch">)</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="co"># Regra para gerar o executável</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="dv">$(PROG):</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">OBJ</span><span class="ch">)</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="er">    </span><span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">OBJ</span><span class="ch">)</span> -o <span class="ch">$(</span><span class="dt">PROG</span><span class="ch">)</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="co"># Regra genérica para compilar cada .c em .o</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="dv">%.o:</span><span class="dt"> %.c</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a><span class="er">    </span><span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> -c <span class="ch">$&lt;</span> -o <span class="ch">$@</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a></span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="co"># Limpeza dos arquivos temporários</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a><span class="dv">clean:</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a><span class="er">    </span>rm -f <span class="ch">$(</span><span class="dt">OBJ</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">PROG</span><span class="ch">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Ao executar o comando <code>make</code> no terminal, vamos obter a saída:</p>
-<pre class="console"><code>$ make
-gcc -c interface.c -o interface.o
-gcc -c programa.c -o programa.o
-gcc interface.o programa.o -o programa</code></pre>
-<p>Agora imagine que <code>programa.c</code> foi modificado. Então somente ele será recompilado e tudo será “linkado” novamente no final.</p>
-<pre class="console"><code>$ make
-gcc -c programa.c -o programa.o
-gcc interface.o programa.o -o programa</code></pre>
-<p>O comando <code>make clean</code> irá apagar o arquivo binário e os arquivos objeto.</p>
-<pre class="console"><code>$ make clean
-rm -f interface.o programa.o programa</code></pre>
+<section id="laços-infinitos" class="level1">
+<h1>Laços infinitos</h1>
+<p>Um laço infinito é aquele que nunca termina, o programa fica preso executando o mesmo bloco de código repetidamente, até que algo o interrompa (por exemplo, com <code>break</code>, <code>return</code>, ou encerrando o programa manualmente).</p>
+<p>Laços infinitos podem parecer um erro de programação, mas eles têm usos práticos, como em:</p>
+<ul>
+<li>programas que ficam “rodando para sempre”, como servidores, jogos ou sistemas embarcados;</li>
+<li>loops de espera, que ficam verificando uma condição até que algo aconteça.</li>
+</ul>
+<p>🔁 Exemplo com <code>while</code></p>
+<p>A forma mais comum de criar um laço infinito em C é com <code>while</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1"></a><span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    printf<span class="op">(</span><span class="st">"Executando para sempre...</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Aqui, a condição é sempre verdadeira (1 significa <em>true</em>), então o loop nunca termina.</p>
+<p>🔁 Exemplo com <code>for</code></p>
+<p>Também podemos criar um laço infinito com <code>for</code>, deixando os três argumentos vazios:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">for</span> <span class="op">(;;)</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>    printf<span class="op">(</span><span class="st">"Executando para sempre...</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esse é o equivalente exato ao <code>while(1)</code>. O compilador entende que não há inicialização, nem condição de parada, nem incremento, então o loop continua indefinidamente.</p>
+<p>⚠️ Cuidados importantes</p>
+<p>Cuidado com <em>loops</em> sem saída, pois se não houver um <code>break</code> ou uma condição de parada dentro do <em>loop</em>, o programa pode travar ou consumir muito processamento.</p>
+<p>Use <code>break</code> para encerrar o <em>loop</em> quando uma condição interna for atendida:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="dt">int</span> opcao<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    printf<span class="op">(</span><span class="st">"Digite 0 para sair: "</span><span class="op">);</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>opcao<span class="op">);</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="cf">if</span> <span class="op">(</span>opcao <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>        <span class="cf">break</span><span class="op">;</span> <span class="co">// encerra o laço</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Evite <em>loops</em> infinitos acidentais, especialmente ao converter <code>for</code> para <code>while</code>. Se esquecer de atualizar a variável de controle (<code>i++</code>, por exemplo), o programa pode nunca sair do loop.</p>
+<p>💡 Dica de prática</p>
+<p>Tente modificar o exemplo anterior do “Cão arrependido” para rodar infinitamente, e depois adicione uma condição de saída com <code>break</code>. Assim você entende bem como o controle de fluxo funciona.</p>
 <hr>
 <p>Nesta tutorial, você aprendeu</p>
-<p>✅ a instalar o compilador GCC</p>
-<p>✅ a compilar um programa em C</p>
-<p>✅ a compilar um projeto em C usando um ou múltiplos comandos</p>
-<p>✅ a usar o utilitário make para automatizar o processo de compilação</p>
-<p>Tudo isso em um sistema operacional baseado no Ubuntu.</p>
+<p>✅ a transformar um laço <code>for</code> em <code>while</code> e vice-versa</p>
+<p>✅ como criar lações infinitos</p>
 
 
 </section>

@@ -14,55 +14,83 @@
   </url>
   <url>
     <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/academic/unidade2/2-callback.html</loc>
-    <lastmod>2025-10-13T23:44:43.656Z</lastmod>
+    <lastmod>2025-10-17T18:42:30.251Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/academic/unidade2/6-tabelahash.html</loc>
+    <lastmod>2025-10-20T19:27:13.918Z</lastmod>
   </url>
   <url>
     <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/academic/unidade2/1-ponteiros.html</loc>
-    <lastmod>2025-10-13T21:03:22.421Z</lastmod>
+    <lastmod>2025-10-17T18:46:46.892Z</lastmod>
   </url>
   <url>
-    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/algoritmos/index.html</loc>
-    <lastmod>2025-10-11T14:50:58.378Z</lastmod>
+    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/academic/index.html</loc>
+    <lastmod>2025-10-19T19:37:39.703Z</lastmod>
   </url>
   <url>
-    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed1/index.html</loc>
-    <lastmod>2025-10-11T14:51:09.387Z</lastmod>
-  </url>
-  <url>
-    <loc>https://brunofx-ufersa.github.io/reacomp/blog.html</loc>
-    <lastmod>2025-10-14T17:41:34.482Z</lastmod>
-  </url>
-  <url>
-    <loc>https://brunofx-ufersa.github.io/reacomp/contribuicao.html</loc>
-    <lastmod>2025-10-12T18:03:08.196Z</lastmod>
-  </url>
-  <url>
-    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas.html</loc>
-    <lastmod>2025-10-12T18:05:37.473Z</lastmod>
-  </url>
-  <url>
-    <loc>https://brunofx-ufersa.github.io/reacomp/about.html</loc>
-    <lastmod>2025-10-11T14:44:37.547Z</lastmod>
-  </url>
-  <url>
-    <loc>https://brunofx-ufersa.github.io/reacomp/posts/compilation-clinux.html</loc>
-    <lastmod>2025-10-14T17:36:03.517Z</lastmod>
-  </url>
-  <url>
-    <loc>https://brunofx-ufersa.github.io/reacomp/index.html</loc>
-    <lastmod>2025-10-11T15:22:14.699Z</lastmod>
+    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/slides/mermaid-ex.html</loc>
+    <lastmod>2025-10-17T17:59:33.596Z</lastmod>
   </url>
   <url>
     <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/programacaoc/index.html</loc>
     <lastmod>2025-10-11T14:50:47.882Z</lastmod>
   </url>
   <url>
-    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/academic/index.html</loc>
-    <lastmod>2025-10-11T15:28:33.365Z</lastmod>
+    <loc>https://brunofx-ufersa.github.io/reacomp/index.html</loc>
+    <lastmod>2025-10-11T15:22:14.699Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/posts/compilation-clinux.html</loc>
+    <lastmod>2025-10-18T14:14:08.089Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/posts/fortowhile.html</loc>
+    <lastmod>2025-10-18T14:13:52.157Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/about.html</loc>
+    <lastmod>2025-10-11T14:44:37.547Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas.html</loc>
+    <lastmod>2025-10-12T18:05:37.473Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/contribuicao.html</loc>
+    <lastmod>2025-10-12T18:03:08.196Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/posts/lrvalues.html</loc>
+    <lastmod>2025-10-18T14:27:54.699Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/blog.html</loc>
+    <lastmod>2025-10-14T17:41:34.482Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed1/index.html</loc>
+    <lastmod>2025-10-11T14:51:09.387Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/algoritmos/index.html</loc>
+    <lastmod>2025-10-11T14:50:58.378Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/slides/hash.html</loc>
+    <lastmod>2025-10-16T14:44:07.267Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/academic/unidade2/5-lista.html</loc>
+    <lastmod>2025-10-21T15:36:39.667Z</lastmod>
   </url>
   <url>
     <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/academic/unidade2/3-memoria.html</loc>
     <lastmod>2025-10-14T12:14:33.384Z</lastmod>
+  </url>
+  <url>
+    <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/academic/unidade2/4-calculadora.html</loc>
+    <lastmod>2025-10-17T19:08:51.077Z</lastmod>
   </url>
   <url>
     <loc>https://brunofx-ufersa.github.io/reacomp/disciplinas/aed2/index.html</loc>

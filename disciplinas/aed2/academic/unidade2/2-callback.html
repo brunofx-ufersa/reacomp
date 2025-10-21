@@ -492,25 +492,44 @@ Nota
 <li><strong>Baixo acoplamento</strong>: <code>calcular</code> não precisa saber como a operação é feita (se é soma ou subtração), apenas que a função passada segue o contrato definido pelo tipo <code>Operacao</code>.</li>
 </ul>
 <p>Dessa maneira, <code>calcular</code> se comporta de várias formas (polimorfismo).</p>
+<p>Uma das grandes vantagens de usar ponteiros para funções é a possibilidade de criar um menu interativo, permitindo ao usuário escolher qual operação deseja executar.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1"></a>Operacao escolha<span class="op">(){</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  printf<span class="op">(</span><span class="st">"Esolha a Operação Desejada</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  printf<span class="op">(</span><span class="st">"1 - Soma</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  printf<span class="op">(</span><span class="st">"2 - Subtração</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  printf<span class="op">(</span><span class="st">"3 - Multiplicação</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  printf<span class="op">(</span><span class="st">"4 - Divisão</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    </span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="dt">int</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>s<span class="op">);</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="cf">if</span> <span class="op">(</span>s <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="cf">return</span> soma<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="cf">if</span> <span class="op">(</span>s <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="cf">return</span> subtracao<span class="op">;</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>  <span class="cf">if</span> <span class="op">(</span>s <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="cf">return</span> produto<span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="cf">if</span> <span class="op">(</span>s <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="cf">return</span> divisao<span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>  </span>
+<span id="cb7-16"><a href="#cb7-16"></a>  <span class="cf">return</span> NULL<span class="op">;</span>  <span class="co">// Retorna NULL se a escolha for inválida</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Na versão acima, a possibilidade de repetir o menu, em caso de entrada inválida, não está implementado. Todavia, podemos modificar para um problema específico. O que notamos de mais problemático é que a função <code>escolha</code> possui duas responsabilidades e devemos evitar isso no futuro para deixar o código mais modular e facilitar a manutenção.</p>
 </section>
 <section id="sec-gen" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-gen">Ponteiro genérico</h2>
 <p>Agora que compreendemos o funcionamento dos ponteiros, passagem por referência e <em>callbacks</em>, podemos dar um passo além. Vamos estudar um método para representar qualquer tipo de dado.</p>
 <p>Em C, o tipo <code>void *</code> é conhecido como ponteiro genérico (<em>generic pointer</em>). Ele é um tipo especial de ponteiro que pode armazenar o endereço de qualquer tipo de dado, por exemplo <code>int</code>, <code>double</code>, <code>char</code>, <code>struct</code> etc.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> idade <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> meta <span class="op">=</span> <span class="fl">8.5</span><span class="op">;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> letra <span class="op">=</span> <span class="ch">'A'</span><span class="op">;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="op">*</span>ptr<span class="op">;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ptr <span class="op">=</span> <span class="op">&amp;</span>idade<span class="op">;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"idade: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">int</span> <span class="op">*)</span>ptr<span class="op">);</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"meta: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">double</span> <span class="op">*)</span>ptr<span class="op">);</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>ptr <span class="op">=</span> <span class="op">&amp;</span>letra<span class="op">;</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"letra: </span><span class="sc">%c\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">char</span> <span class="op">*)</span>ptr<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> idade <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> meta <span class="op">=</span> <span class="fl">8.5</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> letra <span class="op">=</span> <span class="ch">'A'</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="op">*</span>ptr<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>ptr <span class="op">=</span> <span class="op">&amp;</span>idade<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"idade: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">int</span> <span class="op">*)</span>ptr<span class="op">);</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"meta: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">double</span> <span class="op">*)</span>ptr<span class="op">);</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>ptr <span class="op">=</span> <span class="op">&amp;</span>letra<span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"letra: </span><span class="sc">%c\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">char</span> <span class="op">*)</span>ptr<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong><span class="text-warning">Se liga!</span></strong> Não podemos desreferenciar diretamente um ponteiro <code>void *</code> , pois o compilador não sabe quantos <em>bytes</em> ele deve ler. Devemos sempre fazer um <em>cast</em> (conversão) do <code>void *</code> para o tipo específico de ponteiro que desejamos, antes de poder usá-lo.</p>
@@ -521,22 +540,22 @@ Nota
 <h2 class="anchored" data-anchor-id="sec-siz">O papel de <code>size_t</code></h2>
 <p>Ao manipular dados de tipos diferentes, precisamos também saber quanto de memória reservar ou copiar. É aí que entra o tipo <code>size_t</code>, definido no cabeçalho <code>&lt;stddef.h&gt;</code> (ou implicitamente incluído via <code>&lt;stdlib.h&gt;</code> ou <code>&lt;stdio.h&gt;</code>).</p>
 <p>Como um tipo numérico sem sinal (<em>unsigned</em>), <code>size_t</code> é usado para representar tamanhos e quantidades de <em>bytes</em>. Ele é o tipo de retorno de funções como <code>sizeof</code>, <code>malloc</code>, <code>calloc</code> e <code>strlen</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>    <span class="dt">double</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a></span>
-<span id="cb8-8"><a href="#cb8-8"></a>    printf<span class="op">(</span><span class="st">"sizeof(int)   : </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>    printf<span class="op">(</span><span class="st">"sizeof(double): </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">));</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a></span>
-<span id="cb8-11"><a href="#cb8-11"></a>    <span class="dt">void</span> <span class="op">*</span>ptr <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">));</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>    printf<span class="op">(</span><span class="st">"Alocado </span><span class="sc">%zu</span><span class="st"> bytes em </span><span class="sc">%p\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">),</span> ptr<span class="op">);</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a></span>
-<span id="cb8-14"><a href="#cb8-14"></a>    free<span class="op">(</span>ptr<span class="op">);</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="dt">double</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    printf<span class="op">(</span><span class="st">"sizeof(int)   : </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    printf<span class="op">(</span><span class="st">"sizeof(double): </span><span class="sc">%zu</span><span class="st"> bytes</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">));</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="dt">void</span> <span class="op">*</span>ptr <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">));</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>    printf<span class="op">(</span><span class="st">"Alocado </span><span class="sc">%zu</span><span class="st"> bytes em </span><span class="sc">%p\n</span><span class="st">"</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">),</span> ptr<span class="op">);</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a>    free<span class="op">(</span>ptr<span class="op">);</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong><span class="text-warning">Se liga!</span></strong></p>
@@ -566,24 +585,24 @@ Alocado 8 bytes em 0x7ffee1</code></pre>
 <li><code>incrementar</code>: soma um a cada elemento do vetor</li>
 </ul>
 <p>Segue a declação da funções de callback e ordem superior, além de um exemplo de uso.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="dt">void</span> dobrar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">);</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="dt">void</span> zerar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">);</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="dt">void</span> incrementar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">);</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="dt">void</span> aplicar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>vetor<span class="op">,</span> <span class="dt">int</span> tamanho<span class="op">,</span> <span class="dt">void</span> <span class="op">(*</span>funcao<span class="op">)(</span><span class="dt">int</span> <span class="op">*));</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>    <span class="dt">int</span> numeros<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">};</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a>    aplicar<span class="op">(</span>numeros<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> dobrar<span class="op">);</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a></span>
-<span id="cb10-13"><a href="#cb10-13"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st"> "</span><span class="op">,</span> numeros<span class="op">[</span>i<span class="op">]);</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a>    <span class="op">}</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a></span>
-<span id="cb10-17"><a href="#cb10-17"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="dt">void</span> dobrar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">);</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="dt">void</span> zerar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">);</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="dt">void</span> incrementar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">);</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="dt">void</span> aplicar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>vetor<span class="op">,</span> <span class="dt">int</span> tamanho<span class="op">,</span> <span class="dt">void</span> <span class="op">(*</span>funcao<span class="op">)(</span><span class="dt">int</span> <span class="op">*));</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>    <span class="dt">int</span> numeros<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">};</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>    aplicar<span class="op">(</span>numeros<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> dobrar<span class="op">);</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a></span>
+<span id="cb11-13"><a href="#cb11-13"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st"> "</span><span class="op">,</span> numeros<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a>    <span class="op">}</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a></span>
+<span id="cb11-17"><a href="#cb11-17"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solução (clique para ver)">
@@ -598,16 +617,16 @@ Alocado 8 bytes em 0x7ffee1</code></pre>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1"></a><span class="dt">void</span> dobrar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">){</span> <span class="op">*</span>x <span class="op">=</span> <span class="op">*</span>x <span class="op">*</span> <span class="dv">2</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="dt">void</span> zerar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">){</span> <span class="op">*</span>x <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="dt">void</span> incrementar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">){</span> <span class="op">*</span>x <span class="op">=</span> <span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="dt">void</span> aplicar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>vetor<span class="op">,</span> <span class="dt">int</span> tamanho<span class="op">,</span> <span class="dt">void</span> <span class="op">(*</span>funcao<span class="op">)(</span><span class="dt">int</span> <span class="op">*)){</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> tamanho<span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>        funcao<span class="op">(&amp;</span>vetor<span class="op">[</span>i<span class="op">]);</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="op">}</span>    </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1"></a><span class="dt">void</span> dobrar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">){</span> <span class="op">*</span>x <span class="op">=</span> <span class="op">*</span>x <span class="op">*</span> <span class="dv">2</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="dt">void</span> zerar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">){</span> <span class="op">*</span>x <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="dt">void</span> incrementar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>x<span class="op">){</span> <span class="op">*</span>x <span class="op">=</span> <span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="dt">void</span> aplicar<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>vetor<span class="op">,</span> <span class="dt">int</span> tamanho<span class="op">,</span> <span class="dt">void</span> <span class="op">(*</span>funcao<span class="op">)(</span><span class="dt">int</span> <span class="op">*)){</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> tamanho<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>        funcao<span class="op">(&amp;</span>vetor<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="op">}</span>    </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>

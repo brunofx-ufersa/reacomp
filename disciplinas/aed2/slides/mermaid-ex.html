@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Bruno Xavier">
-<meta name="description" content="Tutorial de compilação de programas em C no Linux">
 
-<title>Compilar Programas em C - Linux – REAComp</title>
+<title>Mermaid – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,29 +58,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../img/logo.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-a3508ca507676472fbcc2360244a2547.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../img/logo.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-a3508ca507676472fbcc2360244a2547.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -110,15 +108,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Procurar"
   }
 }</script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -287,9 +285,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">REAComp</span>
     </a>
   </div>
@@ -300,23 +298,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../disciplinas.html"> 
+    <a class="nav-link" href="../../../disciplinas.html"> 
 <span class="menu-text">Recursos</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../contribuicao.html"> 
+    <a class="nav-link" href="../../../contribuicao.html"> 
 <span class="menu-text">Participe</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blog.html"> 
+    <a class="nav-link" href="../../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">Sobre</span></a>
   </li>  
 </ul>
@@ -336,54 +334,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Conteúdo</h2>
-   
-  <ul>
-  <li><a href="#instalação-do-compilador" id="toc-instalação-do-compilador" class="nav-link active" data-scroll-target="#instalação-do-compilador">Instalação do Compilador</a></li>
-  <li><a href="#compilação-simples" id="toc-compilação-simples" class="nav-link" data-scroll-target="#compilação-simples">Compilação Simples</a></li>
-  <li><a href="#compilação-múltipla" id="toc-compilação-múltipla" class="nav-link" data-scroll-target="#compilação-múltipla">Compilação Múltipla</a></li>
-  <li><a href="#automatização" id="toc-automatização" class="nav-link" data-scroll-target="#automatização">Automatização</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Compilar Programas em C - Linux</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">compilação</div>
-    <div class="quarto-category">linux</div>
-    <div class="quarto-category">make</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    Tutorial de <strong>compilação</strong> de programas em C no Linux
-  </div>
+<h1 class="title">Mermaid</h1>
 </div>
+
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor</div>
-    <div class="quarto-title-meta-contents">
-             <p>Bruno Xavier </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Data de Publicação</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">14 de outubro de 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -393,142 +358,674 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="instalação-do-compilador" class="level1">
-<h1>Instalação do Compilador</h1>
-<p>Vamos instalar o compilador em sistemas baseados no Ubuntu. Primeiro, atualize o repositório de pacotes:</p>
-<pre class="console"><code>$ sudo apt update</code></pre>
-<p>Em seguida, instale o pacote <em>build-essential</em></p>
-<pre class="console"><code>$ sudo apt install build-essential</code></pre>
-<p>Este pacote inclui o compilador GCC e outras ferramentas de desenvolvimento necessárias.</p>
-<p>Para a verificar a instalação, faça:</p>
-<pre class="console"><code>$ gcc --version</code></pre>
-</section>
-<section id="compilação-simples" class="level1">
-<h1>Compilação Simples</h1>
-<p>Para compilar um programa em C, use o comando</p>
-<pre class="console"><code>$ gcc file.c -o file</code></pre>
-<p>Onde <code>file.c</code> é o nome do seu arquivo de código fonte. Você pode escolher qualquer nome para o terceiro argumento. No caso acima, escolhemos <code>file</code>. Para executar o programa, faça:</p>
-<pre class="console"><code>$ ./file</code></pre>
-</section>
-<section id="compilação-múltipla" class="level1">
-<h1>Compilação Múltipla</h1>
-<p>Nesta abordagem, estamos tratando de um projeto com mais de um arquivo <code>.c</code>. Vamos exemplificar dessa maneira:</p>
-<p>Primeiro o arquivo de cabeçalho contendo a interface das funções e outras definições:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>interface.h</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="interface.h"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef INTERFACE_H</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define INTERFACE_H</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Includes necessários</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Declarações</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Esse arquivo é apenas um prototipagem, não há código executável.</p>
-<p>Em seguida, o arquivo com as implementações reais:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>interface.c</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-filename="interface.c"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Includes</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"interface.h"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Implementação das funções declaradas em interface.h</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Todas as funções aqui que foram declaradas no <code>.h</code>, então estão visíveis para outros arquivos que incluírem <code>interface.h</code>. Caso criemos funções auxiliares não declaradas no <code>.h</code>, então elas ficam privadas a este módulo (invisíveis fora dele).</p>
-<p>Finalmente, o arquivo principal (contém a <code>main</code>) que usará a implementação dos arquivos anteriores.</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>programa.c</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="programa.c"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Includes</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"interface.h"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Uso</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Observe que <code>programa.c</code> não precisa incluir <code>interface.c</code>, apenas o cabeçalho.</p>
-<p>Para compilar esse projeto, use o comando</p>
-<pre class="console"><code>$ gcc interface.c programa.c -o programa</code></pre>
-<p>Para executar o programa, faça:</p>
-<pre class="console"><code>$ ./programa</code></pre>
-<p>Também podemos compilar em duas etapas (útil em projetos maiores):</p>
-<pre class="console"><code>$ gcc -c interface.c -o interface.o
-$ gcc -c programa.c -o programa.o
-$ gcc interface.o programa.o -o programa</code></pre>
-<p>A <em>flag</em> <code>-c</code> indica para o gcc que compile o código-fonte (<code>.c</code>) em código objeto (<code>.o</code>). Ele não faz o <em>linking</em>, ou seja, não gera o executável final ainda. No último comando, o compilador faz o <em>linking</em> para gerar o executável. Nessa abordagem, se algum arquivo for modificado, só será necessário recompilar ele e não todo o projeto.</p>
-</section>
-<section id="automatização" class="level1">
-<h1>Automatização</h1>
-<p>Um dos utilitários que o pacote <em>build-essential</em> traz é o <strong><em>make</em></strong>. O <em>make</em> evita recompilar manualmente tudo. Além de ser um processo automatizado, ele recompila apenas o que mudou, mantendo o nosso projeto organizado e escalável. Para essa abordagem é necessário criar um arquivo na pasta do nosso projeto chamado <code>Makefile</code> (sem extensão).</p>
+<section id="árvores" class="level2">
+<h2 class="anchored" data-anchor-id="árvores">Árvores</h2>
+<p>BST</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">graph TD
-    A["Projeto/"]:::folder
-    A --&gt; B["interface.h"]:::file
-    A --&gt; C["interface.c"]:::file
-    A --&gt; D["programa.c"]:::file
-    A --&gt; E["Makefile"]:::file
+<pre class="mermaid mermaid-js">flowchart TD
+    A(("8")) --&gt; B(("3")) &amp; C(("10"))
+    B --&gt; D(("1")) &amp; E(("6"))
+    C --&gt; F(("9")) &amp; G(("14"))
+    E --&gt; H(("4")) &amp; I(("7"))
 
-    classDef folder fill:#e6f7ff,stroke:#0077b6,stroke-width:2px,color:#023e8a,font-weight:bold;
-    classDef file fill:#fff,stroke:#999,stroke-width:1px,color:#333;
+    style A fill:#C8E6C9
+    style B fill:#BBDEFB
+    style C fill:#FFCDD2
+    style D fill:#BBDEFB
+    style E fill:#BBDEFB
+    style F fill:#FFCDD2
+    style G fill:#FFCDD2
+    style H fill:#BBDEFB
+    style I fill:#BBDEFB
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
-<p>Um exemplo de arquivo <code>Makefile</code> seria esse:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Makefile</strong></pre>
+<p>Add1</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A(("15"))
+</pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-filename="Makefile"><pre class="sourceCode numberSource makefile number-lines code-with-copy"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Nome do executável final</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="dt">PROG</span> <span class="ch">=</span><span class="st"> programa</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Compilador</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="dt">CC</span> <span class="ch">=</span><span class="st"> gcc</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co"># Arquivos fonte e objetos</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="dt">SRC</span> <span class="ch">=</span><span class="st"> interface.c programa.c</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="dt">OBJ</span> <span class="ch">=</span><span class="st"> </span><span class="ch">$(</span><span class="dt">SRC</span><span class="kw">:</span><span class="ss">.c</span><span class="kw">=</span><span class="ss">.o</span><span class="ch">)</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="co"># Regra padrão (executada quando você roda apenas `make`)</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="dv">all:</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">PROG</span><span class="ch">)</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="co"># Regra para gerar o executável</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="dv">$(PROG):</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">OBJ</span><span class="ch">)</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="er">    </span><span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">OBJ</span><span class="ch">)</span> -o <span class="ch">$(</span><span class="dt">PROG</span><span class="ch">)</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="co"># Regra genérica para compilar cada .c em .o</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="dv">%.o:</span><span class="dt"> %.c</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a><span class="er">    </span><span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> -c <span class="ch">$&lt;</span> -o <span class="ch">$@</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a></span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="co"># Limpeza dos arquivos temporários</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a><span class="dv">clean:</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a><span class="er">    </span>rm -f <span class="ch">$(</span><span class="dt">OBJ</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">PROG</span><span class="ch">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p></p></figure><p></p>
 </div>
-<p>Ao executar o comando <code>make</code> no terminal, vamos obter a saída:</p>
-<pre class="console"><code>$ make
-gcc -c interface.c -o interface.o
-gcc -c programa.c -o programa.o
-gcc interface.o programa.o -o programa</code></pre>
-<p>Agora imagine que <code>programa.c</code> foi modificado. Então somente ele será recompilado e tudo será “linkado” novamente no final.</p>
-<pre class="console"><code>$ make
-gcc -c programa.c -o programa.o
-gcc interface.o programa.o -o programa</code></pre>
-<p>O comando <code>make clean</code> irá apagar o arquivo binário e os arquivos objeto.</p>
-<pre class="console"><code>$ make clean
-rm -f interface.o programa.o programa</code></pre>
-<hr>
-<p>Nesta tutorial, você aprendeu</p>
-<p>✅ a instalar o compilador GCC</p>
-<p>✅ a compilar um programa em C</p>
-<p>✅ a compilar um projeto em C usando um ou múltiplos comandos</p>
-<p>✅ a usar o utilitário make para automatizar o processo de compilação</p>
-<p>Tudo isso em um sistema operacional baseado no Ubuntu.</p>
+</div>
+</div>
+<p>Add2</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A(("15")) L_A_B_0@--&gt; B(("10"))
+    A ~~~ N((" "))
+
+    style N stroke:none,fill:transparent
+
+    L_A_B_0@{ animation: slow } 
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Add3</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A(("15")) --&gt; B(("10"))
+    A L_A_N_0@--&gt; N(("20"))
+
+    L_A_N_0@{ animation: slow } 
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Add4</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A(("15")) L_A_B_0@--&gt; B(("10"))
+    A --&gt; C(("20"))
+    B L_B_D_0@--&gt; D(("8"))
+    B ~~~ N((" "))
+
+    style N stroke:none,fill:transparent
+
+    L_A_B_0@{ animation: slow }
+    L_B_D_0@{ animation: slow } 
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Add5</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A(("15")) L_A_B_0@--&gt; B(("10"))
+    A --&gt; C(("20"))
+    B --&gt; D(("8"))
+    B L_B_E_0@--&gt; E(("12"))
+
+ 
+    L_A_B_0@{ animation: slow }
+    L_B_E_0@{ animation: slow } 
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Add6</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A(("15")) --&gt; B(("10"))
+    A --&gt; C(("20"))
+    B --&gt; D(("8"))
+    B --&gt; E(("12"))
+    C --&gt; F(("17"))
+    C ~~~ N((" "))
+ 
+    style N stroke:none,fill:transparent
+
+    L_A_C_0@{ animation: slow }
+    L_C_F_0@{ animation: slow } 
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Add7</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A(("15")) --&gt; B(("10"))
+    A --&gt; C(("20"))
+    B --&gt; D(("8"))
+    B --&gt; E(("12"))
+    C --&gt; F(("17"))
+    C --&gt; G(("25"))
+ 
+    L_A_C_0@{ animation: slow }
+    L_C_G_0@{ animation: slow } 
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Altura e Profundidade</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A(("A")) --- B(("B"))
+    A === C(("C"))
+    B --- D(("D")) &amp; E(("E"))
+    C --- F(("F"))
+    C === G(("G"))
+    G === H(("H"))
+    G --- I(("I"))
+    H === J(("J"))
+    H --- K(("K"))
+
+    style A fill:#BBDEFB
+    style C fill:#BBDEFB
+    style G fill:#FFE0B2
+    style H fill:#C8E6C9
+    style J fill:#C8E6C9
+    linkStyle 1 stroke:#2962FF,fill:none
+    linkStyle 5 stroke:#2962FF,fill:none
+    linkStyle 6 stroke:#00C853,fill:none
+    linkStyle 8 stroke:#00C853
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>AVLEx</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">---
+config:
+  layout: elk
+---
+flowchart TD
+    A(("30")) --&gt; B(("20")) &amp; C(("40"))
+    A -.-&gt; FB_A["fb=0"]
+    B -.-&gt; FB_B["fb=+1"]
+    C -.-&gt; FB_C["fb=-1"]
+     FB_A:::fb
+     FB_B:::fb
+     FB_C:::fb
+    classDef fb fill:#ffd,stroke:#333,stroke-dasharray:2 2,font-size:10px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A["12&lt;br/&gt;+1"] --- B["8&lt;br/&gt;+1"] &amp; C["18&lt;br/&gt;+1"]
+    B --- D["5&lt;br/&gt;+1"] &amp; E["11&lt;br/&gt;0"]
+    C --- F["17&lt;br/&gt;0"]
+    C ~~~ G[" "]
+    D --- H["4&lt;br/&gt;0"]
+    D ~~~ I[" "]
+    
+    classDef circleish rx:50,ry:50;
+    A:::circleish
+    B:::circleish
+    C:::circleish
+    D:::circleish
+    E:::circleish
+    F:::circleish 
+    H:::circleish
+
+    style G fill:transparent,stroke:none
+    style I fill:transparent,stroke:none
+    style D min-height: 50px, padding: 5px 10px
+    A:::largeNode
+    B:::largeNode
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="ponteiros" class="level2">
+<h2 class="anchored" data-anchor-id="ponteiros">Ponteiros</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart RL
+    %% Nós de variáveis e ponteiros
+    X["📦 &lt;b&gt;x&lt;/b&gt;&lt;br/&gt;Endereço: &lt;code&gt;0x100&lt;/code&gt;&lt;br/&gt;Conteúdo: &lt;b&gt;42&lt;/b&gt;"]
+    Y["📦 &lt;b&gt;y&lt;/b&gt;&lt;br/&gt;Endereço: &lt;code&gt;0x200&lt;/code&gt;&lt;br/&gt;Conteúdo: &lt;b&gt;137&lt;/b&gt;"]
+    P["🎯 &lt;b&gt;p&lt;/b&gt;&lt;br/&gt;Endereço: &lt;code&gt;0x300&lt;/code&gt;&lt;br/&gt;Conteúdo: &lt;code&gt;0x100&lt;/code&gt;"]
+    PP["🎯 &lt;b&gt;pp&lt;/b&gt;&lt;br/&gt;Endereço: &lt;code&gt;0x400&lt;/code&gt;&lt;br/&gt;Conteúdo: &lt;code&gt;0x300&lt;/code&gt;"]
+
+    %% Conexões
+    PP --&gt;|"aponta para"| P
+    P --&gt;|"aponta para"| X
+    P ~~~ Y
+    Y ~~~ X
+
+    %% Estilos de formatação
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px;
+    classDef ptr fill:#FFD3B6,stroke:#E65100,color:#000,stroke-width:1px;
+    class X,Y var
+    class P,PP ptr
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        X["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xe8&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;7.5&lt;/b&gt;"]
+        Y["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xc0&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;7.5&lt;/b&gt;"]
+  end
+
+ subgraph s2[" "]
+        A["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xe8&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;7.5&lt;/b&gt;"]
+        B["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xc0&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;15&lt;/b&gt;"]
+  end
+
+    s1 --dobrar_meta--&gt; s2
+    
+     X:::var
+     Y:::var
+     A:::var
+     B:::var
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px
+    style s1 fill:transparent
+    style s2 fill:transparent
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        X["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xe8&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;7.5&lt;/b&gt;"]
+        Y["🎯 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xc0&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;0xe8&lt;/b&gt;"]
+  end
+ subgraph s2[" "]
+        A["📦 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xe8&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;15&lt;/b&gt;"]
+        B["🎯 &lt;b&gt;meta&lt;/b&gt;&lt;br&gt;Endereço: &lt;code&gt;0xc0&lt;/code&gt;&lt;br&gt;Conteúdo: &lt;b&gt;0xe8&lt;/b&gt;"]
+  end
+    s1 -- dobrar_meta --&gt; s2
+
+     X:::var
+     Y:::ptr
+     A:::var
+     B:::ptr
+    classDef var fill:#A8E6CF,stroke:#2E7D32,color:#000,stroke-width:1px
+    classDef ptr fill:#FFD3B6,stroke:#E65100,color:#000,stroke-width:1px;
+    style s1 fill:transparent
+    style s2 fill:transparent
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="dt">int</span> <span class="op">*</span>ptr <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="dt">int</span> y <span class="op">=</span> <span class="op">*</span>ptr<span class="op">;</span>  <span class="co">// desreferenciação</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+    participant Stack as Memória (Stack)
+    participant X as Variável x
+    participant Ptr as Ponteiro ptr
+    participant CPU as CPU/Programa
+
+    Note over CPU,Stack: Declaração e atribuição inicial
+    CPU-&gt;&gt;Stack: Aloca espaço para x = 10
+    Stack-&gt;&gt;X: Cria x (valor=10, endereço=0x1000)
+
+    Note over CPU,Ptr: Ponteiro recebe o endereço de x
+    CPU-&gt;&gt;Ptr: ptr = &amp;x
+    Ptr-&gt;&gt;Stack: Guarda endereço 0x1000
+
+    Note over CPU,Stack: Desreferenciação
+    CPU-&gt;&gt;Ptr: lê conteúdo de ptr
+    Ptr--&gt;&gt;Stack: endereço 0x1000
+    Stack--&gt;&gt;CPU: retorna valor armazenado (10)
+    CPU-&gt;&gt;Stack: y = 10
+
+    Note right of CPU: *ptr lê o valor armazenado em x
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">int</span> <span class="op">*</span>ptr <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+    participant CPU as CPU / Programa
+    participant Stack as Memória (Stack)
+    participant X as Variável x
+    participant Ptr as Ponteiro ptr
+
+    Note over CPU,Stack: Declaração e atribuição de ponteiro
+    CPU-&gt;&gt;Stack: Aloca variável x = 10 (endereço 0x1000)
+    Stack-&gt;&gt;X: Cria x (valor = 10)
+
+    CPU-&gt;&gt;Stack: Aloca variável ponteiro ptr
+    CPU-&gt;&gt;Ptr: ptr = &amp;x
+    Ptr-&gt;&gt;Stack: Guarda o endereço de x (0x1000)
+
+    Note right of Ptr: ptr aponta para o endereço de x
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="op">*</span>ptr<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+    participant CPU as CPU / Programa
+    participant Ptr as Ponteiro ptr
+    participant Stack as Memória (Stack)
+    participant X as Variável x
+
+    Note over CPU,Ptr: Desreferenciação (*ptr)
+    CPU-&gt;&gt;Ptr: Solicita conteúdo apontado por ptr
+    Ptr--&gt;&gt;Stack: Envia endereço armazenado (0x1000)
+    Stack--&gt;&gt;X: Acessa a célula de memória de x
+    X--&gt;&gt;Stack: Retorna valor = 10
+    Stack--&gt;&gt;CPU: Retorna 10 (valor apontado por ptr)
+    CPU-&gt;&gt;Stack: Atribui y = 10
+
+    Note right of CPU: *ptr lê o valor armazenado em x
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="tabela-hash" class="level2">
+<h2 class="anchored" data-anchor-id="tabela-hash">Tabela Hash</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1["🔑 Chaves"]
+        A0["'maçã'"]
+        B0["'uva'"]
+        C0["'laranja'"]
+        D0["'banana'"]
+  end
+ subgraph s2["⚙️ Função Hash"]
+  end
+ subgraph s3["📊 Tabela Hash"]
+        A2["Índice 0: ❌      "]
+        B2["Índice 1: 'laranja'"]
+        C2["Índice 2: 'uva'"]
+        D2["Índice 3: 'maçã'"]
+        E2["Índice 4: 'banana'"]
+  end
+    A0 ==&gt; s2
+    B0 ==&gt; s2
+    C0 ==&gt; s2
+    D0 ==&gt; s2
+    s2 =="hash('laranja')=1"==&gt; B2
+    s2 =="hash('uva')=2"==&gt; C2
+    s2 =="hash('maçã')=3"==&gt; D2
+    s2 =="hash('banana')=4"==&gt; E2
+
+    classDef box fill:#fff,stroke:#000,color:#000,stroke-width:1px;
+    
+    class A0 box
+    class B0 box
+    class C0 box
+    class D0 box
+    class A2 box
+    class B2 box
+    class C2 box
+    class D2 box
+    class E2 box
+    
+    style s2 stroke:none,fill:#BBDEFB
+    style s1 stroke:none,fill:#FFE0B2
+    style s3 stroke:none,fill:#FFE0B2
+    
+    linkStyle 0 stroke:#D50000,fill:none
+    linkStyle 1 stroke:#00C853,fill:none
+    linkStyle 2 stroke:#2962FF,fill:none
+    linkStyle 4 stroke:#2962FF
+    linkStyle 5 stroke:#00C853,fill:none
+    linkStyle 6 stroke:#D50000,fill:none
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+ subgraph s1[" "]
+        n1["Filled Circle"]
+        C0@{ label: "'laranja'" }
+        B0@{ label: "'uva'" }
+        n2["Filled Circle"]
+        n3["Filled Circle"]
+        A0@{ label: "'maçã'" }
+        E0@{ label: "'morango'" }
+        n4["Filled Circle"]
+        D0@{ label: "'banana'" }
+        n5["Filled Circle"]
+  end
+ subgraph s3["Tabela Hash"]
+        A2["Índice 0"]
+        B2["Índice 1"]
+        C2["Índice 2"]
+        D2["Índice 3"]
+        E2["Índice 4"]
+end
+    A2 ==&gt; n1
+    B2 ==&gt; C0
+    C0 ==&gt; B0
+    B0 ==&gt; n2
+    C2 ==&gt; n3
+    D2 ==&gt; A0
+    A0 ==&gt; E0
+    E0 ==&gt; n4
+    E2 ==&gt; D0
+    D0 ==&gt; n5
+    A0@{ shape: rect}
+    B0@{ shape: rect}
+    C0@{ shape: rect}
+    D0@{ shape: rect}
+    n1@{ shape: f-circ}
+    n2@{ shape: f-circ}
+    n3@{ shape: f-circ}
+    n4@{ shape: f-circ}
+    n5@{ shape: f-circ}
+    
+    classDef box fill:#fff,stroke:#000,color:#000,stroke-width:1px;
+    
+    class A0 box
+    class B0 box
+    class C0 box
+    class D0 box
+    class E0 box
+    class A2 box
+    class B2 box
+    class C2 box
+    class D2 box
+    class E2 box
+    
+    style s1 stroke:none,fill:transparent
+    style s3 stroke:none,fill:#FFE0B2
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1["🔑 Chaves"]
+        A0@{ label: "'maçã'" }
+        B0@{ label: "'uva'" }
+        C0@{ label: "'laranja'" }
+        D0@{ label: "'banana'" }
+        E0@{ label: "'morango'" }
+  end
+ subgraph s2["⚙️ Função Hash"]
+  end
+ subgraph s3["📊 Tabela Hash"]
+        A2["Índice 0: ❌"]
+        B2["Índice 1: 🔗"]
+        C2["Índice 2: 🔗"]
+        D2["Índice 3: 🔗"]
+        E2["Índice 4: 🔗"]
+  end
+ subgraph s4[" "]
+        C1@{ label: "🎯 'uva'" }
+        B1@{ label: "🎯 'laranja'" }
+        A1@{ label: "🎯 'maçã'" }
+        D1@{ label: "🎯 'banana'" }
+        E1@{ label: "🎯 'morango'" }
+        n1["NULL"]
+        n2["NULL"]
+        n3["NULL"]
+        n4["NULL"]
+  end
+    A0 ==&gt; s2
+    B0 ==&gt; s2
+    C0 ==&gt; s2
+    D0 ==&gt; s2
+    E0 ==&gt; s2
+    s2 ==&gt; B2 &amp; C2 &amp; D2 &amp; E2
+    B2 -.- C1
+    C2 -.- B1
+    D2 -.- A1
+    E2 -.- D1
+    A1 --&gt; E1
+    C1 --&gt; n1
+    B1 --&gt; n2
+    E1 --&gt; n3
+    D1 --&gt; n4
+
+    A0@{ shape: rect}
+    B0@{ shape: rect}
+    C0@{ shape: rect}
+    D0@{ shape: rect}
+    E0@{ shape: rect}
+    B2@{ shape: rect}
+    C2@{ shape: rect}
+    D2@{ shape: rect}
+    E2@{ shape: rect}
+    C1@{ shape: subproc}
+    B1@{ shape: subproc}
+    A1@{ shape: subproc}
+    D1@{ shape: subproc}
+    E1@{ shape: subproc}
+    n1@{ shape: subproc}
+    n2@{ shape: subproc}
+    n3@{ shape: subproc}
+    n4@{ shape: subproc}
+     A0:::box
+     B0:::box
+     C0:::box
+     D0:::box
+     E0:::box
+     A2:::box
+     B2:::box
+     C2:::box
+     D2:::box
+     E2:::box
+     n1:::NULL_NODE
+     n2:::NULL_NODE
+     n3:::NULL_NODE
+     n4:::NULL_NODE
+    classDef box fill:#fff,stroke:#000,color:#000,stroke-width:1px
+    classDef NULL_NODE fill:#F5F5F5, stroke:#BDBDBD, color:#757575, stroke-dasharray: 5 5
+    style s2 stroke:none,fill:#BBDEFB
+    style s1 stroke:none,fill:#FFE0B2
+    style s3 stroke:none,fill:#FFE0B2
+    style s4 stroke:none,fill:transparent
+    linkStyle 0 stroke:#D50000,fill:none
+    linkStyle 1 stroke:#00C853,fill:none
+    linkStyle 2 stroke:#2962FF,fill:none
+    linkStyle 4 stroke:#D50000,fill:none
+    linkStyle 5 stroke:#00C853,fill:none
+    linkStyle 6 stroke:#2962FF,fill:none
+    linkStyle 7 stroke:#D50000,fill:none
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 
 
 </section>

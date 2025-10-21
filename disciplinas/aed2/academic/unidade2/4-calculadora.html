@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Projeto de Calculadora – REAComp</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../disciplinas/aed2/academic/unidade2/5-lista.html" rel="next">
+<link href="../../../../disciplinas/aed2/academic/unidade2/3-memoria.html" rel="prev">
+<link href="../../../../img/logo.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-a3508ca507676472fbcc2360244a2547.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../../styles.css">
+<link rel="stylesheet" href="../styles/academic.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">REAComp</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../disciplinas.html"> 
+<span class="menu-text">Recursos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../contribuicao.html"> 
+<span class="menu-text">Participe</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">Sobre</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo escuro"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo de leitor">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Projeto de Calculadora</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Vamos usar os conhecimentos adquiridos até aqui para desenvolver uma calculadora simples. Nosso projeto será composto pelo arquivo de cabeçalho (<code>calculator.h</code>), a implementação (<code>calculator.c</code>) e o programa que usa nossa calculadora (<code>main_calculator.c</code>).</p>
+<p>Até aqui, usamos muitas palavras em português, visto que os ponteiros para função podem causar confusão no início. Agora, vamos usar mais o inglês nas implementações, pois o ecossistema de programação C (bibliotecas, documentação, e <em>frameworks</em>) utiliza predominantemente o inglês. Adotar o inglês em nomes de variáveis, funções e estruturas é crucial para aderir às boas práticas da indústria e facilitar a colaboração e a leitura global do código.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Se você possui um pouco de dificuldade com o inglês, mantenha um <strong>glóssario</strong> com as palavras mais usadas em programação. Consumir conteúdo de programação em inglês ajudará bastante nesta empreitada também.</p>
+</div>
+</div>
+<section id="interface-da-api" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="interface-da-api">Interface da API</h2>
+<p>A interface da calculadora contém um novo tipo <code>Operation</code> que representa uma função binária. Como já mencionamos é um ponteiro para uma função genérica que recebe dois paramêtros. Definimos a estrtura calculadora que contém os campos <code>data_size</code> para o tamanho em <em>bytes</em> do tipo de dados que iremos trabalhar, <code>n_operations</code> para o número de operações que a calculadora suporta e um ponteiro <code>operations</code> que contém as operações da calculadora.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>calculator.h</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="calculator.h"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;stddef.h&gt;</span><span class="pp"> </span><span class="co">// Necessário para o tipo size_t</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">typedef</span> <span class="dt">void</span><span class="op">*</span> <span class="op">(*</span>Operation<span class="op">)(</span><span class="dt">const</span> <span class="dt">void</span><span class="op">*,</span> <span class="dt">const</span> <span class="dt">void</span><span class="op">*);</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">typedef</span> <span class="kw">struct</span> calculator <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="dt">size_t</span> data_size<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="dt">size_t</span> n_operations<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>    Operation <span class="op">*</span>operations<span class="op">;</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="op">}</span> Calculator<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> A palavra chave <code>const</code> indica que os valores passados para a operação não podem ser modificados internamente.</p>
+</div></div><p>Em seguida, temos protótipos das funções para criar e destruir uma calculadora. A função <code>evaluation</code> já é conhecida e ela coordenda qual <em>callback</em> usar para calcular. Além dela, temos quatro funções de <em>callback</em> para adicionar e multiplicar inteiros ou números em ponto flutuante.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>calculator.h</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="calculator.h"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&lt;stddef.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>Calculator <span class="op">*</span>calculator_create<span class="op">(</span><span class="dt">size_t</span> dataSize<span class="op">,</span> </span>
+<span id="cb2-4"><a href="#cb2-4"></a>                              <span class="dt">size_t</span> n_operations<span class="op">,</span> </span>
+<span id="cb2-5"><a href="#cb2-5"></a>                              <span class="dt">const</span> Operation <span class="op">*</span>operations<span class="op">);</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="dt">void</span> calculator_destroy<span class="op">(</span>Calculator <span class="op">*</span>calc<span class="op">);</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="dt">void</span><span class="op">*</span> evaluation<span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">,</span> Operation operation<span class="op">);</span> </span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="dt">void</span><span class="op">*</span> add_int <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="dt">void</span><span class="op">*</span> add_double <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="dt">void</span><span class="op">*</span> multiply_int <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="dt">void</span><span class="op">*</span> multiply_double <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a></span>
+<span id="cb2-15"><a href="#cb2-15"></a>Operation selectOperationInt<span class="op">();</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>Operation selectOperationDouble<span class="op">();</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Em resumo:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 20%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Componente</th>
+<th>Função</th>
+<th>Design é Sólido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>typedef Operation</code></td>
+<td>O contrato binário de todas as funções de cálculo.</td>
+<td>O uso de <code>const void*</code> protege os dados de entrada, garantindo que os <em>callbacks</em> apenas leiam.</td>
+</tr>
+<tr class="even">
+<td><code>struct Calculator</code></td>
+<td>O contêiner para metadados e operações.</td>
+<td>Os campos <code>data_size</code> e <code>n_operations</code> (ambos <code>size_t</code>) tornam a estrutura robusta e configurável para qualquer tipo de dado.</td>
+</tr>
+<tr class="odd">
+<td><code>calculator_create/destroy</code></td>
+<td>Gerenciamento de ciclo de vida.</td>
+<td>Define claramente como a memória é alocada e, mais importante, como deve ser liberada.</td>
+</tr>
+<tr class="even">
+<td><code>evaluation</code></td>
+<td>A função coordenadora.</td>
+<td>Mantém o código principal limpo, delegando a lógica complexa (o <em>callback</em>).</td>
+</tr>
+<tr class="odd">
+<td><em>Callbacks</em></td>
+<td>As funções de soma e multiplicação.</td>
+<td>Estão prontas para serem implementadas com a lógica de alocação de memória e <em>casting</em> de tipos.</td>
+</tr>
+<tr class="even">
+<td><code>selectOperationInt</code></td>
+<td>Função de fábrica/seleção de <em>callback</em>.</td>
+<td>Permite ao usuário selecionar dinamicamente a operação para inteiros em tempo de execução, desacoplando a escolha da lógica de execução.</td>
+</tr>
+<tr class="odd">
+<td><code>selectOperationDouble</code></td>
+<td>Função de fábrica/seleção de <em>callback</em>.</td>
+<td>Permite ao usuário selecionar dinamicamente a operação para reais em tempo de execução, desacoplando a escolha da lógica de execução.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="implementação-da-api" class="level2">
+<h2 class="anchored" data-anchor-id="implementação-da-api">Implementação da API</h2>
+<p>Agora partiremos para a implementação das funções da nossa interface. Primeiramente, vamos estabelecer quais bibliotecas padrão C e quais arquivos de interface precisamos importar.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>calculator.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">"calculator.h"</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="pp">#include </span><span class="im">&lt;assert.h&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Na primeira linha, estamos importando nossa interface <code>calculator.h</code>. Como ela não faz parte da biblioteca padrão de C, usamos aspas duplas (<code>"..."</code>) designando o caminho (basta o nome, pois ela está na mesma pasta).</p>
+<p>Em seguida, importamos quatro bibliotecas padrão:</p>
+<ul>
+<li><p><code>&lt;stdlib.h&gt;</code>: Essencial para o gerenciamento de memória (<code>malloc</code> e <code>free</code>).</p></li>
+<li><p><code>&lt;string.h&gt;</code>: Necessária para o método <code>memcpy</code>, que utilizaremos para realizar a cópia segura de dados e dos ponteiros de função em um contexto genérico.</p></li>
+<li><p><code>&lt;assert.h&gt;</code>: Usada para a macro <code>assert</code>, que insere verificações de segurança no código e garante que as pré-condições das funções sejam atendidas.</p></li>
+<li><p><code>&lt;stdio.h&gt;</code>: Usada para imprimir mensagem na tela e receber dados do usuário.</p></li>
+</ul>
+<p>Com as dependências definidas, podemos começar a implementação das funções, começando pelo construtor <code>calculator_create</code>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>calculator.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a>Calculator <span class="op">*</span>calculator_create<span class="op">(</span><span class="dt">size_t</span> dataSize<span class="op">,</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>                              <span class="dt">size_t</span> n_operations<span class="op">,</span> </span>
+<span id="cb4-3"><a href="#cb4-3"></a>                              <span class="dt">const</span> Operation <span class="op">*</span>operations<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    assert<span class="op">(</span>dataSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    assert<span class="op">(</span>n_operations <span class="op">&gt;</span> <span class="dv">0</span><span class="op">);</span>   </span>
+<span id="cb4-6"><a href="#cb4-6"></a>    assert<span class="op">(</span>operations <span class="op">!=</span> NULL<span class="op">);</span> </span>
+<span id="cb4-7"><a href="#cb4-7"></a>    </span>
+<span id="cb4-8"><a href="#cb4-8"></a>    Calculator <span class="op">*</span>calc <span class="op">=</span> <span class="op">(</span>Calculator <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Calculator<span class="op">));</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    calc<span class="op">-&gt;</span>data_size <span class="op">=</span> dataSize<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    calc<span class="op">-&gt;</span>n_operations <span class="op">=</span> n_operations<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    calc<span class="op">-&gt;</span>operations <span class="op">=</span> <span class="op">(</span>Operation <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Operation<span class="op">)</span> <span class="op">*</span> n_operations<span class="op">);</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="cf">if</span> <span class="op">(</span>calc<span class="op">-&gt;</span>operations <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>        free<span class="op">(</span>calc<span class="op">);</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>        <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="op">}</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a></span>
+<span id="cb4-18"><a href="#cb4-18"></a>    memcpy<span class="op">(</span>calc<span class="op">-&gt;</span>operations<span class="op">,</span> operations<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>Operation<span class="op">)</span> <span class="op">*</span> n_operations<span class="op">);</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a></span>
+<span id="cb4-20"><a href="#cb4-20"></a>    <span class="cf">return</span> calc<span class="op">;</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O primeiro ato é verificar as pré-condições com <code>assert</code>. Caso a pré-condição seja falsa, o programa é abortado, especificando qual condição falhou e em qual linha ela se encontra.</p>
+<ul>
+<li><p><code>assert(dataSize &gt; 0)</code>: Esta verificação garante que a calculadora tenha recebido um tamanho de dado válido. Não faz sentido alocar memória para um dado com 0 <em>bytes</em>, o que é fundamental para a função <code>memcpy</code> funcionar corretamente.</p></li>
+<li><p><code>assert(n_operations &gt; 0)</code> e <code>assert(operations != NULL)</code>: Esses <em>asserts</em> trabalham em conjunto para garantir que a calculadora possa de fato operar. Eles verificam que há pelo menos uma função de <em>callback</em> para a calculadora utilizar e que o ponteiro para o <em>array</em> de <em>callbacks</em> não é nulo.</p></li>
+</ul>
+<p>O restante da função executa a alocação para <code>Calculator</code>, inicializa os campos e usa o tratamento de erro (<em>rollback</em>) para liberar corretamente a memória se algo falhar na alocação do <em>array</em> de operações. O uso de <code>memcpy</code> finaliza a função, garantindo que a estrutura <code>Calculator</code> é dona de sua própria tabela de <em>callbacks</em>. Ela copia o <em>array</em> de operações passado de forma segura, <em>byte a byte</em>.</p>
+<p>Para cada construtor, implemente um destrutor (ou, mais precisamente, para cada <code>malloc</code> deve haver um <code>free</code> correspondente). Use esse princípio para programar em C e evitar vazamentos de memória (<em>memory leaks</em>). Uma vez que criamos o construtor da calculadora, vamos criar seu destrutor, <code>calculator_destroy</code>.</p>
+<p>Primeiro, devemos liberar a memória alocada para as operações. Depois, a memória alocada para a estrutura principal da calculadora. É uma boa prática verificar se o ponteiro é válido antes de tentar liberar.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>calculator.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1"></a><span class="dt">void</span> calculator_destroy<span class="op">(</span>Calculator <span class="op">*</span>calc<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="cf">if</span> <span class="op">(</span>calc <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="op">}</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="co">// 1. Libera o array de operações (operations).</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="cf">if</span> <span class="op">(</span>calc<span class="op">-&gt;</span>operations <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>        free<span class="op">(</span>calc<span class="op">-&gt;</span>operations<span class="op">);</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>        calc<span class="op">-&gt;</span>operations <span class="op">=</span> NULL<span class="op">;</span> </span>
+<span id="cb5-10"><a href="#cb5-10"></a>    <span class="op">}</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>    </span>
+<span id="cb5-12"><a href="#cb5-12"></a>    <span class="co">// 2. Libera a estrutura Calculator principal.</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>    free<span class="op">(</span>calc<span class="op">);</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A ordem de liberação é crucial: se a gente liberasse a estrutura principal <code>free(calc)</code> primeiro, o endereço de <code>calc-&gt;operations</code> (que está dentro de <code>calc</code>) seria perdido para sempre. Isso resultaria em um vazamento de memória (<em>memory leak</em>), pois você não conseguiria liberar o <em>array</em> de operações.</p>
+<p>Depois de liberar a memória, é uma boa prática atribuir o valor <code>NULL</code> ao ponteiro a fim de evitar ponteiros pendentes (<em>dangling pointers</em>). No entanto, note que não fazemos isso com o ponteiro <code>calc</code>, porque ele foi passado por valor. A variável <code>calc</code> dentro desta função é apenas uma cópia do endereço; o ponteiro original (por exemplo, <code>calculator_int</code>) no <code>main</code> não é alterado.</p>
+<p>A função coordenadora (<code>evaluation</code>) é a parte mais simples da nossa implementação. Ela não precisa saber qual operação está sendo executada, apenas delega a responsabilidade para a função de <em>callback</em> que foi passada:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>calculator.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1"></a><span class="dt">void</span><span class="op">*</span> evaluation<span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">,</span> Operation operation<span class="op">){</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="cf">return</span> operation<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="op">}</span> </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>As funções que realmente realizam o cálculo seguem um protocolo rigoroso para garantir a generalidade e o gerenciamento de memória. Cada <em>callback</em> deve:</p>
+<ul>
+<li>Alocar Memória: Usar <code>malloc</code> para reservar espaço para o resultado na memória <em>heap</em>.</li>
+<li>Fazer o <em>Casting</em>: Converter o ponteiro genérico de entrada (<code>const void*</code>) para o tipo de dado correto (ex: <code>int*</code> ou <code>double*</code>) para que a operação possa ser realizada.</li>
+<li>Desreferenciar e Calcular: Acessar o valor real (<code>*</code>) do ponteiro para realizar a operação.</li>
+<li>Retornar: Reverter o ponteiro do resultado para o tipo genérico (<code>void*</code>).</li>
+</ul>
+<p>Observe nos exemplos de soma como o <em>casting</em> é usado para transformar o ponteiro genérico (<code>a</code>, <code>b</code>) no tipo esperado:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>calculator.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">// Callback para Soma de Inteiros </span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="dt">void</span><span class="op">*</span> add_int <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">){</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="dt">int</span> <span class="op">*</span>result <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    </span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="co">// Casting de (const void*) para (int*), seguido pela desreferência (*)</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="op">*</span>result <span class="op">=</span> <span class="op">*(</span><span class="dt">int</span><span class="op">*)</span>a <span class="op">+</span> <span class="op">*(</span><span class="dt">int</span><span class="op">*)</span>b<span class="op">;</span> </span>
+<span id="cb7-7"><a href="#cb7-7"></a>    </span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="cf">return</span> <span class="op">(</span><span class="dt">void</span><span class="op">*)</span>result<span class="op">;</span> </span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="op">}</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">// Callback para Soma de Ponto Flutuante</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="dt">void</span><span class="op">*</span> add_double <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">){</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>    <span class="dt">double</span> <span class="op">*</span>result <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">));</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>    </span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="co">// Casting de (const void*) para (double*), seguido pela desreferência (*)</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>    <span class="op">*</span>result <span class="op">=</span> <span class="op">*(</span><span class="dt">double</span><span class="op">*)</span>a <span class="op">+</span> <span class="op">*(</span><span class="dt">double</span><span class="op">*)</span>b<span class="op">;</span> </span>
+<span id="cb7-17"><a href="#cb7-17"></a>    </span>
+<span id="cb7-18"><a href="#cb7-18"></a>    <span class="cf">return</span> <span class="op">(</span><span class="dt">void</span><span class="op">*)</span>result<span class="op">;</span> </span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>As outras funções de <em>callback</em> para multiplicação (<code>multiply_int</code> e <code>multiply_double</code>) seguirão exatamente o mesmo padrão de alocação e <em>casting</em>.</p>
+<p>Os <strong>ponteiros de função</strong> nos permitem criar interfaces dinâmicas, como um menu interativo, permitindo que o usuário selecione qual <em>callback</em> deve ser executado em tempo de execução. A função <code>selectOperationInt</code> é o nosso exemplo de <strong>função de fábrica</strong> para <em>callbacks</em> de inteiros. Seu objetivo é mapear a entrada numérica do usuário para o endereço de memória da função de <em>callback</em> correspondente.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>calculator.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1"></a>Operation selectOperationInt<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="dt">int</span> c <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    printf<span class="op">(</span><span class="st">"Escolha sua operação:</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>    printf<span class="op">(</span><span class="st">"1. Soma</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    printf<span class="op">(</span><span class="st">"2. Multiplicação</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    printf<span class="op">(</span><span class="st">"Digite:</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>c<span class="op">);</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="cf">if</span> <span class="op">(</span>c <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="cf">return</span> add_int<span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>c <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="cf">return</span> multiply_int<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>    <span class="cf">else</span> <span class="cf">return</span> NULL<span class="op">;</span> <span class="co">// Retorna NULL como ponteiro de função inválido</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O bloco de controle de fluxo <code>if-else</code> é a parte central da função. Ele mapeia o inteiro <code>c</code> diretamente para o <strong>endereço de memória</strong> da função de <em>callback</em> desejada. Dessa forma, a função está pronta para ser usada no nosso <code>main</code> para selecionar dinamicamente a operação!</p>
+<p>Do mesmo modo, a função <code>selectOperationDouble()</code> é implementada.</p>
+</section>
+<section id="uso-da-api" class="level2">
+<h2 class="anchored" data-anchor-id="uso-da-api">Uso da API</h2>
+<p>Nossa calculadora simples está finalmente finalizada. Prosseguiremos exemplificando o uso da mesma.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>main_calculator.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-filename="main_calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1"></a><span class="pp">#include </span><span class="im">"calculator.h"</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    </span>
+<span id="cb9-7"><a href="#cb9-7"></a>    Operation operations<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span>add_int<span class="op">,</span> multiply_int<span class="op">};</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="dt">size_t</span> n_operations <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>operations<span class="op">)</span> <span class="op">/</span> <span class="kw">sizeof</span><span class="op">(</span>operations<span class="op">[</span><span class="dv">0</span><span class="op">]);</span> </span>
+<span id="cb9-9"><a href="#cb9-9"></a>    </span>
+<span id="cb9-10"><a href="#cb9-10"></a>    <span class="co">// 1. CRIAÇÃO E TRATAMENTO DE ERRO</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>    Calculator<span class="op">*</span> calculator_int <span class="op">=</span> calculator_create<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">),</span> </span>
+<span id="cb9-12"><a href="#cb9-12"></a>                                                   n_operations<span class="op">,</span> </span>
+<span id="cb9-13"><a href="#cb9-13"></a>                                                   operations<span class="op">);</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>    </span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="cf">if</span> <span class="op">(</span>calculator_int <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Erro: Falha ao alocar a estrutura Calculator.</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>    <span class="op">}</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>    </span>
+<span id="cb9-20"><a href="#cb9-20"></a>    <span class="co">// Dados para teste</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>    <span class="dt">int</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>    </span>
+<span id="cb9-24"><a href="#cb9-24"></a>    <span class="co">// 2. SELEÇÃO E EXECUÇÃO</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a>    Operation selected_op <span class="op">=</span> selectOperactionInt<span class="op">();</span> </span>
+<span id="cb9-26"><a href="#cb9-26"></a>    </span>
+<span id="cb9-27"><a href="#cb9-27"></a>    <span class="cf">if</span> <span class="op">(</span>selected_op <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Erro: Operação inválida selecionada.</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a>        calculator_destroy<span class="op">(</span>calculator_int<span class="op">);</span> <span class="co">// Limpa o que foi criado</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a>    <span class="op">}</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a></span>
+<span id="cb9-33"><a href="#cb9-33"></a>    <span class="co">// Chama evaluation, que aloca o resultado na heap</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>    <span class="dt">void</span> <span class="op">*</span>result_ptr <span class="op">=</span> evaluation<span class="op">(&amp;</span>a<span class="op">,</span> <span class="op">&amp;</span>b<span class="op">,</span> selected_op<span class="op">);</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a>    </span>
+<span id="cb9-36"><a href="#cb9-36"></a>    <span class="cf">if</span> <span class="op">(</span>result_ptr <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Erro: Falha ao alocar memória para o resultado.</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a>        calculator_destroy<span class="op">(</span>calculator_int<span class="op">);</span> <span class="co">// Limpa o que foi criado</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a>    <span class="op">}</span></span>
+<span id="cb9-41"><a href="#cb9-41"></a>    </span>
+<span id="cb9-42"><a href="#cb9-42"></a>    printf<span class="op">(</span><span class="st">"Resultado: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*(</span><span class="dt">int</span><span class="op">*)</span>result_ptr<span class="op">);</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a></span>
+<span id="cb9-44"><a href="#cb9-44"></a>    <span class="co">// 3. LIMPEZA DA MEMÓRIA</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a>    </span>
+<span id="cb9-46"><a href="#cb9-46"></a>    <span class="co">// 3.1 Libera a memória alocada DENTRO do callback</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a>    free<span class="op">(</span>result_ptr<span class="op">);</span> </span>
+<span id="cb9-48"><a href="#cb9-48"></a>    </span>
+<span id="cb9-49"><a href="#cb9-49"></a>    <span class="co">// 3.2 Libera a estrutura Calculator e suas operações internas</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a>    calculator_destroy<span class="op">(</span>calculator_int<span class="op">);</span> </span>
+<span id="cb9-51"><a href="#cb9-51"></a>    calculator_int <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// Boa prática: anular o ponteiro</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a>    </span>
+<span id="cb9-53"><a href="#cb9-53"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-54"><a href="#cb9-54"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Lembrando que para compilar nossa calculadora, garantindo que ambos os arquivos de implementação sejam processado, devemos executar o seguinte comando no terminal:</p>
+<pre class="console"><code>$ gcc calculator.c main_calculator.c -o calc</code></pre>
+<p>Isso irá gerar um executável chamado <code>calc</code> na sua pasta.</p>
+<p>Finalizamos a implementação da nossa <strong>Calculadora Genérica</strong>. Ela pode não estar perfeita, mas conseguimos aplicar e solidificar conceitos avançados que dão um grande <em>up</em> em nossa jornada na programação C. Em particular, a manipulação de <strong>ponteiros genéricos</strong> (<code>void*</code>) e o uso de <strong>ponteiros para funções</strong> como <em>callbacks</em> são ferramentas poderosíssimas que devem ser exploradas com afinco.</p>
+<p>Como sugestão de aprimoramento e prática adicional, você pode tentar modularizar o sistema e refinar a interface do usuário:</p>
+<ul>
+<li><strong>Modularização da UI</strong>: Mova as funções <code>selectOperationInt</code> e <code>selectOperationDouble</code> para um novo par de arquivos de utilitário (por exemplo, <code>ui.c</code>/<code>ui.h</code>). Isso ajuda a manter o arquivo principal (<code>calculator.c</code>) focado apenas na lógica de cálculo, separando a <strong>Interface do Usuário</strong> da <strong>Lógica de Negócios</strong>.</li>
+<li><strong>Refinamento do Tipo</strong>: Refine a UI criando uma função inicial que permita ao usuário escolher entre os tipos (<code>int</code> ou <code>double</code>) antes de chamar as funções de seleção de operação.</li>
+</ul>
+<p>Com isso, a arquitetura se torna ainda mais flexível e organizada.</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/brunofx-ufersa\.github\.io\/reacomp\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../disciplinas/aed2/academic/unidade2/3-memoria.html" class="pagination-link" aria-label="Gerenciamento da Memória">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Gerenciamento da Memória</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../disciplinas/aed2/academic/unidade2/5-lista.html" class="pagination-link" aria-label="Lista Genérica">
+        <span class="nav-page-text">Lista Genérica</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Licença
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<p>CC BY-SA 4.0</p>
+</a>
+  </li>  
+    <li class="nav-item">
+ — Portal construído com
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://quarto.org/">
+<p>Quarto</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

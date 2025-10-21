@@ -2,6 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/lrvalues.html",
+      "/posts/fortowhile.html",
       "/posts/compilation-clinux.html"
     ]
   }
