@@ -9,7 +9,7 @@ int main() {
     
     // 1. CRIAÇÃO E TRATAMENTO DE ERRO
     Calculator* calculator_int = calculator_create(sizeof(int), n_operations, operations);
-    
+
     if (calculator_int == NULL) {
         fprintf(stderr, "Erro: Falha ao alocar a estrutura Calculator.\n");
         return 1;

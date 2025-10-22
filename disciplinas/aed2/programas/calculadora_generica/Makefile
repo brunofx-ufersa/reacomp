@@ -6,7 +6,7 @@ CC = gcc
 CFLAGS = -Wall -g
 
 # Arquivos fonte e objetos
-SRC = calculator.c main.c
+SRC =  calculator.c main.c
 OBJ = $(SRC:.c=.o)
 
 # Regras phony

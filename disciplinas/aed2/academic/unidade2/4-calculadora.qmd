@@ -105,7 +105,7 @@ Calculator *calculator_create(size_t data_size,
     assert(operations != NULL); 
     
 	Calculator *calc = (Calculator *)malloc(sizeof(Calculator));
-	calc->data_size = data_size;
+	calc->data_size = dataSize;
     calc->n_operations = n_operations;
     calc->operations = (Operation *)malloc(sizeof(Operation) * n_operations);
 
@@ -122,7 +122,7 @@ Calculator *calculator_create(size_t data_size,
 
 O primeiro ato é verificar as pré-condições com `assert`. Caso a pré-condição seja falsa, o programa é abortado, especificando qual condição falhou e em qual linha ela se encontra.
 
-- `assert(dataSize > 0)`: Esta verificação garante que a calculadora tenha recebido um tamanho de dado válido. Não faz sentido alocar memória para um dado com 0 _bytes_, o que é fundamental para a função `memcpy` funcionar corretamente.
+- `assert(data_size > 0)`: Esta verificação garante que a calculadora tenha recebido um tamanho de dado válido. Não faz sentido alocar memória para um dado com 0 _bytes_, o que é fundamental para a função `memcpy` funcionar corretamente.
 
 - `assert(n_operations > 0)` e `assert(operations != NULL)`: Esses _asserts_ trabalham em conjunto para garantir que a calculadora possa de fato operar. Eles verificam que há pelo menos uma função de _callback_ para a calculadora utilizar e que o ponteiro para o _array_ de _callbacks_ não é nulo.
 
@@ -136,9 +136,7 @@ Primeiro, devemos liberar a memória alocada para as operações. Depois, a mem�
 
 ```{.c filename=calculator.c}
 void calculator_destroy(Calculator *calc) {
-    if (calc == NULL) {
-        return;
-    }
+    if (calc == NULL) return;
 
     // 1. Libera o array de operações (operations).
     if (calc->operations != NULL) {
@@ -200,15 +198,15 @@ Os **ponteiros de função** nos permitem criar interfaces dinâmicas, como um m
 
 ```{.c filename=calculator.c}
 Operation select_operation_int() {
-    int c = 0;
+    int option = 0;
     printf("Escolha sua operação:\n");
     printf("1. Soma\n");
     printf("2. Multiplicação\n");
     printf("Digite: ");
-    scanf("%d", &c);
+    scanf("%d", &option);
 
-    if (c == 1) return add_int;
-    else if (c == 2) return multiply_int;
+    if (option == 1) return add_int;
+    else if (option == 2) return multiply_int;
     else return NULL; // Retorna NULL como ponteiro de função inválido
 }
 ```
@@ -289,7 +287,7 @@ Finalizamos a implementação da nossa **Calculadora Genérica**. Ela pode não 
 
 Como sugestão de aprimoramento e prática adicional, você pode tentar modularizar o sistema e refinar a interface do usuário:
 
-- **Modularização da UI**: Mova as funções `selectOperationInt` e `selectOperationDouble` para um novo par de arquivos de utilitário (por exemplo, `ui.c`/`ui.h`). Isso ajuda a manter o arquivo principal (`calculator.c`) focado apenas na lógica de cálculo, separando a **Interface do Usuário** da **Lógica de Negócios**.
+- **Modularização da UI**: Mova as funções `select_operation_int` e `select_operation_double` para um novo par de arquivos de utilitário (por exemplo, `ui.c`/`ui.h`). Isso ajuda a manter o arquivo principal (`calculator.c`) focado apenas na lógica de cálculo, separando a **Interface do Usuário** da **Lógica de Negócios**.
 - **Refinamento do Tipo**: Refine a UI criando uma função inicial que permita ao usuário escolher entre os tipos (`int` ou `double`) antes de chamar as funções de seleção de operação.
 
 Com isso, a arquitetura se torna ainda mais flexível e organizada.
