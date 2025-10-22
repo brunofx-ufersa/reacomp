@@ -399,22 +399,20 @@ Nota
 <div class="code-with-filename-file">
 <pre><strong>calculator.h</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="calculator.h"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&lt;stddef.h&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>Calculator <span class="op">*</span>calculator_create<span class="op">(</span><span class="dt">size_t</span> dataSize<span class="op">,</span> </span>
-<span id="cb2-4"><a href="#cb2-4"></a>                              <span class="dt">size_t</span> n_operations<span class="op">,</span> </span>
-<span id="cb2-5"><a href="#cb2-5"></a>                              <span class="dt">const</span> Operation <span class="op">*</span>operations<span class="op">);</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="dt">void</span> calculator_destroy<span class="op">(</span>Calculator <span class="op">*</span>calc<span class="op">);</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="calculator.h"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1"></a>Calculator <span class="op">*</span>calculator_create<span class="op">(</span><span class="dt">size_t</span> data_size<span class="op">,</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a>                              <span class="dt">size_t</span> n_operations<span class="op">,</span> </span>
+<span id="cb2-3"><a href="#cb2-3"></a>                              <span class="dt">const</span> Operation <span class="op">*</span>operations<span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">void</span> calculator_destroy<span class="op">(</span>Calculator <span class="op">*</span>calc<span class="op">);</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="dt">void</span><span class="op">*</span> evaluation<span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">,</span> Operation operation<span class="op">);</span> </span>
 <span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="dt">void</span><span class="op">*</span> evaluation<span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">,</span> Operation operation<span class="op">);</span> </span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="dt">void</span><span class="op">*</span> add_int <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="dt">void</span><span class="op">*</span> add_double <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="dt">void</span><span class="op">*</span> multiply_int <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="dt">void</span><span class="op">*</span> multiply_double <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a></span>
-<span id="cb2-15"><a href="#cb2-15"></a>Operation selectOperationInt<span class="op">();</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>Operation selectOperationDouble<span class="op">();</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="dt">void</span><span class="op">*</span> add_int <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="dt">void</span><span class="op">*</span> add_double <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="dt">void</span><span class="op">*</span> multiply_int <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="dt">void</span><span class="op">*</span> multiply_double <span class="op">(</span><span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>b<span class="op">);</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a>Operation select_operation_int<span class="op">();</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>Operation select_operation_double<span class="op">();</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Em resumo:</p>
 <table class="caption-top table">
@@ -457,12 +455,12 @@ Nota
 <td>Estão prontas para serem implementadas com a lógica de alocação de memória e <em>casting</em> de tipos.</td>
 </tr>
 <tr class="even">
-<td><code>selectOperationInt</code></td>
+<td><code>select_operation_int</code></td>
 <td>Função de fábrica/seleção de <em>callback</em>.</td>
 <td>Permite ao usuário selecionar dinamicamente a operação para inteiros em tempo de execução, desacoplando a escolha da lógica de execução.</td>
 </tr>
 <tr class="odd">
-<td><code>selectOperationDouble</code></td>
+<td><code>select_operation_double</code></td>
 <td>Função de fábrica/seleção de <em>callback</em>.</td>
 <td>Permite ao usuário selecionar dinamicamente a operação para reais em tempo de execução, desacoplando a escolha da lógica de execução.</td>
 </tr>
@@ -495,10 +493,10 @@ Nota
 <div class="code-with-filename-file">
 <pre><strong>calculator.c</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a>Calculator <span class="op">*</span>calculator_create<span class="op">(</span><span class="dt">size_t</span> dataSize<span class="op">,</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a>Calculator <span class="op">*</span>calculator_create<span class="op">(</span><span class="dt">size_t</span> data_size<span class="op">,</span> </span>
 <span id="cb4-2"><a href="#cb4-2"></a>                              <span class="dt">size_t</span> n_operations<span class="op">,</span> </span>
 <span id="cb4-3"><a href="#cb4-3"></a>                              <span class="dt">const</span> Operation <span class="op">*</span>operations<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>    assert<span class="op">(</span>dataSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    assert<span class="op">(</span>data_size <span class="op">&gt;</span> <span class="dv">0</span><span class="op">);</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a>    assert<span class="op">(</span>n_operations <span class="op">&gt;</span> <span class="dv">0</span><span class="op">);</span>   </span>
 <span id="cb4-6"><a href="#cb4-6"></a>    assert<span class="op">(</span>operations <span class="op">!=</span> NULL<span class="op">);</span> </span>
 <span id="cb4-7"><a href="#cb4-7"></a>    </span>
@@ -519,7 +517,7 @@ Nota
 </div>
 <p>O primeiro ato é verificar as pré-condições com <code>assert</code>. Caso a pré-condição seja falsa, o programa é abortado, especificando qual condição falhou e em qual linha ela se encontra.</p>
 <ul>
-<li><p><code>assert(dataSize &gt; 0)</code>: Esta verificação garante que a calculadora tenha recebido um tamanho de dado válido. Não faz sentido alocar memória para um dado com 0 <em>bytes</em>, o que é fundamental para a função <code>memcpy</code> funcionar corretamente.</p></li>
+<li><p><code>assert(data_size &gt; 0)</code>: Esta verificação garante que a calculadora tenha recebido um tamanho de dado válido. Não faz sentido alocar memória para um dado com 0 <em>bytes</em>, o que é fundamental para a função <code>memcpy</code> funcionar corretamente.</p></li>
 <li><p><code>assert(n_operations &gt; 0)</code> e <code>assert(operations != NULL)</code>: Esses <em>asserts</em> trabalham em conjunto para garantir que a calculadora possa de fato operar. Eles verificam que há pelo menos uma função de <em>callback</em> para a calculadora utilizar e que o ponteiro para o <em>array</em> de <em>callbacks</em> não é nulo.</p></li>
 </ul>
 <p>O restante da função executa a alocação para <code>Calculator</code>, inicializa os campos e usa o tratamento de erro (<em>rollback</em>) para liberar corretamente a memória se algo falhar na alocação do <em>array</em> de operações. O uso de <code>memcpy</code> finaliza a função, garantindo que a estrutura <code>Calculator</code> é dona de sua própria tabela de <em>callbacks</em>. Ela copia o <em>array</em> de operações passado de forma segura, <em>byte a byte</em>.</p>
@@ -530,19 +528,17 @@ Nota
 <pre><strong>calculator.c</strong></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1"></a><span class="dt">void</span> calculator_destroy<span class="op">(</span>Calculator <span class="op">*</span>calc<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>    <span class="cf">if</span> <span class="op">(</span>calc <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>        <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="op">}</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a>    <span class="co">// 1. Libera o array de operações (operations).</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>    <span class="cf">if</span> <span class="op">(</span>calc<span class="op">-&gt;</span>operations <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>        free<span class="op">(</span>calc<span class="op">-&gt;</span>operations<span class="op">);</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>        calc<span class="op">-&gt;</span>operations <span class="op">=</span> NULL<span class="op">;</span> </span>
-<span id="cb5-10"><a href="#cb5-10"></a>    <span class="op">}</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>    </span>
-<span id="cb5-12"><a href="#cb5-12"></a>    <span class="co">// 2. Libera a estrutura Calculator principal.</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a>    free<span class="op">(</span>calc<span class="op">);</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="cf">if</span> <span class="op">(</span>calc <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="co">// 1. Libera o array de operações (operations).</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="cf">if</span> <span class="op">(</span>calc<span class="op">-&gt;</span>operations <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>        free<span class="op">(</span>calc<span class="op">-&gt;</span>operations<span class="op">);</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>        calc<span class="op">-&gt;</span>operations <span class="op">=</span> NULL<span class="op">;</span> </span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="op">}</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>    </span>
+<span id="cb5-10"><a href="#cb5-10"></a>    <span class="co">// 2. Libera a estrutura Calculator principal.</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>    free<span class="op">(</span>calc<span class="op">);</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>A ordem de liberação é crucial: se a gente liberasse a estrutura principal <code>free(calc)</code> primeiro, o endereço de <code>calc-&gt;operations</code> (que está dentro de <code>calc</code>) seria perdido para sempre. Isso resultaria em um vazamento de memória (<em>memory leak</em>), pois você não conseguiria liberar o <em>array</em> de operações.</p>
 <p>Depois de liberar a memória, é uma boa prática atribuir o valor <code>NULL</code> ao ponteiro a fim de evitar ponteiros pendentes (<em>dangling pointers</em>). No entanto, note que não fazemos isso com o ponteiro <code>calc</code>, porque ele foi passado por valor. A variável <code>calc</code> dentro desta função é apenas uma cópia do endereço; o ponteiro original (por exemplo, <code>calculator_int</code>) no <code>main</code> não é alterado.</p>
@@ -588,26 +584,26 @@ Nota
 <span id="cb7-19"><a href="#cb7-19"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>As outras funções de <em>callback</em> para multiplicação (<code>multiply_int</code> e <code>multiply_double</code>) seguirão exatamente o mesmo padrão de alocação e <em>casting</em>.</p>
-<p>Os <strong>ponteiros de função</strong> nos permitem criar interfaces dinâmicas, como um menu interativo, permitindo que o usuário selecione qual <em>callback</em> deve ser executado em tempo de execução. A função <code>selectOperationInt</code> é o nosso exemplo de <strong>função de fábrica</strong> para <em>callbacks</em> de inteiros. Seu objetivo é mapear a entrada numérica do usuário para o endereço de memória da função de <em>callback</em> correspondente.</p>
+<p>Os <strong>ponteiros de função</strong> nos permitem criar interfaces dinâmicas, como um menu interativo, permitindo que o usuário selecione qual <em>callback</em> deve ser executado em tempo de execução. A função <code>select_operation_int</code> é o nosso exemplo de <strong>função de fábrica</strong> para <em>callbacks</em> de inteiros. Seu objetivo é mapear a entrada numérica do usuário para o endereço de memória da função de <em>callback</em> correspondente.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>calculator.c</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1"></a>Operation selectOperationInt<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>    <span class="dt">int</span> c <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="calculator.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1"></a>Operation select_operation_int<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="dt">int</span> option <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>    printf<span class="op">(</span><span class="st">"Escolha sua operação:</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a>    printf<span class="op">(</span><span class="st">"1. Soma</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a>    printf<span class="op">(</span><span class="st">"2. Multiplicação</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>    printf<span class="op">(</span><span class="st">"Digite:</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>    scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>c<span class="op">);</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    printf<span class="op">(</span><span class="st">"Digite: "</span><span class="op">);</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>option<span class="op">);</span></span>
 <span id="cb8-8"><a href="#cb8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9"></a>    <span class="cf">if</span> <span class="op">(</span>c <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="cf">return</span> add_int<span class="op">;</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>c <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="cf">return</span> multiply_int<span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="cf">if</span> <span class="op">(</span>option <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="cf">return</span> add_int<span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>option <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="cf">return</span> multiply_int<span class="op">;</span></span>
 <span id="cb8-11"><a href="#cb8-11"></a>    <span class="cf">else</span> <span class="cf">return</span> NULL<span class="op">;</span> <span class="co">// Retorna NULL como ponteiro de função inválido</span></span>
 <span id="cb8-12"><a href="#cb8-12"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>O bloco de controle de fluxo <code>if-else</code> é a parte central da função. Ele mapeia o inteiro <code>c</code> diretamente para o <strong>endereço de memória</strong> da função de <em>callback</em> desejada. Dessa forma, a função está pronta para ser usada no nosso <code>main</code> para selecionar dinamicamente a operação!</p>
-<p>Do mesmo modo, a função <code>selectOperationDouble()</code> é implementada.</p>
+<p>Do mesmo modo, a função <code>select_operation_double()</code> é implementada.</p>
 </section>
 <section id="uso-da-api" class="level2">
 <h2 class="anchored" data-anchor-id="uso-da-api">Uso da API</h2>
@@ -640,7 +636,7 @@ Nota
 <span id="cb9-22"><a href="#cb9-22"></a>    <span class="dt">int</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
 <span id="cb9-23"><a href="#cb9-23"></a>    </span>
 <span id="cb9-24"><a href="#cb9-24"></a>    <span class="co">// 2. SELEÇÃO E EXECUÇÃO</span></span>
-<span id="cb9-25"><a href="#cb9-25"></a>    Operation selected_op <span class="op">=</span> selectOperactionInt<span class="op">();</span> </span>
+<span id="cb9-25"><a href="#cb9-25"></a>    Operation selected_op <span class="op">=</span> select_operation_int<span class="op">();</span> </span>
 <span id="cb9-26"><a href="#cb9-26"></a>    </span>
 <span id="cb9-27"><a href="#cb9-27"></a>    <span class="cf">if</span> <span class="op">(</span>selected_op <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb9-28"><a href="#cb9-28"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Erro: Operação inválida selecionada.</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
@@ -677,7 +673,7 @@ Nota
 <p>Finalizamos a implementação da nossa <strong>Calculadora Genérica</strong>. Ela pode não estar perfeita, mas conseguimos aplicar e solidificar conceitos avançados que dão um grande <em>up</em> em nossa jornada na programação C. Em particular, a manipulação de <strong>ponteiros genéricos</strong> (<code>void*</code>) e o uso de <strong>ponteiros para funções</strong> como <em>callbacks</em> são ferramentas poderosíssimas que devem ser exploradas com afinco.</p>
 <p>Como sugestão de aprimoramento e prática adicional, você pode tentar modularizar o sistema e refinar a interface do usuário:</p>
 <ul>
-<li><strong>Modularização da UI</strong>: Mova as funções <code>selectOperationInt</code> e <code>selectOperationDouble</code> para um novo par de arquivos de utilitário (por exemplo, <code>ui.c</code>/<code>ui.h</code>). Isso ajuda a manter o arquivo principal (<code>calculator.c</code>) focado apenas na lógica de cálculo, separando a <strong>Interface do Usuário</strong> da <strong>Lógica de Negócios</strong>.</li>
+<li><strong>Modularização da UI</strong>: Mova as funções <code>select_operation_int</code> e <code>select_operation_double</code> para um novo par de arquivos de utilitário (por exemplo, <code>ui.c</code>/<code>ui.h</code>). Isso ajuda a manter o arquivo principal (<code>calculator.c</code>) focado apenas na lógica de cálculo, separando a <strong>Interface do Usuário</strong> da <strong>Lógica de Negócios</strong>.</li>
 <li><strong>Refinamento do Tipo</strong>: Refine a UI criando uma função inicial que permita ao usuário escolher entre os tipos (<code>int</code> ou <code>double</code>) antes de chamar as funções de seleção de operação.</li>
 </ul>
 <p>Com isso, a arquitetura se torna ainda mais flexível e organizada.</p>
