@@ -1,0 +1,111 @@
+---
+title: "Tabela de Dispersão Dinâmica"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+---
+
+
+Imagine que você possui um pequeno móvel com quatro compartimentos:
+
+- No compartimento 1, você guarda um relógio **Ferrari**.
+- No compartimento 2, um relógio **Casio**.
+- No compartimento 3, um relógio **Xing-ling**.
+
+Com o tempo, você percebe que o móvel está ficando cheio e decide comprar um novo móvel com o dobro do tamanho, para ter mais espaço e organização.
+
+No novo móvel, os relógios podem ficar em posições diferentes, por exemplo, o Ferrari agora pode ser guardado no compartimento 6. Além disso, você adquire um novo relógio **Rolex** e o coloca no compartimento 5.
+
+Mais tarde, você decide presentear seu melhor amigo com o relógio **Xing-ling** e vender o **Casio**. Para completar, um dos relógios acaba sendo roubado. Agora, dos oito compartimentos, apenas um está ocupado. Um grande desperdício de espaço.
+
+Diante disso, você decide trocar novamente de móvel, voltando a um modelo menor, com quatro compartimentos, mais adequado à sua nova coleção.
+
+Esse comportamento de aumentar ou diminuir o número de compartimentos conforme a quantidade de itens é exatamente o que ocorre em uma tabela hash dinâmica.
+
+Em resumo, ela funciona como um "guarda-roupa inteligente" que se adapta automaticamente:
+
+- Expande (aumenta) quando está ficando cheia, evitando que as "gavetas" fiquem apertadas (muitas colisões).
+- Contrai (diminui) quando está quase vazia, economizando espaço e memória.
+
+Essa capacidade de ajustar dinamicamente o tamanho permite que a tabela hash mantenha alto desempenho e uso eficiente de memória, independentemente do número de elementos armazenados.
+
+## Fator de Carga
+
+O fator de carga (load factor) determina quando uma tabela hash deve ser expandida ou contraída.
+Ele é definido como a razão entre o número de elementos armazenados e o número total de buckets (ou posições disponíveis na tabela):
+$$\lambda = \frac{n}{m}$$
+onde $n$ é o número de itens atualmente armazenados e $m$ o tamanho da tabela.
+
+
+O desempenho ideal de uma tabela hash depende de duas condições principais:
+
+- uma função hash eficiente, que distribua os elementos de forma uniforme;
+- um fator de carga baixo, que mantenha o número de colisões sob controle.
+
+Se o fator de carga $\lambda$ for muito alto, o número de colisões tende a crescer, e as operações de busca, inserção e remoção podem degradar de O(1) para O(n). Por outro lado, se $\lambda$ for muito baixo, haverá desperdício de espaço, pois a tabela ficará com muitos buckets vazios.
+
+O coração de uma tabela hash dinâmica é justamente o processo de redimensionamento, que ajusta o tamanho da tabela conforme o fator de carga ultrapassa (ou cai abaixo de) determinados limites predefinidos. Por exemplo,
+
+- expansão: quando $\lambda>0.7$ ou  $\lambda>0.75$;
+- contração: quando $\lambda<0.25$.
+
+
+O processo de redimensionamento normalmente envolve três etapas principais:
+
+
+**1. Criação de uma nova tabela**
+
+> Uma nova tabela é alocada, geralmente com o dobro (em caso de expansão) ou metade (em caso de contração) do tamanho atual.
+
+**2. Re-hashing dos elementos**
+
+> Todos os elementos da tabela antiga são reprocessados por uma nova função hash e inseridos na nova tabela, agora com índices recalculados conforme o novo tamanho.
+
+**3. Substituição**
+
+> A tabela antiga é descartada, e a nova tabela passa a ser usada nas próximas operações de inserção, busca e remoção.
+
+Finalmente, podemos citar como vantagens e desvantagens da tabela hash dinâmica:
+
+::: {.panel-tabset}
+
+## Vantagens
+
+**Otimização do espaço**
+
+A tabela se ajusta à quantidade de dados, evitando desperdício de memória quando há poucos itens e garantindo espaço suficiente para muitos itens.
+
+**Desempenho consistente**
+
+Ajuda a manter o fator de carga em níveis ótimos, garantindo que as operações de O(1) sejam mantidas na média.
+
+**Facilidade de uso**
+
+O desenvolvedor não precisa se preocupar em prever o tamanho da tabela, simplificando o desenvolvimento.
+
+## Desvantagens
+
+**Custo do redimensionamento**
+
+A operação de redimensionamento pode ser
+custosa, pois envolve a criação de uma nova tabela e o re-hashing de todos os
+elementos. Isso pode levar a picos de latência inesperados.
+
+**Complexidade de implementação**
+
+É mais complexa de implementar do que uma tabela hash estática.
+
+**Cache ineficiente durante redimensionamento**
+
+Durante o re-hashing, os dados podem se espalhar por novas posições de memória, o que pode impactar
+o desempenho do cache da CPU temporariamente.
+:::
+
+
+
+

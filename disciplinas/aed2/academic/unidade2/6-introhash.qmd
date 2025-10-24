@@ -1,0 +1,88 @@
+---
+title: "Tabela de Dispersão"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+---
+
+Nesta unidade do curso, iremos estudar as **tabelas de dispersão** (_hash table_). Pense em uma busca que não demora, que não precisa de caminhadas longas por uma lista ou descidas por uma árvore. Imagine que você pode encontrar qualquer dado em um instante, de forma quase mágica. Essa é a promessa de uma tabela de dispersão.
+
+Vamos explorar o conceito de **função de hash**, que é o coração dessa estrutura, e aprenderemos a lidar com as **colisões**. Ao final, você terá em mãos uma das ferramentas mais rápidas e eficientes para a manipulação de grandes volumes de dados desde dicionários de programação até _caches_ de navegador e bancos de dados. 
+
+
+## Problematização
+
+Você está desenvolvendo um RPG retrô com restrições severas de memória, limitando seu catálogo mestre de itens a um array de apenas 10 slots (índices de 0 a 9).
+
+No entanto, o jogo tem muito mais do que 10 itens no total, e cada um tem um ID inteiro único (a chave).
+
+::: {style="width: 60%; margin: auto;"}
+| Item	             | ID (chave) |
+|--------------------|------------|
+| Poção de Vida      | 12         |
+| Amuleto Raro       | 18         |
+| Espada Longa       | 21         |
+| Armadura de Bronze | 3          |
+| Armadura de Ouro   | 15         |
+
+: Coleção de itens coletados no jogo
+:::
+
+
+O desafio é como mapear IDs maiores que 9 (12, 22, 13) para um _array_ com slots numerados de 0 a 9, e ainda assim conseguir encontrá-los rapidamente?
+
+
+## Proposta de solução
+
+A ideia é usar uma função que transforma qualquer ID em um número entre 0 e 9, reaproveitando o mesmo espaço de forma controlada.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+O resto da divisão de qualquer inteiro pelo inteiro $m$ está no intervalo $[0,m-1]$. 
+:::
+
+
+Essa função é o módulo (resto da divisão):
+
+$$h(id) = id\bmod 10$$
+
+Como o divisor é $10$, os únicos valores de resto possíveis são os números de 0 a 9, como desejamos.
+
+Aplicando a função aos nossos itens:
+
+- $h(12) = 12 \bmod 10 = 2$
+- $h(18) = 18 \bmod 10 = 8$
+- $h(21) = 21 \bmod 10 = 1$
+- $h(3)\,\,\,= 3\,\,\,\bmod 10 = 3$
+- $h(15) = 15 \bmod 10 = 5$
+
+Dessa maneira, nosso vetor resultante seria:
+
+
+|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| id  | ❌ | Espada Longa  | Poção de Vida  | Pão Velho | ❌ | Armadura de Couro | ❌ | ❌ | Amuleto Raro | ❌ |
+
+Agora, para verificar se o jogador possui o Amuleto Raro, basta aplicar novamente a mesma função: $h(18) = 18 \bmod 10 = 8$.
+
+Sem precisar percorrer todo o _array_, o jogo já sabe que o item (se existir) estará na posição $8$.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Essa técnica permite economizar memória e acessar elementos em tempo constante, O(1).
+:::
+
+Um questionamento comum acontece quando a função retorna o mesmo valor para duas chaves distintas. Por exemplo, com uma chave $25$, teremos $f(25)=25\bmod 10=5$, mas a posição $5$ já está ocupada e o vetor não está totalmente preenchido. Hesse caso, dizemos que ocorreu uma colisão.
+
+Colisões são indesejáveis! Precisamos de funções bem definidas para evitar esse tipo de problema.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+A função que escolhemos anteriormente é chamada de função de hash. Existem várias versões, mas a que mostramos é uma das mais simples.
+:::
+

@@ -1,0 +1,153 @@
+---
+title: "Tratamento de Colisões"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+---
+
+
+Sabemos que uma colisão ocorre quando a função hash produz o mesmo valor para duas ou mais chaves
+distintas.
+$$h(k1) = h(k2)$$
+
+Uma colisão é praticamente inevitável, por isso devemos tratá-la. As principais
+abordagens são endereçamento aberto e encadeamento separado.
+
+- **Endereçamento aberto**: percorrer a tabela em busca de um local não ocupado.
+- **Encadeamento separado**: uso de listas ligadas para armazenar as colisões.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Endereçamento aberto: procura um endereço aberto, um slot vazio.
+Encadeamento separado: usa listas encadeadas separadas, uma para cada slot.
+:::
+
+## Endereçamento aberto
+
+A técnica de endereçamento aberto tenta resolver o problema de colisão buscando
+um outro lugar vazio para armazenar a chave que colidiu. As maneiras principais de sondar um espaço vazio são:
+
+- Sondagem linear;
+- Sondagem quadrática;
+- Duplo hash
+
+### Sondagem linear
+
+A sondagem linear procura pela próxima posição vazia do vetor. A função de hash possui uma nova variável iterativa que permitirá a procura por esse lugar vazio:
+$$h(k,i) = (h(k)+i)\bmod n$$
+onde $i=0,1,2,3,\ldots$
+
+Sempre que ocorre um colisão, esta variável ($i$) é incrementada em uma unidade.
+
+
+Por exemplo, considere o vetor abaixo:
+
+|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| chave  | ❌ | 21  | 42  | 63 | ❌ | ❌ | ❌ | ❌ | ❌ | 69 |
+
+E a função de hash $h(k)=k\bmod 10$.
+
+Vamos adicionar a chave 81:
+
+- $h(81,0) = (h(81) + 0) \bmod 10 = (1+0) \bmod 10 = 1$, colisão com 21
+- $h(81,1) = (h(81) + 1) \bmod 10 = (1+1) \bmod 10 = 2$, colisão com 42
+- $h(81,2) = (h(81) + 2) \bmod 10 = (1+2) \bmod 10 = 3$, colisão com 63
+- $h(81,3) = (h(81) + 3) \bmod 10 = (1+3) \bmod 10 = 4$
+
+Como a posição 4 está vazia, a chave 81 será alocada lá.
+
+
+|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| chave  | ❌ | 21  | 42  | 63 | 81 | ❌ | ❌ | ❌ | ❌ | 69 |
+
+
+
+### Sondagem quadrática
+
+A sondagem quadrática procura pela próxima posição vazia usando uma função quadrática. 
+$$h(k,i) = (h(k)+c_1i+c_2i^2)\bmod n$$
+onde $c_1,c_2$ são constantes e $i=0,1,2,3,\ldots$
+
+Considere o exemplo anterior com sondagem quadrática ($c_1=0$ e $c_2=1$).
+
+- $h(81,0) = (h(81) + 0^2) \bmod 10 = (1+0) \bmod 10 = 1$, colisão com 21
+- $h(81,1) = (h(81) + 1^2) \bmod 10 = (1+1) \bmod 10 = 2$, colisão com 42
+- $h(81,2) = (h(81) + 2^2) \bmod 10 = (1+4) \bmod 10 = 5$
+
+
+Como a posição 5 está vazia, a chave 81 será alocada lá.
+
+
+|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| chave  | ❌ | 21  | 42  | 63 | ❌ | 81 | ❌ | ❌ | ❌ | 69 |
+
+### Duplo hash
+
+Como o nome sugere, o tratamento de colisão usa duas funções hash ($h_1$ e $h_2$). 
+$$h(k,i) = (h_1(k) + i\cdot h_2(k)) \bmod n$$
+onde $i=0,1,2,3,\ldots$
+
+Por exemplo, suponha
+$h_1(k) = k \bmod 10$ e $h_2(k) = 5 − (k \bmod 5)$. 
+
+No exemplo anterior teremos:
+
+- $h(81,0) = (h_1(81) + 0 \cdot h_2(81)) \bmod 10 = (1+0) \bmod 10 = 1$, colisão com 21
+- $h(81,1) = (h_1(81) + 1 \cdot h_2(81)) \bmod 10 = (1 + 4) \bmod 10 = 5$
+
+Ou seja,
+
+
+|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| chave  | ❌ | 21  | 42  | 63 | ❌ | 81 | ❌ | ❌ | ❌ | 69 |
+
+## Encadeamento separado
+
+A técnica de encadeamento separado é bastante simples. Ao invés de tratar a colisão procurando um lugar vazio, iremos colocar as colisões em uma lista encadeada. Logo, não teremos um vetor de chaves, mas sim um vetor de ponteiros que apontam para listas encadeadas separadamente. 
+
+No exemplo anterior, quando houve a colisão da chave 81 com 21, a posição 1 iria apontar para uma lista ligada com dois componentes.
+
+
+```{mermaid}
+flowchart TD
+ subgraph s1["Array"]
+        A0["❌"]
+        A1["prt_1"]
+        A2["prt_2"]
+        A3["prt_3"]
+        A4["❌"]
+        A5["❌"]
+        A6["❌"]
+        A7["❌"]
+        A8["❌"]
+        A9["prt_9"]
+  end
+    A1 -.-> B1["21"]
+    B1 --> B2["81"]
+    A2 -.-> B3["42"]
+    A3 -.-> B4["63"]
+    A9 -.-> B5["69"]
+    B2 --> n1["Filled Circle"]
+    B3 --> n2["Filled Circle"]
+    B4 --> n3["Filled Circle"]
+    B5 --> n4["Filled Circle"]
+
+    n1@{ shape: f-circ}
+    n2@{ shape: f-circ}
+    n3@{ shape: f-circ}
+    n4@{ shape: f-circ}
+    style A1 fill:#fff
+    style A2 fill:#fff
+    style A3 fill:#fff
+    style A9 fill:#fff
+```
+

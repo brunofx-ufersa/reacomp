@@ -1,0 +1,215 @@
+---
+title: "Função Hash"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+---
+
+
+## Características da Função Hash
+	
+- Fácil de ser calculada;
+- Distribuição uniforme dos dados;
+- Minimiza as colisões;
+- Capaz de resolver possíveis colisões.
+
+A vantagem da tabela hash é a velocidade de busca, uma função muito complicada para calcular é incoveniente, pois pode demorar mais que uma busca em uma árvore binária, por exemplo. Além disso, se a função não distribui as chaves de maneira uniforme, muitas delas irão se concentrar em um local do vetor, aumentando a probabilidade de colisões.
+
+
+## Método da Divisão
+	
+  No método da divisão, usamos o resultado do resto da divisão do valor da chave pelo tamanho da tabela.
+ $$h(k) = k \bmod m$$
+
+O ideal é que $m$ seja um número primo e não muito próximo de potências de $2$.
+	
+Por exemplo, se $k=12345$ e $m=101$, então
+$$h(k) = h(12345)= 12345 \bmod 101 = 22$$
+
+A chave $12345$ deve ser alocada na posição $22$ do vetor de $101$ posições.	
+	
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Nem sempre trateremos com chaves inteiras simples como as vistas até aqui. Nesses casos, precisamos de um mecanismo para transformar em um valor inteiro antes de processar a função hash. Veremos isso à frente.
+:::
+
+
+Este é o método mais simples e fácil de gerar um valor de hash. A função hash divide o valor $k$ (chave) por $m$ (tamanho da tabela) e, em seguida, usa o resto obtido. É mais adequado que $m$ seja um número primo, pois isso pode garantir que as chaves sejam distribuídas de forma mais uniforme. 
+
+Embora simples, o método da divisão leva a um desempenho ruim, uma vez que chaves consecutivas mapeiam para valores de hash consecutivos na tabela de hash.
+	
+::: {.callout-note icon="false" title="Exercício"}
+Dada a função hash $h(k) = k^2\bmod 7$, calcule os valores hash para as chaves $$4, 17, 13, 35, 25, 11, 2, 10, 32$$.
+:::
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+- $h(4)\,\,\,=\,\,\,4^2\bmod 7=16\bmod 7\,\,\,\,\,\,=2$
+- $h(17)=17^2\bmod 7=289\bmod 7\,\,\,=2$
+- $h(13)=13^2\bmod 7=169\bmod 7\,\,\,=1$
+- $h(35)=35^2\bmod 7=1225\bmod 7=0$
+- $h(25)=25^2\bmod 7=625\bmod 7\,\,\,=2$
+- $h(11)=11^2\bmod 7=121\bmod 7\,\,\,=2$
+- $h(2)\,\,\,=\,\,\,2^2\bmod 7=4\bmod 7\,\,\,\,\,\,\,\,\,=4$
+- $h(10)=10^2\bmod 7=100\bmod 7\,\,\,=2$
+- $h(32)=32^2\bmod 7=1024\bmod 7=2$
+
+Muitas colisões ocorreram! Era evidente que haveria sobreposição de chaves, pois temos somentes sete espaços. 
+:::
+
+## Método da Multiplicação
+
+No método da multiplicação, realizamos os seguintes passos:
+
+- Multiplicamos a chave ($k$) por uma constante $A$ entre $0$ e $1$;
+- Extraímos a parte fracionária de $kA$;
+- Multiplicamos esse valor por $m$ (tamanho da tabela);
+- Arredondamos para baixo;
+
+Ou seja,
+
+$$h(k) = \lfloor m (kA \bmod 1) \rfloor, \text{ com } 0 < A < 1$$
+
+Por exemplo, considere $k = 123$, $m = 1000$, e $A \approx 0,618$.
+
+$$h(k) = \lfloor 1000 (123 \cdot 0,618 \bmod 1) \rfloor=\lfloor 1000 (76,014 \bmod 1) \rfloor=\lfloor 1000\cdot 0,014 \rfloor=14$$
+	
+	
+A vantagem do método de multiplicação é que ele pode trabalhar com qualquer valor entre 0 e 1. 
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+O método de multiplicação é geralmente adequado quando o tamanho da tabela é uma potência de dois.	
+:::
+
+::: {.callout-note icon="false" title="Exercício"}
+Seja a chave $k = 12345$, a constante $A = 0,357840$ e o tamanho da tabela $m = 100$, calcule o valor hash usando o método da multiplicação.
+:::
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+$$h(k) = \lfloor m (kA \bmod 1) \rfloor$$
+$h(12345) = \lfloor 100 (12345\cdot 0,357840 \bmod 1) \rfloor=\lfloor 100 (4417,5348 \bmod 1) \rfloor=\lfloor 100 (0,5348) \rfloor=\lfloor 53,48 \rfloor=53$
+:::
+
+## Hashing Universal
+
+O hash universal tenta resolver o problema das colisões usando uma família de funções de hash, $\mathcal{H}$, que possui uma propriedade matemática crucial:
+
+> Para quaisquer duas chaves distintas, $k_1$ e $k_2$, a probabilidade de que a função de hash $h \in \mathcal{H}$ escolhida aleatoriamente cause uma colisão é no máximo igual à probabilidade de colisão aleatória, que é $1/m$, onde $m$ é o número de posições na tabela hash.
+
+Uma das famílias universais mais usadas para chaves que são números inteiros e uma tabela de tamanho $m$ é definida da seguinte forma:
+
+Seja $p$ um número primo maior que qualquer chave possível, e $m$ o tamanho da tabela hash. A família $\mathcal{H}$ é o conjunto de funções $h_{a,b}$ dadas pela fórmula:
+$$h_{a,b}(k) = ((ak + b) \bmod p) \bmod m$$
+
+Onde $a$ e $b$ são parâmetros **inteiros** aleatórios escolhidos no início, com $a\in[1, p-1]$ e $b\in[0, p-1]$.
+  
+Os parâmetros aleatórios ajudam a dispersar o valor da chave. Já a operação de módulo por um primo $p$ ajuda a garantir que a distribuição do resultado seja uniforme no intervalo $[0, p-1]$. Finalmente, o resultado final é mapeado para o índice da tabela hash, no intervalo $[0, m-1]$. 
+  
+Por exemplo, digamos uma tabela com $m=10$ slots e escolhamos $p=103$.
+
+- Sorteamos $a$ entre $1$ e $p-1$, ou seja, no intervalo $[1, 102]$ 
+- Sorteamos $b$ entre $0$ e $p-1$, ou seja, no intervalo $[0, 102]$ 
+
+Digamos que $a=5$ e $b=13$, então nossa função sorteada da família universal será:
+$$h_{5,13}(k)=((5k+13)\bmod103)\bmod 10$$
+
+Vamos calcular alguns valores de hash para fixação.
+
+- $h(4)\,\,\,=\,\,\,((5\cdot4+13)\bmod103)\bmod 10=\,\,\,(33\bmod103)\bmod 10=33 \bmod 10=3$
+- $h(17)=((5\cdot17+13)\bmod103)\bmod 10=\,\,\,(98\bmod103)\bmod 10= 98\bmod 10=8$
+- $h(25)=((5\cdot25+13)\bmod103)\bmod 10=(138\bmod103)\bmod 10=35\bmod 10=5$
+- $h(32)=((5\cdot32+13)\bmod103)\bmod 10=(173\bmod103)\bmod 10=70\bmod 10=0$
+
+
+Mesmo com os melhores métodos, é impossível evitar colisões. Quando acontece, devemos tratá-la de modo que o desempenho da busca não seja muito afetado. No entanto, antes de estudarmos os tratamentos de colições, iremos abordar as estratégias para mapeamento de chaves em inteiros.
+
+
+## Estratégias para Mapeamento
+
+Quando falamos em mapeamento de chaves em inteiros, estamos nos referindo a um pré-processamento que transforma uma chave (como uma string ou um número muito grande) em um inteiro mais adequado para ser usado por uma função de hash.
+
+Embora seja possível criar suas próprias estratégias, apresentamos a seguir alguns métodos clássicos encontrados na literatura.
+
+### Chaves do tipo _string_
+
+Os métodos clássicos para tratar strings usam o fato de cada letra ter um inteiro correspondente na tabela ASCII.
+
+#### Soma
+
+Muitas vezes, as chaves que estamos trabalhando são _strings_. Uma forma simples de convertê-las em inteiros é somar os valores ASCII de cada caractere:
+$$k=\sum_{i=0}^{n-1}s[i]=s[0]+s[1]+s[2]+\cdots+s[n-1]$$
+
+onde $n$ é o tamanho da palavra.
+
+Por exemplo, a palavra "PAI" (P = 80, A = 65 e I = 73):
+$$k=\sum_{i=0}^{3-1}s[i]=\sum_{i=0}^{2}s[i]=s[0]+s[1]+s[2]=80+65+73=218$$
+
+Esse método é simples, mas apresenta má distribuição, ou seja, palavras com as mesmas letras em ordem diferente geram o mesmo valor.
+
+#### Multiplicação Polinomial
+
+Um método mais robusto é o da **multiplicação polinomial**. Aqui, tratamos a _string_ como um número em uma base $\beta$ (β (geralmente um número primo pequeno):
+$$k=s[0]\cdot\beta^{n-1}+s[1]\cdot\beta^{n-2}+\cdots+s[n-1]\cdot\beta^{0}$$
+
+Por exemplo, a palavra "PAI" (P = 80, A = 65 e I = 73) e $\beta=13$:
+$$k=s[0]\cdot 13^{3-1}+s[1]\cdot 13^{3-2}+\cdots+s[2]\cdot 13^{0}=80\cdot13^2+65\cdot13^1+73\cdot13^0=14438$$
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+A multiplicação por um número primo ajuda a espalhar os valores de forma mais uniforme do que se usássemos um número composto.
+:::
+
+Essa técnica é superior à soma simples, pois considera a ordem dos caracteres. Para palavras como "cama" e "maca", a soma simples irá retornar os mesmos valores, enquanto que a multiplicação polinomial não.
+
+Exemplo simples: 
+
+- $BA : 66\cdot13^1 + 65\cdot13^0 = 923$.
+- $AB : 65\cdot13^1 + 66\cdot13^0 = 911$.
+
+Dessa forma, "BA" e "AB" produzem resultados distintos, evitando colisões triviais.
+
+### Chaves do tipo _int_ grandes
+
+Quando lidamos com inteiros muito grandes, precisamos reduzi-los para evitar estouro de capacidade (overflow) ou para encaixá-los em um intervalo menor. A seguir, apresentamos três métodos comuns: dobramento (folding), XOR e quadrado central (mid-square).
+
+#### Dobramento (Folding)
+
+Consiste em dividir a chave em partes menores e, em seguida, somá-las ou aplicar XOR entre elas para gerar um número reduzido. Por exemplo, suponha $k = 83.529.170$, vamos dividir a chave assim:
+
+- $k_1 = 835$
+- $k_2 = 291$
+- $k_3 = 70$
+
+O dobramento por soma resulta em $k_1+k_2+k_3=835+291+70=1196$.
+
+No dobramento por XOR, as partes são combinadas usando a operação lógica OU exclusivo (XOR), muito comum em funções de hash criptográficas. Primeiro, convertemos as partes para binário (aqui, usando 10 bits para simplificar):
+
+
+| Parte | Decimal | Binário (10 bits)|
+| -----| -----| -----|  
+| $k_1$ | 835 | 1101000011| 
+| $k_2$ | 291 | 0100100011| 
+| $k_3$ | 70  | 0001000110| 
+
+Realizamos a operação XOR bit a bit entre as partes.
+$$k_1 \oplus k_2 \oplus k_3$$$$\begin{array}{r l l} & 1101000011 & (k_1) \\ \oplus & 0100100011 & (k_2) \\ \hline & 1001100000 & (k_1 \oplus k_2) \\ \oplus & 0001000110 & (k_3) \\ \hline & \mathbf{1000100110} & (\text{Resultado}) \end{array}$$
+
+Transformando 1000100110 de volta para decimal:
+$$1000100110_2=512+64+8+4+2=590$$
+
+O método XOR tende a preservar melhor as características de todas as partes da chave, ainda que seja um pouco mais complexo de implementar do que a soma simples.
+
+#### Mid-Square
+
+O método do quadrado central é uma técnica clássica de extração. A chave é elevada ao quadrado, e então o hash é formado pelos dígitos centrais do resultado. A quantidade de dígitos extraídos é indicada por $d$.
+
+Apesar de ser simples, ele pode gerar um código hash razoavelmente bem distribuído. Como exemplo, considere uma $k=931$ e $d=3$.
+$$k^2=931^2=866761$$
+Assim, podemos selecionar $676$, ou até $667$.
+
+Esses métodos apresentados podem ser combinados ou até mesmo utilizados como substitutos de uma função hash. Em sistemas mais complexos, essas abordagens costumam ser empregadas como etapas auxiliares dentro de funções de hash mais sofisticadas.

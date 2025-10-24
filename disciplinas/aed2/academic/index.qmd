@@ -4,45 +4,55 @@ lang: pt
 toc: false
 ---
 
-Esta é a versão mais próxima do estilo acadêmica de estudos em **{{< meta title >}}**. O portal está organizado conforme o conteúdo abaixo.
+
+Bem-vindo(a) ao curso de **{{< meta title >}}**!
+
+> Este módulo está dividido em cinco temas centrais. 
+> Clique em qualquer um deles para expandir o conteúdo e navegar pelos subtópicos específicos.
 
 
-::: {.grid}
+::: {.callout-note collapse="true" icon="false"}
+## <i class="bi bi-tree"></i> Árvores
 
-::: {.g-col-6}
-::: {.card .bg-success .text-white .text-center .p-4}
-<i class="bi bi-tree"></i>   
-**[Árvores](){.stretched-link .text-white}**
-:::
-:::
-
-::: {.g-col-6}
-::: {.card .bg-primary .text-white .text-center .p-4}
-<i class="bi bi-emoji-neutral"></i>  
-**[Estruturas Genéricas](unidade2/1-ponteiros.qmd){.stretched-link .text-white}**
-:::
 :::
 
 
-::: {.g-col-6}
-::: {.card .bg-warning .text-white .text-center .p-4}
-<i class="bi bi-hash"></i>  
-**[Tabela de Dispersão](unidade2/6-tabelahash.qmd){.stretched-link .text-white}**
-:::
-:::
+::: {.callout-note collapse="true" icon="false"}
+## <i class="bi bi-emoji-neutral"></i> Estruturas Genéricas
 
-::: {.g-col-6}
-::: {.card .bg-info .text-white .text-center .p-4}
-<i class="bi bi-card-checklist"></i>  
-**[Lista de Prioridade](){.stretched-link .text-white}**
-:::
-:::
+::: {.list-group .list-group-flush .mb-0 .text-decoration-none .border-0}
 
-::: {.g-col-12}
-::: {.card .bg-danger .text-white .text-center .p-4}
-<i class="bi bi-bounding-box-circles"></i>  
-**[Grafos](){.stretched-link .text-white}**
-:::
+[1. Ponteiros (Revisão)](unidade2/1-ponteiros.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[2. Callbacks](unidade2/2-callback.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[3. Gerenciamento de Memória](unidade2/3-memoria.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[4. Calculadora Genérica](unidade2/4-calculadora.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[5. Lista Genérica](unidade2/5-lista.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+
 :::
 
 :::
+
+
+
+::: {.callout-note collapse="true" icon="false"}
+## <i class="bi bi-hash"></i> Tabela de Dispersão
+  
+::: {.list-group .list-group-flush .mb-0 .text-decoration-none .border-0}
+
+[1. Introdução](unidade2/6-introhash.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[2. Função Hash](unidade2/7-funcaohash.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[3. Tratamento de Colisões](unidade2/8-colisoes.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[4. Tabela de Dispersão Dinâmica](unidade2/9-tabeladinamica.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+
+:::
+:::
+
+::: {.callout-note collapse="true" icon="false"}
+## <i class="bi bi-card-checklist"></i></i> Lista de Prioridade
+:::
+
+
+::: {.callout-note collapse="true" icon="false"}
+## <i class="bi bi-bounding-box-circles"></i> Grafos
+:::
+
