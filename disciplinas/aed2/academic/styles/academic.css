@@ -13,7 +13,7 @@
 
 /* ======== Callouts Gamificados ======== */
 
-/* DICA / MISSÃO */
+/* DICA / MISSÃO 
 .callout-tip {
   border-left: 6px solid #00b894;
   background: #e8fdf2;
@@ -24,8 +24,9 @@
   color: #008a5e;
   font-weight: 700;
 }
+*/
 
-/* DESAFIO */
+/* DESAFIO 
 .callout-note {
   border-left: 6px solid #0984e3;
   background: #ecf5ff;
@@ -36,8 +37,9 @@
   color: #065cb0;
   font-weight: 700;
 }
+*/
 
-/* REFLEXÃO */
+/* REFLEXÃO 
 .callout-caution {
   border-left: 6px solid #e17055;
   background: #fff3e0;
@@ -46,8 +48,9 @@
 .callout-caution .callout-title {
   color: #d35400;
 }
+*/
 
-/* SPOILER / RECOMPENSA */
+/* SPOILER / RECOMPENSA 
 .callout-important {
   border-left: 6px solid #9b59b6;
   background: #f9f0ff;
@@ -58,6 +61,7 @@
   font-weight: 700;
 }
 
+*/
 
 /* ======== Animações ======== */
 .callout {

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Algoritmos e Estruturas de Dados 2 – REAComp</title>
+<title>Tabela de Dispersão – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,29 +23,30 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<link href="../../../img/logo.png" rel="icon" type="image/png">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-023439531b09c5d34e467d9e2f831cae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../disciplinas/aed2/academic/unidade2/7-funcaohash.html" rel="next">
+<link href="../../../../img/logo.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-023439531b09c5d34e467d9e2f831cae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,11 +75,41 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+<link rel="stylesheet" href="../styles/academic.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -247,9 +278,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">REAComp</span>
     </a>
   </div>
@@ -260,23 +291,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../disciplinas.html"> 
+    <a class="nav-link" href="../../../../disciplinas.html"> 
 <span class="menu-text">Recursos</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../contribuicao.html"> 
+    <a class="nav-link" href="../../../../contribuicao.html"> 
 <span class="menu-text">Participe</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../blog.html"> 
+    <a class="nav-link" href="../../../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../about.html"> 
+    <a class="nav-link" href="../../../../about.html"> 
 <span class="menu-text">Sobre</span></a>
   </li>  
 </ul>
@@ -296,14 +327,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Algoritmos e Estruturas de Dados 2</h1>
+<h1 class="title">Tabela de Dispersão</h1>
 </div>
 
 
@@ -320,96 +352,123 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Bem-vindo(a) ao curso de <strong>Algoritmos e Estruturas de Dados 2</strong>!</p>
-<blockquote class="blockquote">
-<p>Este módulo está dividido em cinco temas centrais. Clique em qualquer um deles para expandir o conteúdo e navegar pelos subtópicos específicos.</p>
-</blockquote>
-<div class="callout callout-style-default callout-note no-icon callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<p>Nesta unidade do curso, iremos estudar as <strong>tabelas de dispersão</strong> (<em>hash table</em>). Pense em uma busca que não demora, que não precisa de caminhadas longas por uma lista ou descidas por uma árvore. Imagine que você pode encontrar qualquer dado em um instante, de forma quase mágica. Essa é a promessa de uma tabela de dispersão.</p>
+<p>Vamos explorar o conceito de <strong>função de hash</strong>, que é o coração dessa estrutura, e aprenderemos a lidar com as <strong>colisões</strong>. Ao final, você terá em mãos uma das ferramentas mais rápidas e eficientes para a manipulação de grandes volumes de dados desde dicionários de programação até <em>caches</em> de navegador e bancos de dados.</p>
+<section id="problematização" class="level2">
+<h2 class="anchored" data-anchor-id="problematização">Problematização</h2>
+<p>Você está desenvolvendo um RPG retrô com restrições severas de memória, limitando seu catálogo mestre de itens a um array de apenas 10 slots (índices de 0 a 9).</p>
+<p>No entanto, o jogo tem muito mais do que 10 itens no total, e cada um tem um ID inteiro único (a chave).</p>
+<div style="width: 60%; margin: auto;">
+<table class="caption-top table">
+<caption>Coleção de itens coletados no jogo</caption>
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>ID (chave)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Poção de Vida</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>Amuleto Raro</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td>Espada Longa</td>
+<td>21</td>
+</tr>
+<tr class="even">
+<td>Armadura de Bronze</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Armadura de Ouro</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span><i class="bi bi-tree"></i> Árvores
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<p>O desafio é como mapear IDs maiores que 9 (12, 22, 13) para um <em>array</em> com slots numerados de 0 a 9, e ainda assim conseguir encontrá-los rapidamente?</p>
+</section>
+<section id="proposta-de-solução" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="proposta-de-solução">Proposta de solução</h2>
+<p>A ideia é usar uma função que transforma qualquer ID em um número entre 0 e 9, reaproveitando o mesmo espaço de forma controlada.</p>
 
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span><i class="bi bi-emoji-neutral"></i> Estruturas Genéricas
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="list-group list-group-flush mb-0 text-decoration-none border-0">
-<p><a href="../../../disciplinas/aed2/academic/unidade2/1-ponteiros.html" class="list-group-item list-group-item-action text-body border-0">1. Ponteiros (Revisão)</a> <a href="../../../disciplinas/aed2/academic/unidade2/2-callback.html" class="list-group-item list-group-item-action text-body border-0">2. Callbacks</a> <a href="../../../disciplinas/aed2/academic/unidade2/3-memoria.html" class="list-group-item list-group-item-action text-body border-0">3. Gerenciamento de Memória</a> <a href="../../../disciplinas/aed2/academic/unidade2/4-calculadora.html" class="list-group-item list-group-item-action text-body border-0">4. Calculadora Genérica</a> <a href="../../../disciplinas/aed2/academic/unidade2/5-lista.html" class="list-group-item list-group-item-action text-body border-0">5. Lista Genérica</a></p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span><i class="bi bi-hash"></i> Tabela de Dispersão
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="list-group list-group-flush mb-0 text-decoration-none border-0">
-<p><a href="../../../disciplinas/aed2/academic/unidade2/6-introhash.html" class="list-group-item list-group-item-action text-body border-0">1. Introdução</a> <a href="../../../disciplinas/aed2/academic/unidade2/7-funcaohash.html" class="list-group-item list-group-item-action text-body border-0">2. Função Hash</a> <a href="../../../disciplinas/aed2/academic/unidade2/8-colisoes.html" class="list-group-item list-group-item-action text-body border-0">3. Tratamento de Colisões</a> <a href="../../../disciplinas/aed2/academic/unidade2/9-tabeladinamica.html" class="list-group-item list-group-item-action text-body border-0">4. Tabela de Dispersão Dinâmica</a></p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span><i class="bi bi-card-checklist"></i> Lista de Prioridade
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> O resto da divisão de qualquer inteiro pelo inteiro <span class="math inline">\(m\)</span> está no intervalo <span class="math inline">\([0,m-1]\)</span>.</p>
+</div></div><p>Essa função é o módulo (resto da divisão):</p>
+<p><span class="math display">\[h(id) = id\bmod 10\]</span></p>
+<p>Como o divisor é <span class="math inline">\(10\)</span>, os únicos valores de resto possíveis são os números de 0 a 9, como desejamos.</p>
+<p>Aplicando a função aos nossos itens:</p>
+<ul>
+<li><span class="math inline">\(h(12) = 12 \bmod 10 = 2\)</span></li>
+<li><span class="math inline">\(h(18) = 18 \bmod 10 = 8\)</span></li>
+<li><span class="math inline">\(h(21) = 21 \bmod 10 = 1\)</span></li>
+<li><span class="math inline">\(h(3)\,\,\,= 3\,\,\,\bmod 10 = 3\)</span></li>
+<li><span class="math inline">\(h(15) = 15 \bmod 10 = 5\)</span></li>
+</ul>
+<p>Dessa maneira, nosso vetor resultante seria:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>slot</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>id</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">Espada Longa</td>
+<td style="text-align: center;">Poção de Vida</td>
+<td style="text-align: center;">Pão Velho</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">Armadura de Couro</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">Amuleto Raro</td>
+<td style="text-align: center;">❌</td>
+</tr>
+</tbody>
+</table>
+<p>Agora, para verificar se o jogador possui o Amuleto Raro, basta aplicar novamente a mesma função: <span class="math inline">\(h(18) = 18 \bmod 10 = 8\)</span>.</p>
+<p>Sem precisar percorrer todo o <em>array</em>, o jogo já sabe que o item (se existir) estará na posição <span class="math inline">\(8\)</span>.</p>
 
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span><i class="bi bi-bounding-box-circles"></i> Grafos
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-
-</div>
-</div>
-</div>
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> Essa técnica permite economizar memória e acessar elementos em tempo constante, O(1).</p>
+</div></div><p>Um questionamento comum acontece quando a função retorna o mesmo valor para duas chaves distintas. Por exemplo, com uma chave <span class="math inline">\(25\)</span>, teremos <span class="math inline">\(f(25)=25\bmod 10=5\)</span>, mas a posição <span class="math inline">\(5\)</span> já está ocupada e o vetor não está totalmente preenchido. Hesse caso, dizemos que ocorreu uma colisão.</p>
+<p>Colisões são indesejáveis! Precisamos de funções bem definidas para evitar esse tipo de problema.</p>
 
 
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> A função que escolhemos anteriormente é chamada de função de hash. Existem várias versões, mas a que mostramos é uma das mais simples.</p>
+</div></div></section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -825,6 +884,15 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../disciplinas/aed2/academic/unidade2/7-funcaohash.html" class="pagination-link" aria-label="Função Hash">
+        <span class="nav-page-text">Função Hash</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

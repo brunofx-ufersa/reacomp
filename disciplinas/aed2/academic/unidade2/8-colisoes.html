@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Bruno Xavier">
-<meta name="description" content="Tutorial de compilação de programas em C no Linux">
 
-<title>Compilar Programas em C - Linux – REAComp</title>
+<title>Tratamento de Colisões – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,67 +20,34 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../img/logo.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-a3508ca507676472fbcc2360244a2547.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../disciplinas/aed2/academic/unidade2/9-tabeladinamica.html" rel="next">
+<link href="../../../../disciplinas/aed2/academic/unidade2/7-funcaohash.html" rel="prev">
+<link href="../../../../img/logo.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-023439531b09c5d34e467d9e2f831cae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -110,12 +75,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Procurar"
   }
 }</script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+<link rel="stylesheet" href="../styles/academic.css">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -287,9 +282,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">REAComp</span>
     </a>
   </div>
@@ -300,23 +295,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../disciplinas.html"> 
+    <a class="nav-link" href="../../../../disciplinas.html"> 
 <span class="menu-text">Recursos</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../contribuicao.html"> 
+    <a class="nav-link" href="../../../../contribuicao.html"> 
 <span class="menu-text">Participe</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blog.html"> 
+    <a class="nav-link" href="../../../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../../../about.html"> 
 <span class="menu-text">Sobre</span></a>
   </li>  
 </ul>
@@ -336,53 +331,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Nesta página</h2>
-   
-  <ul>
-  <li><a href="#instalação-do-compilador" id="toc-instalação-do-compilador" class="nav-link active" data-scroll-target="#instalação-do-compilador">Instalação do Compilador</a></li>
-  <li><a href="#compilação-simples" id="toc-compilação-simples" class="nav-link" data-scroll-target="#compilação-simples">Compilação Simples</a></li>
-  <li><a href="#compilação-múltipla" id="toc-compilação-múltipla" class="nav-link" data-scroll-target="#compilação-múltipla">Compilação Múltipla</a></li>
-  <li><a href="#automatização" id="toc-automatização" class="nav-link" data-scroll-target="#automatização">Automatização</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Compilar Programas em C - Linux</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">compilação</div>
-    <div class="quarto-category">linux</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    Tutorial de compilação de programas em C no Linux
-  </div>
+<h1 class="title">Tratamento de Colisões</h1>
 </div>
+
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor</div>
-    <div class="quarto-title-meta-contents">
-             <p>Bruno Xavier </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Data de Publicação</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">10 de fevereiro de 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -392,135 +356,287 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="instalação-do-compilador" class="level1">
-<h1>Instalação do Compilador</h1>
-<p>Vamos instalar o compilador em sistemas baseados no Ubuntu. Primeiro, atualize o repositório de pacotes:</p>
-<pre class="console"><code>$ sudo apt update</code></pre>
-<p>Em seguida, instale o pacote <em>build-essential</em></p>
-<pre class="console"><code>$ sudo apt install build-essential</code></pre>
-<p>Este pacote inclui o compilador GCC e outras ferramentas de desenvolvimento necessárias.</p>
-<p>Para a verificar a instalação, faça:</p>
-<pre class="console"><code>$ gcc --version</code></pre>
+<p>Sabemos que uma colisão ocorre quando a função hash produz o mesmo valor para duas ou mais chaves distintas. <span class="math display">\[h(k1) = h(k2)\]</span></p>
+<p>Uma colisão é praticamente inevitável, por isso devemos tratá-la. As principais abordagens são endereçamento aberto e encadeamento separado.</p>
+<ul>
+<li><strong>Endereçamento aberto</strong>: percorrer a tabela em busca de um local não ocupado.</li>
+<li><strong>Encadeamento separado</strong>: uso de listas ligadas para armazenar as colisões.</li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> Endereçamento aberto: procura um endereço aberto, um slot vazio. Encadeamento separado: usa listas encadeadas separadas, uma para cada slot.</p>
+</div></div><section id="endereçamento-aberto" class="level2">
+<h2 class="anchored" data-anchor-id="endereçamento-aberto">Endereçamento aberto</h2>
+<p>A técnica de endereçamento aberto tenta resolver o problema de colisão buscando um outro lugar vazio para armazenar a chave que colidiu. As maneiras principais de sondar um espaço vazio são:</p>
+<ul>
+<li>Sondagem linear;</li>
+<li>Sondagem quadrática;</li>
+<li>Duplo hash</li>
+</ul>
+<section id="sondagem-linear" class="level3">
+<h3 class="anchored" data-anchor-id="sondagem-linear">Sondagem linear</h3>
+<p>A sondagem linear procura pela próxima posição vazia do vetor. A função de hash possui uma nova variável iterativa que permitirá a procura por esse lugar vazio: <span class="math display">\[h(k,i) = (h(k)+i)\bmod n\]</span> onde <span class="math inline">\(i=0,1,2,3,\ldots\)</span></p>
+<p>Sempre que ocorre um colisão, esta variável (<span class="math inline">\(i\)</span>) é incrementada em uma unidade.</p>
+<p>Por exemplo, considere o vetor abaixo:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>slot</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>chave</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">63</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">69</td>
+</tr>
+</tbody>
+</table>
+<p>E a função de hash <span class="math inline">\(h(k)=k\bmod 10\)</span>.</p>
+<p>Vamos adicionar a chave 81:</p>
+<ul>
+<li><span class="math inline">\(h(81,0) = (h(81) + 0) \bmod 10 = (1+0) \bmod 10 = 1\)</span>, colisão com 21</li>
+<li><span class="math inline">\(h(81,1) = (h(81) + 1) \bmod 10 = (1+1) \bmod 10 = 2\)</span>, colisão com 42</li>
+<li><span class="math inline">\(h(81,2) = (h(81) + 2) \bmod 10 = (1+2) \bmod 10 = 3\)</span>, colisão com 63</li>
+<li><span class="math inline">\(h(81,3) = (h(81) + 3) \bmod 10 = (1+3) \bmod 10 = 4\)</span></li>
+</ul>
+<p>Como a posição 4 está vazia, a chave 81 será alocada lá.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>slot</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>chave</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">63</td>
+<td style="text-align: center;">81</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">69</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="compilação-simples" class="level1">
-<h1>Compilação Simples</h1>
-<p>Para compilar um programa em C, use o comando</p>
-<pre class="console"><code>$ gcc file.c -o file</code></pre>
-<p>Onde <code>file.c</code> é o nome do seu arquivo de código fonte. Você pode escolher qualquer nome para o terceiro argumento. No caso acima, escolhemos <code>file</code>. Para executar o programa, faça:</p>
-<pre class="console"><code>$ ./file</code></pre>
+<section id="sondagem-quadrática" class="level3">
+<h3 class="anchored" data-anchor-id="sondagem-quadrática">Sondagem quadrática</h3>
+<p>A sondagem quadrática procura pela próxima posição vazia usando uma função quadrática. <span class="math display">\[h(k,i) = (h(k)+c_1i+c_2i^2)\bmod n\]</span> onde <span class="math inline">\(c_1,c_2\)</span> são constantes e <span class="math inline">\(i=0,1,2,3,\ldots\)</span></p>
+<p>Considere o exemplo anterior com sondagem quadrática (<span class="math inline">\(c_1=0\)</span> e <span class="math inline">\(c_2=1\)</span>).</p>
+<ul>
+<li><span class="math inline">\(h(81,0) = (h(81) + 0^2) \bmod 10 = (1+0) \bmod 10 = 1\)</span>, colisão com 21</li>
+<li><span class="math inline">\(h(81,1) = (h(81) + 1^2) \bmod 10 = (1+1) \bmod 10 = 2\)</span>, colisão com 42</li>
+<li><span class="math inline">\(h(81,2) = (h(81) + 2^2) \bmod 10 = (1+4) \bmod 10 = 5\)</span></li>
+</ul>
+<p>Como a posição 5 está vazia, a chave 81 será alocada lá.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>slot</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>chave</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">63</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">81</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">69</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="compilação-múltipla" class="level1">
-<h1>Compilação Múltipla</h1>
-<p>Nesta abordagem, estamos tratando de um projeto com mais de um arquivo <code>.c</code>. Vamos exemplificar dessa maneira:</p>
-<p>Primeiro o arquivo de cabeçalho contendo a interface das funções e outras definições:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>interface.h</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="interface.h"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef INTERFACE_H</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define INTERFACE_H</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Includes necessários</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Declarações</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Esse arquivo é apenas um prototipagem, não há código executável.</p>
-<p>Em seguida, o arquivo com as implementações reais:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>interface.c</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-filename="interface.c"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Includes</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"interface.h"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Implementação das funções declaradas em interface.h</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Todas as funções aqui que foram declaradas no <code>.h</code>, então estão visíveis para outros arquivos que incluírem <code>interface.h</code>. Caso criemos funções auxiliares não declaradas no <code>.h</code>, então elas ficam privadas a este módulo (invisíveis fora dele).</p>
-<p>Finalmente, o arquivo principal (contém a <code>main</code>) que usará a implementação dos arquivos anteriores.</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>programa.c</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="programa.c"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Includes</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"interface.h"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Uso</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Observe que <code>programa.c</code> não precisa incluir <code>interface.c</code>, apenas o cabeçalho.</p>
-<p>Para compilar esse projeto, use o comando</p>
-<pre class="console"><code>$ gcc interface.c programa.c -o programa</code></pre>
-<p>Para executar o programa, faça:</p>
-<pre class="console"><code>$ ./programa</code></pre>
-<p>Também podemos compilar em duas etapas (útil em projetos maiores):</p>
-<pre class="console"><code>$ gcc -c interface.c -o interface.o
-$ gcc -c programa.c -o programa.o
-$ gcc interface.o programa.o -o programa</code></pre>
-<p>A <em>flag</em> <code>-c</code> indica para o gcc que compile o código-fonte (<code>.c</code>) em código objeto (<code>.o</code>). Ele não faz o <em>linking</em>, ou seja, não gera o executável final ainda. No último comando, o compilador faz o <em>linking</em> para gerar o executável. Nessa abordagem, se algum arquivo for modificado, só será necessário recompilar ele e não todo o projeto.</p>
+<section id="duplo-hash" class="level3">
+<h3 class="anchored" data-anchor-id="duplo-hash">Duplo hash</h3>
+<p>Como o nome sugere, o tratamento de colisão usa duas funções hash (<span class="math inline">\(h_1\)</span> e <span class="math inline">\(h_2\)</span>). <span class="math display">\[h(k,i) = (h_1(k) + i\cdot h_2(k)) \bmod n\]</span> onde <span class="math inline">\(i=0,1,2,3,\ldots\)</span></p>
+<p>Por exemplo, suponha <span class="math inline">\(h_1(k) = k \bmod 10\)</span> e <span class="math inline">\(h_2(k) = 5 − (k \bmod 5)\)</span>.</p>
+<p>No exemplo anterior teremos:</p>
+<ul>
+<li><span class="math inline">\(h(81,0) = (h_1(81) + 0 \cdot h_2(81)) \bmod 10 = (1+0) \bmod 10 = 1\)</span>, colisão com 21</li>
+<li><span class="math inline">\(h(81,1) = (h_1(81) + 1 \cdot h_2(81)) \bmod 10 = (1 + 4) \bmod 10 = 5\)</span></li>
+</ul>
+<p>Ou seja,</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>slot</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>chave</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">63</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">81</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">69</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="automatização" class="level1">
-<h1>Automatização</h1>
-<p>Um dos utilitários que o pacote <em>build-essential</em> traz é o <strong><em>make</em></strong>. O <em>make</em> evita recompilar manualmente tudo. Além de ser um processo automatizado, ele recompila apenas o que mudou, mantendo o nosso projeto organizado e escalável. Para essa abordagem é necessário criar um arquivo na pasta do nosso projeto chamado <code>Makefile</code> (sem extensão).</p>
+</section>
+<section id="encadeamento-separado" class="level2">
+<h2 class="anchored" data-anchor-id="encadeamento-separado">Encadeamento separado</h2>
+<p>A técnica de encadeamento separado é bastante simples. Ao invés de tratar a colisão procurando um lugar vazio, iremos colocar as colisões em uma lista encadeada. Logo, não teremos um vetor de chaves, mas sim um vetor de ponteiros que apontam para listas encadeadas separadamente.</p>
+<p>No exemplo anterior, quando houve a colisão da chave 81 com 21, a posição 1 iria apontar para uma lista ligada com dois componentes.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">graph TD
-    A["Projeto/"]:::folder
-    A --&gt; B["interface.h"]:::file
-    A --&gt; C["interface.c"]:::file
-    A --&gt; D["programa.c"]:::file
-    A --&gt; E["Makefile"]:::file
+<pre class="mermaid mermaid-js">flowchart TD
+ subgraph s1["Array"]
+        A0["❌"]
+        A1["prt_1"]
+        A2["prt_2"]
+        A3["prt_3"]
+        A4["❌"]
+        A5["❌"]
+        A6["❌"]
+        A7["❌"]
+        A8["❌"]
+        A9["prt_9"]
+  end
+    A1 -.-&gt; B1["21"]
+    B1 --&gt; B2["81"]
+    A2 -.-&gt; B3["42"]
+    A3 -.-&gt; B4["63"]
+    A9 -.-&gt; B5["69"]
+    B2 --&gt; n1["Filled Circle"]
+    B3 --&gt; n2["Filled Circle"]
+    B4 --&gt; n3["Filled Circle"]
+    B5 --&gt; n4["Filled Circle"]
 
-    classDef folder fill:#e6f7ff,stroke:#0077b6,stroke-width:2px,color:#023e8a,font-weight:bold;
-    classDef file fill:#fff,stroke:#999,stroke-width:1px,color:#333;
+    n1@{ shape: f-circ}
+    n2@{ shape: f-circ}
+    n3@{ shape: f-circ}
+    n4@{ shape: f-circ}
+    style A1 fill:#fff
+    style A2 fill:#fff
+    style A3 fill:#fff
+    style A9 fill:#fff
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
-<p>Um exemplo de arquivo <code>Makefile</code> seria esse:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Makefile</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-filename="Makefile"><pre class="sourceCode numberSource makefile number-lines code-with-copy"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Nome do executável final</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="dt">PROG</span> <span class="ch">=</span><span class="st"> programa</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Compilador</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="dt">CC</span> <span class="ch">=</span><span class="st"> gcc</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co"># Arquivos fonte e objetos</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="dt">SRC</span> <span class="ch">=</span><span class="st"> interface.c programa.c</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="dt">OBJ</span> <span class="ch">=</span><span class="st"> </span><span class="ch">$(</span><span class="dt">SRC</span><span class="kw">:</span><span class="ss">.c</span><span class="kw">=</span><span class="ss">.o</span><span class="ch">)</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="co"># Regra padrão (executada quando você roda apenas `make`)</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="dv">all:</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">PROG</span><span class="ch">)</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="co"># Regra para gerar o executável</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="dv">$(PROG):</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">OBJ</span><span class="ch">)</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="er">    </span><span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">OBJ</span><span class="ch">)</span> -o <span class="ch">$(</span><span class="dt">PROG</span><span class="ch">)</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="co"># Regra genérica para compilar cada .c em .o</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="dv">%.o:</span><span class="dt"> %.c</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a><span class="er">    </span><span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> -c <span class="ch">$&lt;</span> -o <span class="ch">$@</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a></span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="co"># Limpeza dos arquivos temporários</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a><span class="dv">clean:</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a><span class="er">    </span>rm -f <span class="ch">$(</span><span class="dt">OBJ</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">PROG</span><span class="ch">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Ao executar o comando <code>make</code> no terminal, vamos obter a saída:</p>
-<pre class="console"><code>$ make
-gcc -c interface.c -o interface.o
-gcc -c programa.c -o programa.o
-gcc interface.o programa.o -o programa</code></pre>
-<p>Agora imagine que <code>programa.c</code> foi modificado. Então somente ele será recompilado e tudo será “linkado” novamente no final.</p>
-<pre class="console"><code>$ make
-gcc -c programa.c -o programa.o
-gcc interface.o programa.o -o programa</code></pre>
-<p>O comando <code>make clean</code> irá apagar o arquivo binário e os arquivos objeto.</p>
-<pre class="console"><code>$ make clean
-rm -f interface.o programa.o programa</code></pre>
 
 
 </section>
@@ -612,7 +728,7 @@ rm -f interface.o programa.o programa</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/brunofx-ufersa\.github\.io\/reacomp\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -939,6 +1055,18 @@ rm -f interface.o programa.o programa</code></pre>
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../disciplinas/aed2/academic/unidade2/7-funcaohash.html" class="pagination-link" aria-label="Função Hash">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Função Hash</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../disciplinas/aed2/academic/unidade2/9-tabeladinamica.html" class="pagination-link" aria-label="Tabela de Dispersão Dinâmica">
+        <span class="nav-page-text">Tabela de Dispersão Dinâmica</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

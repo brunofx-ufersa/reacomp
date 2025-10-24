@@ -1,0 +1,42 @@
+---
+title: "Recursos"
+format: html
+toc: false 
+---
+
+Explore nossos materiais sobre Algoritmos, Programação em C e Estruturas de Dados. 
+
+::: {.grid}
+
+::: {.g-col-6}
+::: {.card .bg-success .text-white .text-center .p-4}
+{{< fa project-diagram >}}  
+**[Algoritmos](disciplinas/algoritmos/index.qmd){.stretched-link .text-white}**
+:::
+:::
+
+
+::: {.g-col-6}
+::: {.card .bg-primary .text-white .text-center .p-4}
+{{< fa code >}}  
+**[Programação em C](disciplinas/programacaoc/index.qmd){.stretched-link .text-white}**
+:::
+:::
+
+::: {.g-col-6}
+::: {.card .bg-warning .text-white .text-center .p-4}
+{{< fa sitemap >}}  
+**[Estruturas de Dados I](disciplinas/aed1/index.qmd){.stretched-link .text-white}**
+:::
+:::
+
+::: {.g-col-6}
+::: {.card .bg-purple .text-white .text-center .p-4}
+{{< fa network-wired >}}  
+**[Estruturas de Dados II](disciplinas/aed2/academic/index.qmd){.stretched-link .text-white}**
+:::
+:::
+
+:::
+---
+_Clique em uma opção para começar!_ 

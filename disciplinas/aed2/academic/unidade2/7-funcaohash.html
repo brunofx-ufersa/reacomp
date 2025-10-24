@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Tabela de Dispersão – REAComp</title>
+<title>Função Hash – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../">
+<link href="../../../../disciplinas/aed2/academic/unidade2/8-colisoes.html" rel="next">
+<link href="../../../../disciplinas/aed2/academic/unidade2/6-introhash.html" rel="prev">
 <link href="../../../../img/logo.png" rel="icon" type="image/png">
 <script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -38,14 +40,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-a3508ca507676472fbcc2360244a2547.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-f27957d2c769e3c969afb3e6fade3360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-023439531b09c5d34e467d9e2f831cae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,9 +75,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Procurar"
   }
 }</script>
-<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -337,7 +336,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Tabela de Dispersão</h1>
+<h1 class="title">Função Hash</h1>
 </div>
 
 
@@ -354,123 +353,8 @@ window.Quarto = {
 </header>
 
 
-<p>Nesta unidade do curso, iremos estudar as <strong>tabelas de dispersão</strong> (<em>hash table</em>). Pense em uma busca que não demora, que não precisa de caminhadas longas por uma lista ou descidas por uma árvore. Imagine que você pode encontrar qualquer dado em um instante, de forma quase mágica. Essa é a promessa de uma tabela de dispersão.</p>
-<p>Vamos explorar o conceito de <strong>função de hash</strong>, que é o coração dessa estrutura, e aprenderemos a lidar com as <strong>colisões</strong>. Ao final, você terá em mãos uma das ferramentas mais rápidas e eficientes para a manipulação de grandes volumes de dados desde dicionários de programação até <em>caches</em> de navegador e bancos de dados.</p>
-<section id="problematização" class="level2">
-<h2 class="anchored" data-anchor-id="problematização">Problematização</h2>
-<p>Você está desenvolvendo um RPG retrô com restrições severas de memória, limitando seu catálogo mestre de itens a um array de apenas 10 slots (índices de 0 a 9).</p>
-<p>No entanto, o jogo tem muito mais do que 10 itens no total, e cada um tem um ID inteiro único (a chave).</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Item</th>
-<th>ID (chave)</th>
-<th>Cor (valor)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Poção de Vida</td>
-<td>12</td>
-<td>Vermelho</td>
-</tr>
-<tr class="even">
-<td>Amuleto Raro</td>
-<td>18</td>
-<td>Ouro</td>
-</tr>
-<tr class="odd">
-<td>Espada Longa</td>
-<td>21</td>
-<td>Aço</td>
-</tr>
-<tr class="even">
-<td>Pão Velho</td>
-<td>3</td>
-<td>Marrom</td>
-</tr>
-<tr class="odd">
-<td>Armadura de Couro</td>
-<td>15</td>
-<td>Couro</td>
-</tr>
-</tbody>
-</table>
-<p>O desafio é como mapear IDs muito maiores que 9 (12, 22, 13) para um slot que só vai de 0 a 9, e ainda assim conseguir encontrá-los rapidamente?</p>
-</section>
-<section id="proposta-de-solução" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="proposta-de-solução">Proposta de solução</h2>
-<p>A ideia é usar uma função que transforma qualquer ID em um número entre 0 e 9, reaproveitando o mesmo espaço de forma controlada.</p>
-<p>Essa função é o módulo (resto da divisão):</p>
-<p><span class="math display">\[h(id) = id\bmod 10\]</span></p>
-<p>Como o divisor é <span class="math inline">\(10\)</span>, os únicos valores de resto possíveis são os números de 0 a 9, como desejamos.</p>
-<p>Aplicando a função aos nossos itens:</p>
-<ul>
-<li><span class="math inline">\(h(12) = 12 \bmod 10 = 2\)</span></li>
-<li><span class="math inline">\(h(18) = 18 \bmod 10 = 8\)</span></li>
-<li><span class="math inline">\(h(21) = 21 \bmod 10 = 1\)</span></li>
-<li><span class="math inline">\(h(3)\,\,\,= 3\,\,\,\bmod 10 = 3\)</span></li>
-<li><span class="math inline">\(h(15) = 15 \bmod 10 = 5\)</span></li>
-</ul>
-<p>Dessa maneira, nosso vetor resultante seria:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 7%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>slot</th>
-<th style="text-align: center;">0</th>
-<th style="text-align: center;">1</th>
-<th style="text-align: center;">2</th>
-<th style="text-align: center;">3</th>
-<th style="text-align: center;">4</th>
-<th style="text-align: center;">5</th>
-<th style="text-align: center;">6</th>
-<th style="text-align: center;">7</th>
-<th style="text-align: center;">8</th>
-<th style="text-align: center;">9</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>id</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">Espada Longa</td>
-<td style="text-align: center;">Poção de Vida</td>
-<td style="text-align: center;">Pão Velho</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">Armadura de Couro</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">Amuleto Raro</td>
-<td style="text-align: center;">❌</td>
-</tr>
-</tbody>
-</table>
-<p>Agora, para verificar se o jogador possui o Amuleto Raro, basta aplicar novamente a mesma função: <span class="math inline">\(h(18) = 18 \bmod 10 = 8\)</span>.</p>
-<p>Sem precisar percorrer todo o <em>array</em>, o jogo já sabe que o item (se existir) estará na posição <span class="math inline">\(8\)</span>.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong><span class="text-warning">Se liga!</span></strong> Essa técnica permite economizar memória e acessar elementos em tempo constante, O(1).</p>
-</div></div><p>Um questionamento comum acontece quando a função retorna o mesmo valor para duas chaves distintas. Por exemplo, com uma chave <span class="math inline">\(25\)</span>, teremos <span class="math inline">\(f(25)=25\bmod 10=5\)</span>, mas a posição <span class="math inline">\(5\)</span> já está ocupada e o vetor não está totalmente preenchido. Hesse caso, dizemos que ocorreu uma colisão.</p>
-<p>Colisões são indesejáveis! Precisamos de funções bem definidas para evitar esse tipo de problema.</p>
-</section>
-<section id="função-hash" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="função-hash">Função Hash</h2>
-<p>A função que escolhemos anteriormente é chamada de função de hash. Existem várias versões, mas a que mostramos é uma das mais simples.</p>
-<section id="características-da-função-hash" class="level3">
-<h3 class="anchored" data-anchor-id="características-da-função-hash">Características da Função Hash</h3>
+<section id="características-da-função-hash" class="level2">
+<h2 class="anchored" data-anchor-id="características-da-função-hash">Características da Função Hash</h2>
 <ul>
 <li>Fácil de ser calculada;</li>
 <li>Distribuição uniforme dos dados;</li>
@@ -479,8 +363,8 @@ window.Quarto = {
 </ul>
 <p>A vantagem da tabela hash é a velocidade de busca, uma função muito complicada para calcular é incoveniente, pois pode demorar mais que uma busca em uma árvore binária, por exemplo. Além disso, se a função não distribui as chaves de maneira uniforme, muitas delas irão se concentrar em um local do vetor, aumentando a probabilidade de colisões.</p>
 </section>
-<section id="método-da-divisão" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="método-da-divisão">Método da Divisão</h3>
+<section id="método-da-divisão" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="método-da-divisão">Método da Divisão</h2>
 <p>No método da divisão, usamos o resultado do resto da divisão do valor da chave pelo tamanho da tabela. <span class="math display">\[h(k) = k \bmod m\]</span></p>
 <p>O ideal é que <span class="math inline">\(m\)</span> seja um número primo e não muito próximo de potências de <span class="math inline">\(2\)</span>.</p>
 <p>Por exemplo, se <span class="math inline">\(k=12345\)</span> e <span class="math inline">\(m=101\)</span>, então <span class="math display">\[h(k) = h(12345)= 12345 \bmod 101 = 22\]</span></p>
@@ -531,11 +415,11 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="método-da-multiplicação" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="método-da-multiplicação">Método da Multiplicação</h3>
+<section id="método-da-multiplicação" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="método-da-multiplicação">Método da Multiplicação</h2>
 <p>No método da multiplicação, realizamos os seguintes passos:</p>
 <ul>
-<li>Multiplicamos a chave (<span class="math inline">\(k\)</span>) por uma constate <span class="math inline">\(A\)</span> entre <span class="math inline">\(0\)</span> e <span class="math inline">\(1\)</span>;</li>
+<li>Multiplicamos a chave (<span class="math inline">\(k\)</span>) por uma constante <span class="math inline">\(A\)</span> entre <span class="math inline">\(0\)</span> e <span class="math inline">\(1\)</span>;</li>
 <li>Extraímos a parte fracionária de <span class="math inline">\(kA\)</span>;</li>
 <li>Multiplicamos esse valor por <span class="math inline">\(m\)</span> (tamanho da tabela);</li>
 <li>Arredondamos para baixo;</li>
@@ -543,7 +427,7 @@ window.Quarto = {
 <p>Ou seja,</p>
 <p><span class="math display">\[h(k) = \lfloor m (kA \bmod 1) \rfloor, \text{ com } 0 &lt; A &lt; 1\]</span></p>
 <p>Por exemplo, considere <span class="math inline">\(k = 123\)</span>, <span class="math inline">\(m = 1000\)</span>, e <span class="math inline">\(A \approx 0,618\)</span>.</p>
-<p><span class="math display">\[h(k) = \lfloor 1000 (123 \cdot 0,618 \bmod 1) \rfloor=\lfloor 1000 (76,014 \bmod 1) \rfloor=\lfloor 1000\cdot 0.014 \rfloor=14\]</span></p>
+<p><span class="math display">\[h(k) = \lfloor 1000 (123 \cdot 0,618 \bmod 1) \rfloor=\lfloor 1000 (76,014 \bmod 1) \rfloor=\lfloor 1000\cdot 0,014 \rfloor=14\]</span></p>
 <p>A vantagem do método de multiplicação é que ele pode trabalhar com qualquer valor entre 0 e 1.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -578,8 +462,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="hashing-universal" class="level3">
-<h3 class="anchored" data-anchor-id="hashing-universal">Hashing Universal</h3>
+<section id="hashing-universal" class="level2">
+<h2 class="anchored" data-anchor-id="hashing-universal">Hashing Universal</h2>
 <p>O hash universal tenta resolver o problema das colisões usando uma família de funções de hash, <span class="math inline">\(\mathcal{H}\)</span>, que possui uma propriedade matemática crucial:</p>
 <blockquote class="blockquote">
 <p>Para quaisquer duas chaves distintas, <span class="math inline">\(k_1\)</span> e <span class="math inline">\(k_2\)</span>, a probabilidade de que a função de hash <span class="math inline">\(h \in \mathcal{H}\)</span> escolhida aleatoriamente cause uma colisão é no máximo igual à probabilidade de colisão aleatória, que é <span class="math inline">\(1/m\)</span>, onde <span class="math inline">\(m\)</span> é o número de posições na tabela hash.</p>
@@ -603,13 +487,12 @@ window.Quarto = {
 </ul>
 <p>Mesmo com os melhores métodos, é impossível evitar colisões. Quando acontece, devemos tratá-la de modo que o desempenho da busca não seja muito afetado. No entanto, antes de estudarmos os tratamentos de colições, iremos abordar as estratégias para mapeamento de chaves em inteiros.</p>
 </section>
-</section>
 <section id="estratégias-para-mapeamento" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="estratégias-para-mapeamento">Estratégias para Mapeamento</h2>
 <p>Quando falamos em mapeamento de chaves em inteiros, estamos nos referindo a um pré-processamento que transforma uma chave (como uma string ou um número muito grande) em um inteiro mais adequado para ser usado por uma função de hash.</p>
 <p>Embora seja possível criar suas próprias estratégias, apresentamos a seguir alguns métodos clássicos encontrados na literatura.</p>
 <section id="chaves-do-tipo-string" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="chaves-do-tipo-string">🔠 Chaves do tipo <em>string</em></h3>
+<h3 class="anchored" data-anchor-id="chaves-do-tipo-string">Chaves do tipo <em>string</em></h3>
 <p>Os métodos clássicos para tratar strings usam o fato de cada letra ter um inteiro correspondente na tabela ASCII.</p>
 <section id="soma" class="level4">
 <h4 class="anchored" data-anchor-id="soma">Soma</h4>
@@ -635,7 +518,7 @@ window.Quarto = {
 </section>
 </section>
 <section id="chaves-do-tipo-int-grandes" class="level3">
-<h3 class="anchored" data-anchor-id="chaves-do-tipo-int-grandes">🔢 Chaves do tipo <em>int</em> grandes</h3>
+<h3 class="anchored" data-anchor-id="chaves-do-tipo-int-grandes">Chaves do tipo <em>int</em> grandes</h3>
 <p>Quando lidamos com inteiros muito grandes, precisamos reduzi-los para evitar estouro de capacidade (overflow) ou para encaixá-los em um intervalo menor. A seguir, apresentamos três métodos comuns: dobramento (folding), XOR e quadrado central (mid-square).</p>
 <section id="dobramento-folding" class="level4">
 <h4 class="anchored" data-anchor-id="dobramento-folding">Dobramento (Folding)</h4>
@@ -682,355 +565,9 @@ window.Quarto = {
 <p>O método do quadrado central é uma técnica clássica de extração. A chave é elevada ao quadrado, e então o hash é formado pelos dígitos centrais do resultado. A quantidade de dígitos extraídos é indicada por <span class="math inline">\(d\)</span>.</p>
 <p>Apesar de ser simples, ele pode gerar um código hash razoavelmente bem distribuído. Como exemplo, considere uma <span class="math inline">\(k=931\)</span> e <span class="math inline">\(d=3\)</span>. <span class="math display">\[k^2=931^2=866761\]</span> Assim, podemos selecionar <span class="math inline">\(676\)</span>, ou até <span class="math inline">\(667\)</span>.</p>
 <p>Esses métodos apresentados podem ser combinados ou até mesmo utilizados como substitutos de uma função hash. Em sistemas mais complexos, essas abordagens costumam ser empregadas como etapas auxiliares dentro de funções de hash mais sofisticadas.</p>
-</section>
-</section>
-</section>
-<section id="tratamento-de-colisões" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="tratamento-de-colisões">Tratamento de Colisões</h2>
-<p>Sabemos que uma colisão ocorre quando a função hash produz o mesmo valor para duas ou mais chaves distintas. <span class="math display">\[h(k1) = h(k2)\]</span></p>
-<p>Uma colisão é praticamente inevitável, por isso devemos tratá-la. As principais abordagens são endereçamento aberto e encadeamento separado.</p>
-<ul>
-<li><strong>Endereçamento aberto</strong>: percorrer a tabela em busca de um local não ocupado.</li>
-<li><strong>Encadeamento separado</strong>: uso de listas ligadas para armazenar as colisões.</li>
-</ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong><span class="text-warning">Se liga!</span></strong> Endereçamento aberto: procura um endereço aberto, um slot vazio. Encadeamento separado: usa listas encadeadas separadas, uma para cada slot.</p>
-</div></div><section id="endereçamento-aberto" class="level3">
-<h3 class="anchored" data-anchor-id="endereçamento-aberto">Endereçamento aberto</h3>
-<p>A técnica de endereçamento aberto tenta resolver o problema de colisão buscando um outro lugar vazio para armazenar a chave que colidiu. As maneiras principais de sondar um espaço vazio são:</p>
-<ul>
-<li>Sondagem linear;</li>
-<li>Sondagem quadrática;</li>
-<li>Duplo hash</li>
-</ul>
-<section id="sondagem-linear" class="level4">
-<h4 class="anchored" data-anchor-id="sondagem-linear">Sondagem linear</h4>
-<p>A sondagem linear procura pela próxima posição vazia do vetor. A função de hash possui uma nova variável iterativa que permitirá a procura por esse lugar vazio: <span class="math display">\[h(k,i) = (h(k)+i)\bmod n\]</span> onde <span class="math inline">\(i=0,1,2,3,\ldots\)</span></p>
-<p>Sempre que ocorre um colisão, esta variável (<span class="math inline">\(i\)</span>) é incrementada em uma unidade.</p>
-<p>Por exemplo, considere o vetor abaixo:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 7%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>slot</th>
-<th style="text-align: center;">0</th>
-<th style="text-align: center;">1</th>
-<th style="text-align: center;">2</th>
-<th style="text-align: center;">3</th>
-<th style="text-align: center;">4</th>
-<th style="text-align: center;">5</th>
-<th style="text-align: center;">6</th>
-<th style="text-align: center;">7</th>
-<th style="text-align: center;">8</th>
-<th style="text-align: center;">9</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>chave</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">21</td>
-<td style="text-align: center;">42</td>
-<td style="text-align: center;">63</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">69</td>
-</tr>
-</tbody>
-</table>
-<p>E a função de hash <span class="math inline">\(h(k)=k\bmod 10\)</span>.</p>
-<p>Vamos adicionar a chave 81:</p>
-<ul>
-<li><span class="math inline">\(h(81,0) = (h(81) + 0) \bmod 10 = (1+0) \bmod 10 = 1\)</span>, colisão com 21</li>
-<li><span class="math inline">\(h(81,1) = (h(81) + 1) \bmod 10 = (1+1) \bmod 10 = 2\)</span>, colisão com 42</li>
-<li><span class="math inline">\(h(81,2) = (h(81) + 2) \bmod 10 = (1+2) \bmod 10 = 3\)</span>, colisão com 63</li>
-<li><span class="math inline">\(h(81,3) = (h(81) + 3) \bmod 10 = (1+3) \bmod 10 = 4\)</span></li>
-</ul>
-<p>Como a posição 4 está vazia, a chave 81 será alocada lá.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 7%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>slot</th>
-<th style="text-align: center;">0</th>
-<th style="text-align: center;">1</th>
-<th style="text-align: center;">2</th>
-<th style="text-align: center;">3</th>
-<th style="text-align: center;">4</th>
-<th style="text-align: center;">5</th>
-<th style="text-align: center;">6</th>
-<th style="text-align: center;">7</th>
-<th style="text-align: center;">8</th>
-<th style="text-align: center;">9</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>chave</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">21</td>
-<td style="text-align: center;">42</td>
-<td style="text-align: center;">63</td>
-<td style="text-align: center;">81</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">69</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="sondagem-quadrática" class="level4">
-<h4 class="anchored" data-anchor-id="sondagem-quadrática">Sondagem quadrática</h4>
-<p>A sondagem quadrática procura pela próxima posição vazia usando uma função quadrática. <span class="math display">\[h(k,i) = (h(k)+c_1i+c_2i^2)\bmod n\]</span> onde <span class="math inline">\(c_1,c_2\)</span> são constantes e <span class="math inline">\(i=0,1,2,3,\ldots\)</span></p>
-<p>Considere o exemplo anterior com sondagem quadrática (<span class="math inline">\(c_1=0\)</span> e <span class="math inline">\(c_2=1\)</span>).</p>
-<ul>
-<li><span class="math inline">\(h(81,0) = (h(81) + 0^2) \bmod 10 = (1+0) \bmod 10 = 1\)</span>, colisão com 21</li>
-<li><span class="math inline">\(h(81,1) = (h(81) + 1^2) \bmod 10 = (1+1) \bmod 10 = 2\)</span>, colisão com 42</li>
-<li><span class="math inline">\(h(81,2) = (h(81) + 2^2) \bmod 10 = (1+4) \bmod 10 = 5\)</span></li>
-</ul>
-<p>Como a posição 5 está vazia, a chave 81 será alocada lá.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 7%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>slot</th>
-<th style="text-align: center;">0</th>
-<th style="text-align: center;">1</th>
-<th style="text-align: center;">2</th>
-<th style="text-align: center;">3</th>
-<th style="text-align: center;">4</th>
-<th style="text-align: center;">5</th>
-<th style="text-align: center;">6</th>
-<th style="text-align: center;">7</th>
-<th style="text-align: center;">8</th>
-<th style="text-align: center;">9</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>chave</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">21</td>
-<td style="text-align: center;">42</td>
-<td style="text-align: center;">63</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">81</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">69</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="duplo-hash" class="level4">
-<h4 class="anchored" data-anchor-id="duplo-hash">Duplo hash</h4>
-<p>Como o nome sugere, o tratamento de colisão usa duas funções hash (<span class="math inline">\(h_1\)</span> e <span class="math inline">\(h_2\)</span>). <span class="math display">\[h(k,i) = (h_1(k) + i\cdot h_2(k)) \bmod n\]</span> onde <span class="math inline">\(i=0,1,2,3,\ldots\)</span></p>
-<p>Por exemplo, suponha <span class="math inline">\(h_1(k) = k \bmod 10\)</span> e <span class="math inline">\(h_2(k) = 5 − (k \bmod 5)\)</span>.</p>
-<p>No exemplo anterior teremos:</p>
-<ul>
-<li><span class="math inline">\(h(81,0) = (h_1(81) + 0 \cdot h_2(81)) \bmod 10 = (1+0) \bmod 10 = 1\)</span>, colisão com 21</li>
-<li><span class="math inline">\(h(81,1) = (h_1(81) + 1 \cdot h_2(81)) \bmod 10 = (1 + 4) \bmod 10 = 5\)</span></li>
-</ul>
-<p>Ou seja,</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 7%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>slot</th>
-<th style="text-align: center;">0</th>
-<th style="text-align: center;">1</th>
-<th style="text-align: center;">2</th>
-<th style="text-align: center;">3</th>
-<th style="text-align: center;">4</th>
-<th style="text-align: center;">5</th>
-<th style="text-align: center;">6</th>
-<th style="text-align: center;">7</th>
-<th style="text-align: center;">8</th>
-<th style="text-align: center;">9</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>chave</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">21</td>
-<td style="text-align: center;">42</td>
-<td style="text-align: center;">63</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">81</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">❌</td>
-<td style="text-align: center;">69</td>
-</tr>
-</tbody>
-</table>
-</section>
-</section>
-<section id="encadeamento-separado" class="level3">
-<h3 class="anchored" data-anchor-id="encadeamento-separado">Encadeamento separado</h3>
-<p>A técnica de encadeamento separado é bastante simples. Ao invés de tratar a colisão procurando um lugar vazio, iremos colocar as colisões em uma lista encadeada. Logo, não teremos um vetor de chaves, mas sim um vetor de ponteiros que apontam para listas encadeadas separadamente.</p>
-<p>No exemplo anterior, quando houve a colisão da chave 81 com 21, a posição 1 iria apontar para uma lista ligada com dois componentes.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
- subgraph s1["Array"]
-        A0["❌"]
-        A1["prt_1"]
-        A2["prt_2"]
-        A3["prt_3"]
-        A4["❌"]
-        A5["❌"]
-        A6["❌"]
-        A7["❌"]
-        A8["❌"]
-        A9["prt_9"]
-  end
-    A1 -.-&gt; B1["21"]
-    B1 --&gt; B2["81"]
-    A2 -.-&gt; B3["42"]
-    A3 -.-&gt; B4["63"]
-    A9 -.-&gt; B5["69"]
-    B2 --&gt; n1["Filled Circle"]
-    B3 --&gt; n2["Filled Circle"]
-    B4 --&gt; n3["Filled Circle"]
-    B5 --&gt; n4["Filled Circle"]
-
-    n1@{ shape: f-circ}
-    n2@{ shape: f-circ}
-    n3@{ shape: f-circ}
-    n4@{ shape: f-circ}
-    style A1 fill:#fff
-    style A2 fill:#fff
-    style A3 fill:#fff
-    style A9 fill:#fff
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="tabela-de-dispersão-dinâmica" class="level2">
-<h2 class="anchored" data-anchor-id="tabela-de-dispersão-dinâmica">Tabela de Dispersão Dinâmica</h2>
-<p>Imagine que você possui um pequeno móvel com quatro compartimentos:</p>
-<ul>
-<li>No compartimento 1, você guarda um relógio <strong>Ferrari</strong>.</li>
-<li>No compartimento 2, um relógio <strong>Casio</strong>.</li>
-<li>No compartimento 3, um relógio <strong>Xing-ling</strong>.</li>
-</ul>
-<p>Com o tempo, você percebe que o móvel está ficando cheio e decide comprar um novo móvel com o dobro do tamanho, para ter mais espaço e organização.</p>
-<p>No novo móvel, os relógios podem ficar em posições diferentes, por exemplo, o Ferrari agora pode ser guardado no compartimento 6. Além disso, você adquire um novo relógio <strong>Rolex</strong> e o coloca no compartimento 5.</p>
-<p>Mais tarde, você decide presentear seu melhor amigo com o relógio <strong>Xing-ling</strong> e vender o <strong>Casio</strong>. Para completar, um dos relógios acaba sendo roubado. Agora, dos oito compartimentos, apenas um está ocupado. Um grande desperdício de espaço.</p>
-<p>Diante disso, você decide trocar novamente de móvel, voltando a um modelo menor, com quatro compartimentos, mais adequado à sua nova coleção.</p>
-<p>Esse comportamento de aumentar ou diminuir o número de compartimentos conforme a quantidade de itens é exatamente o que ocorre em uma tabela hash dinâmica.</p>
-<p>Em resumo, ela funciona como um “guarda-roupa inteligente” que se adapta automaticamente:</p>
-<ul>
-<li>Expande (aumenta) quando está ficando cheia, evitando que as “gavetas” fiquem apertadas (muitas colisões).</li>
-<li>Contrai (diminui) quando está quase vazia, economizando espaço e memória.</li>
-</ul>
-<p>Essa capacidade de ajustar dinamicamente o tamanho permite que a tabela hash mantenha alto desempenho e uso eficiente de memória, independentemente do número de elementos armazenados.</p>
-<section id="fator-de-carga" class="level3">
-<h3 class="anchored" data-anchor-id="fator-de-carga">Fator de Carga</h3>
-<p>O fator de carga (load factor) determina quando uma tabela hash deve ser expandida ou contraída. Ele é definido como a razão entre o número de elementos armazenados e o número total de buckets (ou posições disponíveis na tabela): <span class="math display">\[\lambda = \frac{n}{m}\]</span> onde <span class="math inline">\(n\)</span> é o número de itens atualmente armazenados e <span class="math inline">\(m\)</span> o tamanho da tabela.</p>
-<p>O desempenho ideal de uma tabela hash depende de duas condições principais:</p>
-<ul>
-<li>uma função hash eficiente, que distribua os elementos de forma uniforme;</li>
-<li>um fator de carga baixo, que mantenha o número de colisões sob controle.</li>
-</ul>
-<p>Se o fator de carga <span class="math inline">\(\lambda\)</span> for muito alto, o número de colisões tende a crescer, e as operações de busca, inserção e remoção podem degradar de O(1) para O(n). Por outro lado, se <span class="math inline">\(\lambda\)</span> for muito baixo, haverá desperdício de espaço, pois a tabela ficará com muitos buckets vazios.</p>
-<p>O coração de uma tabela hash dinâmica é justamente o processo de redimensionamento, que ajusta o tamanho da tabela conforme o fator de carga ultrapassa (ou cai abaixo de) determinados limites predefinidos. Por exemplo,</p>
-<ul>
-<li>expansão: quando <span class="math inline">\(\lambda&gt;0.7\)</span> ou <span class="math inline">\(\lambda&gt;0.75\)</span>;</li>
-<li>contração: quando <span class="math inline">\(\lambda&lt;0.25\)</span>.</li>
-</ul>
-<p>O processo de redimensionamento normalmente envolve três etapas principais:</p>
-<ul>
-<li><strong>Criação de uma nova tabela</strong>: Uma nova tabela é alocada, geralmente com o dobro (em caso de expansão) ou metade (em caso de contração) do tamanho atual.</li>
-<li><strong>Re-hashing dos elementos</strong>: Todos os elementos da tabela antiga são reprocessados por uma nova função hash e inseridos na nova tabela, agora com índices recalculados conforme o novo tamanho.</li>
-<li><strong>Substituição</strong>: A tabela antiga é descartada, e a nova tabela passa a ser usada nas próximas operações de inserção, busca e remoção.</li>
-</ul>
-<p>Finalmente, podemos citar como vantagens e desvantagens da tabela hash dinâmica:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Vantagens</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Desvantagens</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<ul>
-<li><strong>Otimização do espaço</strong>: A tabela se ajusta à quantidade de dados, evitando desperdício de memória quando há poucos itens e garantindo espaço suficiente para muitos itens.</li>
-<li><strong>Desempenho consistente</strong>: Ajuda a manter o fator de carga em níveis ótimos, garantindo que as operações de O(1) sejam mantidas na média.</li>
-<li><strong>Facilidade de uso</strong>: O desenvolvedor não precisa se preocupar em prever o tamanho da tabela, simplificando o desenvolvimento.</li>
-</ul>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<ul>
-<li><strong>Custo do redimensionamento</strong>: A operação de redimensionamento pode ser custosa, pois envolve a criação de uma nova tabela e o re-hashing de todos os elementos. Isso pode levar a picos de latência inesperados.</li>
-<li><strong>Complexidade de implementação</strong>: É mais complexa de implementar do que uma tabela hash estática.</li>
-<li><strong>Cache ineficiente durante redimensionamento</strong>: Durante o re-hashing, os dados podem se espalhar por novas posições de memória, o que pode impactar o desempenho do cache da CPU temporariamente.</li>
-</ul>
-</div>
-</div>
-</div>
 
 
+</section>
 </section>
 </section>
 
@@ -1448,6 +985,18 @@ window.Quarto = {
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../disciplinas/aed2/academic/unidade2/6-introhash.html" class="pagination-link" aria-label="Tabela de Dispersão">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tabela de Dispersão</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../disciplinas/aed2/academic/unidade2/8-colisoes.html" class="pagination-link" aria-label="Tratamento de Colisões">
+        <span class="nav-page-text">Tratamento de Colisões</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
