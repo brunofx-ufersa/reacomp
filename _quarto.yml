@@ -5,6 +5,7 @@ project:
 website:
   title: "REAComp"
   favicon: img/logo.png
+  google-analytics: "G-ECV5W1L7CB"
   reader-mode: true
   page-navigation: true
   back-to-top-navigation: true

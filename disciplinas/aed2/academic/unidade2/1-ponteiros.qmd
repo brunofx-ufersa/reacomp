@@ -8,6 +8,8 @@ format:
   html:
     reference-location: margin
     css: ../styles/academic.css
+filters: 
+    - quizdown
 ---
 
 Por muito tempo, construir estruturas de dados, como listas e árvores, exigia que os desenvolvedores as reescrevessem para cada tipo de dado. Era uma batalha constante: uma lista para números inteiros, outra para textos, outra para dados de usuários, e assim por diante. Essa repetição não apenas consumia tempo, mas também abria portas para erros e inconsistências.
@@ -453,5 +455,65 @@ Nesta unidade, você aprendeu
 Se você quiser aprofundar mais seu conhecimento sobre ponteiros, revise materiais sobre ponteiros para _structs_, aritmética de ponteiros, ponteiros para _strings_ e a relação entre _arrays_ e ponteiros.
 :::
 
+
+
+```quizdown
+
+# O que melhor descreve um ponteiro em C?
+
+1. [ ] Uma variável que armazena o valor de outra variável.  
+1. [x] Uma variável que armazena o endereço de memória de outra variável.  
+1. [ ] Uma função que manipula endereços de memória.  
+1. [ ] Um tipo especial usado apenas para arrays.  
+
+# Por que um ponteiro deve ser do mesmo tipo da variável para a qual aponta?
+
+1. [x] Para garantir a interpretação correta dos dados armazenados na memória.  
+1. [ ] Para permitir conversão implícita de tipos.  
+1. [ ] Porque o C faz o casting automático de ponteiros.  
+1. [ ] Não é necessário; qualquer ponteiro pode apontar para qualquer tipo de dado com segurança.  
+
+
+# O que acontece ao usar o operador `*` sobre um ponteiro?
+
+1. [ ] Ele recupera o endereço de memória armazenado no ponteiro.  
+1. [x] Ele acessa o valor armazenado no endereço de memória apontado pelo ponteiro.  
+1. [ ] Ele declara uma nova variável ponteiro.  
+1. [ ] Ele libera a memória associada ao ponteiro.  
+
+
+# Quais das declarações abaixo são **equivalentes e válidas** em C?
+
+- [x] `double *meta_ptr = &meta;`  
+- [x] `double* meta_ptr = &meta;` 
+- [ ] `double meta_ptr* = &meta;`  
+- [x] `double * meta_ptr = &meta;` 
+
+
+# Por que a função `dobrar_meta(double meta)` não altera o valor da variável `meta` na função `main`?
+
+1. [x] Porque o C passa argumentos por valor, criando uma cópia da variável.  
+1. [ ] Porque variáveis do tipo `double` são imutáveis.  
+1. [ ] Porque a função não tem retorno (`void`).  
+1. [ ] Porque a variável `meta` é constante.  
+
+
+# O que faz a expressão `*meta = 2 * (*meta);`?
+
+1. [ ] Declara um novo ponteiro.  
+1. [x] Dobra o valor armazenado na variável original, desreferenciando o endereço recebido.  
+1. [ ] Altera o endereço armazenado no ponteiro.  
+1. [ ] Cria uma cópia do ponteiro.  
+
+
+# Marque as afirmativas verdadeiras sobre o exemplo `swap(&x, &y)`.
+
+- [x] São passados os endereços das variáveis `x` e `y`.  
+- [x] Os valores de `x` e `y` são modificados diretamente.  
+- [ ] A função troca apenas cópias das variáveis.  
+- [ ] A função utiliza passagem por valor.  
+
+
+```
 
 {{< include /_includes/progress-bar.qmd >}}

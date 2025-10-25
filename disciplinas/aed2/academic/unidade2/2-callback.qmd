@@ -8,6 +8,8 @@ format:
   html:
     reference-location: margin
     css: ../styles/academic.css
+filters: 
+    - quizdown
 ---
 
 Nossa jornada pelos ponteiros ainda não acabou. Nesta unidade vamos estudar o uso de ponteiros com funções. Isso mesmo, uma função também possui um endereço de memória. Poderemos chamar funções indiretamente e passar funções como paramêtros para outras funções. 
@@ -333,5 +335,99 @@ Nesta unidade, você aprendeu
 
 Falta pouco para criarmos nossas estruturas genéricas com comportamentos também genéricos. Porém, ainda precisamos pontuar algumas questões sobre o gerenciamento de memória.
 
+```quizdown
+# O que é um ponteiro de função?
+
+> Ele armazena o endereço de uma função e permite chamá-la indiretamente.
+
+1. [ ] Um tipo especial de ponteiro usado apenas para variáveis globais
+1. [ ] Um ponteiro que aponta para dados armazenados na pilha
+1. [x] Um ponteiro que armazena o endereço de uma função
+1. [ ] Um operador utilizado para alocar memória dinâmica
+
+
+# Qual é a sintaxe correta para declarar um ponteiro para função que retorna `int` e recebe dois `int`?
+
+> Observe a posição dos parênteses e do asterisco.
+
+1. [x] `int (*ptr)(int, int);`
+1. [ ] `int *ptr(int, int);`
+1. [ ] `(*int ptr)(int, int);`
+1. [ ] `int (ptr*)(int, int);`
+
+
+# Sobre a atribuição de uma função a um ponteiro de função, é correto afirmar que...
+
+> Lembre-se de como nomes de funções se comportam em C.
+
+1. [ ] É necessário usar o operador `&` sempre.
+1. [x] O nome da função já representa seu endereço.
+1. [ ] O operador `*` deve ser usado antes do nome da função.
+1. [ ] Só é possível atribuir funções `void` a ponteiros.
+
+
+# O que caracteriza uma função *callback*?
+
+> Ela é passada como argumento para outra função.
+
+1. [ ] Uma função que chama a si mesma recursivamente.
+1. [ ] Uma função que é executada no início do programa.
+1. [x] Uma função passada como parâmetro para outra.
+1. [ ] Uma função que aloca memória dinamicamente.
+
+
+# No exemplo da função `calcular`, qual das seguintes opções é verdadeira?
+
+> Considere o papel de `calcular` e das funções `soma`, `subtracao` etc.
+
+- [x] `calcular` é uma função de ordem superior.
+- [x] `soma` e `subtracao` são funções *callback*.
+- [ ] `calcular` precisa conhecer a lógica de cada operação.
+- [ ] `soma` e `subtracao` devem ter tipos de retorno diferentes.
+
+
+# Quais das opções abaixo são vantagens do uso de `typedef` para ponteiros de função?
+
+> Pense em legibilidade e clareza do código.
+
+- [x] Aumenta a legibilidade e clareza do código.
+- [x] Simplifica a assinatura de funções que usam ponteiros de função.
+- [ ] Impede erros de compilação.
+- [ ] Aumenta o desempenho em tempo de execução.
+
+
+# Coloque em ordem as etapas de funcionamento da função `calcular` com um *callback*.
+
+> Pense na sequência de chamadas entre `main`, `calcular` e `operacao`.
+
+1. A função `main` chama `calcular`, passando uma função de operação.
+2. `calcular` recebe os parâmetros e o ponteiro de função.
+3. `calcular` invoca a função apontada.
+4. A função apontada executa o cálculo e retorna o resultado.
+5. O resultado é exibido em `main`.
+
+
+# Sobre o uso de `void *`, marque as afirmativas corretas.
+
+> Ele é o ponteiro genérico em C.
+
+- [x] Pode armazenar o endereço de qualquer tipo de dado.
+- [x] Precisa ser convertido (cast) antes de ser desreferenciado.
+- [ ] Pode ser desreferenciado diretamente.
+- [ ] Armazena sempre um número inteiro, não um endereço.
+
+
+# O que o tipo `size_t` representa em C? 
+
+> Ele é usado para representar quantidades de bytes.
+
+1. [ ] Um tipo de dado usado para caracteres Unicode.
+1. [x] Um tipo sem sinal que representa tamanhos e quantidades de bytes.
+1. [ ] Um ponteiro genérico que aponta para qualquer tipo.
+1. [ ] Um tipo que indica o número de elementos em um vetor.
+
+```
 
 {{< include /_includes/progress-bar.qmd >}}
+
+

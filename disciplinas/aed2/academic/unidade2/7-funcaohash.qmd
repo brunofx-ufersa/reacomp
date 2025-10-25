@@ -10,6 +10,59 @@ format:
     css: ../styles/academic.css
 ---
 
+A função _hash_ é usada para mapear uma chave para um valor, gerando um código hash que, por sua vez, é usado para encontrar a localização de um item em uma estrutura de dados como uma tabela hash.
+
+
+
+```{mermaid}
+flowchart LR
+ subgraph s1["🔑 Chaves"]
+        A0["'maçã'"]
+        B0["'uva'"]
+        C0["'laranja'"]
+        D0["'banana'"]
+  end
+ subgraph s2["⚙️ Função Hash"]
+  end
+ subgraph s3["📊 Tabela Hash"]
+        A2["Índice 0: ❌      "]
+        B2["Índice 1: 'laranja'"]
+        C2["Índice 2: 'uva'"]
+        D2["Índice 3: 'maçã'"]
+        E2["Índice 4: 'banana'"]
+  end
+    A0 ==> s2
+    B0 ==> s2
+    C0 ==> s2
+    D0 ==> s2
+    s2 =="h('laranja')=1"==> B2
+    s2 =="h('uva')=2"==> C2
+    s2 =="h('maçã')=3"==> D2
+    s2 =="h('banana')=4"==> E2
+
+    classDef box fill:#fff,stroke:#000,color:#000,stroke-width:1px;
+    
+    class A0 box
+    class B0 box
+    class C0 box
+    class D0 box
+    class A2 box
+    class B2 box
+    class C2 box
+    class D2 box
+    class E2 box
+    
+    style s2 stroke:none,fill:#BBDEFB
+    style s1 stroke:none,fill:#FFE0B2
+    style s3 stroke:none,fill:#FFE0B2
+    
+    linkStyle 0 stroke:#D50000,fill:none
+    linkStyle 1 stroke:#00C853,fill:none
+    linkStyle 2 stroke:#2962FF,fill:none
+    linkStyle 4 stroke:#2962FF
+    linkStyle 5 stroke:#00C853,fill:none
+    linkStyle 6 stroke:#D50000,fill:none
+```
 
 ## Características da Função Hash
 	
@@ -224,7 +277,7 @@ Nesta unidade, você aprendeu
 ✅ metódos clássicos para definir funções _hash_ 
 
 ✅ como mapear palavras e grandes números em chaves
- 
+
 
 {{< include /_includes/progress-bar.qmd >}}
 

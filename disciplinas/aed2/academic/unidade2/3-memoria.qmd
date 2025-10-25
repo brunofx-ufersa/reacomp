@@ -8,6 +8,8 @@ format:
   html:
     reference-location: margin
     css: ../styles/academic.css
+filters: 
+    - quizdown
 ---
  
 
@@ -507,5 +509,168 @@ Nesta unidade, você aprendeu
 
 Gerenciar memória em C é uma arte de equilíbrio entre controle total e responsabilidade absoluta.
 Com disciplina e padrões bem definidos, é possível construir sistemas robustos, performáticos e seguros.
+
+
+```quizdown 
+# Qual é a principal diferença entre a memória *stack* e a *heap*? 
+
+> Pense em quem controla o tempo de vida das variáveis.
+
+1. [ ] Ambas são áreas de memória estática.
+1. [ ] A *stack* é usada para dados dinâmicos e a *heap* para dados locais.
+1. [x] A *stack* é gerenciada automaticamente, enquanto a *heap* exige liberação manual.
+1. [ ] A *heap* é usada apenas por funções recursivas.
+
+
+# Qual é o princípio fundamental da alocação dinâmica de memória em C? 
+
+> Ele garante que não haja vazamentos de memória.
+
+1. [x] Quem aloca, deve liberar.
+1. [ ] Cada variável deve ser liberada ao final da função.
+1. [ ] Sempre usar `free` antes de `malloc`.
+1. [ ] Usar `calloc` e `realloc` em conjunto.
+
+
+# O que acontece se `malloc` falhar ao tentar alocar memória? 
+
+> Lembre-se do valor de retorno.
+
+1. [ ] Retorna um ponteiro inválido.
+1. [x] Retorna `NULL`.
+1. [ ] Lança uma exceção.
+1. [ ] Finaliza automaticamente o programa.
+
+
+# Qual das seguintes funções inicializa automaticamente a memória com zeros? 
+
+> Ela recebe dois parâmetros: número de elementos e tamanho de cada um.
+
+1. [ ] `malloc`
+1. [x] `calloc`
+1. [ ] `realloc`
+1. [ ] `memset`
+
+
+# Qual é o uso correto da função `realloc` para redimensionar um vetor de inteiros?
+
+> Considere a boa prática de usar um ponteiro temporário.
+
+1. [ ] `v = realloc(v, novo_tamanho);`
+1. [ ] `realloc(v, novo_tamanho);`
+1. [x] `temp = realloc(v, novo_tamanho); if (temp != NULL) v = temp;`
+1. [ ] `realloc(&v, novo_tamanho);`
+
+
+# Quais das alternativas abaixo são boas práticas ao liberar memória? 
+
+> Lembre-se do ciclo: alocar, usar, liberar, invalidar.
+
+- [x] Sempre liberar com `free` antes de perder a referência.
+- [x] Definir o ponteiro como `NULL` após liberar.
+- [ ] Usar `delete` para desalocar.
+- [ ] Reutilizar o mesmo ponteiro após `free` sem reatribuir.
+
+
+# Coloque na ordem correta as etapas do ciclo de manipulação de memória dinâmica.
+
+> Siga o ciclo apresentado no fluxograma da seção.
+
+1. Alocar (`malloc`, `calloc` ou `realloc`)
+2. Usar (ler e escrever por meio do ponteiro)
+3. Liberar (`free`)
+4. Invalidar o ponteiro (`ptr = NULL`)
+
+
+# Qual é a função adequada para copiar dados entre regiões de memória que podem se sobrepor? 
+
+> Ela é mais segura que `memcpy` em casos de sobreposição.
+
+1. [ ] `memcpy`
+1. [x] `memmove`
+1. [ ] `memset`
+1. [ ] `strcpy`
+
+
+# Quais são cuidados essenciais ao usar `memcpy`, `memmove` e `memset`?
+
+> Elas trabalham em nível de bytes.
+
+- [x] Sempre usar `sizeof` para calcular o número correto de bytes.
+- [x] Usar `memmove` quando houver dúvida sobre sobreposição.
+- [ ] Usar `memcpy` para estruturas com ponteiros internos.
+- [ ] Passar valores inteiros diretamente para `memset` sem conversão.
+
+
+# Qual é o erro que ocorre ao usar um ponteiro não inicializado? 
+
+> Ele contém um endereço aleatório.
+
+1. [x] *Wild pointer*
+1. [ ] *Dangling pointer*
+1. [ ] *Memory leak*
+1. [ ] *Double free*
+
+
+# Quais das situações abaixo podem causar comportamento indefinido?
+
+> Pense em acessos inválidos à memória.
+
+- [x] Usar ponteiro após `free`.
+- [x] Escrever fora dos limites de um vetor.
+- [ ] Liberar ponteiro definido como `NULL`.
+- [ ] Atribuir `NULL` a um ponteiro liberado.
+
+
+# O que caracteriza um *memory leak*? 
+
+> O programa perde acesso ao bloco de memória alocado.
+
+1. [x] Perda da referência para uma região alocada sem `free`.
+1. [ ] Escrita além dos limites do vetor.
+1. [ ] Liberação dupla da mesma região.
+1. [ ] Ponteiro não inicializado.
+
+
+# Como evitar o erro *double free*? 
+
+> Lembre-se da prática após `free`.
+
+- [x] Atribuir `NULL` após liberar.
+- [x] Controlar claramente quem é o “dono” da memória.
+- [ ] Chamar `free` duas vezes para garantir a liberação.
+- [ ] Usar `malloc` e `free` na mesma função sempre.
+
+
+# Qual prática ajuda a evitar *buffer overflow*? 
+
+> Pense no controle dos índices.
+
+1. [x] Verificar limites dos vetores antes de acessar.
+1. [ ] Usar `malloc` sempre em vez de arrays.
+1. [ ] Evitar o uso de `sizeof`.
+1. [ ] Usar ponteiros não inicializados.
+
+
+# Quais são boas práticas de segurança com memória sensível? 
+
+> Por exemplo, quando lidamos com senhas.
+
+- [x] Zerar a memória antes de liberar.
+- [x] Encapsular alocações em funções seguras como `safe_malloc`.
+- [ ] Deixar senhas em memória após uso.
+- [ ] Evitar o uso de `free` para não perder dados.
+
+
+# Coloque na ordem correta as ações da função `safe_malloc` descrita no texto. 
+
+> Pense no fluxo interno da função.
+
+1. Chamar `malloc` com o tamanho desejado.
+2. Verificar se o retorno é `NULL`.
+3. Imprimir mensagem de erro em `stderr` se necessário.
+4. Retornar o ponteiro válido ao chamador.
+
+```
 
 {{< include /_includes/progress-bar.qmd >}}

@@ -289,6 +289,99 @@ Resultado:
 
 A técnica de encadeamento separado é bastante simples. Ao invés de tratar a colisão procurando um lugar vazio, iremos colocar as colisões em uma lista encadeada. Logo, não teremos um vetor de chaves, mas sim um vetor de ponteiros que apontam para listas encadeadas separadamente. 
 
+```{mermaid}
+flowchart LR
+ subgraph s1["🔑 Chaves"]
+        A0@{ label: "'maçã'" }
+        B0@{ label: "'uva'" }
+        C0@{ label: "'laranja'" }
+        D0@{ label: "'banana'" }
+        E0@{ label: "'morango'" }
+  end
+ subgraph s2["⚙️ Função Hash"]
+  end
+ subgraph s3["📊 Tabela Hash"]
+        A2["Índice 0: ❌"]
+        B2["Índice 1: 🔗"]
+        C2["Índice 2: 🔗"]
+        D2["Índice 3: 🔗"]
+        E2["Índice 4: 🔗"]
+  end
+ subgraph s4[" "]
+        C1@{ label: "🎯 'uva'" }
+        B1@{ label: "🎯 'laranja'" }
+        A1@{ label: "🎯 'maçã'" }
+        D1@{ label: "🎯 'banana'" }
+        E1@{ label: "🎯 'morango'" }
+        n1["NULL"]
+        n2["NULL"]
+        n3["NULL"]
+        n4["NULL"]
+  end
+    A0 ==> s2
+    B0 ==> s2
+    C0 ==> s2
+    D0 ==> s2
+    E0 ==> s2
+    s2 ==> B2 & C2 & D2 & E2
+    B2 -.- C1
+    C2 -.- B1
+    D2 -.- A1
+    E2 -.- D1
+    A1 --> E1
+    C1 --> n1
+    B1 --> n2
+    E1 --> n3
+    D1 --> n4
+
+    A0@{ shape: rect}
+    B0@{ shape: rect}
+    C0@{ shape: rect}
+    D0@{ shape: rect}
+    E0@{ shape: rect}
+    B2@{ shape: rect}
+    C2@{ shape: rect}
+    D2@{ shape: rect}
+    E2@{ shape: rect}
+    C1@{ shape: subproc}
+    B1@{ shape: subproc}
+    A1@{ shape: subproc}
+    D1@{ shape: subproc}
+    E1@{ shape: subproc}
+    n1@{ shape: subproc}
+    n2@{ shape: subproc}
+    n3@{ shape: subproc}
+    n4@{ shape: subproc}
+     A0:::box
+     B0:::box
+     C0:::box
+     D0:::box
+     E0:::box
+     A2:::box
+     B2:::box
+     C2:::box
+     D2:::box
+     E2:::box
+     n1:::NULL_NODE
+     n2:::NULL_NODE
+     n3:::NULL_NODE
+     n4:::NULL_NODE
+    classDef box fill:#fff,stroke:#000,color:#000,stroke-width:1px
+    classDef NULL_NODE fill:#F5F5F5, stroke:#BDBDBD, color:#757575, stroke-dasharray: 5 5
+    style s2 stroke:none,fill:#BBDEFB
+    style s1 stroke:none,fill:#FFE0B2
+    style s3 stroke:none,fill:#FFE0B2
+    style s4 stroke:none,fill:transparent
+    linkStyle 0 stroke:#D50000,fill:none
+    linkStyle 1 stroke:#00C853,fill:none
+    linkStyle 2 stroke:#2962FF,fill:none
+    linkStyle 4 stroke:#D50000,fill:none
+    linkStyle 5 stroke:#00C853,fill:none
+    linkStyle 6 stroke:#2962FF,fill:none
+    linkStyle 7 stroke:#D50000,fill:none
+```
+
+
 No exemplo anterior, quando houve a colisão da chave 81 com 21, a posição 1 iria apontar para uma lista ligada com dois componentes.
 
 ```{mermaid}
@@ -339,6 +432,7 @@ flowchart TD
 
 Use a abordagem de encadeamento separado para criar uma tabela _hash_ com as chaves $$k = \{15, 22, 7, 13, 25, 14, 1, 8, 2, 9, 3, 10, 4, 11, 5, 6, 20, 21, 28\}.$$ Considere a função de _hash_ $h(k)=k\bmod m$, onde $m=7$ é o tamanho do vetor.
 :::
+
 
 <!-- mermaid não renderiza dentro deum callout collapsable -->
 <!-- A solução consiste em instalar o chromium para tranformar em um figura

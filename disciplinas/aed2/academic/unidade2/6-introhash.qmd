@@ -8,6 +8,8 @@ format:
   html:
     reference-location: margin
     css: ../styles/academic.css
+filters: 
+    - quizdown    
 ---
 
 Nesta unidade do curso, iremos estudar as **tabelas de dispersão** (_hash table_). Pense em uma busca que não demora, que não precisa de caminhadas longas por uma lista ou descidas por uma árvore. Imagine que você pode encontrar qualquer dado em um instante, de forma quase mágica. Essa é a promessa de uma tabela de dispersão.
@@ -97,4 +99,3 @@ Nesta unidade, você aprendeu
 ✅ como é controlada a entrada na tabela de dispersão 
 
 {{< include /_includes/progress-bar.qmd >}}
-
