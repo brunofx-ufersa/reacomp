@@ -13,7 +13,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: disciplinas.qmd
+      - href: disciplinas/aed2/academic/index.qmd
         text: Recursos
       - contribuicao.qmd
       - href: blog.qmd

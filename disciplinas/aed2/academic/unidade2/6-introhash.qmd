@@ -86,3 +86,15 @@ Colisões são indesejáveis! Precisamos de funções bem definidas para evitar 
 A função que escolhemos anteriormente é chamada de função de hash. Existem várias versões, mas a que mostramos é uma das mais simples.
 :::
 
+---
+
+Nesta unidade, você aprendeu
+
+✅ o que é uma tabela de dispersão 
+
+✅ onde uma tabela de dispersão é usada
+
+✅ como é controlada a entrada na tabela de dispersão 
+
+{{< include /_includes/progress-bar.qmd >}}
+

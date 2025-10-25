@@ -38,5 +38,7 @@ Explore nossos materiais sobre Algoritmos, Programação em C e Estruturas de Da
 :::
 
 :::
+
 ---
+
 _Clique em uma opção para começar!_ 

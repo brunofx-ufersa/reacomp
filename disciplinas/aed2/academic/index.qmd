@@ -11,11 +11,11 @@ Bem-vindo(a) ao curso de **{{< meta title >}}**!
 > Clique em qualquer um deles para expandir o conteúdo e navegar pelos subtópicos específicos.
 
 
-::: {.callout-note collapse="true" icon="false"}
+<!-- ::: {.callout-note collapse="true" icon="false"}
 ## <i class="bi bi-tree"></i> Árvores
 
 :::
-
+-->
 
 ::: {.callout-note collapse="true" icon="false"}
 ## <i class="bi bi-emoji-neutral"></i> Estruturas Genéricas
@@ -47,6 +47,7 @@ Bem-vindo(a) ao curso de **{{< meta title >}}**!
 :::
 :::
 
+<!--
 ::: {.callout-note collapse="true" icon="false"}
 ## <i class="bi bi-card-checklist"></i></i> Lista de Prioridade
 :::
@@ -56,3 +57,4 @@ Bem-vindo(a) ao curso de **{{< meta title >}}**!
 ## <i class="bi bi-bounding-box-circles"></i> Grafos
 :::
 
+-->

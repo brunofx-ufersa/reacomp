@@ -287,8 +287,30 @@ Finalizamos a implementação da nossa **Calculadora Genérica**. Ela pode não 
 
 Como sugestão de aprimoramento e prática adicional, você pode tentar modularizar o sistema e refinar a interface do usuário:
 
-- **Modularização da UI**: Mova as funções `select_operation_int` e `select_operation_double` para um novo par de arquivos de utilitário (por exemplo, `ui.c`/`ui.h`). Isso ajuda a manter o arquivo principal (`calculator.c`) focado apenas na lógica de cálculo, separando a **Interface do Usuário** da **Lógica de Negócios**.
-- **Refinamento do Tipo**: Refine a UI criando uma função inicial que permita ao usuário escolher entre os tipos (`int` ou `double`) antes de chamar as funções de seleção de operação.
+::: {.callout-note icon="false" title="🎯 Desafio de Código"}
 
-Com isso, a arquitetura se torna ainda mais flexível e organizada.
+**Modularização**
 
+- Mova as funções `select_operation_int` e `select_operation_double` para um novo par de arquivos de utilitário (por exemplo, `ui.c`/`ui.h`). Isso ajuda a manter o arquivo principal (`calculator.c`) focado apenas na lógica de cálculo, separando a **interface do usuário** da **lógica de negócios**.
+
+**Refinamento do Tipo**
+
+- Refine a **interface do usuário** criando uma função inicial que permita ao usuário escolher entre os tipos (`int` ou `double`) antes de chamar as funções de seleção de operação.
+
+:::
+
+
+---
+
+Nesta unidade, você aprendeu
+
+✅ a criar um projeto genérico com interface, implementação e uso
+
+✅ a aplicar os conceitos de função de ordem superior e _callback_
+
+✅ a gerenciar o ciclo de vida dos objetos na memória alocando e desalocando 
+
+✅ a compilar um projeto com mais de um arquivo `.c`
+
+
+{{< include /_includes/progress-bar.qmd >}}

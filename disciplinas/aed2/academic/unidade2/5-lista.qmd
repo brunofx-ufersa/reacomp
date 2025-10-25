@@ -406,3 +406,13 @@ Com a lista genérica implementada, concluímos com sucesso a exploração de um
 O verdadeiro valor deste exercício não está apenas no código da lista, mas nos conceitos transferíveis que você aprendeu. A utilização estratégica de ponteiros para funções (_callbacks_) e a rigorosa gestão da memória via Heap são os pilares que sustentam a criação de qualquer estrutura avançada. Você agora tem o conhecimento necessário para replicar essa arquitetura em pilhas, filas, árvores genéricas e além.
 
 Este trabalho estabelece a base para o desenvolvimento profissional, alinhando seu código com os padrões utilizados nas bibliotecas de software de código aberto mais robustas. Você não apenas criou uma lista; você adquiriu um modelo de design para resolver problemas complexos com elegância.
+
+---
+
+Nesta unidade, você aprendeu
+
+✅ a criar uma lista ligada genérica simples
+
+
+{{< include /_includes/progress-bar.qmd >}}
+

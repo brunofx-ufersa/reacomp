@@ -213,3 +213,18 @@ $$k^2=931^2=866761$$
 Assim, podemos selecionar $676$, ou até $667$.
 
 Esses métodos apresentados podem ser combinados ou até mesmo utilizados como substitutos de uma função hash. Em sistemas mais complexos, essas abordagens costumam ser empregadas como etapas auxiliares dentro de funções de hash mais sofisticadas.
+
+
+---
+
+Nesta unidade, você aprendeu
+
+✅ quais características uma função _hash_ deve possuir 
+
+✅ metódos clássicos para definir funções _hash_ 
+
+✅ como mapear palavras e grandes números em chaves
+ 
+
+{{< include /_includes/progress-bar.qmd >}}
+

@@ -107,5 +107,17 @@ o desempenho do cache da CPU temporariamente.
 :::
 
 
+---
+
+Nesta unidade, você aprendeu
+
+✅ o que é uma tabela de dispersão dinâmica 
+
+✅ a calcular o fator de carga 
+
+✅ a importância do fator de carga no desempenho de uma tabela de dispersão 
+ 
+
+{{< include /_includes/progress-bar.qmd >}}
 
 

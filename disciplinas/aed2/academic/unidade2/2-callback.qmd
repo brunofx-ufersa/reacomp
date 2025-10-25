@@ -318,6 +318,7 @@ void aplicar(int *vetor, int tamanho, void (*funcao)(int *)){
 ```
 :::
 
+---
 
 Nesta unidade, você aprendeu
 
@@ -331,3 +332,6 @@ Nesta unidade, você aprendeu
 
 
 Falta pouco para criarmos nossas estruturas genéricas com comportamentos também genéricos. Porém, ainda precisamos pontuar algumas questões sobre o gerenciamento de memória.
+
+
+{{< include /_includes/progress-bar.qmd >}}

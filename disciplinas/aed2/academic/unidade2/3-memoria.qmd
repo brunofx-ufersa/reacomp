@@ -492,5 +492,20 @@ void* safe_malloc(size_t n) {
  Com esse padrão, você garante que toda alocação seja verificada.
 :::
 
+---
+
+Nesta unidade, você aprendeu
+
+✅ a alocar e desalocar a memória
+
+✅ a copiar blocos de memória
+
+✅ a evitar erros clássicos no gerenciamento de memrória
+
+✅ a aplicar boas práticas em grandes projetos
+
+
 Gerenciar memória em C é uma arte de equilíbrio entre controle total e responsabilidade absoluta.
 Com disciplina e padrões bem definidos, é possível construir sistemas robustos, performáticos e seguros.
+
+{{< include /_includes/progress-bar.qmd >}}
