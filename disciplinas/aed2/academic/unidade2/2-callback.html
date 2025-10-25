@@ -83,6 +83,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../../../site_libs/bootstrap/bootstrap-dark-023439531b09c5d34e467d9e2f831cae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown-init.js"></script>
 <link href="../../../../site_libs/quarto-contrib/glossary/glossary.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -646,6 +650,98 @@ Alocado 8 bytes em 0x7ffee1</code></pre>
 <p>✅ a usar ponteiros sem tipo (<code>void *</code>)</p>
 <p>✅ a usar <code>site_t</code> para designar tamanho ou quantidade de <em>bytes</em></p>
 <p>Falta pouco para criarmos nossas estruturas genéricas com comportamentos também genéricos. Porém, ainda precisamos pontuar algumas questões sobre o gerenciamento de memória.</p>
+<div class="quizdown">
+# O que é um ponteiro de função?
+
+&gt; Ele armazena o endereço de uma função e permite chamá-la indiretamente.
+
+1. [ ] Um tipo especial de ponteiro usado apenas para variáveis globais
+1. [ ] Um ponteiro que aponta para dados armazenados na pilha
+1. [x] Um ponteiro que armazena o endereço de uma função
+1. [ ] Um operador utilizado para alocar memória dinâmica
+
+
+# Qual é a sintaxe correta para declarar um ponteiro para função que retorna `int` e recebe dois `int`?
+
+&gt; Observe a posição dos parênteses e do asterisco.
+
+1. [x] `int (*ptr)(int, int);`
+1. [ ] `int *ptr(int, int);`
+1. [ ] `(*int ptr)(int, int);`
+1. [ ] `int (ptr*)(int, int);`
+
+
+# Sobre a atribuição de uma função a um ponteiro de função, é correto afirmar que...
+
+&gt; Lembre-se de como nomes de funções se comportam em C.
+
+1. [ ] É necessário usar o operador `&amp;` sempre.
+1. [x] O nome da função já representa seu endereço.
+1. [ ] O operador `*` deve ser usado antes do nome da função.
+1. [ ] Só é possível atribuir funções `void` a ponteiros.
+
+
+# O que caracteriza uma função *callback*?
+
+&gt; Ela é passada como argumento para outra função.
+
+1. [ ] Uma função que chama a si mesma recursivamente.
+1. [ ] Uma função que é executada no início do programa.
+1. [x] Uma função passada como parâmetro para outra.
+1. [ ] Uma função que aloca memória dinamicamente.
+
+
+# No exemplo da função `calcular`, qual das seguintes opções é verdadeira?
+
+&gt; Considere o papel de `calcular` e das funções `soma`, `subtracao` etc.
+
+- [x] `calcular` é uma função de ordem superior.
+- [x] `soma` e `subtracao` são funções *callback*.
+- [ ] `calcular` precisa conhecer a lógica de cada operação.
+- [ ] `soma` e `subtracao` devem ter tipos de retorno diferentes.
+
+
+# Quais das opções abaixo são vantagens do uso de `typedef` para ponteiros de função?
+
+&gt; Pense em legibilidade e clareza do código.
+
+- [x] Aumenta a legibilidade e clareza do código.
+- [x] Simplifica a assinatura de funções que usam ponteiros de função.
+- [ ] Impede erros de compilação.
+- [ ] Aumenta o desempenho em tempo de execução.
+
+
+# Coloque em ordem as etapas de funcionamento da função `calcular` com um *callback*.
+
+&gt; Pense na sequência de chamadas entre `main`, `calcular` e `operacao`.
+
+1. A função `main` chama `calcular`, passando uma função de operação.
+2. `calcular` recebe os parâmetros e o ponteiro de função.
+3. `calcular` invoca a função apontada.
+4. A função apontada executa o cálculo e retorna o resultado.
+5. O resultado é exibido em `main`.
+
+
+# Sobre o uso de `void *`, marque as afirmativas corretas.
+
+&gt; Ele é o ponteiro genérico em C.
+
+- [x] Pode armazenar o endereço de qualquer tipo de dado.
+- [x] Precisa ser convertido (cast) antes de ser desreferenciado.
+- [ ] Pode ser desreferenciado diretamente.
+- [ ] Armazena sempre um número inteiro, não um endereço.
+
+
+# O que o tipo `size_t` representa em C? 
+
+&gt; Ele é usado para representar quantidades de bytes.
+
+1. [ ] Um tipo de dado usado para caracteres Unicode.
+1. [x] Um tipo sem sinal que representa tamanhos e quantidades de bytes.
+1. [ ] Um ponteiro genérico que aponta para qualquer tipo.
+1. [ ] Um tipo que indica o número de elementos em um vetor.
+
+</div>
 <div class="progress-bar" id="progressBar"></div>
 
 <script>

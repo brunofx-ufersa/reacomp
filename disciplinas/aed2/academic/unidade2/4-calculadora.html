@@ -83,6 +83,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../../../site_libs/bootstrap/bootstrap-dark-023439531b09c5d34e467d9e2f831cae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown-init.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -510,7 +514,7 @@ Nota
 <span id="cb4-6"><a href="#cb4-6"></a>    assert<span class="op">(</span>operations <span class="op">!=</span> NULL<span class="op">);</span> </span>
 <span id="cb4-7"><a href="#cb4-7"></a>    </span>
 <span id="cb4-8"><a href="#cb4-8"></a>    Calculator <span class="op">*</span>calc <span class="op">=</span> <span class="op">(</span>Calculator <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Calculator<span class="op">));</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>    calc<span class="op">-&gt;</span>data_size <span class="op">=</span> dataSize<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    calc<span class="op">-&gt;</span>data_size <span class="op">=</span> data_size<span class="op">;</span></span>
 <span id="cb4-10"><a href="#cb4-10"></a>    calc<span class="op">-&gt;</span>n_operations <span class="op">=</span> n_operations<span class="op">;</span></span>
 <span id="cb4-11"><a href="#cb4-11"></a>    calc<span class="op">-&gt;</span>operations <span class="op">=</span> <span class="op">(</span>Operation <span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Operation<span class="op">)</span> <span class="op">*</span> n_operations<span class="op">);</span></span>
 <span id="cb4-12"><a href="#cb4-12"></a></span>
@@ -707,6 +711,200 @@ Nota
 <p>✅ a aplicar os conceitos de função de ordem superior e <em>callback</em></p>
 <p>✅ a gerenciar o ciclo de vida dos objetos na memória alocando e desalocando</p>
 <p>✅ a compilar um projeto com mais de um arquivo <code>.c</code></p>
+<div class="quizdown">
+# Qual é o principal propósito do projeto da calculadora?
+
+&gt; Pense na aplicação dos conceitos anteriores.
+
+1. [ ] Criar uma calculadora apenas para inteiros.
+1. [ ] Demonstrar herança e polimorfismo em C.
+1. [x] Consolidar o uso de ponteiros genéricos e ponteiros para funções.
+1. [ ] Implementar operações matemáticas complexas.
+
+
+# O que o tipo `Operation` representa no código?
+
+&gt; Ele é um dos pilares da arquitetura da calculadora.
+
+1. [ ] Um tipo genérico de variável numérica.
+1. [x] Um ponteiro para função que recebe dois argumentos genéricos.
+1. [ ] Uma estrutura auxiliar de armazenamento.
+1. [ ] Um alias para `void*` usado para resultados.
+
+
+# Qual é a função do campo `data_size` na estrutura `Calculator`?
+
+&gt; Lembre-se da importância do `size_t`.
+
+1. [x] Indicar o tamanho em bytes do tipo de dado que será manipulado.
+1. [ ] Controlar o número máximo de operações executadas.
+1. [ ] Armazenar o resultado da última operação.
+1. [ ] Determinar o número de callbacks disponíveis.
+
+
+# Sobre o uso de `const` em `Operation`, qual é a alternativa correta?
+
+&gt; A palavra-chave tem papel importante na segurança do código.
+
+1. [x] Garante que os parâmetros passados não serão modificados internamente.
+1. [ ] Impede a função de retornar um valor.
+1. [ ] Indica que a função deve ser inline.
+1. [ ] Torna o ponteiro de função imutável.
+
+
+# Quais funções fazem parte do gerenciamento de ciclo de vida da calculadora?
+
+&gt; Pense em alocação e liberação de memória.
+
+- [x] `calculator_create`
+- [x] `calculator_destroy`
+- [ ] `evaluation`
+- [ ] `select_operation_int`
+
+
+# Coloque na ordem as etapas executadas dentro de `calculator_create`.
+
+&gt; Observe o processo de criação e inicialização.
+
+1. Verificar pré-condições com `assert`.
+2. Alocar memória para `Calculator`.
+3. Alocar memória para o array `operations`.
+4. Copiar o conteúdo das operações com `memcpy`.
+5. Retornar o ponteiro da nova calculadora.
+
+
+# Qual é o papel da função `calculator_destroy`?
+
+&gt; Pense na ordem correta da liberação.
+
+1. [ ] Limpar apenas os dados dos resultados.
+1. [x] Liberar o array de operações e depois a estrutura principal.
+1. [ ] Encerrar o programa e exibir mensagem de sucesso.
+1. [ ] Apenas definir todos os ponteiros como `NULL`.
+
+
+# Quais práticas de segurança de memória são usadas em `calculator_destroy`?
+
+&gt; Observe o padrão de boas práticas.
+
+- [x] Verificação de ponteiro nulo antes de liberar.
+- [x] Liberação dos recursos na ordem inversa da alocação.
+- [x] Atribuição de `NULL` após `free` para evitar ponteiros pendentes.
+- [ ] Reutilização automática da estrutura após liberação.
+
+
+# O que a função `evaluation` faz?
+
+&gt; Ela é o ponto de coordenação da execução.
+
+1. [ ] Calcula e imprime o resultado diretamente.
+1. [x] Chama a função de callback adequada, repassando os parâmetros.
+1. [ ] Faz a seleção automática da operação.
+1. [ ] Libera os ponteiros após a execução.
+
+
+# Qual é o comportamento comum às funções `add_int` e `add_double`?
+
+&gt; Elas seguem o mesmo protocolo de implementação.
+
+- [x] Fazem cast dos ponteiros genéricos para o tipo correto.
+- [x] Alocam memória dinamicamente para o resultado.
+- [x] Retornam um `void*` apontando para o resultado.
+- [ ] Escrevem o resultado diretamente em `stdout`.
+
+
+# Qual seria o problema se as funções de callback não alocassem memória?
+
+&gt; Pense no tempo de vida dos dados retornados.
+
+1. [ ] A função não conseguiria imprimir o resultado.
+1. [x] O ponteiro retornado apontaria para uma variável local inválida.
+1. [ ] O compilador não aceitaria o retorno do tipo `void*`.
+1. [ ] O programa entraria em loop infinito.
+
+
+# Sobre as funções `multiply_int` e `multiply_double`, assinale o correto.
+
+&gt; Elas espelham a lógica das funções de soma.
+
+1. [ ] Fazem casting incorreto para `float*`.
+1. [x] Seguem o mesmo padrão de alocação, casting e retorno das funções de soma.
+1. [ ] São implementadas com recursão.
+1. [ ] Liberam automaticamente o resultado após a execução.
+
+
+# Qual é a função principal de `select_operation_int`?
+
+&gt; Veja o papel do menu interativo.
+
+1. [x] Retornar o endereço da função correspondente à operação escolhida.
+1. [ ] Executar diretamente a operação selecionada.
+1. [ ] Criar uma nova estrutura de calculadora.
+1. [ ] Exibir o resultado na tela.
+
+
+# Coloque em ordem as etapas principais da execução em `main_calculator.c`.
+
+&gt; Elas seguem o fluxo do programa principal.
+
+1. Criar a calculadora com `calculator_create`.
+2. Selecionar a operação via `select_operation_int`.
+3. Chamar `evaluation` para obter o resultado.
+4. Exibir o resultado na tela.
+5. Liberar os recursos com `free` e `calculator_destroy`.
+
+
+# Quais verificações de erro são realizadas em `main_calculator.c`?
+
+&gt; Segurança sempre vem primeiro.
+
+- [x] Verifica se `calculator_create` retornou `NULL`.
+- [x] Verifica se a operação selecionada é válida.
+- [x] Verifica se houve falha na alocação do resultado.
+- [ ] Verifica se o usuário digitou um número negativo.
+
+
+# Por que `calculator_int` é definido como `NULL` ao final do programa?
+
+&gt; Uma boa prática de limpeza.
+
+1. [x] Para evitar ponteiros pendentes após `free`.
+1. [ ] Porque o compilador exige inicialização nula.
+1. [ ] Para permitir o reuso automático da memória.
+1. [ ] Porque `free` não libera o ponteiro corretamente.
+
+
+# Coloque em ordem o ciclo de vida da memória nesta aplicação.
+
+&gt; Do início ao final da execução.
+
+1. Alocação de `Calculator` com `malloc`.
+2. Alocação de `operations`.
+3. Alocação do resultado dentro do callback.
+4. Liberação do resultado com `free`.
+5. Liberação de `operations` e da estrutura principal.
+
+
+# Quais melhorias são sugeridas no desafio de código?
+
+&gt; Elas visam modularização e clareza.
+
+- [x] Separar a interface do usuário em arquivos `ui.c` e `ui.h`.
+- [x] Permitir que o usuário escolha entre `int` e `double`.
+- [ ] Adicionar suporte a operações de subtração.
+- [ ] Mudar toda a estrutura para C++.
+
+
+# Quais conceitos fundamentais são reforçados neste projeto?
+
+&gt; Ele consolida a base da programação modular em C.
+
+- [x] Uso de ponteiros genéricos (`void*`).
+- [x] Ponteiros para funções como callbacks.
+- [x] Modularização com múltiplos arquivos `.c`.
+- [ ] Programação orientada a objetos nativa.
+
+</div>
 <div class="progress-bar" id="progressBar"></div>
 
 <script>

@@ -82,6 +82,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../../../site_libs/bootstrap/bootstrap-dark-023439531b09c5d34e467d9e2f831cae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown-init.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -768,6 +772,211 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <hr>
 <p>Nesta unidade, você aprendeu</p>
 <p>✅ a criar uma lista ligada genérica simples</p>
+<div class="quizdown">
+# Qual é o principal objetivo da estrutura `List` apresentada?
+
+&gt; Pense na abstração que ela representa.
+
+1. [ ] Armazenar apenas inteiros de forma sequencial.
+1. [x] Permitir o armazenamento de dados genéricos com callbacks para operações específicas.
+1. [ ] Substituir arrays fixos por vetores dinâmicos.
+1. [ ] Gerenciar automaticamente a memória da heap sem intervenção do usuário.
+
+
+# Qual é a função do campo `data_size` dentro da estrutura `List`?
+
+&gt; Ele é essencial para manipular dados genéricos.
+
+1. [x] Indicar o tamanho em bytes do tipo de dado armazenado.
+1. [ ] Controlar o número total de nós da lista.
+1. [ ] Identificar o tipo de dado armazenado (inteiro, float etc.).
+1. [ ] Servir como índice de posição atual na lista.
+
+
+# Qual é a principal diferença entre o campo `free_data` e a função `free` padrão?
+
+&gt; Observe o papel do callback no gerenciamento de memória.
+
+1. [x] `free_data` permite liberar dados complexos com lógica personalizada.
+1. [ ] `free_data` é usada apenas para liberar a estrutura `List`.
+1. [ ] `free_data` substitui a função `malloc`.
+1. [ ] Não há diferença — ambas fazem exatamente a mesma coisa.
+
+
+# No contexto da função `list_add`, por que é necessário usar `memcpy`?
+
+&gt; Lembre-se de que `data` é um ponteiro genérico.
+
+1. [x] Para copiar o conteúdo do dado em vez do endereço.
+1. [ ] Para liberar a memória de origem após a cópia.
+1. [ ] Porque `malloc` não inicializa a memória corretamente.
+1. [ ] Para evitar que o ponteiro `data` fique nulo.
+
+
+# Quais afirmações sobre a função `list_create` estão corretas?
+
+&gt; Considere os parâmetros e suas funções.
+
+- [x] Recebe o tamanho do dado a ser armazenado.
+- [x] Recebe ponteiros de função para liberar e comparar dados.
+- [ ] Aloca apenas o nó inicial da lista.
+- [ ] Cria automaticamente um primeiro elemento.
+
+
+# Quais são os três tipos de alocação de memória usados ao longo da implementação?
+
+&gt; Pense no ciclo completo da lista.
+
+- [x] Alocação para a estrutura `List`.
+- [x] Alocação para cada `Node`.
+- [x] Alocação para o campo `data` em cada nó.
+- [ ] Alocação para cada chamada de comparação.
+
+
+# Coloque em ordem as etapas da função `list_destroy`.
+
+&gt; Ela percorre e libera a lista corretamente.
+
+1. Criar um ponteiro auxiliar para o nó inicial.
+2. Guardar o próximo nó antes de liberar o atual.
+3. Liberar o dado interno com `free_node_data`.
+4. Liberar o nó atual.
+5. Repetir até o final e liberar a estrutura `List`.
+
+
+# Por que `compare_data` é necessário em uma lista genérica?
+
+&gt; Ele garante a comparação lógica correta dos dados.
+
+1. [x] Porque `==` apenas compara endereços de memória.
+1. [ ] Porque ele substitui o operador `sizeof`.
+1. [ ] Porque o compilador não aceita comparação de `void *`.
+1. [ ] Porque ele é obrigatório para listas de inteiros.
+
+
+# Em relação ao uso de `assert`, assinale as opções verdadeiras.
+
+&gt; Elas são fundamentais para segurança em C.
+
+- [x] Garante que ponteiros não sejam nulos antes do uso.
+- [x] É usada para detectar falhas de pré-condição em tempo de execução.
+- [ ] É um comando que substitui `if`.
+- [ ] Impede o programa de compilar se a condição for falsa.
+
+
+# Quais práticas são adequadas ao manipular listas genéricas?
+
+&gt; Pense em modularidade e segurança.
+
+- [x] Passar callbacks apropriados para cada tipo de dado.
+- [x] Liberar todos os recursos com `list_destroy` após o uso.
+- [ ] Usar o operador `==` diretamente em ponteiros `void *`.
+- [ ] Atribuir dados com `=` sem `memcpy`.
+
+
+# Coloque na ordem correta as etapas executadas pela função `list_add`.
+
+&gt; Ela insere o elemento na cabeça da lista.
+
+1. Criar um novo nó com `calloc`.
+2. Alocar memória para o campo `data`.
+3. Copiar o conteúdo do dado com `memcpy`.
+4. Fazer o novo nó apontar para a cabeça atual.
+5. Atualizar a cabeça da lista para o novo nó.
+
+
+# Sobre o uso de `strdup` na criação de um aluno, marque as opções corretas.
+
+&gt; Lembre-se que `strdup` também faz alocação.
+
+- [x] Ela aloca memória e copia a string de origem.
+- [x] O `free` correspondente ocorre em `free_student`.
+- [ ] É equivalente a `strcpy`.
+- [ ] Não precisa de tratamento de erro após chamada.
+
+
+# Qual problema ocorreria se esquecêssemos de liberar `student-&gt;name` em `free_student`?
+
+&gt; Ocorre com dados compostos alocados internamente.
+
+1. [ ] *Segmentation fault*
+1. [ ] *Double free*
+1. [x] *Memory leak*
+1. [ ] *Buffer overflow*
+
+
+# Quais vantagens o uso de callbacks traz para a implementação da lista?
+
+&gt; Pense em reuso e generalização.
+
+- [x] Permite adaptar a lista a diferentes tipos de dados.
+- [x] Evita duplicação de código em diferentes listas.
+- [ ] Aumenta a velocidade de execução do programa.
+- [ ] Impede a ocorrência de erros de alocação.
+
+
+# Coloque em ordem as etapas da função `list_contains`.
+
+&gt; Ela percorre e compara os dados.
+
+1. Inicia em `head`.
+2. Compara o dado do nó com o elemento buscado usando `compare_data`.
+3. Retorna `true` se a comparação for igual a zero.
+4. Avança para o próximo nó.
+5. Retorna `false` se atingir o final sem encontrar.
+
+
+# Quais são os parâmetros da função `list_iterate` no desafio proposto?
+
+&gt; Eles controlam o fluxo da iteração.
+
+- [x] Um ponteiro para a lista.
+- [x] Um ponteiro para função `cb_iterate`.
+- [ ] O número de nós da lista.
+- [ ] Um vetor de ponteiros para dados.
+
+
+# O que ocorre se o callback em `list_iterate` retornar `false`?
+
+&gt; Veja o controle de fluxo dentro da função.
+
+1. [x] A iteração é interrompida imediatamente.
+1. [ ] A iteração reinicia do início.
+1. [ ] O nó atual é removido.
+1. [ ] O programa encerra a execução.
+
+
+# Quais boas práticas são aplicadas na função `create_student`?
+
+&gt; Observe o tratamento de erros e alocações.
+
+- [x] Verificar se o `malloc` retornou `NULL`.
+- [x] Liberar memória parcialmente alocada em caso de falha.
+- [ ] Ignorar erros de alocação.
+- [ ] Retornar `1` para indicar sucesso na alocação.
+
+
+# Coloque em ordem o ciclo de vida completo de um elemento na lista de alunos.
+
+&gt; Do início até a liberação final.
+
+1. Criar `Student` com `malloc` e `strdup`.
+2. Adicionar à lista com `list_add`.
+3. Buscar elemento com `list_contains`.
+4. Destruir lista com `list_destroy`.
+5. Liberar memória de cada aluno via `free_student`.
+
+
+# Quais conceitos fundamentais da linguagem C são consolidados nesta unidade?
+
+&gt; Eles formam a base para estruturas genéricas.
+
+- [x] Ponteiros para funções (*callbacks*).
+- [x] Manipulação de memória dinâmica.
+- [x] Estruturas genéricas com `void *`.
+- [ ] Recursividade em tempo de compilação.
+
+</div>
 <div class="progress-bar" id="progressBar"></div>
 
 <script>
