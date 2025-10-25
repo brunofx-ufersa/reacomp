@@ -295,7 +295,7 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../disciplinas.html"> 
+    <a class="nav-link" href="../../../../disciplinas/aed2/academic/index.html"> 
 <span class="menu-text">Recursos</span></a>
   </li>  
   <li class="nav-item">
@@ -417,6 +417,21 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<hr>
+<p>Nesta unidade, você aprendeu</p>
+<p>✅ o que é uma tabela de dispersão dinâmica</p>
+<p>✅ a calcular o fator de carga</p>
+<p>✅ a importância do fator de carga no desempenho de uma tabela de dispersão</p>
+<div class="progress-bar" id="progressBar"></div>
+
+<script>
+window.addEventListener("scroll", function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById("progressBar").style.width = scrollPercent + "%";
+});
+</script>
 
 
 </section>

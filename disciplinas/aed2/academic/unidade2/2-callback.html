@@ -303,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../disciplinas.html"> 
+    <a class="nav-link" href="../../../../disciplinas/aed2/academic/index.html"> 
 <span class="menu-text">Recursos</span></a>
   </li>  
   <li class="nav-item">
@@ -630,12 +630,23 @@ Alocado 8 bytes em 0x7ffee1</code></pre>
 </div>
 </div>
 </div>
+<hr>
 <p>Nesta unidade, você aprendeu</p>
 <p>✅ a declarar um ponteiro de função</p>
 <p>✅ a criar funções de ordem superior e de <em>callbacks</em></p>
 <p>✅ a usar ponteiros sem tipo (<code>void *</code>)</p>
 <p>✅ a usar <code>site_t</code> para designar tamanho ou quantidade de <em>bytes</em></p>
 <p>Falta pouco para criarmos nossas estruturas genéricas com comportamentos também genéricos. Porém, ainda precisamos pontuar algumas questões sobre o gerenciamento de memória.</p>
+<div class="progress-bar" id="progressBar"></div>
+
+<script>
+window.addEventListener("scroll", function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById("progressBar").style.width = scrollPercent + "%";
+});
+</script>
 
 
 </section>

@@ -302,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../disciplinas.html"> 
+    <a class="nav-link" href="../../../../disciplinas/aed2/academic/index.html"> 
 <span class="menu-text">Recursos</span></a>
   </li>  
   <li class="nav-item">
@@ -672,11 +672,42 @@ Nota
 <p>Isso irá gerar um executável chamado <code>calc</code> na sua pasta.</p>
 <p>Finalizamos a implementação da nossa <strong>Calculadora Genérica</strong>. Ela pode não estar perfeita, mas conseguimos aplicar e solidificar conceitos avançados que dão um grande <em>up</em> em nossa jornada na programação C. Em particular, a manipulação de <strong>ponteiros genéricos</strong> (<code>void*</code>) e o uso de <strong>ponteiros para funções</strong> como <em>callbacks</em> são ferramentas poderosíssimas que devem ser exploradas com afinco.</p>
 <p>Como sugestão de aprimoramento e prática adicional, você pode tentar modularizar o sistema e refinar a interface do usuário:</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="🎯 Desafio de Código">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>🎯 Desafio de Código
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Modularização</strong></p>
 <ul>
-<li><strong>Modularização da UI</strong>: Mova as funções <code>select_operation_int</code> e <code>select_operation_double</code> para um novo par de arquivos de utilitário (por exemplo, <code>ui.c</code>/<code>ui.h</code>). Isso ajuda a manter o arquivo principal (<code>calculator.c</code>) focado apenas na lógica de cálculo, separando a <strong>Interface do Usuário</strong> da <strong>Lógica de Negócios</strong>.</li>
-<li><strong>Refinamento do Tipo</strong>: Refine a UI criando uma função inicial que permita ao usuário escolher entre os tipos (<code>int</code> ou <code>double</code>) antes de chamar as funções de seleção de operação.</li>
+<li>Mova as funções <code>select_operation_int</code> e <code>select_operation_double</code> para um novo par de arquivos de utilitário (por exemplo, <code>ui.c</code>/<code>ui.h</code>). Isso ajuda a manter o arquivo principal (<code>calculator.c</code>) focado apenas na lógica de cálculo, separando a <strong>interface do usuário</strong> da <strong>lógica de negócios</strong>.</li>
 </ul>
-<p>Com isso, a arquitetura se torna ainda mais flexível e organizada.</p>
+<p><strong>Refinamento do Tipo</strong></p>
+<ul>
+<li>Refine a <strong>interface do usuário</strong> criando uma função inicial que permita ao usuário escolher entre os tipos (<code>int</code> ou <code>double</code>) antes de chamar as funções de seleção de operação.</li>
+</ul>
+</div>
+</div>
+<hr>
+<p>Nesta unidade, você aprendeu</p>
+<p>✅ a criar um projeto genérico com interface, implementação e uso</p>
+<p>✅ a aplicar os conceitos de função de ordem superior e <em>callback</em></p>
+<p>✅ a gerenciar o ciclo de vida dos objetos na memória alocando e desalocando</p>
+<p>✅ a compilar um projeto com mais de um arquivo <code>.c</code></p>
+<div class="progress-bar" id="progressBar"></div>
+
+<script>
+window.addEventListener("scroll", function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById("progressBar").style.width = scrollPercent + "%";
+});
+</script>
 
 
 </section>

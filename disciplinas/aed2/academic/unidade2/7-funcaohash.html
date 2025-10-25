@@ -296,7 +296,7 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../disciplinas.html"> 
+    <a class="nav-link" href="../../../../disciplinas/aed2/academic/index.html"> 
 <span class="menu-text">Recursos</span></a>
   </li>  
   <li class="nav-item">
@@ -565,6 +565,21 @@ window.Quarto = {
 <p>O método do quadrado central é uma técnica clássica de extração. A chave é elevada ao quadrado, e então o hash é formado pelos dígitos centrais do resultado. A quantidade de dígitos extraídos é indicada por <span class="math inline">\(d\)</span>.</p>
 <p>Apesar de ser simples, ele pode gerar um código hash razoavelmente bem distribuído. Como exemplo, considere uma <span class="math inline">\(k=931\)</span> e <span class="math inline">\(d=3\)</span>. <span class="math display">\[k^2=931^2=866761\]</span> Assim, podemos selecionar <span class="math inline">\(676\)</span>, ou até <span class="math inline">\(667\)</span>.</p>
 <p>Esses métodos apresentados podem ser combinados ou até mesmo utilizados como substitutos de uma função hash. Em sistemas mais complexos, essas abordagens costumam ser empregadas como etapas auxiliares dentro de funções de hash mais sofisticadas.</p>
+<hr>
+<p>Nesta unidade, você aprendeu</p>
+<p>✅ quais características uma função <em>hash</em> deve possuir</p>
+<p>✅ metódos clássicos para definir funções <em>hash</em></p>
+<p>✅ como mapear palavras e grandes números em chaves</p>
+<div class="progress-bar" id="progressBar"></div>
+
+<script>
+window.addEventListener("scroll", function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById("progressBar").style.width = scrollPercent + "%";
+});
+</script>
 
 
 </section>
