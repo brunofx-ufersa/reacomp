@@ -44,9 +44,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-023439531b09c5d34e467d9e2f831cae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-de1933d555e4b28134edcf86276d32cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown-init.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,7 +118,6 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../../../../styles.css">
 <link rel="stylesheet" href="../styles/academic.css">
 </head>
 
@@ -431,6 +434,104 @@ window.Quarto = {
 <p>✅ o que é uma tabela de dispersão dinâmica</p>
 <p>✅ a calcular o fator de carga</p>
 <p>✅ a importância do fator de carga no desempenho de uma tabela de dispersão</p>
+<div class="quizdown">
+# O que caracteriza uma tabela hash dinâmica? 
+
+&gt; Pense na principal diferença em relação à tabela hash estática.
+
+1. [ ] Uma tabela que nunca sofre colisões.  
+1. [x] Uma tabela que ajusta automaticamente seu tamanho conforme a quantidade de elementos.  
+1. [ ] Uma tabela que usa múltiplas funções hash ao mesmo tempo.  
+1. [ ] Uma tabela implementada apenas com encadeamento separado.  
+
+# Quando uma tabela hash deve **expandir** seu tamanho? 
+
+&gt; Observe o limite superior do fator de carga.
+
+1. [ ] Quando $\lambda &lt; 0.25$  
+1. [x] Quando $\lambda &gt; 0.7$  
+1. [ ] Quando $\lambda = 0$  
+1. [ ] Quando $\lambda = 1$  
+
+
+# Quando uma tabela hash deve **contrair** seu tamanho?  
+
+&gt; O texto cita o limite inferior.
+
+1. [x] Quando $\lambda &lt; 0.25$  
+1. [ ] Quando $\lambda &gt; 0.7$  
+1. [ ] Quando $\lambda &gt; 1$  
+1. [ ] Quando $\lambda = 0.75$  
+
+
+# O que representa o fator de carga $\lambda$? 
+
+&gt; Lembre-se da fórmula apresentada.
+
+1. [x] A razão entre o número de elementos armazenados e o tamanho total da tabela.  
+1. [ ] A soma dos índices ocupados da tabela.  
+1. [ ] O número de colisões dividido pelo tamanho da tabela.  
+1. [ ] O tempo médio de inserção em O(n).  
+
+
+# Quais são as etapas do processo de redimensionamento?   
+
+&gt; Coloque as três fases na ordem correta.
+
+1. Criação de uma nova tabela.  
+2. Re-hashing dos elementos.  
+3. Substituição da tabela antiga.  
+
+
+# Quais são vantagens da tabela hash dinâmica? 
+
+&gt; Elas estão listadas na seção de “Vantagens”.
+
+- [x] Otimização do uso de memória.  
+- [x] Manutenção do desempenho médio em O(1).  
+- [x] Facilidade de uso para o programador.  
+- [ ] Nenhum custo de redimensionamento.  
+
+
+# Quais são desvantagens da tabela hash dinâmica?  
+
+&gt; Observe os impactos durante o redimensionamento.
+
+- [x] Custo alto durante o redimensionamento.  
+- [x] Maior complexidade de implementação.  
+- [x] Possível perda temporária de desempenho de cache.  
+- [ ] Impossibilidade de armazenar chaves duplicadas.  
+
+
+# Se uma tabela tem 30 elementos e 50 posições, qual é o fator de carga $\lambda$?  
+
+&gt; Use $\lambda = \frac{n}{m}$.
+
+1. [ ] 0,25  
+1. [x] 0,6  
+1. [ ] 1,25  
+1. [ ] 0,15  
+
+
+# Qual é a consequência de um fator de carga muito alto? 
+
+&gt; Relacione com o número de colisões.
+
+1. [x] Aumento das colisões e degradação do desempenho.  
+1. [ ] Redução do número de colisões.  
+1. [ ] Melhoria no uso do cache da CPU.  
+1. [ ] Economia de memória.  
+
+# Qual analogia do texto representa melhor o comportamento da tabela hash dinâmica? 
+
+&gt; Pense no exemplo do móvel.
+
+1. [ ] Um armário que só aumenta e nunca diminui.  
+1. [x] Um móvel que expande e contrai conforme a quantidade de relógios.  
+1. [ ] Um cofre com compartimentos fixos.  
+1. [ ] Um sistema de arquivos linear.  
+
+</div>
 <div class="progress-bar" id="progressBar"></div>
 
 <script>

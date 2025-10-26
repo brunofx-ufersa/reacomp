@@ -45,9 +45,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-023439531b09c5d34e467d9e2f831cae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-de1933d555e4b28134edcf86276d32cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown-init.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -118,7 +122,6 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../../../../styles.css">
 <link rel="stylesheet" href="../styles/academic.css">
 </head>
 
@@ -366,7 +369,7 @@ window.Quarto = {
 
 
 <p>A função <em>hash</em> é usada para mapear uma chave para um valor, gerando um código hash que, por sua vez, é usado para encontrar a localização de um item em uma estrutura de dados como uma tabela hash.</p>
-<div class="cell" data-layout-align="default">
+<div class="cell" data-fig-width="6.5" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
@@ -641,6 +644,167 @@ window.Quarto = {
 <p>✅ quais características uma função <em>hash</em> deve possuir</p>
 <p>✅ metódos clássicos para definir funções <em>hash</em></p>
 <p>✅ como mapear palavras e grandes números em chaves</p>
+<div class="quizdown">
+# O que é uma função hash?
+
+&gt; Pense no papel dela dentro de uma tabela de dispersão.
+
+1. [ ] Um algoritmo que ordena elementos de forma crescente.
+1. [x] Uma função que transforma uma chave em um índice de armazenamento.
+1. [ ] Uma técnica de compressão de dados.
+1. [ ] Uma estrutura de dados hierárquica.
+
+
+# Quais são características desejáveis de uma boa função hash? 
+
+&gt; Elas influenciam diretamente na eficiência e distribuição das chaves.
+
+- [x] Ser fácil de calcular.
+- [x] Produzir distribuição uniforme dos dados.
+- [x] Minimizar colisões.
+- [ ] Depender de operações aleatórias complexas.
+
+
+# No método da divisão, qual das opções expressa corretamente a função hash? 
+
+&gt; Observe a operação usada para gerar o índice.
+
+1. [x] $h(k) = k \bmod m$
+1. [ ] $h(k) = k / m$
+1. [ ] $h(k) = k^2 \bmod m$
+1. [ ] $h(k) = \sqrt{k} \bmod m$
+
+
+# Por que é ideal escolher $m$ como um número primo no método da divisão? 
+
+&gt; Isso afeta a forma como os valores se espalham na tabela.
+
+1. [x] Porque ajuda a distribuir as chaves de forma mais uniforme.
+1. [ ] Porque facilita o cálculo de raízes quadradas.
+1. [ ] Porque garante que não ocorram colisões.
+1. [ ] Porque simplifica a implementação de XOR.
+
+
+# Considere $h(k) = k \bmod 101$. Qual o valor de $h(12345)$?
+
+&gt; Aplique o operador módulo diretamente.
+
+1. [ ] 12
+1. [x] 22
+1. [ ] 45
+1. [ ] 99
+
+
+# Quais são as etapas do método da multiplicação?
+
+&gt; Relembre a ordem dos cálculos realizados.
+
+1. Multiplicar a chave ($k$) por uma constante $A$ entre 0 e 1.  
+2. Extrair a parte fracionária de $kA$.  
+3. Multiplicar o resultado por $m$.  
+4. Arredondar para baixo.
+
+
+# No método da multiplicação, qual é uma vantagem importante? 
+
+&gt; Observe a observação sobre o tamanho da tabela.
+
+1. [ ] É ideal quando $m$ é primo.  
+1. [x] É adequado quando o tamanho da tabela é uma potência de dois.  
+1. [ ] Garante ausência total de colisões.  
+1. [ ] Dispensa o uso do operador módulo.
+
+
+# O que caracteriza o hashing universal? 
+
+&gt; Está relacionado à escolha aleatória de funções.
+
+1. [ ] Usa apenas o método da divisão.  
+1. [ ] Calcula o hash como a média de várias funções.  
+1. [x] Escolhe aleatoriamente uma função de uma família de funções que minimiza colisões.  
+1. [ ] Utiliza constantes irracionais para dispersão.
+
+
+# A fórmula do hashing universal $h_{a,b}(k)=((ak+b)\bmod p)\bmod m$ contém quais parâmetros aleatórios?
+
+&gt; Eles são escolhidos no início do processo.
+
+- [x] $a$
+- [x] $b$
+- [ ] $p$
+- [ ] $m$
+
+
+# Quais são métodos clássicos para transformar _strings_ em inteiros? 
+
+&gt; Pense nos dois tipos mencionados no texto.
+
+- [x] Soma dos valores ASCII.  
+- [x] Multiplicação polinomial.  
+- [ ] Hashing universal.  
+- [ ] Método da divisão.
+
+
+# Por que a multiplicação polinomial é superior à soma simples? 
+
+&gt; Compare o que cada método considera.
+
+1. [x] Porque considera a ordem dos caracteres.  
+1. [ ] Porque ignora os valores ASCII.  
+1. [ ] Porque usa números compostos.  
+1. [ ] Porque sempre gera números primos.
+
+
+# Se $\beta = 13$, qual é o valor de $k$ para a palavra "BA"? 
+
+&gt; Use a fórmula da multiplicação polinomial.
+
+1. [ ] 911  
+1. [x] 923  
+1. [ ] 1213  
+1. [ ] 1001  
+
+
+# No método de dobramento (folding), o que fazemos com a chave?
+
+&gt; Veja como ela é reduzida.
+
+1. [x] Dividimos em partes menores e as combinamos por soma ou XOR.  
+1. [ ] Multiplicamos por um número primo e aplicamos módulo.  
+1. [ ] Extraímos os dígitos centrais do quadrado da chave.  
+1. [ ] Aplicamos o logaritmo da chave.
+
+
+# No exemplo do método XOR, qual foi o resultado decimal final? 
+
+&gt; Observe a conversão final do número binário.
+
+1. [ ] 512  
+1. [ ] 5900  
+1. [x] 590  
+1. [ ] 676
+
+
+# O método do quadrado central (mid-square) consiste em:
+
+&gt; Ele é simples, mas eficaz.
+
+1. [ ] Somar as partes da chave.  
+1. [x] Elevar a chave ao quadrado e extrair os dígitos centrais.  
+1. [ ] Dividir a chave por um número primo.  
+1. [ ] Converter a chave em binário e aplicar XOR.
+
+
+# Quais métodos são indicados para mapear inteiros muito grandes? 
+
+&gt; Lembre dos três apresentados no texto.
+
+- [x] Dobramento (folding)  
+- [x] XOR  
+- [x] Quadrado central (mid-square)  
+- [ ] Divisão inteira simples
+
+</div>
 <div class="progress-bar" id="progressBar"></div>
 
 <script>

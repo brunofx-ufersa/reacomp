@@ -44,9 +44,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-023439531b09c5d34e467d9e2f831cae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-5507107efa3b558344c9681f4ca7970d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-de1933d555e4b28134edcf86276d32cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
 <script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
 <script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
@@ -118,7 +118,6 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../../../../styles.css">
 <link rel="stylesheet" href="../styles/academic.css">
 </head>
 
@@ -426,21 +425,19 @@ window.Quarto = {
 <p>Dessa maneira, nosso vetor resultante seria:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 7%">
-<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 8%">
 <col style="width: 10%">
 <col style="width: 10%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 8%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>slot</th>
 <th style="text-align: center;">0</th>
 <th style="text-align: center;">1</th>
 <th style="text-align: center;">2</th>
@@ -455,13 +452,12 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td>id</td>
 <td style="text-align: center;">❌</td>
 <td style="text-align: center;">Espada Longa</td>
 <td style="text-align: center;">Poção de Vida</td>
-<td style="text-align: center;">Pão Velho</td>
+<td style="text-align: center;">Armadura de Bronze</td>
 <td style="text-align: center;">❌</td>
-<td style="text-align: center;">Armadura de Couro</td>
+<td style="text-align: center;">Armadura de Ouro</td>
 <td style="text-align: center;">❌</td>
 <td style="text-align: center;">❌</td>
 <td style="text-align: center;">Amuleto Raro</td>
@@ -474,7 +470,7 @@ window.Quarto = {
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong><span class="text-warning">Se liga!</span></strong> Essa técnica permite economizar memória e acessar elementos em tempo constante, O(1).</p>
-</div></div><p>Um questionamento comum acontece quando a função retorna o mesmo valor para duas chaves distintas. Por exemplo, com uma chave <span class="math inline">\(25\)</span>, teremos <span class="math inline">\(f(25)=25\bmod 10=5\)</span>, mas a posição <span class="math inline">\(5\)</span> já está ocupada e o vetor não está totalmente preenchido. Hesse caso, dizemos que ocorreu uma colisão.</p>
+</div></div><p>Um questionamento comum acontece quando a função retorna o mesmo valor para duas chaves distintas. Por exemplo, com uma chave <span class="math inline">\(25\)</span>, teremos <span class="math inline">\(f(25)=25\bmod 10=5\)</span>, mas a posição <span class="math inline">\(5\)</span> já está ocupada e o vetor não está totalmente preenchido. Nesse caso, dizemos que ocorreu uma <strong>colisão</strong>.</p>
 <p>Colisões são indesejáveis! Precisamos de funções bem definidas para evitar esse tipo de problema.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -484,6 +480,97 @@ window.Quarto = {
 <p>✅ o que é uma tabela de dispersão</p>
 <p>✅ onde uma tabela de dispersão é usada</p>
 <p>✅ como é controlada a entrada na tabela de dispersão</p>
+<div class="quizdown">
+
+# O que é uma tabela de dispersão ?
+
+&gt; Pense na principal característica que a torna eficiente.
+
+1. [ ] Uma estrutura que armazena elementos de forma sequencial.
+1. [x] Uma estrutura que mapeia chaves a posições em um vetor usando uma função de hash.
+1. [ ] Um tipo especial de árvore binária balanceada.
+1. [ ] Um vetor ordenado que permite busca binária.
+
+
+# Qual é a principal função da função de hash em uma tabela de dispersão?
+
+&gt; Ela define como os elementos são distribuídos.
+
+1. [ ] Ordenar as chaves em ordem crescente.
+1. [x] Converter uma chave em um índice válido da tabela.
+1. [ ] Calcular o número total de colisões.
+1. [ ] Garantir que não haja duplicatas.
+
+
+# O que o operador módulo faz no cálculo do hash?
+
+&gt; Ele define o intervalo possível de posições.
+
+1. [x] Retorna o resto da divisão da chave por um número fixo.
+1. [ ] Retorna o quociente da divisão inteira.
+1. [ ] Multiplica a chave pelo tamanho do vetor.
+1. [ ] Subtrai a chave de 10.
+
+
+# Dado o hash $h(k) = k \bmod 9$, qual é o valor de $h(21)$? 
+
+&gt; Basta aplicar a operação de módulo.
+
+1. [ ] 0
+1. [x] 3
+1. [ ] 2
+1. [ ] 9
+
+
+# O que caracteriza uma colisão em uma tabela de dispersão? 
+
+&gt; É quando duas chaves competem pelo mesmo espaço.
+
+1. [ ] Quando duas chaves possuem o mesmo endereço.
+1. [x] Quando duas chaves diferentes são mapeadas para o mesmo índice.
+1. [ ] Quando uma chave é removida da tabela.
+1. [ ] Quando o vetor está completamente vazio.
+
+
+# Quais são consequências de uma função de hash mal projetada?
+
+&gt; Pense nos efeitos diretos sobre desempenho e armazenamento.
+
+- [x] Aumento do número de colisões.
+- [x] Desempenho pior nas buscas.
+- [ ] Redução automática do tamanho da tabela.
+- [ ] Melhoria na aleatoriedade das chaves.
+
+
+# Qual é a complexidade média de acesso a um elemento em uma tabela de dispersão bem implementada?
+
+&gt; A eficiência é o principal atrativo dessa estrutura.
+
+1. [x] O(1)
+1. [ ] O(log n)
+1. [ ] O(n)
+1. [ ] O(n log n)
+
+
+# Qual das opções descreve melhor uma função de hash simples?
+
+&gt; Baseie-se no exemplo do texto.
+
+1. [ ] Uma função que ordena as chaves antes de armazená-las.
+1. [ ] Uma função que soma todos os dígitos da chave.
+1. [x] Uma função que calcula o resto da divisão da chave pelo tamanho do vetor.
+1. [ ] Uma função que gera um número aleatório.
+
+
+# Quais aplicações reais fazem uso de tabelas de dispersão?
+
+&gt; Elas aparecem em vários contextos computacionais.
+
+- [x] Dicionários em linguagens de programação.
+- [x] Caches de navegadores.
+- [x] Índices de bancos de dados.
+- [ ] Árvores de decisão para IA.
+</div>
 <div class="progress-bar" id="progressBar"></div>
 
 <script>
