@@ -66,9 +66,9 @@ Aplicando a função aos nossos itens:
 Dessa maneira, nosso vetor resultante seria:
 
 
-|slot | 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
-|-----| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
-| id  | ❌ | Espada Longa  | Poção de Vida  | Pão Velho | ❌ | Armadura de Couro | ❌ | ❌ | Amuleto Raro | ❌ |
+| 0   | 1    |  2   | 3  | 4  | 5   | 6   | 7   | 8   | 9  |
+| :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
+| ❌ | Espada Longa  | Poção de Vida  | Armadura de Bronze | ❌ | Armadura de Ouro | ❌ | ❌ | Amuleto Raro | ❌ |
 
 Agora, para verificar se o jogador possui o Amuleto Raro, basta aplicar novamente a mesma função: $h(18) = 18 \bmod 10 = 8$.
 
@@ -79,7 +79,7 @@ Sem precisar percorrer todo o _array_, o jogo já sabe que o item (se existir) e
 Essa técnica permite economizar memória e acessar elementos em tempo constante, O(1).
 :::
 
-Um questionamento comum acontece quando a função retorna o mesmo valor para duas chaves distintas. Por exemplo, com uma chave $25$, teremos $f(25)=25\bmod 10=5$, mas a posição $5$ já está ocupada e o vetor não está totalmente preenchido. Hesse caso, dizemos que ocorreu uma colisão.
+Um questionamento comum acontece quando a função retorna o mesmo valor para duas chaves distintas. Por exemplo, com uma chave $25$, teremos $f(25)=25\bmod 10=5$, mas a posição $5$ já está ocupada e o vetor não está totalmente preenchido. Nesse caso, dizemos que ocorreu uma **colisão**.
 
 Colisões são indesejáveis! Precisamos de funções bem definidas para evitar esse tipo de problema.
 
@@ -97,5 +97,98 @@ Nesta unidade, você aprendeu
 ✅ onde uma tabela de dispersão é usada
 
 ✅ como é controlada a entrada na tabela de dispersão 
+
+
+```quizdown
+
+# O que é uma tabela de dispersão ?
+
+> Pense na principal característica que a torna eficiente.
+
+1. [ ] Uma estrutura que armazena elementos de forma sequencial.
+1. [x] Uma estrutura que mapeia chaves a posições em um vetor usando uma função de hash.
+1. [ ] Um tipo especial de árvore binária balanceada.
+1. [ ] Um vetor ordenado que permite busca binária.
+
+
+# Qual é a principal função da função de hash em uma tabela de dispersão?
+
+> Ela define como os elementos são distribuídos.
+
+1. [ ] Ordenar as chaves em ordem crescente.
+1. [x] Converter uma chave em um índice válido da tabela.
+1. [ ] Calcular o número total de colisões.
+1. [ ] Garantir que não haja duplicatas.
+
+
+# O que o operador módulo faz no cálculo do hash?
+
+> Ele define o intervalo possível de posições.
+
+1. [x] Retorna o resto da divisão da chave por um número fixo.
+1. [ ] Retorna o quociente da divisão inteira.
+1. [ ] Multiplica a chave pelo tamanho do vetor.
+1. [ ] Subtrai a chave de 10.
+
+
+# Dado o hash $h(k) = k \bmod 9$, qual é o valor de $h(21)$? 
+
+> Basta aplicar a operação de módulo.
+
+1. [ ] 0
+1. [x] 3
+1. [ ] 2
+1. [ ] 9
+
+
+# O que caracteriza uma colisão em uma tabela de dispersão? 
+
+> É quando duas chaves competem pelo mesmo espaço.
+
+1. [ ] Quando duas chaves possuem o mesmo endereço.
+1. [x] Quando duas chaves diferentes são mapeadas para o mesmo índice.
+1. [ ] Quando uma chave é removida da tabela.
+1. [ ] Quando o vetor está completamente vazio.
+
+
+# Quais são consequências de uma função de hash mal projetada?
+
+> Pense nos efeitos diretos sobre desempenho e armazenamento.
+
+- [x] Aumento do número de colisões.
+- [x] Desempenho pior nas buscas.
+- [ ] Redução automática do tamanho da tabela.
+- [ ] Melhoria na aleatoriedade das chaves.
+
+
+# Qual é a complexidade média de acesso a um elemento em uma tabela de dispersão bem implementada?
+
+> A eficiência é o principal atrativo dessa estrutura.
+
+1. [x] O(1)
+1. [ ] O(log n)
+1. [ ] O(n)
+1. [ ] O(n log n)
+
+
+# Qual das opções descreve melhor uma função de hash simples?
+
+> Baseie-se no exemplo do texto.
+
+1. [ ] Uma função que ordena as chaves antes de armazená-las.
+1. [ ] Uma função que soma todos os dígitos da chave.
+1. [x] Uma função que calcula o resto da divisão da chave pelo tamanho do vetor.
+1. [ ] Uma função que gera um número aleatório.
+
+
+# Quais aplicações reais fazem uso de tabelas de dispersão?
+
+> Elas aparecem em vários contextos computacionais.
+
+- [x] Dicionários em linguagens de programação.
+- [x] Caches de navegadores.
+- [x] Índices de bancos de dados.
+- [ ] Árvores de decisão para IA.
+```
 
 {{< include /_includes/progress-bar.qmd >}}

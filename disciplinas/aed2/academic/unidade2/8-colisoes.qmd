@@ -7,6 +7,8 @@ format:
   html:
     reference-location: margin
     css: ../styles/academic.css 
+filters: 
+    - quizdown
 ---
 
 
@@ -511,6 +513,81 @@ Nesta unidade, você aprendeu
 
 ✅ os principais metódos para tratar colisões
  
+
+```quizdown
+
+# Quando ocorre uma colisão em uma tabela hash?
+
+> Pense no resultado da função hash para chaves diferentes.
+
+1. [ ] Quando duas chaves são idênticas.  
+1. [x] Quando duas chaves diferentes produzem o mesmo valor hash.  
+1. [ ] Quando o vetor está totalmente vazio.  
+1. [ ] Quando a função hash retorna sempre zero.  
+
+
+# Quais são as principais técnicas para tratamento de colisões?
+
+> Existem duas abordagens gerais descritas no texto.
+
+- [x] Endereçamento aberto  
+- [x] Encadeamento separado  
+- [ ] Sondagem aleatória  
+- [ ] Redimensionamento dinâmico  
+
+
+# Complete a ordem correta das sondagens no endereçamento aberto!
+
+> Considere o modo como o algoritmo busca novas posições vazias.
+
+1. Sondagem linear  
+2. Sondagem quadrática  
+3. Duplo hash  
+
+# Como funciona a sondagem linear?
+
+> Veja a fórmula $h(k,i) = (h'(k) + i) \bmod m$.
+
+1. [ ] Utiliza duas funções hash diferentes.  
+1. [x] Incrementa o índice em uma unidade até encontrar posição vazia.  
+1. [ ] Usa potências de $i$ para procurar posições.  
+1. [ ] Usa listas encadeadas para armazenar colisões.  
+
+# Na sondagem quadrática, a função hash usa quais termos?
+
+> Observe a fórmula $h(k,i) = (h'(k) + c_1 i + c_2 i^2) \bmod m$.
+
+- [x] Um termo linear ($c_1 i$)  
+- [x] Um termo quadrático ($c_2 i^2$)  
+- [ ] Um termo cúbico ($c_3 i^3$)  
+- [ ] Um termo logarítmico ($\log i$)  
+
+# No duplo hash, o cálculo depende de duas funções hash. Quais delas são usadas?
+
+> Elas aparecem como $h_1(k)$ e $h_2(k)$.
+
+- [x] $h_1(k)$  
+- [x] $h_2(k)$  
+- [ ] $h_3(k)$  
+- [ ] Nenhuma, é uma sondagem linear disfarçada  
+
+# Coloque em ordem os três métodos de endereçamento aberto apresentados!
+
+> Do mais simples ao mais sofisticado.
+
+1. Sondagem linear  
+2. Sondagem quadrática  
+3. Duplo hash  
+
+# Qual é a ideia principal do encadeamento separado?
+
+> Considere o uso de ponteiros e listas encadeadas.
+
+1. [ ] Procurar um slot vazio no vetor.  
+1. [ ] Remover elementos duplicados automaticamente.  
+1. [x] Manter listas encadeadas separadas para cada posição da tabela.  
+1. [ ] Usar funções hash aleatórias para evitar colisões.  
+```
 
 {{< include /_includes/progress-bar.qmd >}}
 

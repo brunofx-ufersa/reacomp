@@ -73,14 +73,14 @@ format:
   html:
     highlight-style: a11y
     theme:
-      light: flatly
-      dark: darkly
-    css: styles.css
+      light: [litera, styles.scss]
+      dark:  [darkly, styles-dark.scss]
     toc: true
     code-line-numbers: true
     code-block-bg: true
     code-block-border-left: "#31BAE9"
 
+  
 execute:      # Freezing Computations
   freeze: auto
 

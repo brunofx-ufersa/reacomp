@@ -12,6 +12,8 @@ filters:
     - quizdown
 ---
 
+
+
 Por muito tempo, construir estruturas de dados, como listas e árvores, exigia que os desenvolvedores as reescrevessem para cada tipo de dado. Era uma batalha constante: uma lista para números inteiros, outra para textos, outra para dados de usuários, e assim por diante. Essa repetição não apenas consumia tempo, mas também abria portas para erros e inconsistências.
 
 A ideia de estruturas genéricas é poder construir estruturas universais que podem ser aplicadas em qualquer projeto. Embora a linguagem C não tenha suporte nativo a "genéricos", como C++ ou Java, a solução tradicional e elegante é usar ponteiros `void*` e funções de _callback_. 
@@ -168,6 +170,41 @@ printf("idade_ptr: %x\n", idade_ptr);   // Endereço de idade
 printf("*idade_ptr: %d\n", *idade_ptr); // Conteúdo de idade
 ```
 
+Para fixação, observe o diagrama de sequência que ilustra os processos de declação e desreferenciação. 
+
+
+```{.c code-line-numbers="false"}
+int x = 10;
+int *ptr = &x;
+int y = *ptr;  // desreferenciação
+```
+
+
+```{mermaid}
+sequenceDiagram
+    participant Stack as Memória (Stack)
+    participant X as Variável x
+    participant Ptr as Ponteiro ptr
+    participant CPU as CPU/Programa
+
+    Note over CPU,Stack: Declaração e atribuição inicial
+    CPU->>Stack: Aloca espaço para x = 10
+    Stack->>X: Cria x (valor=10, endereço=0x1000)
+
+    Note over CPU,Ptr: Ponteiro recebe o endereço de x
+    CPU->>Ptr: ptr = &x
+    Ptr->>Stack: Guarda endereço 0x1000
+
+    Note over CPU,Stack: Desreferenciação
+    CPU->>Ptr: lê conteúdo de ptr
+    Ptr-->>Stack: endereço 0x1000
+    Stack-->>CPU: retorna valor armazenado (10)
+    CPU->>Stack: y = 10
+
+    Note right of CPU: *ptr lê o valor armazenado em x
+```
+
+
 Além de ler o conteúdo de uma variável, também podemos modificá-lo **indiretamente** usando ponteiros:
 
 ```{.c code-line-numbers="false"}
@@ -178,6 +215,7 @@ double *meta_ptr = &meta;
 printf("meta: %.2f\n", meta); // meta: 10.00
 ```
 Mudamos o valor de `meta` sem acessá-la diretamente. Isso é o poder dos ponteiros!
+
 
 
 ::: {.callout-note icon="false" title="🎯 Desafio de Código"}
