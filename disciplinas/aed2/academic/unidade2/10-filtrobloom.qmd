@@ -1,0 +1,108 @@
+---
+title: "Filtro de Bloom"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+filters: 
+    - quizdown    
+---
+
+O **filtro de Bloom** é uma aplicação da tabela hash que indica a relação de pertinência de um elemento e um conjunto. O filtro possui duas saídas:
+
+- **Certeza** que o elemento **não pertence**;
+- **Talvez** o elemento **pertença**;
+
+Imagine que, em um sistema com milhares de usuários, seu programa deve verificar se um login está disponível. Não é salutar percorrer todos os usuários cadastrados devido a latência. O filtro de Bloom pode ser útil para casos como esse que envolvem verificação de pertinência de conjunto em sistemas de grande escala.
+
+## Construção
+
+O filtro de Bloom é composto por um array de bits e algumas funções hash. Toda vez que um elemento é inserido no sistema, são calculados os hashs. Os resultados indicam as posições nas quais os bits devem se tornar $1$. 
+
+Por exemplo, considere um filtro com tamanho $m=5$ e as funções $h_1(k)=k\bmod 5$ e $h_2(k)=(2k+3)\bmod 5$. Vamos inserir as chaves $9$ e $11$:
+
+::: {style="width: 60%; margin: auto;"}
+| 0   | 1    |  2   | 3  | 4  |   
+| :----: | :-----: | :-----: | :---: | :---: |  
+| 0 | 0  | 0  | 0 |  0 |
+:::
+
+
+- $h_1(9)=9\bmod 5=4$
+- $h_2(9)=(2\cdot9+3)\bmod 5=21\bmod 5=1$
+
+Portanto, as posições $1$ e $4$ são setadas para $1$:
+
+::: {style="width: 60%; margin: auto;"}
+| 0   | 1    |  2   | 3  | 4  |   
+| :----: | :-----: | :-----: | :---: | :---: |  
+| 0 | 1  | 0  | 0   | 1 |
+:::
+
+
+- $h_1(11)=11\bmod 5=1$
+- $h_2(11)=(2\cdot11+3)\bmod 5=25\bmod 5=0$
+
+Portanto, as posições $0$ e $1$ são setadas para $1$:
+
+::: {style="width: 60%; margin: auto;"}
+| 0   | 1    |  2   | 3  | 4  |   
+| :----: | :-----: | :-----: | :---: | :---: |  
+| 1 | 1  | 0  | 0   | 1 |
+:::
+
+De posse de nosso vetor de bits, vamos pesquisar se algumas chaves foram inseridas. Primeiro, a chave $15$:
+
+- $h_1(15)=15\bmod 5=0$
+- $h_2(15)=(2\cdot15+3)\bmod 5=33\bmod 5=3$
+
+Verifacamos no filtro que a posição $0$ está setada com bit $1$, mas a posição $3$ não. Portanto, temos certeza que a chave $15$ nunca foi inserida. 
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Se ao menos um posição for zero, então temos certeza que o elemento nunca foi inserido no sistema
+:::
+
+Agora, testemos o chave $16$:
+
+- $h_1(16)=16\bmod 5=1$
+- $h_2(16)=(2\cdot16+3)\bmod 5=35\bmod 5=0$
+
+Verificamos no filtro que as posições $0$ e $1$ estão setadas com bit $1$. Nesse caso, **provavelmente** a chave $12$ foi inserida. Portanto, dizemos que $12$ é um falso positivo. 
+
+```{mermaid}
+flowchart TD
+ subgraph Filtro[" "]
+        Input["Elemento"]
+        H1{"Função Hash 1"}
+        H2{"Função Hash 2"}
+        HK{"... Função Hash k"}
+        BitArray("Array de Bits M")
+  end
+ subgraph Verificação[" "]
+        Verificacao@{ label: "Todos os índices gerados estão marcados '1'?" }
+        Saida_Nao[["O elemento **NÃO** pertence"]]
+        Saida_Talvez[["**Talvez** o elemento PERTENÇA"]]
+  end
+    Input --> H1 & H2 & HK
+    H1 -- Índice 1 --> BitArray
+    H2 -- Índice 2 --> BitArray
+    HK -- Índice k --> BitArray
+    BitArray --> Verificacao
+    Verificacao -- NÃO --> Saida_Nao
+    Verificacao -- SIM --> Saida_Talvez
+
+    Verificacao@{ shape: diamond}
+    style Verificação stroke:none,fill:transparent
+    style Filtro stroke:none,fill:transparent
+```    
+
+
+
+
+
+

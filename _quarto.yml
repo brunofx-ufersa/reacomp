@@ -20,6 +20,8 @@ website:
       - href: blog.qmd
         text: Blog
       - about.qmd
+      - href: atividades.qmd
+        text: Tarefas
   page-footer: 
     border: false
     background: light
@@ -54,7 +56,8 @@ website:
         - disciplinas/aed2/academic/unidade2/7-funcaohash.qmd
         - disciplinas/aed2/academic/unidade2/8-colisoes.qmd
         - disciplinas/aed2/academic/unidade2/9-tabeladinamica.qmd
-       
+        - disciplinas/aed2/academic/unidade2/10-filtrobloom.qmd
+        - disciplinas/aed2/academic/unidade2/11-exercicios.qmd
     - title: "How-To"
       contents:
         - howto.qmd
