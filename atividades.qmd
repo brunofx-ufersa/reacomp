@@ -101,24 +101,27 @@ Além disso, **todos os prompts utilizados** para gerar conteúdo com IA devem s
 ## Resultado do Sorteio
 
 
-| Grupo                    | Tópico |
-|--------------------------|--------|
-| Ennio & Venâncio         |   11   |
-| Ruan & Kayck             |   20   |
-| Thiago & Amanda          |   15   |
-| Lyrian & Manoel          |   04   |
-| Marcelo & Emerson        |   21   |
-| André & João             |   14   |
-| Felipe & Adrian          |   08   |
-| Anderson & Marília       |   07   |
-| Moisés & João            |   03   |
-| Gabriel & Karllos        |   09   |
-| Guilherme & JP Fernandes |   13   |
-| Pedro & Thiago           |   10   |
-| Frederico & Guilherme    |   18   |
-| João & Vinícius          |   05   |
-| Kayke & Gabriel          |   02   |
-| Luiza & Pedro Emanuel    |   19   |
-| Aline & Candido          |   17   |
+| Ordem | Grupo                    | Tópico |
+|-------|--------------------------|--------|
+|   1   | Ennio & Venâncio         |   11   |
+|   2   | Ruan & Kayck             |   20   |
+|   3   | Thiago & Amanda          |   15   |
+|   4   | Lyrian & Manoel          |   04   |
+|   5   | Marcelo & Emerson        |   21   |
+|   6   | André & João             |   14   |
+|   7   | Felipe & Adrian          |   08   |
+|   8   | Anderson & Marília       |   07   |
+|   9   | Moisés & João            |   03   |
+|   10  | Gabriel & Karllos        |   09   |
+|   11  | Guilherme & JP Fernandes |   13   |
+|   12  | Pedro & Thiago           |   10   |
+|   13  | Frederico & Guilherme    |   18   |
+|   14  | João & Vinícius          |   05   |
+|   15  | Kayke & Gabriel          |   02   |
+|   16  | Luiza & Pedro Emanuel    |   19   |
+|   17  | Aline & Candido          |   17   |
+|   18  | Orlando                  |   06   |
+|   19  | Natanael                 |   12   |
+|   20  | Levi & Rafael            |   01   |
 
 Sorteio realizado em 28 de outubro de 2025.
