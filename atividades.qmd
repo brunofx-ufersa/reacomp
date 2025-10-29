@@ -1,0 +1,176 @@
+---
+title: "Atividade da Segunda Unidade"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+---
+
+## Descrição da Atividade
+
+Nesta atividade, vocês deverão produzir, em duplas, **artigos curtos** sobre temas de **programação em C**, que serão sorteados em sala. O objetivo é que cada dupla desenvolva uma **explicação clara e didática** sobre o tema, incluindo exemplos de código comentados e orientações conceituais, de forma que o material seja útil tanto para estudo próprio quanto para consulta por outros alunos no portal de recursos abertos.
+
+Cada artigo deverá ser elaborado utilizando a linguagem de marcação **Markdown**, no editor de sua preferência
+
+Os artigos selecionados poderão ser publicados no **Portal Aberto de Recursos em Computação**, com os devidos créditos aos autores.
+
+## Orientações e Regras
+
+- A atividade deve ser realizada **em duplas**. 
+- Cada dupla será responsável por um tema **sorteado**.
+- O artigo deve ser **original** e escrito pelos alunos.
+- Evite copiar e colar trechos sem comentários ou explicações próprias.
+
+## Estrutura do Arquivo
+
+O arquivo Markdown deve conter obrigatoriamente um conjunto de metadados com os seguintes campos:
+
+```markdown
+---
+title: "Título do artigo"
+lang: pt-BR
+description: "Breve descrição do conteúdo"
+author: ["Nome do autor 1", "Nome do autor 2"]
+date: "YYYY-MM-DD"
+categories:
+  - palavra-chave-1 
+  - palavra-chave-2
+  - palavra-chave-3  
+---
+```
+
+O restante do artigo pode seguir livremente, basta seguir um ordem lógica (consulte o blog para ter uma ideia). Mas, recomenda-se que o artigo contenha:
+
+- **Introdução ao tema**
+	- Contextualização e motivação para o assunto.
+- **Explicação conceitual**
+	- Definição dos conceitos principais e relação com a linguagem C.
+- **Exemplos de código**
+	- Blocos curtos e comentados, ilustrando a aplicação prática do conceito.
+- **Boas práticas e cuidados**
+	- Dicas sobre armadilhas, limitações ou alternativas.
+- **Conclusão**
+	- Resumo do aprendizado e possíveis aplicações do conhecimento.
+- **Links úteis e referências**
+
+## Entrega
+
+A entrega deverá ser realizada pelo sigaa por um dos componentes da dupla. O arquivo deve ter o formado `.md` com o nome `numero_do_tema-sobrenome1-sobrenome2.md`, por exemplo `9-silva-souza.md`.
+
+Os critérios de avaliação serão: clareza, organização, formatação e presença de exemplos comentados. 
+
+Essa atividade valerá 25% da nota da segunda unidade e deverá ser entregue até uma semana após o sorteio dos temas.
+
+## Disclaimer
+
+É permitido utilizar ferramentas de Inteligência Artificial (IA) para auxiliar na elaboração do artigo.  Contudo, é **obrigatório** indicar claramente quais partes do artigo foram produzidas ou revisadas com IA, informando a tarefa realizada. Por exemplo:
+
+- Geração de código para exemplos em C.
+- Revisão ou correção do texto explicativo.
+
+Além disso, **todos os prompts utilizados** para gerar conteúdo com IA devem ser enviados junto com o artigo.  
+
+## Temas para Sorteio
+
+1. Manipulação de arquivos em C (`fopen`, `fread`, `fwrite`, `fclose`, `fprintf`, `fscanf`)
+2. Argumentos da função `main` (`argc`, `argv`) e _parsing_ básico de linha de comando
+3. Bibliotecas estáticas (`.a`) e dinâmicas (`.so`) em C 
+4. Tratamento de erros com `errno` e `perror`
+5. Configurando WSL/Ubuntu + GCC + VS Code no Windows
+6. Compilação avançada com GCC: flags úteis e otimização
+7. Diferença entre `struct` e `union` 
+8. _Bit Fields_ e operações bit a bit em C
+9. Depuração básica com o `gdb`
+10. Ponteiros `const` e `const` Ponteiros
+11. Medição de tempo de execução com `clock()`
+12. Macros e diretivas de pré-processamento (`#define`, `#ifdef`, `#ifndef`)
+13. Uso de `static`: variáveis persistentes e encapsulamento de funções
+14. Classes de armazenamento: `auto`,  `static` e `extern`
+15. Manipulação de _strings_ (funções básicas da biblioteca `string.h`)
+16. Programação modular (arquivos `.h` e `.c`)
+17. Detecção de vazamentos de memória com `valgrind` 
+18. Funções em C (protótipos, passagem por valor e por referência)
+19. Escopo e tempo de vida de variáveis (variáveis locais, globais e estáticas; _stack_, _heap_ e segmento de dados) 
+20. Funções recursivas e recursão em cauda
+21. Tipo Abstrato de Dados (TAD) : conceito, motivação e exemplos simples em C
+22. Inteiros sem sinal e tipos inteiros portáveis (`unsigned`, `size_t`, `uint32_t` etc.)
+
+
+## Resultado do Sorteio
+
+| Grupo           | Tópico |
+|-----------------|--------|
+| Ennio Bobô      |  11    |
+| Venâncio Neto   |        |
+
+
+Ruan Bezerra
+Kayck Abrantes 
+20
+
+Thiago Dantas
+Amanda Chaves
+15
+
+
+Lyrian Ribeiro
+Manoel Neto  
+4
+
+Marcelo Fernandes 
+Emerson Santos
+21
+
+
+André Jales
+João Barbosa
+14
+
+Felipe da Silva
+Adrian Costa 
+8
+
+Anderson Morais
+Marília Andrade
+7
+
+Moisés Lucarelly
+João Lima 
+3
+
+Francisco Martins
+Karllos Costa
+9
+
+Guilherme Gabriel
+JP Fernandes 
+13
+
+Pedro Lima
+Thiago Lima
+10
+
+
+Frederico Ferreira
+Guilherme Aguiar 
+18
+
+Joao Ferreira
+Vinicius Alencar
+5
+
+Kayke Ferreira
+Gabriel de Freitas
+2
+
+Maria Luiza
+Pedro Emanuel
+19
+
+Aline Estrela
+Candido Oliveira
+17

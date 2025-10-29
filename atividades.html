@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sobre – REAComp</title>
+<title>Atividade da Segunda Unidade – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -84,6 +119,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
 
 
+<link rel="stylesheet" href="../styles/academic.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -284,11 +320,11 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">Sobre</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./atividades.html"> 
+    <a class="nav-link active" href="./atividades.html" aria-current="page"> 
 <span class="menu-text">Tarefas</span></a>
   </li>  
 </ul>
@@ -315,7 +351,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sobre</h1>
+<h1 class="title">Atividade da Segunda Unidade</h1>
 </div>
 
 
@@ -332,11 +368,185 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<p>Este portal reúne Recursos Educacionais Abertos (REA) desenvolvidos para apoiar o ensino e a aprendizagem em Computação no campus da UFERSA em Pau dos Ferros. A iniciativa tem como foco três áreas fundamentais da formação em Computação: <strong>Algoritmos</strong>, <strong>Programação</strong> e <strong>Estruturas de Dados</strong>.</p>
-<p>Todo o conteúdo disponibilizado aqui é aberto, <strong>gratuito</strong> e pode ser reutilizado, adaptado e compartilhado conforme as necessidades de estudantes, docentes e demais interessados. O objetivo é promover o acesso democrático ao conhecimento, estimular a autonomia no aprendizado e fortalecer a educação pública de qualidade.</p>
-<p>Este projeto faz parte do compromisso da UFERSA com a inovação pedagógica, a inclusão digital e a promoção da ciência aberta.</p>
+<section id="descrição-da-atividade" class="level2">
+<h2 class="anchored" data-anchor-id="descrição-da-atividade">Descrição da Atividade</h2>
+<p>Nesta atividade, vocês deverão produzir, em duplas, <strong>artigos curtos</strong> sobre temas de <strong>programação em C</strong>, que serão sorteados em sala. O objetivo é que cada dupla desenvolva uma <strong>explicação clara e didática</strong> sobre o tema, incluindo exemplos de código comentados e orientações conceituais, de forma que o material seja útil tanto para estudo próprio quanto para consulta por outros alunos no portal de recursos abertos.</p>
+<p>Cada artigo deverá ser elaborado utilizando a linguagem de marcação <strong>Markdown</strong>, no editor de sua preferência. Os artigos selecionados poderão ser publicados no <strong>Portal Aberto de Recursos em Computação</strong>, com os devidos créditos aos autores.</p>
+</section>
+<section id="orientações-e-regras" class="level2">
+<h2 class="anchored" data-anchor-id="orientações-e-regras">Orientações e Regras</h2>
+<ul>
+<li>A atividade deve ser realizada <strong>em duplas</strong>.</li>
+<li>Cada dupla será responsável por um tema <strong>sorteado</strong>.</li>
+<li>O artigo deve ser <strong>original</strong> e escrito pelos alunos.</li>
+<li>Evite copiar e colar trechos sem comentários ou explicações próprias.</li>
+</ul>
+</section>
+<section id="estrutura-do-arquivo" class="level2">
+<h2 class="anchored" data-anchor-id="estrutura-do-arquivo">Estrutura do Arquivo</h2>
+<p>O arquivo Markdown deve conter obrigatoriamente um conjunto de metadados com os seguintes campos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "Título do artigo"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="an">lang:</span><span class="co"> pt-BR</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="an">description:</span><span class="co"> "Breve descrição do conteúdo"</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="an">author:</span><span class="co"> ["Nome do autor 1", "Nome do autor 2"]</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="an">date:</span><span class="co"> "YYYY-MM-DD"</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="an">categories:</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">  - palavra-chave-1 </span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">&nbsp; - palavra-chave-2</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">  - palavra-chave-3  </span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">---</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O restante do artigo pode seguir livremente, basta seguir um ordem lógica (consulte o blog para ter uma ideia). Mas, recomenda-se que o artigo contenha:</p>
+<ul>
+<li><strong>Introdução ao tema</strong>
+<ul>
+<li>Contextualização e motivação para o assunto.</li>
+</ul></li>
+<li><strong>Explicação conceitual</strong>
+<ul>
+<li>Definição dos conceitos principais e relação com a linguagem C.</li>
+</ul></li>
+<li><strong>Exemplos de código</strong>
+<ul>
+<li>Blocos curtos e comentados, ilustrando a aplicação prática do conceito.</li>
+</ul></li>
+<li><strong>Boas práticas e cuidados</strong>
+<ul>
+<li>Dicas sobre armadilhas, limitações ou alternativas.</li>
+</ul></li>
+<li><strong>Conclusão</strong>
+<ul>
+<li>Resumo do aprendizado e possíveis aplicações do conhecimento.</li>
+</ul></li>
+<li><strong>Links úteis e referências</strong></li>
+</ul>
+</section>
+<section id="entrega" class="level2">
+<h2 class="anchored" data-anchor-id="entrega">Entrega</h2>
+<p>A entrega deverá ser realizada pelo sigaa por um dos componentes da dupla. O arquivo deve ter o formado <code>.md</code> com o nome <code>numero_do_tema-sobrenome1-sobrenome2.md</code>, por exemplo <code>9-silva-souza.md</code>.</p>
+<p>Os critérios de avaliação serão: clareza, organização, formatação e presença de exemplos comentados.</p>
+<p>Essa atividade valerá 25% da nota da segunda unidade e deverá ser entregue até uma semana após o sorteio dos temas.</p>
+</section>
+<section id="disclaimer" class="level2">
+<h2 class="anchored" data-anchor-id="disclaimer">Disclaimer</h2>
+<p>É permitido utilizar ferramentas de Inteligência Artificial (IA) para auxiliar na elaboração do artigo. Contudo, é <strong>obrigatório</strong> indicar claramente quais partes do artigo foram produzidas ou revisadas com IA, informando a tarefa realizada. Por exemplo:</p>
+<ul>
+<li>Geração de código para exemplos em C.</li>
+<li>Revisão ou correção do texto explicativo.</li>
+</ul>
+<p>Além disso, <strong>todos os prompts utilizados</strong> para gerar conteúdo com IA devem ser enviados junto com o artigo.</p>
+</section>
+<section id="temas-para-sorteio" class="level2">
+<h2 class="anchored" data-anchor-id="temas-para-sorteio">Temas para Sorteio</h2>
+<ol type="1">
+<li>Manipulação de arquivos em C (<code>fopen</code>, <code>fread</code>, <code>fwrite</code>, <code>fclose</code>, <code>fprintf</code>, <code>fscanf</code>)</li>
+<li>Argumentos da função <code>main</code> (<code>argc</code>, <code>argv</code>) e <em>parsing</em> básico de linha de comando</li>
+<li>Bibliotecas estáticas (<code>.a</code>) e dinâmicas (<code>.so</code>) em C</li>
+<li>Tratamento de erros com <code>errno</code> e <code>perror</code></li>
+<li>Configurando WSL/Ubuntu + GCC + VS Code no Windows</li>
+<li>Compilação avançada com GCC: flags úteis e otimização</li>
+<li>Diferença entre <code>struct</code> e <code>union</code></li>
+<li><em>Bit Fields</em> e operações bit a bit em C</li>
+<li>Depuração básica com o <code>gdb</code></li>
+<li>Ponteiros <code>const</code> e <code>const</code> Ponteiros</li>
+<li>Medição de tempo de execução com <code>clock()</code></li>
+<li>Macros e diretivas de pré-processamento (<code>#define</code>, <code>#ifdef</code>, <code>#ifndef</code>)</li>
+<li>Uso de <code>static</code>: variáveis persistentes e encapsulamento de funções</li>
+<li>Classes de armazenamento: <code>auto</code>, <code>static</code> e <code>extern</code></li>
+<li>Manipulação de <em>strings</em> (funções básicas da biblioteca <code>string.h</code>)</li>
+<li>Programação modular (arquivos <code>.h</code> e <code>.c</code>)</li>
+<li>Detecção de vazamentos de memória com <code>valgrind</code></li>
+<li>Funções em C (protótipos, passagem por valor e por referência)</li>
+<li>Escopo e tempo de vida de variáveis (variáveis locais, globais e estáticas; <em>stack</em>, <em>heap</em> e segmento de dados)</li>
+<li>Funções recursivas e recursão em cauda</li>
+<li>Tipo Abstrato de Dados (TAD) : conceito, motivação e exemplos simples em C</li>
+<li>Inteiros sem sinal e tipos inteiros portáveis (<code>unsigned</code>, <code>size_t</code>, <code>uint32_t</code> etc.)</li>
+</ol>
+</section>
+<section id="resultado-do-sorteio" class="level2">
+<h2 class="anchored" data-anchor-id="resultado-do-sorteio">Resultado do Sorteio</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Grupo</th>
+<th>Tópico</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ennio &amp; Venâncio</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td>Ruan &amp; Kayck</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td>Thiago &amp; Amanda</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>Lyrian &amp; Manoel</td>
+<td>04</td>
+</tr>
+<tr class="odd">
+<td>Marcelo &amp; Emerson</td>
+<td>21</td>
+</tr>
+<tr class="even">
+<td>André &amp; João</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td>Felipe &amp; Adrian</td>
+<td>08</td>
+</tr>
+<tr class="even">
+<td>Anderson &amp; Marília</td>
+<td>07</td>
+</tr>
+<tr class="odd">
+<td>Moisés &amp; João</td>
+<td>03</td>
+</tr>
+<tr class="even">
+<td>Gabriel &amp; Karllos</td>
+<td>09</td>
+</tr>
+<tr class="odd">
+<td>Guilherme &amp; JP Fernandes</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td>Pedro &amp; Thiago</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>Frederico &amp; Guilherme</td>
+<td>18</td>
+</tr>
+<tr class="even">
+<td>João &amp; Vinícius</td>
+<td>05</td>
+</tr>
+<tr class="odd">
+<td>Kayke &amp; Gabriel</td>
+<td>02</td>
+</tr>
+<tr class="even">
+<td>Luiza &amp; Pedro Emanuel</td>
+<td>19</td>
+</tr>
+<tr class="odd">
+<td>Aline &amp; Candido</td>
+<td>17</td>
+</tr>
+</tbody>
+</table>
+<p>Sorteio realizado em 28 de outubro de 2025.</p>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
