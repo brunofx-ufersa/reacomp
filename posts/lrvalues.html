@@ -355,6 +355,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
   <li><a href="#o-que-é-um-lvalue" id="toc-o-que-é-um-lvalue" class="nav-link" data-scroll-target="#o-que-é-um-lvalue">O que é um lvalue?</a></li>
   <li><a href="#e-o-rvalue" id="toc-e-o-rvalue" class="nav-link" data-scroll-target="#e-o-rvalue">E o rvalue?</a></li>
   <li><a href="#ligando-os-pontos" id="toc-ligando-os-pontos" class="nav-link" data-scroll-target="#ligando-os-pontos">Ligando os pontos</a></li>
+  <li><a href="#mais-exemplos" id="toc-mais-exemplos" class="nav-link" data-scroll-target="#mais-exemplos">Mais exemplos</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -434,14 +435,16 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <p>✅ Exemplo certo:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> b <span class="op">+</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>(<code>a</code> é lvalue, <code>b + 2</code> é rvalue)</p>
+<p><code>a</code> é lvalue e <code>b + 2</code> é rvalue.</p>
 <p>❌ Exemplo errado:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O compilador vai dizer:</p>
 <pre class="console"><code>error: lvalue required as left operand of assignment</code></pre>
 <p>Porque <code>a + b</code> não é um “lugar” da memória, mas apenas o resultado de uma soma.</p>
-<p>🧠 Mais exemplos rápidos</p>
+</section>
+<section id="mais-exemplos" class="level2">
+<h2 class="anchored" data-anchor-id="mais-exemplos">Mais exemplos</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -495,13 +498,13 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <tbody>
 <tr class="odd">
 <td>lvalue</td>
-<td>✅ Sim</td>
-<td>✅ Sim</td>
+<td>Sim</td>
+<td>Sim</td>
 </tr>
 <tr class="even">
 <td>rvalue</td>
-<td>❌ Não</td>
-<td>⚠️ Não acessível</td>
+<td>Não</td>
+<td>Não acessível</td>
 </tr>
 </tbody>
 </table>

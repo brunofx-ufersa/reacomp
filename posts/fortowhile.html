@@ -352,12 +352,15 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
   <ul>
   <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a></li>
   <li><a href="#sintaxe-básica" id="toc-sintaxe-básica" class="nav-link" data-scroll-target="#sintaxe-básica">Sintaxe Básica</a></li>
-  <li><a href="#laços-infinitos" id="toc-laços-infinitos" class="nav-link" data-scroll-target="#laços-infinitos">Laços infinitos</a></li>
+  <li><a href="#laços-infinitos" id="toc-laços-infinitos" class="nav-link" data-scroll-target="#laços-infinitos">Laços infinitos</a>
+  <ul class="collapse">
+  <li><a href="#cuidados-importantes" id="toc-cuidados-importantes" class="nav-link" data-scroll-target="#cuidados-importantes">Cuidados importantes</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -417,7 +420,6 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <span id="cb2-3"><a href="#cb2-3"></a>    // código que será executado repeditamente</span>
 <span id="cb2-4"><a href="#cb2-4"></a>    incremento</span>
 <span id="cb2-5"><a href="#cb2-5"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>💡 Exemplo prático</p>
 <p>A seguir, veja um exemplo simples que imprime uma frase 42 vezes usando <code>for</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">42</span><span class="op">;</span> i<span class="op">++){</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>    puts<span class="op">(</span><span class="st">"Volta o cão arrependido, </span></span>
@@ -434,7 +436,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <span id="cb4-7"><a href="#cb4-7"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Assim, transformar um <code>for</code> em <code>while</code> é apenas uma questão de reposicionar as três partes: inicialização, condição e incremento.</p>
 </section>
-<section id="laços-infinitos" class="level1">
+<section id="laços-infinitos" class="level1 page-columns page-full">
 <h1>Laços infinitos</h1>
 <p>Um laço infinito é aquele que nunca termina, o programa fica preso executando o mesmo bloco de código repetidamente, até que algo o interrompa (por exemplo, com <code>break</code>, <code>return</code>, ou encerrando o programa manualmente).</p>
 <p>Laços infinitos podem parecer um erro de programação, mas eles têm usos práticos, como em:</p>
@@ -442,19 +444,18 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <li>programas que ficam “rodando para sempre”, como servidores, jogos ou sistemas embarcados;</li>
 <li>loops de espera, que ficam verificando uma condição até que algo aconteça.</li>
 </ul>
-<p>🔁 Exemplo com <code>while</code></p>
 <p>A forma mais comum de criar um laço infinito em C é com <code>while</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1"></a><span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>    printf<span class="op">(</span><span class="st">"Executando para sempre...</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Aqui, a condição é sempre verdadeira (1 significa <em>true</em>), então o loop nunca termina.</p>
-<p>🔁 Exemplo com <code>for</code></p>
 <p>Também podemos criar um laço infinito com <code>for</code>, deixando os três argumentos vazios:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">for</span> <span class="op">(;;)</span> <span class="op">{</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>    printf<span class="op">(</span><span class="st">"Executando para sempre...</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Esse é o equivalente exato ao <code>while(1)</code>. O compilador entende que não há inicialização, nem condição de parada, nem incremento, então o loop continua indefinidamente.</p>
-<p>⚠️ Cuidados importantes</p>
+<section id="cuidados-importantes" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="cuidados-importantes">Cuidados importantes</h2>
 <p>Cuidado com <em>loops</em> sem saída, pois se não houver um <code>break</code> ou uma condição de parada dentro do <em>loop</em>, o programa pode travar ou consumir muito processamento.</p>
 <p>Use <code>break</code> para encerrar o <em>loop</em> quando uma condição interna for atendida:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
@@ -465,14 +466,16 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <span id="cb7-6"><a href="#cb7-6"></a>        <span class="cf">break</span><span class="op">;</span> <span class="co">// encerra o laço</span></span>
 <span id="cb7-7"><a href="#cb7-7"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Evite <em>loops</em> infinitos acidentais, especialmente ao converter <code>for</code> para <code>while</code>. Se esquecer de atualizar a variável de controle (<code>i++</code>, por exemplo), o programa pode nunca sair do loop.</p>
-<p>💡 Dica de prática</p>
-<p>Tente modificar o exemplo anterior do “Cão arrependido” para rodar infinitamente, e depois adicione uma condição de saída com <code>break</code>. Assim você entende bem como o controle de fluxo funciona.</p>
-<hr>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> Tente modificar o exemplo anterior do “cão arrependido” para rodar infinitamente, e depois adicione uma condição de saída com <code>break</code>. Assim você entende bem como o controle de fluxo funciona.</p>
+</div></div><hr>
 <p>Nesta tutorial, você aprendeu</p>
 <p>✅ a transformar um laço <code>for</code> em <code>while</code> e vice-versa</p>
 <p>✅ como criar lações infinitos</p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
