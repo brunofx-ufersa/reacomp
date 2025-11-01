@@ -412,13 +412,13 @@ window.Quarto = {
 <section id="proposta-de-solução" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="proposta-de-solução">Proposta de solução</h2>
 <p>A ideia é usar uma função que transforma qualquer ID em um número entre 0 e 9, reaproveitando o mesmo espaço de forma controlada.</p>
+<p>Essa função é o módulo (resto da divisão):</p>
+<p><span class="math display">\[h(id) = id\bmod 10\]</span></p>
+<p>Como o divisor é <span class="math inline">\(10\)</span>, os únicos valores de resto possíveis são os números de 0 a 9, como desejamos.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong><span class="text-warning">Se liga!</span></strong> O resto da divisão de qualquer inteiro pelo inteiro <span class="math inline">\(m\)</span> está no intervalo <span class="math inline">\([0,m-1]\)</span>.</p>
-</div></div><p>Essa função é o módulo (resto da divisão):</p>
-<p><span class="math display">\[h(id) = id\bmod 10\]</span></p>
-<p>Como o divisor é <span class="math inline">\(10\)</span>, os únicos valores de resto possíveis são os números de 0 a 9, como desejamos.</p>
-<p>Aplicando a função aos nossos itens:</p>
+</div></div><p>Aplicando a função aos nossos itens:</p>
 <ul>
 <li><span class="math inline">\(h(12) = 12 \bmod 10 = 2\)</span></li>
 <li><span class="math inline">\(h(18) = 18 \bmod 10 = 8\)</span></li>
@@ -469,8 +469,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>Agora, para verificar se o jogador possui o Amuleto Raro, basta aplicar novamente a mesma função: <span class="math inline">\(h(18) = 18 \bmod 10 = 8\)</span>.</p>
-<p>Sem precisar percorrer todo o <em>array</em>, o jogo já sabe que o item (se existir) estará na posição <span class="math inline">\(8\)</span>.</p>
+<p>Agora, para verificar se o jogador possui o Amuleto Raro, basta aplicar novamente a mesma função: <span class="math inline">\(h(18) = 18 \bmod 10 = 8\)</span>. Sem precisar percorrer todo o <em>array</em>, o jogo já sabe que o item (se existir) estará na posição <span class="math inline">\(8\)</span>.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong><span class="text-warning">Se liga!</span></strong> Essa técnica permite economizar memória e acessar elementos em tempo constante, O(1).</p>

@@ -431,8 +431,9 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="características-da-função-hash" class="level2">
+<section id="características-da-função-hash" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="características-da-função-hash">Características da Função Hash</h2>
+<p>É desejável que a função <em>hash</em> possua as seguintes características.</p>
 <ul>
 <li>Fácil de ser calculada;</li>
 <li>Distribuição uniforme dos dados;</li>
@@ -440,6 +441,10 @@ window.Quarto = {
 <li>Capaz de resolver possíveis colisões.</li>
 </ul>
 <p>A vantagem da tabela hash é a velocidade de busca, uma função muito complicada para calcular é incoveniente, pois pode demorar mais que uma busca em uma árvore binária, por exemplo. Além disso, se a função não distribui as chaves de maneira uniforme, muitas delas irão se concentrar em um local do vetor, aumentando a probabilidade de colisões.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> Quando muitas chaves se concentram um lugar, dizemos que se formou um <em>cluster</em> (aglomerado).</p>
+</div></div><p>A seguir, vamos estudar os métodos clássicos para criação de funções <em>hash</em>.</p>
 </section>
 <section id="método-da-divisão" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="método-da-divisão">Método da Divisão</h2>
@@ -502,11 +507,13 @@ window.Quarto = {
 <li>Multiplicamos esse valor por <span class="math inline">\(m\)</span> (tamanho da tabela);</li>
 <li>Arredondamos para baixo;</li>
 </ul>
-<p>Ou seja,</p>
-<p><span class="math display">\[h(k) = \lfloor m (kA \bmod 1) \rfloor, \text{ com } 0 &lt; A &lt; 1\]</span></p>
+<p>Ou seja, <span class="math display">\[h(k) = \lfloor m (kA \bmod 1) \rfloor, \text{ com } 0 &lt; A &lt; 1\]</span></p>
 <p>Por exemplo, considere <span class="math inline">\(k = 123\)</span>, <span class="math inline">\(m = 1000\)</span>, e <span class="math inline">\(A \approx 0,618\)</span>.</p>
-<p><span class="math display">\[h(k) = \lfloor 1000 (123 \cdot 0,618 \bmod 1) \rfloor=\lfloor 1000 (76,014 \bmod 1) \rfloor=\lfloor 1000\cdot 0,014 \rfloor=14\]</span></p>
-<p>A vantagem do método de multiplicação é que ele pode trabalhar com qualquer valor entre 0 e 1.</p>
+<p><span class="math display">\[\begin{align*}
+h(k) &amp;= \lfloor 1000 (123 \cdot 0,618 \bmod 1) \rfloor \\
+&amp;=\lfloor 1000 (76,014 \bmod 1) \rfloor \\ &amp;=\lfloor 1000\cdot 0,014 \rfloor=14
+\end{align*}\]</span></p>
+<p>A vantagem deste método é que ele pode trabalhar com qualquer valor entre 0 e 1.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong><span class="text-warning">Se liga!</span></strong> O método de multiplicação é geralmente adequado quando o tamanho da tabela é uma potência de dois.</p>
@@ -581,8 +588,12 @@ window.Quarto = {
 </section>
 <section id="multiplicação-polinomial" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="multiplicação-polinomial">Multiplicação Polinomial</h4>
-<p>Um método mais robusto é o da <strong>multiplicação polinomial</strong>. Aqui, tratamos a <em>string</em> como um número em uma base <span class="math inline">\(\beta\)</span> (β (geralmente um número primo pequeno): <span class="math display">\[k=s[0]\cdot\beta^{n-1}+s[1]\cdot\beta^{n-2}+\cdots+s[n-1]\cdot\beta^{0}\]</span></p>
-<p>Por exemplo, a palavra “PAI” (P = 80, A = 65 e I = 73) e <span class="math inline">\(\beta=13\)</span>: <span class="math display">\[k=s[0]\cdot 13^{3-1}+s[1]\cdot 13^{3-2}+\cdots+s[2]\cdot 13^{0}=80\cdot13^2+65\cdot13^1+73\cdot13^0=14438\]</span></p>
+<p>Um método mais robusto é o da <strong>multiplicação polinomial</strong>. Aqui, tratamos a <em>string</em> como um número em uma base <span class="math inline">\(\beta\)</span> (geralmente um número primo pequeno): <span class="math display">\[k=\sum_{i=0}^{n-1}s[i]\beta^{(n-1)-i}=s[0]\cdot\beta^{n-1}+s[1]\cdot\beta^{n-2}+\cdots+s[n-1]\cdot\beta^{0}\]</span></p>
+<p>Por exemplo, a palavra “PAI” (P = 80, A = 65 e I = 73) e <span class="math inline">\(\beta=13\)</span>: <span class="math display">\[\begin{align*}
+k&amp;=s[0]\cdot 13^{3-1}+s[1]\cdot 13^{3-2}+s[2]\cdot 13^{3-3}\\
+&amp;=80\cdot13^2+65\cdot13^1+73\cdot13^0\\
+&amp;=14438
+\end{align*}\]</span></p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong><span class="text-warning">Se liga!</span></strong> A multiplicação por um número primo ajuda a espalhar os valores de forma mais uniforme do que se usássemos um número composto.</p>
@@ -608,6 +619,7 @@ window.Quarto = {
 </ul>
 <p>O dobramento por soma resulta em <span class="math inline">\(k_1+k_2+k_3=835+291+70=1196\)</span>.</p>
 <p>No dobramento por XOR, as partes são combinadas usando a operação lógica OU exclusivo (XOR), muito comum em funções de hash criptográficas. Primeiro, convertemos as partes para binário (aqui, usando 10 bits para simplificar):</p>
+<div style="width: 60%; margin: auto;">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -634,8 +646,9 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+</div>
 <p>Realizamos a operação XOR bit a bit entre as partes. <span class="math display">\[k_1 \oplus k_2 \oplus k_3\]</span><span class="math display">\[\begin{array}{r l l} &amp; 1101000011 &amp; (k_1) \\ \oplus &amp; 0100100011 &amp; (k_2) \\ \hline &amp; 1001100000 &amp; (k_1 \oplus k_2) \\ \oplus &amp; 0001000110 &amp; (k_3) \\ \hline &amp; \mathbf{1000100110} &amp; (\text{Resultado}) \end{array}\]</span></p>
-<p>Transformando 1000100110 de volta para decimal: <span class="math display">\[1000100110_2=512+64+8+4+2=590\]</span></p>
+<p>Transformando o resultado de volta para decimal: <span class="math display">\[1000100110_2=512+64+8+4+2=590\]</span></p>
 <p>O método XOR tende a preservar melhor as características de todas as partes da chave, ainda que seja um pouco mais complexo de implementar do que a soma simples.</p>
 </section>
 <section id="mid-square" class="level4">
