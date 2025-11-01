@@ -69,6 +69,8 @@ flowchart LR
 
 ## Características da Função Hash
 	
+É desejável que a função _hash_ possua as seguintes características.
+
 - Fácil de ser calculada;
 - Distribuição uniforme dos dados;
 - Minimiza as colisões;
@@ -76,10 +78,16 @@ flowchart LR
 
 A vantagem da tabela hash é a velocidade de busca, uma função muito complicada para calcular é incoveniente, pois pode demorar mais que uma busca em uma árvore binária, por exemplo. Além disso, se a função não distribui as chaves de maneira uniforme, muitas delas irão se concentrar em um local do vetor, aumentando a probabilidade de colisões.
 
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Quando muitas chaves se concentram um lugar, dizemos que se formou um _cluster_ (aglomerado).
+:::
+
+A seguir, vamos estudar os métodos clássicos para criação de funções _hash_.
 
 ## Método da Divisão
 	
-  No método da divisão, usamos o resultado do resto da divisão do valor da chave pelo tamanho da tabela.
+No método da divisão, usamos o resultado do resto da divisão do valor da chave pelo tamanho da tabela.
  $$h(k) = k \bmod m$$
 
 O ideal é que $m$ seja um número primo e não muito próximo de potências de $2$.
@@ -127,15 +135,16 @@ No método da multiplicação, realizamos os seguintes passos:
 - Arredondamos para baixo;
 
 Ou seja,
-
 $$h(k) = \lfloor m (kA \bmod 1) \rfloor, \text{ com } 0 < A < 1$$
 
 Por exemplo, considere $k = 123$, $m = 1000$, e $A \approx 0,618$.
 
-$$h(k) = \lfloor 1000 (123 \cdot 0,618 \bmod 1) \rfloor=\lfloor 1000 (76,014 \bmod 1) \rfloor=\lfloor 1000\cdot 0,014 \rfloor=14$$
+\begin{align*}
+h(k) &= \lfloor 1000 (123 \cdot 0,618 \bmod 1) \rfloor \\
+&=\lfloor 1000 (76,014 \bmod 1) \rfloor \\ &=\lfloor 1000\cdot 0,014 \rfloor=14
+\end{align*}
 	
-	
-A vantagem do método de multiplicação é que ele pode trabalhar com qualquer valor entre 0 e 1. 
+A vantagem deste método é que ele pode trabalhar com qualquer valor entre 0 e 1. 
 
 ::: {.column-margin}
 **[Se liga!]{.text-warning}**
@@ -209,11 +218,15 @@ Esse método é simples, mas apresenta má distribuição, ou seja, palavras com
 
 #### Multiplicação Polinomial
 
-Um método mais robusto é o da **multiplicação polinomial**. Aqui, tratamos a _string_ como um número em uma base $\beta$ (β (geralmente um número primo pequeno):
-$$k=s[0]\cdot\beta^{n-1}+s[1]\cdot\beta^{n-2}+\cdots+s[n-1]\cdot\beta^{0}$$
+Um método mais robusto é o da **multiplicação polinomial**. Aqui, tratamos a _string_ como um número em uma base $\beta$ (geralmente um número primo pequeno):
+$$k=\sum_{i=0}^{n-1}s[i]\beta^{(n-1)-i}=s[0]\cdot\beta^{n-1}+s[1]\cdot\beta^{n-2}+\cdots+s[n-1]\cdot\beta^{0}$$
 
 Por exemplo, a palavra "PAI" (P = 80, A = 65 e I = 73) e $\beta=13$:
-$$k=s[0]\cdot 13^{3-1}+s[1]\cdot 13^{3-2}+\cdots+s[2]\cdot 13^{0}=80\cdot13^2+65\cdot13^1+73\cdot13^0=14438$$
+\begin{align*}
+k&=s[0]\cdot 13^{3-1}+s[1]\cdot 13^{3-2}+s[2]\cdot 13^{3-3}\\
+&=80\cdot13^2+65\cdot13^1+73\cdot13^0\\
+&=14438
+\end{align*}
 
 ::: {.column-margin}
 **[Se liga!]{.text-warning}**
@@ -246,16 +259,18 @@ O dobramento por soma resulta em $k_1+k_2+k_3=835+291+70=1196$.
 No dobramento por XOR, as partes são combinadas usando a operação lógica OU exclusivo (XOR), muito comum em funções de hash criptográficas. Primeiro, convertemos as partes para binário (aqui, usando 10 bits para simplificar):
 
 
+::: {style="width: 60%; margin: auto;"}
 | Parte | Decimal | Binário (10 bits)|
 | -----| -----| -----|  
 | $k_1$ | 835 | 1101000011| 
 | $k_2$ | 291 | 0100100011| 
 | $k_3$ | 70  | 0001000110| 
+:::
 
 Realizamos a operação XOR bit a bit entre as partes.
 $$k_1 \oplus k_2 \oplus k_3$$$$\begin{array}{r l l} & 1101000011 & (k_1) \\ \oplus & 0100100011 & (k_2) \\ \hline & 1001100000 & (k_1 \oplus k_2) \\ \oplus & 0001000110 & (k_3) \\ \hline & \mathbf{1000100110} & (\text{Resultado}) \end{array}$$
 
-Transformando 1000100110 de volta para decimal:
+Transformando o resultado de volta para decimal:
 $$1000100110_2=512+64+8+4+2=590$$
 
 O método XOR tende a preservar melhor as características de todas as partes da chave, ainda que seja um pouco mais complexo de implementar do que a soma simples.

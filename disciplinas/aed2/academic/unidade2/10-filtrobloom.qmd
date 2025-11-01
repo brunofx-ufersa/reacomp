@@ -60,7 +60,7 @@ De posse de nosso vetor de bits, vamos pesquisar se algumas chaves foram inserid
 - $h_1(15)=15\bmod 5=0$
 - $h_2(15)=(2\cdot15+3)\bmod 5=33\bmod 5=3$
 
-Verifacamos no filtro que a posição $0$ está setada com bit $1$, mas a posição $3$ não. Portanto, temos certeza que a chave $15$ nunca foi inserida. 
+Verificamos no filtro que a posição $0$ está setada com bit $1$, mas a posição $3$ não. Portanto, temos certeza que a chave $15$ nunca foi inserida. 
 
 ::: {.column-margin}
 **[Se liga!]{.text-warning}**
@@ -72,37 +72,73 @@ Agora, testemos o chave $16$:
 - $h_1(16)=16\bmod 5=1$
 - $h_2(16)=(2\cdot16+3)\bmod 5=35\bmod 5=0$
 
-Verificamos no filtro que as posições $0$ e $1$ estão setadas com bit $1$. Nesse caso, **provavelmente** a chave $12$ foi inserida. Portanto, dizemos que $12$ é um falso positivo. 
+Verificamos no filtro que as posições $0$ e $1$ estão setadas com bit $1$. Nesse caso, **provavelmente** a chave $12$ foi inserida. Como sabemos de antemão que esta chave não foi inserida, dizemos que é um falso positivo. 
 
-```{mermaid}
-flowchart TD
- subgraph Filtro[" "]
-        Input["Elemento"]
-        H1{"Função Hash 1"}
-        H2{"Função Hash 2"}
-        HK{"... Função Hash k"}
-        BitArray("Array de Bits M")
-  end
- subgraph Verificação[" "]
-        Verificacao@{ label: "Todos os índices gerados estão marcados '1'?" }
-        Saida_Nao[["O elemento **NÃO** pertence"]]
-        Saida_Talvez[["**Talvez** o elemento PERTENÇA"]]
-  end
-    Input --> H1 & H2 & HK
-    H1 -- Índice 1 --> BitArray
-    H2 -- Índice 2 --> BitArray
-    HK -- Índice k --> BitArray
-    BitArray --> Verificacao
-    Verificacao -- NÃO --> Saida_Nao
-    Verificacao -- SIM --> Saida_Talvez
+O desafio de um criar um bom filtro é minimizar as ocorrências de falsos positivos (taxa de falso positivo). Para isso, devemos escolher bem o tamanho do array de bits e o número de funções hash em função do número de elementos que a serem inseridos e a taxa de falso positivo máxima aceitável. Não é nosso objetivo realizar esses cálculos, apenas deixar claro que o filtro de Bloom não é sobre armazenar dados, mas sobre gerenciar essa negociação entre espaço de memória, velocidade de consulta e probabilidade de erro.
 
-    Verificacao@{ shape: diamond}
-    style Verificação stroke:none,fill:transparent
-    style Filtro stroke:none,fill:transparent
-```    
+---
+
+Nesta unidade, você aprendeu
+
+✅ o que é um filtro de Bloom 
+
+✅ a construir um fitro de Bloom 
+
+```quizdown
+# O filtro de Bloom é usado principalmente para verificar...
+
+1. [ ] a igualdade entre dois elementos.
+1. [x] a pertinência de um elemento a um conjunto.
+1. [ ] a ordenação de chaves em um vetor.
+1. [ ] a frequência de uso de uma função hash.
 
 
+# Marque todas as alternativas corretas sobre as possíveis respostas do filtro de Bloom.
+
+- [x] Certeza de que o elemento **não pertence**.
+- [x] **Talvez** o elemento **pertença**.
+- [ ] Certeza de que o elemento **pertence**.
+- [ ] O filtro sempre indica falsos positivos.
 
 
+# O que indicam as funções hash em um filtro de Bloom?
+
+1. [ ] As chaves que devem ser removidas.
+1. [ ] As posições que devem permanecer com 0.
+1. [x] As posições do vetor de bits que devem ser setadas como 1.
+1. [ ] O tamanho máximo do array de bits.
 
 
+# Quando ocorre um falso positivo em um filtro de Bloom?
+
+1. [ ] Quando o filtro retorna que o elemento com certeza não pertence.
+1. [x] Quando o filtro indica que o elemento talvez pertença, mas ele nunca foi inserido.
+1. [ ] Quando todas as posições estão zeradas.
+1. [ ] Quando o filtro não possui nenhuma função hash.
+
+
+# Se ao consultar o filtro de Bloom, **ao menos uma posição** correspondente estiver com bit 0, podemos afirmar que...
+
+1. [x] o elemento **nunca foi inserido**.
+1. [ ] o elemento **talvez tenha sido inserido**.
+1. [ ] ocorreu um falso positivo.
+1. [ ] o filtro está inconsistente.
+
+
+# Coloque na ordem correta as etapas de inserção de um elemento no filtro de Bloom:
+
+1. Aplicar as funções hash ao elemento.
+2. Calcular as posições resultantes no vetor de bits.
+3. Setar as posições calculadas para 1.
+4. Atualizar o filtro de Bloom para consultas futuras.
+
+
+# Sobre as características de um filtro de Bloom, marque as afirmações corretas.
+
+- [x] Ele consome pouca memória.
+- [x] Pode gerar falsos positivos.
+- [ ] Armazena os dados originais.
+- [ ] Nunca erra suas respostas.
+```
+
+{{< include /_includes/progress-bar.qmd >}}

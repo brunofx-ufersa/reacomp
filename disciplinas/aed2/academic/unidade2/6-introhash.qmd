@@ -16,7 +16,6 @@ Nesta unidade do curso, iremos estudar as **tabelas de dispersão** (_hash table
 
 Vamos explorar o conceito de **função de hash**, que é o coração dessa estrutura, e aprenderemos a lidar com as **colisões**. Ao final, você terá em mãos uma das ferramentas mais rápidas e eficientes para a manipulação de grandes volumes de dados desde dicionários de programação até _caches_ de navegador e bancos de dados. 
 
-
 ## Problematização
 
 Você está desenvolvendo um RPG retrô com restrições severas de memória, limitando seu catálogo mestre de itens a um array de apenas 10 slots (índices de 0 a 9).
@@ -43,17 +42,18 @@ O desafio é como mapear IDs maiores que 9 (12, 22, 13) para um _array_ com slot
 
 A ideia é usar uma função que transforma qualquer ID em um número entre 0 e 9, reaproveitando o mesmo espaço de forma controlada.
 
-::: {.column-margin}
-**[Se liga!]{.text-warning}**
-O resto da divisão de qualquer inteiro pelo inteiro $m$ está no intervalo $[0,m-1]$. 
-:::
-
 
 Essa função é o módulo (resto da divisão):
 
 $$h(id) = id\bmod 10$$
 
 Como o divisor é $10$, os únicos valores de resto possíveis são os números de 0 a 9, como desejamos.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+O resto da divisão de qualquer inteiro pelo inteiro $m$ está no intervalo $[0,m-1]$. 
+:::
+
 
 Aplicando a função aos nossos itens:
 
@@ -70,9 +70,7 @@ Dessa maneira, nosso vetor resultante seria:
 | :----: | :-----: | :-----: | :---: | :---: | :----: | :----: | :----: | :----: | :---: |
 | ❌ | Espada Longa  | Poção de Vida  | Armadura de Bronze | ❌ | Armadura de Ouro | ❌ | ❌ | Amuleto Raro | ❌ |
 
-Agora, para verificar se o jogador possui o Amuleto Raro, basta aplicar novamente a mesma função: $h(18) = 18 \bmod 10 = 8$.
-
-Sem precisar percorrer todo o _array_, o jogo já sabe que o item (se existir) estará na posição $8$.
+Agora, para verificar se o jogador possui o Amuleto Raro, basta aplicar novamente a mesma função: $h(18) = 18 \bmod 10 = 8$. Sem precisar percorrer todo o _array_, o jogo já sabe que o item (se existir) estará na posição $8$.
 
 ::: {.column-margin}
 **[Se liga!]{.text-warning}**

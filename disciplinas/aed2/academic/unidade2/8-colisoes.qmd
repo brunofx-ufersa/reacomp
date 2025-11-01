@@ -14,7 +14,7 @@ filters:
 
 Sabemos que uma colisão ocorre quando a função _hash_ produz o mesmo valor para duas ou mais chaves
 distintas. Isto é:
-$$h(k1) = h(k2)$$
+$$h(k_1) = h(k_2)$$
 
 Colisões são praticamente inevitáveis, por isso devemos tratá-las. As principais
 abordagens são endereçamento aberto e encadeamento separado.
@@ -77,7 +77,7 @@ A sondagem quadrática procura pela próxima posição vazia usando uma função
 $$h(k,i) = (h'(k)+c_1i+c_2i^2)\bmod m$$
 onde $c_1 e c_2$ são constantes escolhidas e $i=0,1,2,3,\ldots$
 
-Considere o exemplo anterior com sondagem quadrática. Vamos escolher $c_1=0$ e $c_2=1$.
+Considere o exemplo anterior com sondagem quadrática. Vamos escolher $c_1=0$ e $c_2=1$, ou seja, $h(k,i) = (h'(k)+i^2)\bmod m$.
 
 - $h(81,0) = (h'(81) + 0^2) \bmod 10 = (1+0) \bmod 10 = 1$, colisão com 21
 - $h(81,1) = (h'(81) + 1^2) \bmod 10 = (1+1) \bmod 10 = 2$, colisão com 42
