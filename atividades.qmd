@@ -122,6 +122,8 @@ Além disso, **todos os prompts utilizados** para gerar conteúdo com IA devem s
 |   17  | Aline & Candido          |   17   |
 |   18  | Orlando                  |   06   |
 |   19  | Natanael                 |   12   |
-|   20  | Levi & Rafael            |   01   |
+|   20  | Levi & Armando           |   01   |
+|   21  | Rafael & Gerislan        |   16   |
+|   22  | Samuel                   |   22   |
 
 Sorteio realizado em 28 de outubro de 2025.
