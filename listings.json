@@ -2,6 +2,9 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/18-aguiar-gregorio.html",
+      "/posts/18-gregorio-aguiar.html",
+      "/posts/7-morais-andrade.html",
       "/posts/lrvalues.html",
       "/posts/fortowhile.html",
       "/posts/compilation-clinux.html"
