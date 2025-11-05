@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>⛰️ Vale da Memória – REAComp</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-47525dc5eee78332168216e774cb8d80.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-5930247c92ca797d3f571dd394ba41ed.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-47525dc5eee78332168216e774cb8d80.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">REAComp</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../disciplinas.html"> 
+<span class="menu-text">Recursos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../contribuicao.html"> 
+<span class="menu-text">Participe</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">Sobre</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo escuro"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">⛰️ Vale da Memória</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<button id="theme-toggle">
+Trocar Tema
+</button>
+<div id="chat-container" class="chat-container">
+
+</div>
+<style>
+    /* 1. Cores Padrão (Tema Claro) */
+:root {
+  --background-color: #f0f0f0; /* Fundo bem claro */
+  --text-color: #333333;       /* Texto escuro */
+  --bubble-color: #ffffff;     /* Balão de fala claro */
+  --bubble-text: #000000;
+}
+
+/* 2. Cores para o Tema Escuro */
+.dark-theme {
+  --background-color: #121212; /* Fundo escuro */
+  --text-color: #e0e0e0;       /* Texto claro */
+  --bubble-color: #333333;     /* Balão de fala escuro */
+  --bubble-text: #ffffff;
+}
+
+/* 3. Aplicação das Variáveis nos Elementos */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s; /* Transição suave */
+}
+
+.chat-container {
+  /* Opcional: aplica as cores de texto e fundo aqui também */
+  background-color: var(--background-color);
+}
+
+.chat-bubble {
+  /* Nota: mantenha as cores específicas dos personagens aqui, */
+  /* mas use as variáveis para outros balões ou fundo do chat */
+  color: var(--bubble-text);
+}
+
+</style>
+<script>
+    const toggleButton = document.getElementById('theme-toggle');
+const body = document.body;
+const themeKey = 'user-theme';
+
+// 1. FUNÇÃO PARA APLICAR O TEMA
+function applyTheme(theme) {
+    if (theme === 'dark') {
+        body.classList.add('dark-theme');
+        body.classList.remove('light-theme');
+    } else {
+        body.classList.add('light-theme');
+        body.classList.remove('dark-theme');
+    }
+    // Salva a escolha do usuário para a próxima visita
+    localStorage.setItem(themeKey, theme);
+}
+
+// 2. LÓGICA DO BOTÃO TOGGLE
+toggleButton.addEventListener('click', () => {
+    const currentTheme = localStorage.getItem(themeKey);
+    
+    // Troca o tema: se for dark, vira light; se não, vira dark.
+    if (currentTheme === 'dark') {
+        applyTheme('light');
+    } else {
+        applyTheme('dark');
+    }
+});
+
+// 3. INICIALIZAÇÃO (Carregar o Tema na Abertura da Página)
+document.addEventListener('DOMContentLoaded', () => {
+    // Tenta obter o tema salvo pelo usuário
+    let savedTheme = localStorage.getItem(themeKey);
+    
+    // Se o usuário nunca escolheu um tema, usa o padrão 'light'
+    if (!savedTheme) {
+        savedTheme = 'light'; 
+    }
+    
+    // Aplica o tema salvo (ou o padrão)
+    applyTheme(savedTheme);
+});
+</script>
+<p>Até aqui, vimos como generalizar dados e comportamentos em C usando ponteiros e <em>callbacks</em>. No entanto, toda essa flexibilidade traz a responsabilidade de gerenciar manualmente a memória.</p>
+<p>Nesta seção, vamos entender como a linguagem C lida com a alocação dinâmica, isto é, a capacidade de reservar e liberar memória em tempo de execução. Mais importante, veremos como evitar os erros de memória mais comuns que podem comprometer a estabilidade e a segurança de um programa.</p>
+<section id="sec-alo" class="level2">
+<h2 class="anchored" data-anchor-id="sec-alo">Alocação e liberação dinâmica</h2>
+<p>Quando trabalhamos com <em>arrays</em> ou estruturas em C, geralmente definimos seus tamanhos em tempo de compilação. Eles ficam armazenados em uma área de memória chamada <strong><em>stack</em></strong>.</p>
+<p>No entanto, há muitos casos em que o tamanho dos dados não é conhecido antecipadamente. Para esses casos, o C fornece funções de alocação dinâmica de memória, que permitem reservar e liberar espaço em tempo de execução. Esses blocos de memória são criados em uma região especial chamada <strong><em>heap</em></strong>.</p>
+<p>Dizemos que a memória <em>stack</em> é estática, enquanto que a <em>heap</em> é dinâmica. Na <em>stack</em>, quando a função termina, a variável é destruída. Já na <em>heap</em>, o programador decide quando alocar e liberar.</p>
+<p>A alocação dinâmica oferece flexibilidade, mas também exige disciplina. O princípio fundamental é: <strong>quem aloca, deve liberar</strong>.</p>
+<section id="alocação-simples" class="level3">
+<h3 class="anchored" data-anchor-id="alocação-simples">Alocação simples</h3>
+<p>A função <code>malloc</code> (de <em>memory allocation</em>) reserva um bloco contínuo de memória de tamanho especificado em <em>bytes</em>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>v <span class="op">=</span> malloc<span class="op">(</span><span class="dv">5</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O argumento é o número total de <em>bytes</em> a serem alocados. No trecho acima, estamos alocando o espaço suficiente para cinco inteiros. O retorno é um ponteiro genérico (<code>void*</code>) para o início do bloco. Caso a alocação falhe, <code>malloc</code> retorna <code>NULL</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Em C, ao contrário de C++, não há necessidade de fazer o <em>cast</em> do ponteiro genérico.</p>
+</div>
+</div>
+<p>Como não temos garantia que a memória foi alocada, precisamos tratar quando <code>malloc</code> falha. Isso é geramente feito com um bloco <code>if</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>v <span class="op">=</span> malloc<span class="op">(</span><span class="dv">5</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>v <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Erro: sem memória suficiente!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>       </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No trecho acima, poderíamos ter usado <code>printf</code> ao invés de <code>fprintf</code>. A escolha, por <code>fprintf</code> se dá por ser o padrão para erros. Ele permite especificar exatamente para onde a saída deve ir. Ao usarmos <code>stderr</code> (de <em>standard error</em>), estamos dizendo ao sistema que esta mensagem é um erro e deve ser tratada como tal.</p>
+<p>Quando usamos <code>printf</code> a saída é armazenada em <em>buffer</em>, portanto a mensagem de erro poderia ficar presa e nunca ser exibida antes do programa abortar. Já quando optamos por <code>fprintf</code>, a saída é <em>unbuffered</em>, ou seja, é exibida imediatamente no terminal.</p>
+<p>Resumindo, use <code>fprinf</code> mensagens de erro, diagnóstico e logs críticos e use <code>printf</code> para mensagens de sucesso, resultado da aplicação e saída esperada.</p>
+<p>O <code>return 1</code> informa ao sistema operacional que algo deu errado .</p>
+</section>
+<section id="alocação-e-inicialização" class="level3">
+<h3 class="anchored" data-anchor-id="alocação-e-inicialização">Alocação e inicialização</h3>
+<p>A função <code>calloc</code> (de <em>contiguous allocation</em>) funciona como <code>malloc</code>, mas com duas diferenças:</p>
+<ul>
+<li>Recebe dois parâmetros, número de elementos e tamanho de cada um;</li>
+<li>Inicializa o bloco com zeros.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>v <span class="op">=</span> calloc<span class="op">(</span><span class="dv">5</span><span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Assim, todo o vetor começa zerado, o que evita leituras de lixo de memória.</p>
+</section>
+<section id="redimensionamento-de-bloco" class="level3">
+<h3 class="anchored" data-anchor-id="redimensionamento-de-bloco">Redimensionamento de bloco</h3>
+<p>A função <code>realloc</code> permite ajustar o tamanho de um bloco de memória já alocado.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>novo <span class="op">=</span> realloc<span class="op">(</span>v<span class="op">,</span> <span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Se houver espaço contíguo suficiente, o bloco é expandido no mesmo local. Caso contrário, um novo bloco é alocado e o conteúdo antigo é copiado automaticamente. Em caso de falha, retorna <code>NULL</code> e não desaloca o bloco de memória original. Por isso, é recomendado sempre usar um ponteiro temporário:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>temp <span class="op">=</span> realloc<span class="op">(</span>v<span class="op">,</span> <span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>temp <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Erro ao realocar memória!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> temp<span class="op">;</span> <span class="co">// Atualiza o ponteiro com segurança</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="liberação-de-memória" class="level3">
+<h3 class="anchored" data-anchor-id="liberação-de-memória">Liberação de memória</h3>
+<p>A função <code>free</code> libera um bloco previamente alocado com <code>malloc</code>, <code>calloc</code> ou <code>realloc</code>. Ela devolve o espaço ao sistema operacional, mas não zera o ponteiro.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> NULL<span class="op">;</span> <span class="co">// Boa prática</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Após liberar, o ponteiro ainda guarda o endereço antigo, agora inválido. Atribuir <code>NULL</code> ajuda a evitar o uso acidental, um erro clássico conhecido como <em>dangling pointer</em>.</p>
+</div>
+</div>
+<p>Este ciclo é a base de toda manipulação segura de memória dinâmica em C:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A("Alocar") --&gt; B("Usar")
+    B --&gt; C("Liberar")  
+    C --&gt; D("Invalidar")
+    D --&gt; A
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li>Alocar (<code>malloc</code>, <code>calloc</code> ou <code>realloc</code>)</li>
+<li>Usar (ler e escrever por meio do ponteiro)</li>
+<li>Liberar (<code>free</code>)</li>
+<li>Invalidar o ponteiro (<code>ptr = NULL</code>)</li>
+</ul>
+<p>Com essas funções, temos total controle sobre a vida útil de cada dado em memória. No entanto, esse poder vem acompanhado de riscos: acessos indevidos, vazamentos e corrupção de memória são erros comuns quando o ciclo de alocação não é seguido corretamente.</p>
+<p>Na próxima seção, vamos explorar as funções de manipulação de blocos de memória e entender como operá-las com segurança antes de mergulhar nos erros clássicos de memória.</p>
+</section>
+</section>
+<section id="sec-man" class="level2">
+<h2 class="anchored" data-anchor-id="sec-man">Manipulação de blocos de memória</h2>
+<p>Quando trabalhamos com alocação dinâmica, frequentemente precisamos copiar dados de uma região de memória para outra. O C oferece um conjunto de funções na biblioteca &lt;string.h&gt; para manipular blocos de memória de forma genérica, usando ponteiros do tipo <code>void*</code>.</p>
+<p>Essas funções operam diretamente em <em>bytes</em>, e não conhecem o tipo de dado armazenado. Por isso, exigem atenção com o tamanho dos blocos manipulados (geralmente expresso com <code>size_t</code>).</p>
+<p>As três funções principais para manipulação de blocos de memória são:</p>
+<ul>
+<li>memcpy: copia <em>bytes</em> de uma origem para um destino</li>
+<li>memmove: copia <em>bytes</em> com segurança mesmo se houver sobreposição</li>
+<li>memset: preenche uma área de memória com um valor constante</li>
+</ul>
+<section id="copiando-blocos-de-memória" class="level3">
+<h3 class="anchored" data-anchor-id="copiando-blocos-de-memória">Copiando blocos de memória</h3>
+<p>A função <code>memcpy</code> copia <span class="math inline">\(n\)</span> <em>bytes</em> do bloco apontado por <code>src</code> (origem) para o bloco apontado por <code>dest</code> (destino).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="op">*</span>memcpy<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>dest<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>src<span class="op">,</span> <span class="dt">size_t</span> n<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Exemplo prático:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="dt">int</span> origem<span class="op">[</span><span class="dv">5</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">};</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="dt">int</span> destino<span class="op">[</span><span class="dv">5</span><span class="op">];</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a>    memcpy<span class="op">(</span>destino<span class="op">,</span> origem<span class="op">,</span> <span class="dv">5</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st"> "</span><span class="op">,</span> destino<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>    </span>
+<span id="cb8-13"><a href="#cb8-13"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída:</p>
+<pre class="console"><code>1 2 3 4 5</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A função <code>memcpy</code> não deve ser usada quando as regiões de origem e destino se sobrepõem. O comportamento é indefinido, podendo corromper os dados.</p>
+</div>
+</div>
+</section>
+<section id="cópia-segura-com-sobreposição" class="level3">
+<h3 class="anchored" data-anchor-id="cópia-segura-com-sobreposição">Cópia segura com sobreposição</h3>
+<p>A função <code>memmove</code> é semelhante a <code>memcpy</code>, mas trata corretamente casos de sobreposição. Se o bloco de destino estiver dentro da área de origem (ou vice-versa), ela ajusta a direção da cópia automaticamente.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="op">*</span>memmove<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>dest<span class="op">,</span> <span class="dt">const</span> <span class="dt">void</span> <span class="op">*</span>src<span class="op">,</span> <span class="dt">size_t</span> n<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Exemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="dt">char</span> texto<span class="op">[</span><span class="dv">20</span><span class="op">]</span> <span class="op">=</span> <span class="st">"ABCDEF"</span><span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="co">// Copiando parte sobreposta</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>    memmove<span class="op">(</span>texto <span class="op">+</span> <span class="dv">2</span><span class="op">,</span> texto<span class="op">,</span> <span class="dv">4</span><span class="op">);</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>    texto<span class="op">[</span><span class="dv">6</span><span class="op">]</span> <span class="op">=</span> <span class="ch">'</span><span class="sc">\0</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> texto<span class="op">);</span> <span class="co">// Resultado: "ABABCD"</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Se tivéssemos usado <code>memcpy</code> nesse exemplo, o conteúdo de texto poderia ser corrompido, pois as regiões <code>texto</code> e <code>texto + 2</code> se sobrepõem.</p>
+</section>
+<section id="inicializando-memória" class="level3">
+<h3 class="anchored" data-anchor-id="inicializando-memória">Inicializando memória</h3>
+<p>A função <code>memset</code> preenche um bloco de memória com um valor constante em <em>bytes</em>. Ela é muito usada para inicializar <em>buffers</em> ou zerar estruturas.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="op">*</span>memset<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>ptr<span class="op">,</span> <span class="dt">int</span> valor<span class="op">,</span> <span class="dt">size_t</span> n<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Exemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="dt">int</span> v<span class="op">[</span><span class="dv">5</span><span class="op">];</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>    memset<span class="op">(</span>v<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">5</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st"> "</span><span class="op">,</span> v<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>    </span>
+<span id="cb13-11"><a href="#cb13-11"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída:</p>
+<pre class="console"><code>0 0 0 0 0</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O valor passado a <code>memset</code> é interpretado como um <em>byte</em>, e não como um inteiro completo. Por exemplo, <code>memset(v, 1, sizeof(int)*5)</code> preencherá todos os <em>bytes</em> com <code>0x01</code>, não com o inteiro <code>1</code>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-cui" class="level2">
+<h2 class="anchored" data-anchor-id="sec-cui">Cuidados e boas práticas</h2>
+<ul>
+<li>Sempre use <code>sizeof</code> para calcular o número correto de <em>bytes</em>.
+<ul>
+<li>Evite expressões mágicas como <code>memcpy(dest, src, 20)</code>.</li>
+<li>Use <code>memcpy(dest, src, n * sizeof(T))</code>.</li>
+</ul></li>
+<li>Prefira <code>memmove</code> quando houver dúvida sobre sobreposição.</li>
+<li>Zere estruturas antes de usá-las (por exemplo, <em>buffers</em> de <em>strings</em>).</li>
+<li>Evite manipular memória de tipos complexos (estruturas com ponteiros internos) com <code>memcpy</code>
+<ul>
+<li>Isso pode quebrar o encapsulamento e gerar cópias superficiais perigosas.</li>
+</ul></li>
+</ul>
+<p>Com essas funções, temos ferramentas poderosas para manipular diretamente a memória. Isso é um recurso essencial para implementar estruturas genéricas e operações de baixo nível. Entretanto, o uso incorreto dessas funções é uma das principais causas de erros sutis e difíceis de depurar em C.</p>
+<p>Na próxima seção, estudaremos exatamente esses erros, os erros clássicos de memória, como <em>dangling pointers</em>, <em>buffer overflow</em> e <em>double free</em>, e como evitá-los com boas práticas.</p>
+<section id="erros-clássicos-de-memória" class="level3">
+<h3 class="anchored" data-anchor-id="erros-clássicos-de-memória">Erros clássicos de memória</h3>
+<p>Gerenciar memória manualmente é uma das maiores responsabilidades (e riscos) ao programar em C. Ao lidar com ponteiros e alocação dinâmica, pequenos descuidos podem causar comportamentos indefinidos, travamentos ou até falhas de segurança.</p>
+<p>Nesta seção, veremos os erros mais comuns, seus sintomas e como evitá-los.</p>
+<section id="ponteiros-não-inicializados-wild-pointers" class="level4">
+<h4 class="anchored" data-anchor-id="ponteiros-não-inicializados-wild-pointers">Ponteiros não inicializados (wild pointers)</h4>
+<p>Um <em>wild pointer</em> é um ponteiro que não foi inicializado antes do uso. Ele contém um valor de endereço aleatório, podendo apontar para qualquer lugar da memória.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="dt">int</span> <span class="op">*</span>p<span class="op">;</span>       <span class="co">// não inicializado!</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="op">*</span>p <span class="op">=</span> <span class="dv">42</span><span class="op">;</span>      <span class="co">// comportamento indefinido!</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>p<span class="op">);</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cuidado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Esse código pode travar o programa (<em>segmentation fault</em>), corromper dados ou até “funcionar”, mascarando o erro (o pior cenário).</p>
+</div>
+</div>
+<p>Como boa prática, sempre inicialize ponteiros:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> NULL<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ponteiros-pendentes-dangling-pointers" class="level4">
+<h4 class="anchored" data-anchor-id="ponteiros-pendentes-dangling-pointers">Ponteiros pendentes (dangling pointers)</h4>
+<p>Um <em>dangling pointer</em> ocorre quando o ponteiro ainda referencia uma região de memória já liberada.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>    <span class="op">*</span>p <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>    free<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>p<span class="op">);</span> <span class="co">// uso após liberação — ERRO</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cuidado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O bloco de memória foi liberado, mas o ponteiro ainda “acha” que é válido. Acessar ou modificar essa região causa comportamento indefinido.</p>
+</div>
+</div>
+<p>Como boa prática, após <code>free(p)</code>, defina <code>p = NULL</code>; para evitar acessos acidentais.</p>
+</section>
+<section id="vazamentos-de-memória-memory-leaks" class="level4">
+<h4 class="anchored" data-anchor-id="vazamentos-de-memória-memory-leaks">Vazamentos de memória (memory leaks)</h4>
+<p>Um <em>memory leak</em> acontece quando um programa perde a referência para uma região de memória alocada, sem chamá-la com <code>free()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb18-1"><a href="#cb18-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span><span class="dv">100</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>    p <span class="op">=</span> NULL<span class="op">;</span>  <span class="co">// perdemos a referência — vazamento!</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cuidado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A memória continua alocada, mas inacessível. Em programas longos, isso pode acumular e exaurir a memória do sistema.</p>
+</div>
+</div>
+<p>Como boas prática, sempre emparelhe <code>malloc</code> e <code>free</code>. Em funções complexas, adote o princípio “quem aloca, libera”.</p>
+</section>
+<section id="liberação-duplicada-double-free" class="level4">
+<h4 class="anchored" data-anchor-id="liberação-duplicada-double-free">Liberação duplicada (double free)</h4>
+<p>Um <em>double free</em> ocorre quando tentamos liberar o mesmo bloco de memória mais de uma vez.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb19-1"><a href="#cb19-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>    free<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>    free<span class="op">(</span>p<span class="op">);</span> <span class="co">// ERRO: double free</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cuidado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Isso causa corrupção da estrutura interna do heap e frequentemente resulta em segmentation fault.</p>
+</div>
+</div>
+<p>Como boa prática, após liberar, defina <code>p = NULL</code>.</p>
+</section>
+<section id="acesso-fora-dos-limites-buffer-overflow-e-underrun" class="level4">
+<h4 class="anchored" data-anchor-id="acesso-fora-dos-limites-buffer-overflow-e-underrun">Acesso fora dos limites (buffer overflow e underrun)</h4>
+<p>Um <em>buffer overflow</em> ocorre quando se escreve além do final (ou antes do início) de um bloco de memória.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb20-1"><a href="#cb20-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="dt">int</span> v<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>    v<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">=</span> <span class="dv">99</span><span class="op">;</span> <span class="co">// índice inválido — overflow</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> v<span class="op">[</span><span class="dv">3</span><span class="op">]);</span> <span class="co">// comportamento indefinido</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cuidado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Esse tipo de erro é grave: pode corromper variáveis adjacentes, causar travamentos ou vulnerabilidades de segurança (exploração de stack overflow).</p>
+</div>
+</div>
+<p>Como boas prática, sempre verifique limites de vetores. Além disso, prefira funções seguras (ex: <code>strncpy</code> no lugar de <code>strcpy</code>). Ao usar <code>malloc</code>, garanta que o tamanho esteja correto com <code>sizeof</code>.</p>
+<p>Podemos resumir os tipos de erros abordados por meio da seguinte tabela.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 16%">
+<col style="width: 25%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo de Erro</th>
+<th>Causa</th>
+<th>Sintoma</th>
+<th>Prevenção</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Wild Pointer</em></td>
+<td>Ponteiro não inicializado</td>
+<td><em>Crash</em> aleatório</td>
+<td>Inicializar com <code>NULL</code></td>
+</tr>
+<tr class="even">
+<td><em>Dangling Pointer</em></td>
+<td>Uso após <code>free</code></td>
+<td><em>Segmentation fault</em></td>
+<td><code>p = NULL</code> após <code>free</code></td>
+</tr>
+<tr class="odd">
+<td><em>Memory Leak</em></td>
+<td>Perda de referência</td>
+<td>Aumento de uso de memória</td>
+<td>Sempre liberar</td>
+</tr>
+<tr class="even">
+<td><em>Double Free</em></td>
+<td>Liberação repetida</td>
+<td>Corrupção do <em>heap</em></td>
+<td>Controle de <em>ownership</em></td>
+</tr>
+<tr class="odd">
+<td><em>Buffer Overflow</em></td>
+<td>Escrita fora dos limites</td>
+<td>Corrupção de memória</td>
+<td>Verificar limites</td>
+</tr>
+</tbody>
+</table>
+<p>Erros de memória estão entre os mais sutis e perigosos em C. Eles não apenas causam falhas, mas podem introduzir vulnerabilidades de segurança sérias. Com boas práticas e ferramentas adequadas, é possível evitá-los e desenvolver sistemas robustos e confiáveis.</p>
+</section>
+</section>
+</section>
+<section id="sec-boa" class="level2">
+<h2 class="anchored" data-anchor-id="sec-boa">Boas práticas e padrões</h2>
+<p>Gerenciar memória em C exige disciplina. A responsabilidade é totalmente do programador, pois o compilador não faz verificações automáticas. A seguir, apresentamos um conjunto de princípios e padrões que ajudam a escrever código seguro, previsível e fácil de manter.</p>
+<section id="inicialização-defensiva" class="level3">
+<h3 class="anchored" data-anchor-id="inicialização-defensiva">Inicialização defensiva</h3>
+<p>Sempre inicialize ponteiros, mesmo quando você ainda não sabe qual endereço eles terão.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> NULL<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Essa prática evita comportamentos indefinidos quando o ponteiro é usado antes de ser atribuído. Ela também facilita verificações de segurança:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>p <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>p <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dica
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Um ponteiro deve sempre apontar para algo válido, ou para <code>NULL</code>.</p>
+</div>
+</div>
+</section>
+<section id="o-princípio-da-propriedade-ownership" class="level3">
+<h3 class="anchored" data-anchor-id="o-princípio-da-propriedade-ownership">O princípio da propriedade (ownership)</h3>
+<p>Em programas maiores, é comum que uma função aloca memória e outra a utilize. Para evitar vazamentos ou liberações incorretas, defina quem é o dono (<em>owner</em>) de cada bloco alocado.</p>
+<p>🔸 Quem aloca é responsável por liberar.</p>
+<p>Exemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span><span class="op">*</span> criar_mensagem<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>msg <span class="op">=</span> malloc<span class="op">(</span><span class="dv">50</span><span class="op">);</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    sprintf<span class="op">(</span>msg<span class="op">,</span> <span class="st">"Olá, mundo!"</span><span class="op">);</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> msg<span class="op">;</span>  <span class="co">// a função devolve a posse</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>m <span class="op">=</span> criar_mensagem<span class="op">();</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    puts<span class="op">(</span>m<span class="op">);</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>m<span class="op">);</span>     <span class="co">// responsabilidade de quem recebeu</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="par-malloc-e-free" class="level3">
+<h3 class="anchored" data-anchor-id="par-malloc-e-free">Par malloc e free</h3>
+<p>Cada chamada de alocação dinâmica deve ter uma contrapartida de liberação. Evite fluxos de execução que impeçam o <code>free</code> de ser chamado.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span><span class="dv">100</span><span class="op">);</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span>p<span class="op">)</span> <span class="cf">return</span><span class="op">;</span>   <span class="co">// erro de alocação</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>p<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dica
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Centralize liberações num único ponto de saída, especialmente em funções longas.</p>
+</div>
+</div>
+</section>
+<section id="evite-operações-parciais" class="level3">
+<h3 class="anchored" data-anchor-id="evite-operações-parciais">Evite operações parciais</h3>
+<p>Nunca tente liberar apenas parte de uma estrutura alocada. Sempre opere sobre a mesma referência retornada por <code>malloc</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>v <span class="op">=</span> malloc<span class="op">(</span><span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> v <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>p<span class="op">);</span> <span class="co">// ❌ comportamento indefinido</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>v<span class="op">);</span> <span class="co">// ✅ correto</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="zerar-memória-após-liberação-quando-necessário" class="level3">
+<h3 class="anchored" data-anchor-id="zerar-memória-após-liberação-quando-necessário">Zerar memória após liberação (quando necessário)</h3>
+<p>Em sistemas que lidam com dados sensíveis (como senhas), vale a pena limpar o conteúdo antes de liberar.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>memset<span class="op">(</span>senha<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> tamanho<span class="op">);</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>free<span class="op">(</span>senha<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Isso impede que dados fiquem acessíveis em regiões de memória reaproveitadas.</p>
+</section>
+<section id="macros-e-wrappers-de-segurança" class="level3">
+<h3 class="anchored" data-anchor-id="macros-e-wrappers-de-segurança">Macros e wrappers de segurança</h3>
+<p>Em projetos grandes, é comum encapsular chamadas de alocação/liberação em funções auxiliares. Isso facilita rastrear erros e aplicar verificações centralizadas.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span><span class="op">*</span> safe_malloc<span class="op">(</span><span class="dt">size_t</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span>n<span class="op">);</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>p <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Erro: malloc falhou</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        exit<span class="op">(</span>EXIT_FAILURE<span class="op">);</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p<span class="op">;</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>🔹 Com esse padrão, você garante que toda alocação seja verificada.</p>
+<p>Gerenciar memória em C é uma arte de equilíbrio entre controle total e responsabilidade absoluta. Com disciplina e padrões bem definidos, é possível construir sistemas robustos, performáticos e seguros.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Licença
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<p>CC BY-SA 4.0</p>
+</a>
+  </li>  
+    <li class="nav-item">
+ — Portal construído com
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://quarto.org/">
+<p>Quarto</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
