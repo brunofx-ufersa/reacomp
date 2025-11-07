@@ -6,10 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Bruno Xavier">
-<meta name="description" content="Entendendo o que são lvalue e rvalue em C">
+<meta name="author" content="Lyrian Fernandes">
+<meta name="author" content="Manoel Nascimento">
+<meta name="description" content="Tratamento de erros usando errno">
 
-<title>LValues e RValues – REAComp</title>
+<title>Tratamento de Erros – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -350,13 +351,9 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
     <h2 id="toc-title">Conteúdo</h2>
    
   <ul>
-  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a>
-  <ul class="collapse">
-  <li><a href="#o-que-é-um-lvalue" id="toc-o-que-é-um-lvalue" class="nav-link" data-scroll-target="#o-que-é-um-lvalue">O que é um lvalue?</a></li>
-  <li><a href="#e-o-rvalue" id="toc-e-o-rvalue" class="nav-link" data-scroll-target="#e-o-rvalue">E o rvalue?</a></li>
-  <li><a href="#ligando-os-pontos" id="toc-ligando-os-pontos" class="nav-link" data-scroll-target="#ligando-os-pontos">Ligando os pontos</a></li>
-  <li><a href="#mais-exemplos" id="toc-mais-exemplos" class="nav-link" data-scroll-target="#mais-exemplos">Mais exemplos</a></li>
-  </ul></li>
+  <li><a href="#tratamento-de-erros" id="toc-tratamento-de-erros" class="nav-link active" data-scroll-target="#tratamento-de-erros">Tratamento de Erros</a></li>
+  <li><a href="#tratamento-manual" id="toc-tratamento-manual" class="nav-link" data-scroll-target="#tratamento-manual">Tratamento Manual</a></li>
+  <li><a href="#tratamento-automático" id="toc-tratamento-automático" class="nav-link" data-scroll-target="#tratamento-automático">Tratamento Automático</a></li>
   </ul>
 </nav>
     </div>
@@ -366,16 +363,16 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">LValues e RValues</h1>
+<h1 class="title">Tratamento de Erros</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Gerenciamento de Memória</div>
+    <div class="quarto-category">Modularização e I/O</div>
     <div class="quarto-category">Fundamentos C</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Entendendo o que são lvalue e rvalue em C
+    Tratamento de erros usando <code>errno</code>
   </div>
 </div>
 
@@ -383,16 +380,17 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-heading">Autores</div>
     <div class="quarto-title-meta-contents">
-             <p>Bruno Xavier </p>
+             <p>Lyrian Fernandes </p>
+             <p>Manoel Nascimento </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">18 de outubro de 2025</p>
+      <p class="date">4 de novembro de 2025</p>
     </div>
   </div>
   
@@ -404,119 +402,196 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<section id="introdução" class="level1">
-<h1>Introdução</h1>
-<p>Se você já levou uma bronca do compilador com uma mensagem parecida com esta:</p>
-<pre class="console"><code>error: lvalue required as left operand of assignment</code></pre>
-<p>… então parabéns 😅 você acabou de esbarrar em um dos conceitos fundamentais da linguagem C: <em>lvalue</em> e <em>rvalue</em>.</p>
-<p>Esses dois nomes parecem saídos de um feitiço do Harry Potter, mas são bem mais simples do que parecem. Eles estão ligados a como o C enxerga o que pode ou não receber um valor.</p>
-<section id="o-que-é-um-lvalue" class="level2">
-<h2 class="anchored" data-anchor-id="o-que-é-um-lvalue">O que é um lvalue?</h2>
-<p>A palavra <strong>lvalue</strong> vem de “left value”, ou “valor que pode estar à esquerda”, do sinal de igual (=). Em outras palavras, um lvalue é algo que tem um endereço na memória e pode armazenar um valor.</p>
-<p>Pense no lvalue como uma caixinha com nome, onde o programa guarda um dado.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>  <span class="co">// x é um lvalue</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">20</span><span class="op">;</span>      <span class="co">// tudo certo, estamos mudando o valor de x</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Aqui, <code>x</code> é um <em>lvalue</em>. Ele existe em algum lugar da memória e pode receber outro valor quando quisermos.</p>
+<section id="tratamento-de-erros" class="level2">
+<h2 class="anchored" data-anchor-id="tratamento-de-erros">Tratamento de Erros</h2>
+<p>O <strong>tratamento de erros</strong> em C é um mecanismo fundamental para garantir que o programa possa responder adequadamente a situações inesperadas, como falhas de leitura de arquivos, problemas de alocação de memória ou erros de comunicação. Ao contrário de linguagens modernas que possuem estruturas específicas de exceção, como <em>try/catch</em>, a linguagem C utiliza um conjunto de ferramentas baseadas em códigos de erro.</p>
+<p>As principais entre elas são a variável global <code>errno</code>, declarada em <code>errno.h</code>, e as funções auxiliares <code>perror()</code> e <code>strerror()</code>, declaradas em <code>stdio.h</code> e <code>string.h</code>, respectivamente.</p>
 </section>
-<section id="e-o-rvalue" class="level2">
-<h2 class="anchored" data-anchor-id="e-o-rvalue">E o rvalue?</h2>
-<p>O <strong>rvalue</strong>, por outro lado, vem de “right value”, ou “valor que fica à direita” do sinal de igual. Ele é o valor em si, não um local da memória.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span><span class="op">;</span> <span class="co">// x + 5 é um rvalue</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A expressão <code>x + 5</code> é um <em>rvalue</em>. Ela é apenas o resultado de uma conta, um número temporário que “nasce e morre” dentro dessa linha. Ele não mora em lugar nenhum, então não dá pra armazenar nada nele.</p>
-</section>
-<section id="ligando-os-pontos" class="level2">
-<h2 class="anchored" data-anchor-id="ligando-os-pontos">Ligando os pontos</h2>
-<p>Em toda atribuição, temos a mesma estrutura:</p>
-<ul>
-<li>lvalue = rvalue;</li>
-<li>O lvalue está à esquerda e precisa ser algo que possa receber um valor.</li>
-<li>O rvalue está à direita e é o valor que será guardado.</li>
-</ul>
-<p>✅ Exemplo certo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> b <span class="op">+</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>a</code> é lvalue e <code>b + 2</code> é rvalue.</p>
-<p>❌ Exemplo errado:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>O compilador vai dizer:</p>
-<pre class="console"><code>error: lvalue required as left operand of assignment</code></pre>
-<p>Porque <code>a + b</code> não é um “lugar” da memória, mas apenas o resultado de uma soma.</p>
-</section>
-<section id="mais-exemplos" class="level2">
-<h2 class="anchored" data-anchor-id="mais-exemplos">Mais exemplos</h2>
+<section id="tratamento-manual" class="level2">
+<h2 class="anchored" data-anchor-id="tratamento-manual">Tratamento Manual</h2>
+<p>O cabeçalho <code>errno.h</code> é responsável por definir a variável global <code>errno</code>, usada pelas funções da biblioteca padrão e pelas chamadas de sistema para indicar o tipo de erro que ocorreu. Em <code>errno.h</code> também exist um conjunto de constantes simbólicas que representam os códigos de erro retornados por chamadas de sistema e funções de biblioteca.</p>
+<p>Exemplo de macros definidos em <code>errno.h</code>:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Código</th>
-<th>Pode compilar?</th>
-<th>Por quê</th>
+<th>Macro</th>
+<th>Significado</th>
+<th>Valor</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>x = 5;</code></td>
-<td>✅</td>
-<td><code>x</code> é lvalue, <code>5</code> é rvalue</td>
+<td><code>EPERM</code></td>
+<td>Operação não permitida</td>
+<td>1</td>
 </tr>
 <tr class="even">
-<td><code>5 = x;</code></td>
-<td>❌</td>
-<td>Literal <code>5</code> não pode receber valor</td>
+<td><code>ENOENT</code></td>
+<td>Arquivo ou diretório não encontrado</td>
+<td>2</td>
 </tr>
 <tr class="odd">
-<td><code>*ptr = 10;</code></td>
-<td>✅</td>
-<td><code>*ptr</code> é um lvalue (aponta pra um endereço)</td>
+<td><code>ESRCH</code></td>
+<td>Processo inexistente</td>
+<td>3</td>
 </tr>
 <tr class="even">
-<td><code>ptr + 1 = x;</code></td>
-<td>❌</td>
-<td>Resultado de <code>ptr + 1</code> é temporário</td>
+<td><code>EINTR</code></td>
+<td>Chamada de sistema interrompida</td>
+<td>4</td>
 </tr>
 <tr class="odd">
-<td><code>++x;</code></td>
-<td>✅</td>
-<td><code>x</code> tem endereço, pode ser alterado</td>
+<td><code>EIO</code></td>
+<td>Erro de entrada/saída</td>
+<td>5</td>
 </tr>
 <tr class="even">
-<td><code>++(x + 1);</code></td>
-<td>❌</td>
-<td><code>x + 1</code> é rvalue, não existe na memória</td>
+<td><code>ENOMEM</code></td>
+<td>Memória insuficiente</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td><code>EACCES</code></td>
+<td>Permissão negada</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td><code>EINVAL</code></td>
+<td>Argumento inválido</td>
+<td>22</td>
+</tr>
+<tr class="odd">
+<td><code>EEXIST</code></td>
+<td>Arquivo já existe</td>
+<td>17</td>
 </tr>
 </tbody>
 </table>
-<p>Resumindo</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Tipo</th>
-<th>Pode estar à esquerda do =?</th>
-<th>Tem endereço?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>lvalue</td>
-<td>Sim</td>
-<td>Sim</td>
-</tr>
-<tr class="even">
-<td>rvalue</td>
-<td>Não</td>
-<td>Não acessível</td>
-</tr>
-</tbody>
-</table>
+<p>Quando uma função falha, por exemplo, ao tentar abrir um arquivo que não existe, ela normalmente retorna um valor especial (como <code>NULL</code>, <code>-1</code> ou <code>EOF</code>) e define errno com um código numérico que representa o erro.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="pp">#include </span><span class="im">&lt;errno.h&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="co">// força uma tentativa absurda de alocação</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="dt">size_t</span> tamanho <span class="op">=</span> <span class="op">(</span><span class="dt">size_t</span><span class="op">)-</span><span class="dv">1</span><span class="op">;</span> <span class="co">// número enorme</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="dt">void</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span>tamanho<span class="op">);</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="cf">if</span> <span class="op">(</span>p <span class="op">==</span> NULL<span class="op">)</span> </span>
+<span id="cb1-11"><a href="#cb1-11"></a>       fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"[errno] Código: </span><span class="sc">%d</span><span class="st"> (ENOMEM)</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> errno<span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="cf">else</span> </span>
+<span id="cb1-13"><a href="#cb1-13"></a>        printf<span class="op">(</span><span class="st">"Alocação bem-sucedida!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    </span>
+<span id="cb1-15"><a href="#cb1-15"></a>    free<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>     </span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída</p>
+<pre class="console"><code>[errno] Código: 12 (ENOMEM)</code></pre>
+<p>Tratar erros assim não é muito vantajoso, pois temos de consultar uma tabela enorme de códigos de erros para tratá-los. Precisamos de algo mais sistemático que <code>perror()</code> trará para nós.</p>
+</section>
+<section id="tratamento-automático" class="level2">
+<h2 class="anchored" data-anchor-id="tratamento-automático">Tratamento Automático</h2>
+<p>A função <code>perror()</code>, declarada em <code>stdio.h</code>, é usada para exibir uma mensagem descritiva do último erro que ocorreu no programa. Ela imprime o texto correspondente a <code>errno</code>.</p>
+<p>Seu protótipo é:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> perror <span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>mensagem<span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ela imprime no terminal a mensagem passada como argumento, seguida de uma explicação gerada pelo sistema, de acordo com o valor atual de errno.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="pp">#include </span><span class="im">&lt;errno.h&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="co">// força uma tentativa absurda de alocação</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="dt">size_t</span> tamanho <span class="op">=</span> <span class="op">(</span><span class="dt">size_t</span><span class="op">)-</span><span class="dv">1</span><span class="op">;</span> <span class="co">// número enorme</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="dt">void</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span>tamanho<span class="op">);</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="cf">if</span> <span class="op">(</span>p <span class="op">==</span> NULL<span class="op">)</span> </span>
+<span id="cb4-11"><a href="#cb4-11"></a>        perror<span class="op">(</span><span class="st">"[perror] Falha ao alocar memória"</span><span class="op">);</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>    <span class="cf">else</span> </span>
+<span id="cb4-13"><a href="#cb4-13"></a>        printf<span class="op">(</span><span class="st">"Alocação bem-sucedida!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>    </span>
+<span id="cb4-15"><a href="#cb4-15"></a>    free<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída</p>
+<pre class="console"><code>[perror] Falha ao alocar memória: Cannot allocate memory</code></pre>
+<p>A função <code>perror()</code> usa o valor de <code>errno</code> para traduzir o erro em uma mensagem compreensível para o usuário.</p>
+<p>Já a função <code>strerror()</code> converte o código numérico contido em errno para uma string descritiva. Portanto, ela retorna um ponteiro para string com texto do erro. Isso permite personalizar mensagens de erro dentro do código, o que pode ser útil em programas maiores.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="pp">#include </span><span class="im">&lt;errno.h&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="co">// força uma tentativa absurda de alocação</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="dt">size_t</span> tamanho <span class="op">=</span> <span class="op">(</span><span class="dt">size_t</span><span class="op">)-</span><span class="dv">1</span><span class="op">;</span> <span class="co">// número enorme</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>    <span class="dt">void</span> <span class="op">*</span>p <span class="op">=</span> malloc<span class="op">(</span>tamanho<span class="op">);</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a>    <span class="cf">if</span> <span class="op">(</span>p <span class="op">==</span> NULL<span class="op">)</span> </span>
+<span id="cb6-12"><a href="#cb6-12"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"[strerror] </span><span class="sc">%s</span><span class="st">: </span><span class="sc">%s</span><span class="st"> (errno = </span><span class="sc">%d</span><span class="st">)</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>         <span class="st">"falha ao alocar memória"</span><span class="op">,</span> strerror<span class="op">(</span>errno<span class="op">),</span> errno<span class="op">);</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>    <span class="cf">else</span> </span>
+<span id="cb6-15"><a href="#cb6-15"></a>        printf<span class="op">(</span><span class="st">"Alocação bem-sucedida!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>    </span>
+<span id="cb6-17"><a href="#cb6-17"></a>    free<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a></span>
+<span id="cb6-19"><a href="#cb6-19"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída:</p>
+<pre class="console"><code>[strerror] falha ao alocar memória: Cannot allocate memory (errno = 12)</code></pre>
+<p>O exemplo a seguir mostra as três ferramentas trabalhando juntas:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="pp">#include </span><span class="im">&lt;errno.h&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">"arquivo_inexistente.txt"</span><span class="op">,</span> <span class="st">"r"</span><span class="op">);</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="cf">if</span> <span class="op">(</span>f <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>        <span class="co">// Mostra código numérico</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Código do erro: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> errno<span class="op">);</span> </span>
+<span id="cb8-11"><a href="#cb8-11"></a>        <span class="co">// Mostra mensagem automática</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>        perror<span class="op">(</span><span class="st">"Erro ao abrir o arquivo"</span><span class="op">);</span> </span>
+<span id="cb8-13"><a href="#cb8-13"></a>        <span class="co">// Mostra texto do erro</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>        fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">"Descrição detalhada: </span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> strerror<span class="op">(</span>errno<span class="op">));</span> </span>
+<span id="cb8-15"><a href="#cb8-15"></a></span>
+<span id="cb8-16"><a href="#cb8-16"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>    <span class="op">}</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a></span>
+<span id="cb8-19"><a href="#cb8-19"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a><span class="op">}</span> </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída típica:</p>
+<pre class="console"><code>Código do erro: 2
+Erro ao abrir o arquivo: No such file or directory
+Descrição detalhada: No such file or directory</code></pre>
+<p>Esse tipo de saída é extremamente útil em aplicações reais, pois ajuda a identificar rapidamente o problema e a sua causa.</p>
+<blockquote class="blockquote">
+<p>Além disso, <code>errno</code> é definido por <em>thread</em>, ou seja, cada fluxo de execução mantém seu próprio valor de erro, algo importante em aplicações que utilizam paralelismo.</p>
+</blockquote>
+<p>Lembre-se que o sistema apenas informa o erro, mas a decisão do que fazer com ele é responsabilidade do programador. Isso garante controle total, mas também exige atenção, pois um erro não tratado pode comprometer todo o funcionamento do programa.</p>
 <hr>
-<p>Nesta tutorial, você aprendeu</p>
-<p>✅ os conceitos de lvalue e rvalue</p>
-<p>✅ a evitar erros de compilação envolvendo lvalue</p>
-<p>✅ como o C pensa internamente</p>
+<p>Nesta unidade, você aprendeu</p>
+<p>✅ a utilizar a variável global <code>errno</code> para identificar erros do sistema<br>
+✅ a usar <code>perror()</code> para imprimir mensagens de erro padronizadas<br>
+✅ a usar <code>strerror()</code> para personalizar mensagens de erro</p>
+<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Aviso da Redação
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este artigo foi revisado e editado pela equipe do blog em <strong>07 de novembro de 2025</strong>.</p>
+</div>
+</div>
 
 
-</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->

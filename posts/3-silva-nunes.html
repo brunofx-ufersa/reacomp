@@ -6,10 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Bruno Xavier">
-<meta name="description" content="Entendendo o que são lvalue e rvalue em C">
+<meta name="author" content="Moisés Lucarelly">
+<meta name="author" content="João Victtor">
+<meta name="description" content="Criando e usando bibliotecas estáticas e dinâmicas">
 
-<title>LValues e RValues – REAComp</title>
+<title>Bibliotecas em C – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,6 +120,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -350,13 +354,14 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
     <h2 id="toc-title">Conteúdo</h2>
    
   <ul>
-  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a></li>
+  <li><a href="#contextualização-e-motivação" id="toc-contextualização-e-motivação" class="nav-link" data-scroll-target="#contextualização-e-motivação">Contextualização e Motivação</a></li>
+  <li><a href="#explicação-conceitual" id="toc-explicação-conceitual" class="nav-link" data-scroll-target="#explicação-conceitual">Explicação Conceitual</a>
   <ul class="collapse">
-  <li><a href="#o-que-é-um-lvalue" id="toc-o-que-é-um-lvalue" class="nav-link" data-scroll-target="#o-que-é-um-lvalue">O que é um lvalue?</a></li>
-  <li><a href="#e-o-rvalue" id="toc-e-o-rvalue" class="nav-link" data-scroll-target="#e-o-rvalue">E o rvalue?</a></li>
-  <li><a href="#ligando-os-pontos" id="toc-ligando-os-pontos" class="nav-link" data-scroll-target="#ligando-os-pontos">Ligando os pontos</a></li>
-  <li><a href="#mais-exemplos" id="toc-mais-exemplos" class="nav-link" data-scroll-target="#mais-exemplos">Mais exemplos</a></li>
+  <li><a href="#bibliotecas-estáticas" id="toc-bibliotecas-estáticas" class="nav-link" data-scroll-target="#bibliotecas-estáticas">Bibliotecas Estáticas</a></li>
+  <li><a href="#bibliotecas-dinâmicas" id="toc-bibliotecas-dinâmicas" class="nav-link" data-scroll-target="#bibliotecas-dinâmicas">Bibliotecas Dinâmicas</a></li>
   </ul></li>
+  <li><a href="#mão-na-massa" id="toc-mão-na-massa" class="nav-link" data-scroll-target="#mão-na-massa">Mão na massa</a></li>
   </ul>
 </nav>
     </div>
@@ -366,16 +371,16 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">LValues e RValues</h1>
+<h1 class="title">Bibliotecas em C</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Gerenciamento de Memória</div>
-    <div class="quarto-category">Fundamentos C</div>
+    <div class="quarto-category">Bibliotecas C</div>
+    <div class="quarto-category">Desempenho e Compilação</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Entendendo o que são lvalue e rvalue em C
+    Criando e usando bibliotecas estáticas e dinâmicas
   </div>
 </div>
 
@@ -383,16 +388,17 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-heading">Autores</div>
     <div class="quarto-title-meta-contents">
-             <p>Bruno Xavier </p>
+             <p>Moisés Lucarelly </p>
+             <p>João Victtor </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">18 de outubro de 2025</p>
+      <p class="date">4 de novembro de 2025</p>
     </div>
   </div>
   
@@ -404,116 +410,241 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<section id="introdução" class="level1">
-<h1>Introdução</h1>
-<p>Se você já levou uma bronca do compilador com uma mensagem parecida com esta:</p>
-<pre class="console"><code>error: lvalue required as left operand of assignment</code></pre>
-<p>… então parabéns 😅 você acabou de esbarrar em um dos conceitos fundamentais da linguagem C: <em>lvalue</em> e <em>rvalue</em>.</p>
-<p>Esses dois nomes parecem saídos de um feitiço do Harry Potter, mas são bem mais simples do que parecem. Eles estão ligados a como o C enxerga o que pode ou não receber um valor.</p>
-<section id="o-que-é-um-lvalue" class="level2">
-<h2 class="anchored" data-anchor-id="o-que-é-um-lvalue">O que é um lvalue?</h2>
-<p>A palavra <strong>lvalue</strong> vem de “left value”, ou “valor que pode estar à esquerda”, do sinal de igual (=). Em outras palavras, um lvalue é algo que tem um endereço na memória e pode armazenar um valor.</p>
-<p>Pense no lvalue como uma caixinha com nome, onde o programa guarda um dado.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>  <span class="co">// x é um lvalue</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">20</span><span class="op">;</span>      <span class="co">// tudo certo, estamos mudando o valor de x</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Aqui, <code>x</code> é um <em>lvalue</em>. Ele existe em algum lugar da memória e pode receber outro valor quando quisermos.</p>
+<section id="introdução" class="level2">
+<h2 class="anchored" data-anchor-id="introdução">Introdução</h2>
+<p>Ao programar em C, especialmente em projetos maiores, é comum querermos reutilizar código. Funções que usamos em vários programas, como rotinas matemáticas ou de manipulação de dados, não precisam ser copiadas e coladas. A solução para isso é o uso de <strong>bibliotecas</strong>: coleções de código pré-compilado que podem ser “linkadas” (ligadas) ao seu programa principal.</p>
+<p>Existem dois tipos principais de bibliotecas em C: <strong>estáticas</strong> e <strong>dinâmicas</strong>. Este artigo explica a diferença conceitual entre elas e mostra, na prática, como criar e usar cada uma.</p>
 </section>
-<section id="e-o-rvalue" class="level2">
-<h2 class="anchored" data-anchor-id="e-o-rvalue">E o rvalue?</h2>
-<p>O <strong>rvalue</strong>, por outro lado, vem de “right value”, ou “valor que fica à direita” do sinal de igual. Ele é o valor em si, não um local da memória.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span><span class="op">;</span> <span class="co">// x + 5 é um rvalue</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A expressão <code>x + 5</code> é um <em>rvalue</em>. Ela é apenas o resultado de uma conta, um número temporário que “nasce e morre” dentro dessa linha. Ele não mora em lugar nenhum, então não dá pra armazenar nada nele.</p>
+<section id="contextualização-e-motivação" class="level2">
+<h2 class="anchored" data-anchor-id="contextualização-e-motivação">Contextualização e Motivação</h2>
+<p>Imagine que você criou um conjunto de funções matemáticas incríveis em arquivos <code>mat.c</code> e <code>mat.h</code>. Agora, cinco programas diferentes no seu projeto precisam usar essas funções.</p>
+<p>Sem bibliotecas, você teria que compilar o <code>mat.c</code> junto com cada um desses cinco programas. Se você encontrar um bug em <code>mat.c</code>, precisará recompilar <em>todos os cinco programas</em> após corrigi-lo.</p>
+<p>Bibliotecas resolvem isso. Elas encapsulam o código de <code>mat.c</code> em um único arquivo. Seus programas principais apenas “usam” essa biblioteca. Isso melhora a organização, a manutenção e a reutilização do código.</p>
 </section>
-<section id="ligando-os-pontos" class="level2">
-<h2 class="anchored" data-anchor-id="ligando-os-pontos">Ligando os pontos</h2>
-<p>Em toda atribuição, temos a mesma estrutura:</p>
+<section id="explicação-conceitual" class="level2">
+<h2 class="anchored" data-anchor-id="explicação-conceitual">Explicação Conceitual</h2>
+<p>A principal diferença entre bibliotecas estáticas e dinâmicas está em <em>quando</em> e <em>como</em> o código da biblioteca é incorporado ao seu programa executável.</p>
+<section id="bibliotecas-estáticas" class="level3">
+<h3 class="anchored" data-anchor-id="bibliotecas-estáticas">Bibliotecas Estáticas</h3>
+<p>Uma biblioteca estática (arquivo <code>.a</code>, de <em>archive</em>) é um pacote de arquivos objeto (<code>.o</code>).</p>
+<p>Durante o processo de compilação (especificamente, na fase de <em>linkagem</em>), o “linker” (ligador) identifica quais funções da biblioteca seu programa utiliza e <strong>copia</strong> o código binário dessas funções para dentro do seu arquivo executável final.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["01010101
+       11111110
+       10000001"] --&gt; B["10101010
+                         00000001
+                         10001111
+                         10011001
+                         11000010"]
+    A --o n1["biblioteca"]
+    B --&gt; C["01010101
+            11111110
+            10000001
+            10101010
+            00000001
+            10001111
+            10011001
+            11000010"]
+    B --o n2["binario"]
+    C --o n3["executável final"]
+
+    n1@{ shape: text}
+    n2@{ shape: text}
+    n3@{ shape: text}
+     A:::etapa1
+     B:::etapa2
+     C:::etapa3
+    classDef etapa1 fill:#dff0ff,stroke:#0074D9,stroke-width:2px,color:#000,font-weight:bold;   %% Azul
+    classDef etapa2 fill:#fff8dc,stroke:#ffb400,stroke-width:2px,color:#000,font-weight:bold;  %% Amarelo
+    classDef etapa3 fill:#d9fdd3,stroke:#2ecc71,stroke-width:2px,color:#000,font-weight:bold;  %% Verde
+    classDef label fill:none,stroke:none,color:#333,font-style:italic;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Dessa maneira, o executável se torna autossuficiente no sentido em que ele contém todo o código necessário para rodar, incluindo o seu próprio código e o código das bibliotecas estáticas que utilizou.</p>
+<p>Como vantagem de usarmos bibliotecas estáticas é que o executável pode ser distribuído sozinho, pois não depende de arquivos de biblioteca externos no sistema do usuário, aumentando a portabilidade. Porém, o executável final é maior, pois o código da biblioteca é replicado dentro dele. Outra desvantagem é que se a biblioteca for atualizada, todos os programas que a utilizam precisam ser recompilados e linkados novamente.</p>
+</section>
+<section id="bibliotecas-dinâmicas" class="level3">
+<h3 class="anchored" data-anchor-id="bibliotecas-dinâmicas">Bibliotecas Dinâmicas</h3>
+<p>Uma biblioteca dinâmica (arquivo <code>.so</code>, de <em>shared object</em> ou objeto compartilhado), além de ter um pacote de arquivos <code>.o</code>, possui metadados adicionais e seções especiais que permitem ligação e carregamento dinâmico.</p>
+<p>Neste caso, linker não copia o código da biblioteca para o executável. Em vez disso, ele apenas insere uma “referência” ou um “aviso” no executável, dizendo:</p>
+<blockquote class="blockquote">
+<p>“Quando você for executado, você precisará carregar a biblioteca <code>libexemplo.so</code>”.</p>
+</blockquote>
+<p>Dessa maneira, quando você executa o programa, o <em>sistema operacional</em> (ou um <em>dynamic linker/loader</em>) encontra o arquivo <code>.so</code> necessário no sistema, o carrega na memória e só então o programa começa a rodar.</p>
+<p>Isso é vantajoso, pois o executável final é muito menor. Além disso, se a biblioteca <code>.so</code> for atualizada no sistema, todos os programas que a utilizam dinamicamente passam a usar a nova versão automaticamente, sem precisarem ser recompilados.</p>
+<p>No entanto, com bibliotecas dinâmicas, perdemos a autosuficiência, ou seja, o executável não roda sozinho. O arquivo <code>.so</code> correspondente (e da versão correta) deve estar presente no sistema onde o programa será executado.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>No <em>Windows</em>, a biblioteca estática tem a extensão <code>.lib</code>, e a dinâmica <code>.dll</code>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="mão-na-massa" class="level2">
+<h2 class="anchored" data-anchor-id="mão-na-massa">Mão na massa</h2>
+<p>Vamos criar uma biblioteca simples chamada <code>soma</code> com uma função para somar dois inteiros e usá-la em um programa principal.</p>
+<section id="arquivos-da-biblioteca" class="level4">
+<h4 class="anchored" data-anchor-id="arquivos-da-biblioteca">Arquivos da biblioteca</h4>
+<p>Primeiro, criamos os arquivos da nossa biblioteca.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>soma.h</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="soma.h"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef SOMA_H</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define SOMA_H</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> somar<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>soma.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="soma.c"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> somar<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">){</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="criando-a-biblioteca-estática" class="level4">
+<h4 class="anchored" data-anchor-id="criando-a-biblioteca-estática">Criando a biblioteca estática</h4>
+<p>Primeiro precisamos compilar o código-fonte para um arquivo objeto:</p>
+<pre class="console"><code>$ gcc -c soma.c -o soma.o</code></pre>
+<p>O comando <code>gcc -c</code> apenas compila, mas não linka.</p>
+<p>Agora precisamos empacotar o objeto em um biblioteca estática:</p>
+<pre class="console"><code>$ ar rcs libsoma.a soma.o</code></pre>
+<p>O comando <code>ar</code> (<em>archiver</em>) cria a biblioteca. É necessário frisar que o nome da biblioteca deve conter o prefixo “lib”. Desse modo, acabamos de gerar o arquivo <code>libsoma.a</code>.</p>
+</section>
+<section id="criando-a-biblioteca-dinâmica" class="level4">
+<h4 class="anchored" data-anchor-id="criando-a-biblioteca-dinâmica">Criando a biblioteca dinâmica</h4>
+<p>O processo para gerarmos <code>.so</code> é um pouco diferente, pois precisamos compilar o código-fonte para um arquivo objeto usando a flag <code>-fPIC</code>:</p>
+<pre class="console"><code>$ gcc -c -fPIC soma.c -o soma.o</code></pre>
+<p>A flag <code>-fPIC</code> (<em>Position Independent Code</em>) é <strong>obrigatória</strong> para bibliotecas dinâmicas, pois elas podem ser carregadas em diferentes endereços de memória.</p>
+<p>Para criarmos a biblioteca dinâmica a partir do objeto usamos <code>-shared</code>. Dessa forma, informamos ao gcc para criar um objeto compartilhado (<em>shared object</em>).</p>
+<pre class="console"><code>$ gcc -shared -o libsoma.so soma.o</code></pre>
+<p>Como resultado, obtemos o arquivo <code>libsoma.so</code>.</p>
+</section>
+<section id="usando-as-bibliotecas" class="level4">
+<h4 class="anchored" data-anchor-id="usando-as-bibliotecas">Usando as bibliotecas</h4>
+<p>Agora, vamos criar nosso programa principal que usa a função <code>somar</code>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>main.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-filename="main.c"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"minhalib.h"</span><span class="pp"> </span><span class="co">// Inclui nossa definição</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> resultado <span class="op">=</span> somar<span class="op">(</span><span class="dv">10</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"O resultado da soma é: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> resultado<span class="op">);</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="compilando-e-linkando-com-a-biblioteca-estática" class="level4">
+<h4 class="anchored" data-anchor-id="compilando-e-linkando-com-a-biblioteca-estática">Compilando e linkando com a biblioteca estática</h4>
+<p>Executamos o seguinte comando:</p>
+<pre class="console"><code>$ gcc main.c -L. -lsoma -o soma_estatica</code></pre>
 <ul>
-<li>lvalue = rvalue;</li>
-<li>O lvalue está à esquerda e precisa ser algo que possa receber um valor.</li>
-<li>O rvalue está à direita e é o valor que será guardado.</li>
+<li>-L.: indica ao linker para procurar bibliotecas no diretório atual</li>
+<li>-lsoma: indica ao linker para usar a biblioteca <code>libsoma.a</code>.</li>
 </ul>
-<p>✅ Exemplo certo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> b <span class="op">+</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>a</code> é lvalue e <code>b + 2</code> é rvalue.</p>
-<p>❌ Exemplo errado:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>O compilador vai dizer:</p>
-<pre class="console"><code>error: lvalue required as left operand of assignment</code></pre>
-<p>Porque <code>a + b</code> não é um “lugar” da memória, mas apenas o resultado de uma soma.</p>
+<p>Agora temos o executável <code>soma_estatica</code>. Ele já contém o código da função <code>somar</code>, pois a biblioteca é copiada para dentro do executável.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Se você for distribuir seu programa, usar linkagem estática torna o executável independente e mais fácil de “instalar” (copiar e colar).</p>
+</div>
+</div>
 </section>
-<section id="mais-exemplos" class="level2">
-<h2 class="anchored" data-anchor-id="mais-exemplos">Mais exemplos</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Código</th>
-<th>Pode compilar?</th>
-<th>Por quê</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>x = 5;</code></td>
-<td>✅</td>
-<td><code>x</code> é lvalue, <code>5</code> é rvalue</td>
-</tr>
-<tr class="even">
-<td><code>5 = x;</code></td>
-<td>❌</td>
-<td>Literal <code>5</code> não pode receber valor</td>
-</tr>
-<tr class="odd">
-<td><code>*ptr = 10;</code></td>
-<td>✅</td>
-<td><code>*ptr</code> é um lvalue (aponta pra um endereço)</td>
-</tr>
-<tr class="even">
-<td><code>ptr + 1 = x;</code></td>
-<td>❌</td>
-<td>Resultado de <code>ptr + 1</code> é temporário</td>
-</tr>
-<tr class="odd">
-<td><code>++x;</code></td>
-<td>✅</td>
-<td><code>x</code> tem endereço, pode ser alterado</td>
-</tr>
-<tr class="even">
-<td><code>++(x + 1);</code></td>
-<td>❌</td>
-<td><code>x + 1</code> é rvalue, não existe na memória</td>
-</tr>
-</tbody>
-</table>
-<p>Resumindo</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Tipo</th>
-<th>Pode estar à esquerda do =?</th>
-<th>Tem endereço?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>lvalue</td>
-<td>Sim</td>
-<td>Sim</td>
-</tr>
-<tr class="even">
-<td>rvalue</td>
-<td>Não</td>
-<td>Não acessível</td>
-</tr>
-</tbody>
-</table>
+<section id="compilando-e-linkando-com-a-biblioteca-dinãmica" class="level4">
+<h4 class="anchored" data-anchor-id="compilando-e-linkando-com-a-biblioteca-dinãmica">Compilando e linkando com a biblioteca dinãmica</h4>
+<p>O comando de compilação é idêntico.</p>
+<pre class="console"><code>$ gcc main.c -L. -lsoma -o soma_dinamica</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Se no mesmo diretório estiverem duas versões da biblioteca (estática e dinâmica), o gcc vai escolher a dinâmica. Primeiro ele procura por <code>.so</code>, se não existir, então procura por <code>.a</code>.</p>
+<p>As bibliotecas em Linux quase sempre começam com <code>lib</code> e terminam com <code>.a</code> ou <code>.so</code>. O linker procura por <code>libNOME.so</code> ou <code>libNOME.a</code> quando você usa a flag <code>-lNOME</code>.</p>
+</div>
+</div>
+<p>Acabamos de gerar o execultável <code>soma_dinamica</code>, mas diferentemente da estática, ele não carrega o código da biblioteca dentro dele, ele apenas guarda uma referência. Quando o programa roda, o loader do sistema carrega <code>libsoma.so</code> dinamicamente.</p>
+<p>É muito provável que vamos obter um erro se rodarmos o executável <code>soma_dinamica</code>. Isso porque o loader dinâmico do sistema não procura a biblioteca automaticamente no diretório atual. Por padrão, ele procura em diretórios como:</p>
+<ul>
+<li><code>/lib</code></li>
+<li><code>/usr/lib</code></li>
+<li><code>/usr/local/lib</code></li>
+</ul>
+<p>As alternativas mais simples para contornar isso são copiar nossa biblioteca para <code>/usr/local/lib/</code> ou indicar ao sistema onde procurar executando o comando:</p>
+<pre class="console"><code>$ export LD_LIBRARY_PATH=.</code></pre>
+<p>O <code>.</code> no final indica o diretório atual. Vale salientar que o comando acima funciona temporariamente, isto é, até fechar o terminal.</p>
+<p>Dessa forma, podemos executar <code>soma_dinamica</code> sem problemas.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ao usarmos a linkagem dinâmica, nossa programa depende que o usuário tenha a versão correta daquela biblioteca instalada no local certo (como <code>/usr/lib</code>).</p>
+</div>
+</div>
+<p>Existe uma opção mais elegante que consiste em fixar o caminho da <code>.so</code> dentro do executável no momento da compilação:</p>
+<pre class="console"><code>$ gcc main.c -L. -lsoma -Wl,-rpath=. -o soma_dinamica</code></pre>
+<p>O <code>-rpath</code> (<em>run-time search path</em>) indica o diretório onde o sistema devo procurar a biblioteca dinâmica. Essa flag não é reconhecida pelo compilador, mas pelo linker. Por essa razão, usamos a flag <code>-Wl</code> que significa que o que vem depois da vírgula deve ser passado para o linker. Ou seja, estamos chamando o linker indiretamente via gcc.</p>
 <hr>
 <p>Nesta tutorial, você aprendeu</p>
-<p>✅ os conceitos de lvalue e rvalue</p>
-<p>✅ a evitar erros de compilação envolvendo lvalue</p>
-<p>✅ como o C pensa internamente</p>
+<p>✅ como gerar bibiotecas estáticas e dinâmicas em C</p>
+<p>✅ como fazer a linkagem das bibliotecas aos programas clientes</p>
+<p>✅ a executar programas que usam bibliotecas</p>
+<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Aviso da Redação
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este artigo foi revisado e editado pela equipe do blog em <strong>07 de novembro de 2025</strong>.</p>
+</div>
+</div>
 
 
 </section>

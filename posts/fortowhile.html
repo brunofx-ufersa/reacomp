@@ -367,7 +367,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <div class="quarto-title">
 <h1 class="title">For e While</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">algoritmo</div>
+    <div class="quarto-category">Fundamentos C</div>
   </div>
   </div>
 
@@ -404,6 +404,23 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <section id="introdução" class="level1">
 <h1>Introdução</h1>
+<p>Oi pesssoal, sim.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Estudem!</p>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Os laços de repetição são ferramentas fundamentais em qualquer linguagem de programação. Eles permitem executar blocos de código várias vezes sem precisar reescrevê-los. Em C, os dois tipos mais comuns são o <code>for</code> e o <code>while</code>.</p>
 <p>Muitos programadores têm preferência por um ou outro, mas ambos têm seu papel. O laço <code>for</code> é mais usado quando sabemos quantas vezes o código deve ser repetido, enquanto o <code>while</code> é ideal para situações em que a repetição depende de uma condição.</p>
 <p>Embora possamos criar <em>loops</em> infinitos com o <code>for</code>, o <code>while</code> geralmente é a melhor escolha quando não sabemos o número exato de repetições.</p>
@@ -411,29 +428,29 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <section id="sintaxe-básica" class="level1">
 <h1>Sintaxe Básica</h1>
 <p>A estrutura de um <code>for</code> pode ser escrita assim:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>for (inicialização; condição; incremento){</span>
-<span id="cb1-2"><a href="#cb1-2"></a>    // código que será executado repeditamente</span>
-<span id="cb1-3"><a href="#cb1-3"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>for (inicialização; condição; incremento){</span>
+<span id="cb2-2"><a href="#cb2-2"></a>    // código que será executado repeditamente</span>
+<span id="cb2-3"><a href="#cb2-3"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Já o mesmo comportamento pode ser obtido com um <code>while</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>inicialização</span>
-<span id="cb2-2"><a href="#cb2-2"></a>while (condição){</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    // código que será executado repeditamente</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    incremento</span>
-<span id="cb2-5"><a href="#cb2-5"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>inicialização</span>
+<span id="cb3-2"><a href="#cb3-2"></a>while (condição){</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    // código que será executado repeditamente</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    incremento</span>
+<span id="cb3-5"><a href="#cb3-5"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A seguir, veja um exemplo simples que imprime uma frase 42 vezes usando <code>for</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">42</span><span class="op">;</span> i<span class="op">++){</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>    puts<span class="op">(</span><span class="st">"Volta o cão arrependido, </span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>          com orelhas fartas<span class="op">,</span> seu osso roido </span>
-<span id="cb3-4"><a href="#cb3-4"></a>          e o rabo entre as patas<span class="st">");</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">42</span><span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    puts<span class="op">(</span><span class="st">"Volta o cão arrependido, </span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>          com orelhas fartas<span class="op">,</span> seu osso roido </span>
+<span id="cb4-4"><a href="#cb4-4"></a>          e o rabo entre as patas<span class="st">");</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O mesmo comportamento pode ser obtido com <code>while</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="cf">while</span> <span class="op">(</span>i <span class="op">&lt;</span> <span class="dv">42</span><span class="op">){</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>    puts<span class="op">(</span><span class="st">"Volta o cão arrependido, </span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>          com orelhas fartas<span class="op">,</span> seu osso roido </span>
-<span id="cb4-5"><a href="#cb4-5"></a>          e o rabo entre as patas<span class="st">");</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>    i<span class="op">++;</span>      </span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1"></a><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="cf">while</span> <span class="op">(</span>i <span class="op">&lt;</span> <span class="dv">42</span><span class="op">){</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    puts<span class="op">(</span><span class="st">"Volta o cão arrependido, </span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>          com orelhas fartas<span class="op">,</span> seu osso roido </span>
+<span id="cb5-5"><a href="#cb5-5"></a>          e o rabo entre as patas<span class="st">");</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    i<span class="op">++;</span>      </span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Assim, transformar um <code>for</code> em <code>while</code> é apenas uma questão de reposicionar as três partes: inicialização, condição e incremento.</p>
 </section>
 <section id="laços-infinitos" class="level1 page-columns page-full">
@@ -445,26 +462,26 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <li>loops de espera, que ficam verificando uma condição até que algo aconteça.</li>
 </ul>
 <p>A forma mais comum de criar um laço infinito em C é com <code>while</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1"></a><span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>    printf<span class="op">(</span><span class="st">"Executando para sempre...</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Aqui, a condição é sempre verdadeira (1 significa <em>true</em>), então o loop nunca termina.</p>
-<p>Também podemos criar um laço infinito com <code>for</code>, deixando os três argumentos vazios:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">for</span> <span class="op">(;;)</span> <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>    printf<span class="op">(</span><span class="st">"Executando para sempre...</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Aqui, a condição é sempre verdadeira (1 significa <em>true</em>), então o loop nunca termina.</p>
+<p>Também podemos criar um laço infinito com <code>for</code>, deixando os três argumentos vazios:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span> <span class="op">(;;)</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    printf<span class="op">(</span><span class="st">"Executando para sempre...</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Esse é o equivalente exato ao <code>while(1)</code>. O compilador entende que não há inicialização, nem condição de parada, nem incremento, então o loop continua indefinidamente.</p>
 <section id="cuidados-importantes" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="cuidados-importantes">Cuidados importantes</h2>
 <p>Cuidado com <em>loops</em> sem saída, pois se não houver um <code>break</code> ou uma condição de parada dentro do <em>loop</em>, o programa pode travar ou consumir muito processamento.</p>
 <p>Use <code>break</code> para encerrar o <em>loop</em> quando uma condição interna for atendida:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>    <span class="dt">int</span> opcao<span class="op">;</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>    printf<span class="op">(</span><span class="st">"Digite 0 para sair: "</span><span class="op">);</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>    scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>opcao<span class="op">);</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="cf">if</span> <span class="op">(</span>opcao <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>        <span class="cf">break</span><span class="op">;</span> <span class="co">// encerra o laço</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="dt">int</span> opcao<span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    printf<span class="op">(</span><span class="st">"Digite 0 para sair: "</span><span class="op">);</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>    scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> <span class="op">&amp;</span>opcao<span class="op">);</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="cf">if</span> <span class="op">(</span>opcao <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>        <span class="cf">break</span><span class="op">;</span> <span class="co">// encerra o laço</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Evite <em>loops</em> infinitos acidentais, especialmente ao converter <code>for</code> para <code>while</code>. Se esquecer de atualizar a variável de controle (<code>i++</code>, por exemplo), o programa pode nunca sair do loop.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">

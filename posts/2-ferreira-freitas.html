@@ -6,10 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Bruno Xavier">
-<meta name="description" content="Entendendo o que são lvalue e rvalue em C">
+<meta name="author" content="Kaiky Ferreira">
+<meta name="author" content="Gabriel de Freitas">
+<meta name="description" content="Argumentos da função main e parsing básico de linha de comando">
 
-<title>LValues e RValues – REAComp</title>
+<title>Função main – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -350,12 +351,11 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
     <h2 id="toc-title">Conteúdo</h2>
    
   <ul>
-  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a></li>
+  <li><a href="#os-argumentos" id="toc-os-argumentos" class="nav-link" data-scroll-target="#os-argumentos">Os Argumentos</a>
   <ul class="collapse">
-  <li><a href="#o-que-é-um-lvalue" id="toc-o-que-é-um-lvalue" class="nav-link" data-scroll-target="#o-que-é-um-lvalue">O que é um lvalue?</a></li>
-  <li><a href="#e-o-rvalue" id="toc-e-o-rvalue" class="nav-link" data-scroll-target="#e-o-rvalue">E o rvalue?</a></li>
-  <li><a href="#ligando-os-pontos" id="toc-ligando-os-pontos" class="nav-link" data-scroll-target="#ligando-os-pontos">Ligando os pontos</a></li>
-  <li><a href="#mais-exemplos" id="toc-mais-exemplos" class="nav-link" data-scroll-target="#mais-exemplos">Mais exemplos</a></li>
+  <li><a href="#exemplo-1" id="toc-exemplo-1" class="nav-link" data-scroll-target="#exemplo-1">Exemplo 1</a></li>
+  <li><a href="#exemplo-2" id="toc-exemplo-2" class="nav-link" data-scroll-target="#exemplo-2">Exemplo 2</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -366,16 +366,16 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">LValues e RValues</h1>
+<h1 class="title">Função main</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Gerenciamento de Memória</div>
+    <div class="quarto-category">Modularização e I/O</div>
     <div class="quarto-category">Fundamentos C</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Entendendo o que são lvalue e rvalue em C
+    Argumentos da função <code>main</code> e <em>parsing</em> básico de linha de comando
   </div>
 </div>
 
@@ -383,16 +383,17 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-heading">Autores</div>
     <div class="quarto-title-meta-contents">
-             <p>Bruno Xavier </p>
+             <p>Kaiky Ferreira </p>
+             <p>Gabriel de Freitas </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">18 de outubro de 2025</p>
+      <p class="date">3 de novembro de 2025</p>
     </div>
   </div>
   
@@ -406,114 +407,96 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <section id="introdução" class="level1">
 <h1>Introdução</h1>
-<p>Se você já levou uma bronca do compilador com uma mensagem parecida com esta:</p>
-<pre class="console"><code>error: lvalue required as left operand of assignment</code></pre>
-<p>… então parabéns 😅 você acabou de esbarrar em um dos conceitos fundamentais da linguagem C: <em>lvalue</em> e <em>rvalue</em>.</p>
-<p>Esses dois nomes parecem saídos de um feitiço do Harry Potter, mas são bem mais simples do que parecem. Eles estão ligados a como o C enxerga o que pode ou não receber um valor.</p>
-<section id="o-que-é-um-lvalue" class="level2">
-<h2 class="anchored" data-anchor-id="o-que-é-um-lvalue">O que é um lvalue?</h2>
-<p>A palavra <strong>lvalue</strong> vem de “left value”, ou “valor que pode estar à esquerda”, do sinal de igual (=). Em outras palavras, um lvalue é algo que tem um endereço na memória e pode armazenar um valor.</p>
-<p>Pense no lvalue como uma caixinha com nome, onde o programa guarda um dado.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>  <span class="co">// x é um lvalue</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">20</span><span class="op">;</span>      <span class="co">// tudo certo, estamos mudando o valor de x</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Aqui, <code>x</code> é um <em>lvalue</em>. Ele existe em algum lugar da memória e pode receber outro valor quando quisermos.</p>
+<p>A função <code>main</code> é o ponto de partida de todo programa escrito em C, sendo responsável por iniciar a execução e, em muitos casos, receber parâmetros externos.</p>
+<p>Quando declarada com os argumentos <code>argc</code> e <code>argv</code>, ela permite que o programa interprete informações enviadas pelo usuário através da linha de comando. Essa funcionalidade é fundamental para o desenvolvimento de aplicações que precisam processar arquivos, opções ou comandos personalizados.</p>
+<p>Compreender o uso desses parâmetros e o processo de <em>parsing</em> é essencial para quem deseja escrever programas robustos e adaptáveis em ambientes de terminal.</p>
 </section>
-<section id="e-o-rvalue" class="level2">
-<h2 class="anchored" data-anchor-id="e-o-rvalue">E o rvalue?</h2>
-<p>O <strong>rvalue</strong>, por outro lado, vem de “right value”, ou “valor que fica à direita” do sinal de igual. Ele é o valor em si, não um local da memória.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span><span class="op">;</span> <span class="co">// x + 5 é um rvalue</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A expressão <code>x + 5</code> é um <em>rvalue</em>. Ela é apenas o resultado de uma conta, um número temporário que “nasce e morre” dentro dessa linha. Ele não mora em lugar nenhum, então não dá pra armazenar nada nele.</p>
+<section id="os-argumentos" class="level1">
+<h1>Os Argumentos</h1>
+<p>Quando declarada como <code>int main(int argc, char *argv[])</code>, a função principal permite que o programa interprete parâmetros passados pelo usuário diretamente na linha de comando.</p>
+<p>O parâmetro <code>argc</code> (<em>argument count</em>) indica quantos argumentos foram passados, enquanto <code>argv</code> (<em>argument vector</em>) armazena cada um deles em um vetor de <em>strings</em>.</p>
+<p>O primeiro argumento (<code>argv[0]</code>) contém o nome do programa, enquanto os demais representam valores inseridos durante a execução. Por exemplo, ao executar <code>./programa exemplo.txt</code>, o valor de <code>argc</code> será dois, e <code>argv[1]</code> conterá “exemplo.txt”. Esse tipo de leitura é comum em sistemas operacionais e programas utilitários, pois permite que o comportamento da aplicação varie conforme os comandos recebidos.</p>
+<p>O processo de interpretação desses argumentos é conhecido como <em>parsing</em> de linha de comando. Ele consiste em identificar opções, valores e instruções, direcionando o programa conforme a necessidade.</p>
+<section id="exemplo-1" class="level2">
+<h2 class="anchored" data-anchor-id="exemplo-1">Exemplo 1</h2>
+<p>Programa que conta e mostra os argumentos recebidos na linha de comando.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>argumentos.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="argumentos.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[]){</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> argc<span class="op">;</span> count<span class="op">++)</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>        printf<span class="op">(</span><span class="st">"argumento </span><span class="sc">%d</span><span class="st">: </span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> i<span class="op">,</span> argv<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>    </span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Compilação</p>
+<pre class="console"><code>$ gcc argumentos.c -o argumentos</code></pre>
+<p>Uso (windows)</p>
+<pre class="console"><code>$ .\argumentos 25 A 3.9</code></pre>
+<p>Uso (linux)</p>
+<pre class="console"><code>$ ./argumentos 25 A 3.9</code></pre>
+<p>Saída típica</p>
+<pre class="console"><code>argumento 0: C:\Users\REAComp\Programas\argumentos.exe
+argumento 1: 25
+argumento 2: A
+argumento 3: 3.9</code></pre>
 </section>
-<section id="ligando-os-pontos" class="level2">
-<h2 class="anchored" data-anchor-id="ligando-os-pontos">Ligando os pontos</h2>
-<p>Em toda atribuição, temos a mesma estrutura:</p>
-<ul>
-<li>lvalue = rvalue;</li>
-<li>O lvalue está à esquerda e precisa ser algo que possa receber um valor.</li>
-<li>O rvalue está à direita e é o valor que será guardado.</li>
-</ul>
-<p>✅ Exemplo certo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> b <span class="op">+</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>a</code> é lvalue e <code>b + 2</code> é rvalue.</p>
-<p>❌ Exemplo errado:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>O compilador vai dizer:</p>
-<pre class="console"><code>error: lvalue required as left operand of assignment</code></pre>
-<p>Porque <code>a + b</code> não é um “lugar” da memória, mas apenas o resultado de uma soma.</p>
-</section>
-<section id="mais-exemplos" class="level2">
-<h2 class="anchored" data-anchor-id="mais-exemplos">Mais exemplos</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Código</th>
-<th>Pode compilar?</th>
-<th>Por quê</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>x = 5;</code></td>
-<td>✅</td>
-<td><code>x</code> é lvalue, <code>5</code> é rvalue</td>
-</tr>
-<tr class="even">
-<td><code>5 = x;</code></td>
-<td>❌</td>
-<td>Literal <code>5</code> não pode receber valor</td>
-</tr>
-<tr class="odd">
-<td><code>*ptr = 10;</code></td>
-<td>✅</td>
-<td><code>*ptr</code> é um lvalue (aponta pra um endereço)</td>
-</tr>
-<tr class="even">
-<td><code>ptr + 1 = x;</code></td>
-<td>❌</td>
-<td>Resultado de <code>ptr + 1</code> é temporário</td>
-</tr>
-<tr class="odd">
-<td><code>++x;</code></td>
-<td>✅</td>
-<td><code>x</code> tem endereço, pode ser alterado</td>
-</tr>
-<tr class="even">
-<td><code>++(x + 1);</code></td>
-<td>❌</td>
-<td><code>x + 1</code> é rvalue, não existe na memória</td>
-</tr>
-</tbody>
-</table>
-<p>Resumindo</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Tipo</th>
-<th>Pode estar à esquerda do =?</th>
-<th>Tem endereço?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>lvalue</td>
-<td>Sim</td>
-<td>Sim</td>
-</tr>
-<tr class="even">
-<td>rvalue</td>
-<td>Não</td>
-<td>Não acessível</td>
-</tr>
-</tbody>
-</table>
+<section id="exemplo-2" class="level2">
+<h2 class="anchored" data-anchor-id="exemplo-2">Exemplo 2</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>multiplicacao.c</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="multiplicacao.c"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[]){</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="dt">int</span> resutado<span class="op">,</span> fatorA<span class="op">,</span> fatorB<span class="op">;</span> </span>
+<span id="cb6-6"><a href="#cb6-6"></a>    printf<span class="op">(</span><span class="st">"Multiplicando valores passados na linha de comando.</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="co">// atoi converte de alfanumérico para numérico</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>    fatorA <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>    fatorB <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>    </span>
+<span id="cb6-12"><a href="#cb6-12"></a>    resultado <span class="op">=</span> fatorA <span class="op">*</span> fatorB<span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\t%d</span><span class="st"> x </span><span class="sc">%d</span><span class="st"> = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> fatorA<span class="op">,</span> fatorB<span class="op">,</span> resultado<span class="op">);</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>    </span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A conversão usando <code>atoi</code> é necessária porque os argumentos passados via linha de comando são armazenados em <em>strings</em>.</p>
+<p>Compilação</p>
+<pre class="console"><code>$ gcc multiplicacao.c -o multiplicacao</code></pre>
+<p>Uso (windows)</p>
+<pre class="console"><code>$ .\multiplicacao 4 5</code></pre>
+<p>Uso (linux)</p>
+<pre class="console"><code>$ ./multiplicacao 4 5</code></pre>
+<p>Saída</p>
+<pre class="console"><code>Multiplicando valores passados na linha de comando.
+    4 x 5 = 20</code></pre>
+<p>O uso dos parâmetros <code>argc</code> e <code>argv</code> na função <code>main</code> representa uma das formas mais práticas de tornar programas em C interativos e configuráveis. Por meio deles, é possível capturar e interpretar informações fornecidas pelo usuário diretamente na linha de comando, o que amplia a versatilidade e o controle sobre a execução do <em>software</em>.</p>
 <hr>
 <p>Nesta tutorial, você aprendeu</p>
-<p>✅ os conceitos de lvalue e rvalue</p>
-<p>✅ a evitar erros de compilação envolvendo lvalue</p>
-<p>✅ como o C pensa internamente</p>
+<p>✅ a passar argumentos para a função <code>main</code></p>
+<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Aviso da Redação
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este artigo foi revisado e editado pela equipe do blog em <strong>04 de novembro de 2025</strong>.</p>
+</div>
+</div>
 
 
 </section>

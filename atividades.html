@@ -117,6 +117,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles/academic.css">
@@ -587,6 +590,39 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </tbody>
 </table>
 <p>Sorteio realizado em 28 de outubro de 2025.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A["Codigo fonte (.c)"] --&gt; B["Pre-processador"]
+    B --o n1@{ label: "&lt;span style=\"color:\"&gt;expande macros, inclui headers, remove comentarios&lt;/span&gt;" }
+    B --&gt; C["Compilador"]
+    C --o n2@{ label: "&lt;span style=\"color:\"&gt;analisa sintaxe e semantica, gera codigo assembly&lt;/span&gt;" }
+    C --&gt; D["Montador"]
+   D --o n3@{ label: "&lt;span style=\"color:\"&gt;converte assembly em codigo objeto .o&lt;/span&gt;" }
+   D --&gt; E["Ligador (Linker)"]
+   E --o n4@{ label: "&lt;span style=\"color:\"&gt;une codigo objeto e bibliotecas&lt;/span&gt;" }
+    E --&gt; F["Executavel (.exe / a.out)"]
+   
+    n1@{ shape: text}
+    n2@{ shape: text}
+    n3@{ shape: text}
+    n4@{ shape: text}
+     A:::etapa
+     B:::etapa
+     C:::etapa
+     D:::etapa
+     E:::etapa
+     F:::etapa
+    classDef etapa fill:#dff0ff,stroke:#0074D9,stroke-width:2px,color:#000
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 
 
 </section>
