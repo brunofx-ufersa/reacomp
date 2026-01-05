@@ -127,3 +127,29 @@ Além disso, **todos os prompts utilizados** para gerar conteúdo com IA devem s
 |   22  | Samuel                   |   22   |
 
 Sorteio realizado em 28 de outubro de 2025.
+
+
+```{mermaid}
+flowchart TD
+    A["Codigo fonte (.c)"] --> B["Pre-processador"]
+    B --o n1@{ label: "<span style=\"color:\">expande macros, inclui headers, remove comentarios</span>" }
+    B --> C["Compilador"]
+    C --o n2@{ label: "<span style=\"color:\">analisa sintaxe e semantica, gera codigo assembly</span>" }
+    C --> D["Montador"]
+   D --o n3@{ label: "<span style=\"color:\">converte assembly em codigo objeto .o</span>" }
+   D --> E["Ligador (Linker)"]
+   E --o n4@{ label: "<span style=\"color:\">une codigo objeto e bibliotecas</span>" }
+    E --> F["Executavel (.exe / a.out)"]
+   
+    n1@{ shape: text}
+    n2@{ shape: text}
+    n3@{ shape: text}
+    n4@{ shape: text}
+     A:::etapa
+     B:::etapa
+     C:::etapa
+     D:::etapa
+     E:::etapa
+     F:::etapa
+    classDef etapa fill:#dff0ff,stroke:#0074D9,stroke-width:2px,color:#000
+```

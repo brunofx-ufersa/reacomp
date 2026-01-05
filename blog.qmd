@@ -1,6 +1,6 @@
 ---
 title: "REAComp Blog"
-lang: pt
+lang: pt-BR
 listing:
   contents: posts
   sort: "date desc"

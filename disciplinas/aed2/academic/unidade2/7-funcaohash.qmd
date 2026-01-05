@@ -93,9 +93,9 @@ No método da divisão, usamos o resultado do resto da divisão do valor da chav
 O ideal é que $m$ seja um número primo e não muito próximo de potências de $2$.
 	
 Por exemplo, se $k=12345$ e $m=101$, então
-$$h(k) = h(12345)= 12345 \bmod 101 = 22$$
+$$h(k) = h(12345)= 12345 \bmod 101 = 23$$
 
-A chave $12345$ deve ser alocada na posição $22$ do vetor de $101$ posições.	
+A chave $12345$ deve ser alocada na posição $23$ do vetor de $101$ posições.	
 	
 ::: {.column-margin}
 **[Se liga!]{.text-warning}**

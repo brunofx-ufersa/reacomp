@@ -1,9 +1,15 @@
 project:
   type: website
+  render:
+    - "*.qmd"      # Renderiza todos os arquivos .qmd na raiz
+    - "!posts/"
+    - "!disciplinas/aed2/gaming"
+    - "!blog.qmd"
   output-dir: docs
-
+  
 website:
   title: "REAComp"
+  site-url: "https://brunofx-ufersa.github.io/reacomp/"
   favicon: img/logo.png
   google-analytics: "G-ECV5W1L7CB"
   reader-mode: true
@@ -17,11 +23,11 @@ website:
       - href: disciplinas/aed2/academic/index.qmd
         text: Recursos
       - contribuicao.qmd
-      - href: blog.qmd
-        text: Blog
+      #- href: blog.qmd
+      #  text: Blog
       - about.qmd
-      - href: atividades.qmd
-        text: Tarefas
+      #- href: atividades.qmd
+      #  text: Tarefas
   page-footer: 
     border: false
     background: light
