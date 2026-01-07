@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Bruno Xavier">
-<meta name="description" content="Entendendo o que são lvalue e rvalue em C">
 
-<title>LValues e RValues – REAComp</title>
+<title>Árvore AVL – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,67 +20,37 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../img/logo.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-de1933d555e4b28134edcf86276d32cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../disciplinas/aed2/academic/unidade1/3-arvoresbinariasdebusca.html" rel="prev">
+<link href="../../../../img/logo.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-de1933d555e4b28134edcf86276d32cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown-init.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -119,11 +87,44 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
+<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles/academic.css">
 </head>
 
-<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -292,9 +293,9 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">REAComp</span>
     </a>
   </div>
@@ -305,28 +306,20 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../disciplinas/aed2/academic/index.html"> 
+    <a class="nav-link" href="../../../../disciplinas/aed2/academic/index.html"> 
 <span class="menu-text">Recursos</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../contribuicao.html"> 
+    <a class="nav-link" href="../../../../contribuicao.html"> 
 <span class="menu-text">Participe</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blog.html"> 
-<span class="menu-text">Blog</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../../../about.html"> 
 <span class="menu-text">Sobre</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../atividades.html"> 
-<span class="menu-text">Tarefas</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -345,56 +338,21 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Conteúdo</h2>
-   
-  <ul>
-  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a>
-  <ul class="collapse">
-  <li><a href="#o-que-é-um-lvalue" id="toc-o-que-é-um-lvalue" class="nav-link" data-scroll-target="#o-que-é-um-lvalue">O que é um lvalue?</a></li>
-  <li><a href="#e-o-rvalue" id="toc-e-o-rvalue" class="nav-link" data-scroll-target="#e-o-rvalue">E o rvalue?</a></li>
-  <li><a href="#ligando-os-pontos" id="toc-ligando-os-pontos" class="nav-link" data-scroll-target="#ligando-os-pontos">Ligando os pontos</a></li>
-  <li><a href="#mais-exemplos" id="toc-mais-exemplos" class="nav-link" data-scroll-target="#mais-exemplos">Mais exemplos</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">LValues e RValues</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">Gerenciamento de Memória</div>
-    <div class="quarto-category">Fundamentos C</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    Entendendo o que são lvalue e rvalue em C
-  </div>
+<h1 class="title">Árvore AVL</h1>
 </div>
+
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor</div>
-    <div class="quarto-title-meta-contents">
-             <p>Bruno Xavier </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Data de Publicação</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">18 de outubro de 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -404,116 +362,837 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<section id="introdução" class="level1">
-<h1>Introdução</h1>
-<p>Se você já levou uma bronca do compilador com uma mensagem parecida com esta:</p>
-<pre class="console"><code>error: lvalue required as left operand of assignment</code></pre>
-<p>… então parabéns 😅 você acabou de esbarrar em um dos conceitos fundamentais da linguagem C: <em>lvalue</em> e <em>rvalue</em>.</p>
-<p>Esses dois nomes parecem saídos de um feitiço do Harry Potter, mas são bem mais simples do que parecem. Eles estão ligados a como o C enxerga o que pode ou não receber um valor.</p>
-<section id="o-que-é-um-lvalue" class="level2">
-<h2 class="anchored" data-anchor-id="o-que-é-um-lvalue">O que é um lvalue?</h2>
-<p>A palavra <strong>lvalue</strong> vem de “left value”, ou “valor que pode estar à esquerda”, do sinal de igual (=). Em outras palavras, um lvalue é algo que tem um endereço na memória e pode armazenar um valor.</p>
-<p>Pense no lvalue como uma caixinha com nome, onde o programa guarda um dado.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>  <span class="co">// x é um lvalue</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">20</span><span class="op">;</span>      <span class="co">// tudo certo, estamos mudando o valor de x</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Aqui, <code>x</code> é um <em>lvalue</em>. Ele existe em algum lugar da memória e pode receber outro valor quando quisermos.</p>
+<p>Um dos problemas das BSTs são que elas pode ficar desbalanceadas, no pior caso, degeneradas. A árvore AVL busca remover esse problema rebalanceado a árvore sem perder as propriedades de uma BST.</p>
+<p>Definição AVL Uma árvore AVL (Adelson-Velsky e Landis) é uma árvore binária de busca (BST) que é balanceada, ou seja, a altura de cada nó difere em no máximo uma unidade entre suas subárvores esquerda e direita. Isso garante que operações como inserção, remoção e busca sejam eficientes, com uma complexidade de tempo de O(log n).</p>
+<section id="fator-de-balanceamento" class="level2">
+<h2 class="anchored" data-anchor-id="fator-de-balanceamento">Fator de Balanceamento</h2>
+<p>Definição Fator de Balanceamento O fator de balanceamento (fb) de um nó é a diferença entre as alturas de suas subárvores esquerda e direita. Um nó com fator de balanceamento de -1, 0 ou +1 é considerado balanceado. Para calcular o fator, basta fazer a diferença entre a quantidade de níveis da subárvore esquerda e a quantidade de níveis da subárvore direta. O fator de balanceamento das folhas é sempre zero.</p>
+<p>Significado Os valores do fb nos dizem o estado de balanceamento de um nó:</p>
+<p>fb = 0: A subárvore esquerda e a subárvore direita têm a mesma altura. O nó está perfeitamente balanceado. fb = +1: A subárvore esquerda é uma aresta mais alta que a subárvore direita. O nó está balanceado, mas com uma leve inclinação para a esquerda. fb = -1: A subárvore direita é uma aresta mais alta que a subárvore esquerda. O nó está balanceado, mas com uma leve inclinação para a direita. Em qualquer outro caso, será necessário um rebalanceamento.</p>
+<p>Exemplo Neste exemplo, cada nó, além da chave, possui o fator de balanceamento. Onde não há indicação significa que o fb é zero. Como todos os nós estão com fator de balanceamento dentro do limite permitido ([-1,1]), esta árvore é AVL.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("12")) --- B(("08"))
+    A --- C(("18"))
+    B --- D(("05"))
+    B --- E(("11"))
+    C --- F(("17"))
+    C --- I1((" "))
+    D --- G(("04"))
+    D --- I2((" "))
+
+A:::BL
+B:::BL
+C:::BL
+D:::BL
+E:::WT
+F:::WT
+G:::WT
+
+style I1 stroke:none,fill:transparent
+style I2 stroke:none,fill:transparent
+linkStyle 5 stroke:none,fill:none
+linkStyle 7 stroke:none,fill:none
+classDef WT fill:#FFFFFF
+classDef BL fill:#BBDEFB
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Neste caso, temos o nó com chave 8 desbalanceado. Além dele, a raiz também está desbalanceada. Por essa razão, a árvore ilustrada não é AVL.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("12")) --- B(("08"))
+    A --- C(("18"))
+    B --- D(("05"))
+    B --- E(("11"))
+    C --- F(("17"))
+    C --- I1((" "))
+    D --- G(("04"))
+    D --- H(("07"))
+    G --- I(("02"))
+    G --- I2((" "))
+    
+
+A:::RE
+B:::RE
+C:::BL
+D:::BL
+E:::WT
+F:::WT
+G:::BL
+H:::WT
+I:::WT
+
+style I1 stroke:none,fill:transparent
+style I2 stroke:none,fill:transparent
+linkStyle 5 stroke:none,fill:none
+linkStyle 9 stroke:none,fill:none
+classDef WT fill:#FFFFFF
+classDef BL fill:#BBDEFB
+classDef RE fill:#FFCDD2
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
-<section id="e-o-rvalue" class="level2">
-<h2 class="anchored" data-anchor-id="e-o-rvalue">E o rvalue?</h2>
-<p>O <strong>rvalue</strong>, por outro lado, vem de “right value”, ou “valor que fica à direita” do sinal de igual. Ele é o valor em si, não um local da memória.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span><span class="op">;</span> <span class="co">// x + 5 é um rvalue</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A expressão <code>x + 5</code> é um <em>rvalue</em>. Ela é apenas o resultado de uma conta, um número temporário que “nasce e morre” dentro dessa linha. Ele não mora em lugar nenhum, então não dá pra armazenar nada nele.</p>
+<section id="rotações" class="level2">
+<h2 class="anchored" data-anchor-id="rotações">Rotações</h2>
+<p>Rotação Para manter o balanceamento, a árvore AVL realiza operações de rotação. Elas são necessárias após inserções ou remoções para redistribuir os nós e garantir que o balanceamento seja preservado.</p>
+<p>Rotação Inserção/Remoção: Após esta operação, a árvore AVL verifica o fator de balanceamento dos nós afetados. Rotação: Se um nó tiver um fator de balanceamento fora do intervalo aceitável (-1 a 1), uma rotação é realizada para restabelecer o balanceamento. Atualização: A altura e o fator de balanceamento de todos os nós afetados pela rotação são atualizados.</p>
+<p>Tipos de Rotações As rotações podem ser divididas em simples ou duplas, além da direção esquerda ou direita. Como fb é a diferença entra as alturas das subárvores esquerda e direita, se</p>
+<p>fb &gt; 1: deve-se rotacionar para a direita; fb &lt; 1: deve-se rotacionar para a esquerda; Sobre se a rotação é simples ou dupla, é necessário verificar o sinal do fb do filho.</p>
+<section id="rotações-simples" class="level3">
+<h3 class="anchored" data-anchor-id="rotações-simples">Rotações Simples</h3>
+<p>Rotação à Direita Considere que <span class="math inline">\(fb(B) &gt; 1\)</span>. Além disso, <span class="math inline">\(fb(A) \geq 0\)</span>.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        A(("A"))
+        B(("B"))
+        C(" ")
+        D(" ")
+        E(" ")
+  end
+
+ subgraph s2[" "]
+        A1(("A"))
+        B1(("B"))
+        C1(" ")
+        D1(" ")
+        E1(" ")
+  end
+
+    B --- A
+    B --- C
+    A --- D
+    A --- E
+
+    A1 --- D1
+    A1 --- B1
+    B1 --- E1
+    B1 --- C1
+
+   s1 ---&gt; s2
+
+A:::WT
+B:::WT
+A1:::WT
+B1:::WT
+
+C@{ shape: tri}
+D@{ shape: tri}
+E@{ shape: tri}
+C1@{ shape: tri}
+D1@{ shape: tri}
+E1@{ shape: tri}
+style C fill:#2962FF,stroke:none
+style D fill:#00C853,stroke:none
+style E fill:#D50000,stroke:none    
+style C1 fill:#2962FF,stroke:none
+style D1 fill:#00C853,stroke:none
+style E1 fill:#D50000,stroke:none    
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent       
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Exemplo Claramente, o nó C está desbalanceado com um fator igual a +2. É necessário que seja realizada uma rotação para a direita. Desse modo, o nó B funciona como um pivô.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        A(("A"))
+        B(("B"))
+        C(("C"))
+        I1(" ")
+        I2(" ")
+  end
+
+ subgraph s2[" "]
+        A1(("A"))
+        B1(("B"))
+        C1(("C"))
+  end
+
+    C --- B
+    C --- I1
+    B --- A
+    B --- I2
+
+    B1 --- A1
+    B1 --- C1
+
+   s1 ---&gt; s2
+
+A:::WT
+B:::WT
+C:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent
+style I1 stroke:none,fill:transparent
+style I2 stroke:none,fill:transparent
+linkStyle 1 stroke:none,fill:none    
+linkStyle 3 stroke:none,fill:none    
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Claramente, o nó A está desbalanceado com um fator igual a +2. É necessário que seja realizada uma rotação para a direita. Como A deve se tornar filho da direita de B, devemos realocar D como filho da esquerda de A.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        A(("A"))
+        B(("B"))
+        C(("C"))
+        D(("D"))
+        I1(" ")
+  end
+
+ subgraph s2[" "]
+        A1(("A"))
+        B1(("B"))
+        C1(("C"))
+        D1(("D"))
+        I2(" ")
+  end
+
+    D --- B
+    D --- I1
+    B --- A
+    B --- C
+
+    B1 --- A1
+    B1 --- D1
+    D1 --- C1
+    D1 --- I2
+
+   s1 ---&gt; s2
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent
+style I1 stroke:none,fill:transparent
+style I2 stroke:none,fill:transparent
+linkStyle 1 stroke:none,fill:none    
+linkStyle 7 stroke:none,fill:none    
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Rotação à Esquerda A rotação à esquerda é dual à direta.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        A(("A"))
+        B(("B"))
+        C(" ")
+        D(" ")
+        E(" ")
+  end
+
+ subgraph s2[" "]
+        A1(("A"))
+        B1(("B"))
+        C1(" ")
+        D1(" ")
+        E1(" ")
+  end
+
+    A --- D
+    A --- B
+    B --- E
+    B --- C
+
+    B1 --- A1
+    B1 --- C1
+    A1 --- D1
+    A1 --- E1
+
+   s1 ---&gt; s2
+
+A:::WT
+B:::WT
+A1:::WT
+B1:::WT
+
+C@{ shape: tri}
+D@{ shape: tri}
+E@{ shape: tri}
+C1@{ shape: tri}
+D1@{ shape: tri}
+E1@{ shape: tri}
+style C fill:#2962FF,stroke:none
+style D fill:#00C853,stroke:none
+style E fill:#D50000,stroke:none    
+style C1 fill:#2962FF,stroke:none
+style D1 fill:#00C853,stroke:none
+style E1 fill:#D50000,stroke:none    
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent       
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Exemplo Qual nó está desbalanceado? Qual rotação deve ser aplicada? Qual a árvore resultante dessa operação?</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        A(("A"))
+        B(("B"))
+        C(("C"))
+        D(("D"))
+        E(("E"))
+        F(("F"))
+        I1(" ")
+  end
+
+
+    B --- A
+    B --- D
+    D --- C
+    D --- E
+    E --- I1
+    E --- F
+
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style I1 stroke:none,fill:transparent
+linkStyle 4 stroke:none,fill:none    
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        A(("A"))
+        B(("B"))
+        C(("C"))
+        D(("D"))
+        E(("E"))
+        F(("F"))
+        I1(" ")
+  end
+
+ subgraph s2[" "]
+        A1(("A"))
+        B1(("B"))
+        C1(("C"))
+        D1(("D"))
+        E1(("E"))
+        F1(("F"))
+        I2(" ")
+  end
+
+    B --- A
+    B --- D
+    D --- C
+    D --- E
+    E --- I1
+    E --- F
+    
+    D1 --- B1
+    D1 --- E1
+    B1 --- A1
+    B1 --- C1
+    E1 --- I2
+    E1 --- F1
+
+    s1 ---&gt; s2
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+E1:::WT
+F1:::WT
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent
+style I1 stroke:none,fill:transparent
+style I2 stroke:none,fill:transparent
+linkStyle 4 stroke:none,fill:none    
+linkStyle 10 stroke:none,fill:none    
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Nota Você irá perceber que, teoricamente, só precisamos de uma rotação. Primeiro, porque as rotações à esquerda e direita são espelhadas. Segundo, como você notará, as rotações duplas pode ser divididas em simples.</p>
+<p>Uma rotação dupla à esquerda, por exemplo, não significa duas rotações à esquerda, mas uma para a direita na subárvore seguida de uma para a esquerda. Todavia, para diminuir o número de operações, podemos fazer tudo em um passo só.</p>
 </section>
-<section id="ligando-os-pontos" class="level2">
-<h2 class="anchored" data-anchor-id="ligando-os-pontos">Ligando os pontos</h2>
-<p>Em toda atribuição, temos a mesma estrutura:</p>
-<ul>
-<li>lvalue = rvalue;</li>
-<li>O lvalue está à esquerda e precisa ser algo que possa receber um valor.</li>
-<li>O rvalue está à direita e é o valor que será guardado.</li>
-</ul>
-<p>✅ Exemplo certo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> b <span class="op">+</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>a</code> é lvalue e <code>b + 2</code> é rvalue.</p>
-<p>❌ Exemplo errado:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>O compilador vai dizer:</p>
-<pre class="console"><code>error: lvalue required as left operand of assignment</code></pre>
-<p>Porque <code>a + b</code> não é um “lugar” da memória, mas apenas o resultado de uma soma.</p>
-</section>
-<section id="mais-exemplos" class="level2">
-<h2 class="anchored" data-anchor-id="mais-exemplos">Mais exemplos</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Código</th>
-<th>Pode compilar?</th>
-<th>Por quê</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>x = 5;</code></td>
-<td>✅</td>
-<td><code>x</code> é lvalue, <code>5</code> é rvalue</td>
-</tr>
-<tr class="even">
-<td><code>5 = x;</code></td>
-<td>❌</td>
-<td>Literal <code>5</code> não pode receber valor</td>
-</tr>
-<tr class="odd">
-<td><code>*ptr = 10;</code></td>
-<td>✅</td>
-<td><code>*ptr</code> é um lvalue (aponta pra um endereço)</td>
-</tr>
-<tr class="even">
-<td><code>ptr + 1 = x;</code></td>
-<td>❌</td>
-<td>Resultado de <code>ptr + 1</code> é temporário</td>
-</tr>
-<tr class="odd">
-<td><code>++x;</code></td>
-<td>✅</td>
-<td><code>x</code> tem endereço, pode ser alterado</td>
-</tr>
-<tr class="even">
-<td><code>++(x + 1);</code></td>
-<td>❌</td>
-<td><code>x + 1</code> é rvalue, não existe na memória</td>
-</tr>
-</tbody>
-</table>
-<p>Resumindo</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Tipo</th>
-<th>Pode estar à esquerda do =?</th>
-<th>Tem endereço?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>lvalue</td>
-<td>Sim</td>
-<td>Sim</td>
-</tr>
-<tr class="even">
-<td>rvalue</td>
-<td>Não</td>
-<td>Não acessível</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>Nesta tutorial, você aprendeu</p>
-<p>✅ os conceitos de lvalue e rvalue</p>
-<p>✅ a evitar erros de compilação envolvendo lvalue</p>
-<p>✅ como o C pensa internamente</p>
+<section id="rotações-duplas" class="level3">
+<h3 class="anchored" data-anchor-id="rotações-duplas">Rotações Duplas</h3>
+<p>Rotação à Direita Em dois passos. Rotação para a esquerda em B, depois para a direita em A.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        A(("A"))
+        B(("B"))
+        C(("C"))
+        verde(" ")
+        vermelho(" ")
+        azul(" ")
+        amarelo(" ")
+  end
+
+ subgraph s2[" "]
+        A1(("A"))
+        B1(("B"))
+        C1(("C"))
+        verde1(" ")
+        vermelho1(" ")
+        azul1(" ")
+        amarelo1(" ")
+  end
+
+ subgraph s3[" "]
+        A2(("A"))
+        B2(("B"))
+        C2(("C"))
+        verde2(" ")
+        vermelho2(" ")
+        azul2(" ")
+        amarelo2(" ")
+  end
+
+    C --- A
+    C --- amarelo
+    A --- verde
+    A --- B
+    B --- vermelho
+    B --- azul
+
+    C1 --- B1
+    C1 --- amarelo1
+    B1 --- A1
+    B1 --- azul1
+    A1 --- verde1
+    A1 --- vermelho1
+
+    B2 --- A2
+    B2 --- C2
+    A2 --- verde2
+    A2 --- vermelho2
+    C2 --- azul2
+    C2 --- amarelo2
+  
+
+   s1 ---&gt; s2
+   s2 ---&gt; s3
+
+A:::WT
+B:::WT
+C:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+A2:::WT
+B2:::WT
+C2:::WT
+
+verde@{ shape: tri}
+vermelho@{ shape: tri}
+azul@{ shape: tri}
+amarelo@{ shape: tri}
+verde1@{ shape: tri}
+vermelho1@{ shape: tri}
+azul1@{ shape: tri}
+amarelo1@{ shape: tri}
+verde2@{ shape: tri}
+vermelho2@{ shape: tri}
+azul2@{ shape: tri}
+amarelo2@{ shape: tri}
+
+style verde fill:#00C853,stroke:none
+style vermelho fill:#D50000,stroke:none    
+style azul fill:#2962FF,stroke:none
+style amarelo fill:#FFD600,stroke:none
+
+style verde1 fill:#00C853,stroke:none
+style vermelho1 fill:#D50000,stroke:none    
+style azul1 fill:#2962FF,stroke:none
+style amarelo1 fill:#FFD600,stroke:none
+
+style verde2 fill:#00C853,stroke:none
+style vermelho2 fill:#D50000,stroke:none    
+style azul2 fill:#2962FF,stroke:none
+style amarelo2 fill:#FFD600,stroke:none
+
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent       
+style s3 stroke:none,fill:transparent       
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Em um único passo. Considere <span class="math inline">\(fb(A) &gt; 1\)</span> e <span class="math inline">\(fb(B) &lt; 0\)</span>.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        A(("A"))
+        B(("B"))
+        C(("C"))
+        verde(" ")
+        vermelho(" ")
+        azul(" ")
+        amarelo(" ")
+  end
+
+ subgraph s3[" "]
+        A2(("A"))
+        B2(("B"))
+        C2(("C"))
+        verde2(" ")
+        vermelho2(" ")
+        azul2(" ")
+        amarelo2(" ")
+  end
+
+    C --- A
+    C --- amarelo
+    A --- verde
+    A --- B
+    B --- vermelho
+    B --- azul
+
+    B2 --- A2
+    B2 --- C2
+    A2 --- verde2
+    A2 --- vermelho2
+    C2 --- azul2
+    C2 --- amarelo2
+  
+
+   s1 ---&gt; s3
+
+A:::WT
+B:::WT
+C:::WT
+A2:::WT
+B2:::WT
+C2:::WT
+
+verde@{ shape: tri}
+vermelho@{ shape: tri}
+azul@{ shape: tri}
+amarelo@{ shape: tri}
+verde2@{ shape: tri}
+vermelho2@{ shape: tri}
+azul2@{ shape: tri}
+amarelo2@{ shape: tri}
+
+style verde fill:#00C853,stroke:none
+style vermelho fill:#D50000,stroke:none    
+style azul fill:#2962FF,stroke:none
+style amarelo fill:#FFD600,stroke:none
+
+style verde2 fill:#00C853,stroke:none
+style vermelho2 fill:#D50000,stroke:none    
+style azul2 fill:#2962FF,stroke:none
+style amarelo2 fill:#FFD600,stroke:none
+
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s3 stroke:none,fill:transparent       
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Rotação à Esquerda Em dois passos. Rotação para a direita em B, depois para a esquerda em A.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        A(("A"))
+        B(("B"))
+        C(("C"))
+        verde(" ")
+        vermelho(" ")
+        azul(" ")
+        amarelo(" ")
+  end
+
+ subgraph s2[" "]
+        A1(("A"))
+        B1(("B"))
+        C1(("C"))
+        verde1(" ")
+        vermelho1(" ")
+        azul1(" ")
+        amarelo1(" ")
+  end
+
+ subgraph s3[" "]
+        A2(("A"))
+        B2(("B"))
+        C2(("C"))
+        verde2(" ")
+        vermelho2(" ")
+        azul2(" ")
+        amarelo2(" ")
+  end
+
+    A --- verde
+    A --- C
+    C --- B
+    C --- amarelo
+    B --- vermelho
+    B --- azul
+
+    A1 --- verde1
+    A1 --- B1
+    B1 --- vermelho1
+    B1 --- C1
+    C1 --- azul1
+    C1 --- amarelo1
+
+    B2 --- A2
+    B2 --- C2
+    A2 --- verde2
+    A2 --- vermelho2
+    C2 --- azul2
+    C2 --- amarelo2
+  
+
+   s1 ---&gt; s2
+   s2 ---&gt; s3
+
+A:::WT
+B:::WT
+C:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+A2:::WT
+B2:::WT
+C2:::WT
+
+verde@{ shape: tri}
+vermelho@{ shape: tri}
+azul@{ shape: tri}
+amarelo@{ shape: tri}
+verde1@{ shape: tri}
+vermelho1@{ shape: tri}
+azul1@{ shape: tri}
+amarelo1@{ shape: tri}
+verde2@{ shape: tri}
+vermelho2@{ shape: tri}
+azul2@{ shape: tri}
+amarelo2@{ shape: tri}
+
+style verde fill:#00C853,stroke:none
+style vermelho fill:#D50000,stroke:none    
+style azul fill:#2962FF,stroke:none
+style amarelo fill:#FFD600,stroke:none
+
+style verde1 fill:#00C853,stroke:none
+style vermelho1 fill:#D50000,stroke:none    
+style azul1 fill:#2962FF,stroke:none
+style amarelo1 fill:#FFD600,stroke:none
+
+style verde2 fill:#00C853,stroke:none
+style vermelho2 fill:#D50000,stroke:none    
+style azul2 fill:#2962FF,stroke:none
+style amarelo2 fill:#FFD600,stroke:none
+
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent       
+style s3 stroke:none,fill:transparent       
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Em um único passo. Considere <span class="math inline">\(fb(A) &lt; -1\)</span> e <span class="math inline">\(fb(B) &gt; 0\)</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+ subgraph s1[" "]
+        A(("A"))
+        B(("B"))
+        C(("C"))
+        verde(" ")
+        vermelho(" ")
+        azul(" ")
+        amarelo(" ")
+  end
+
+
+ subgraph s3[" "]
+        A2(("A"))
+        B2(("B"))
+        C2(("C"))
+        verde2(" ")
+        vermelho2(" ")
+        azul2(" ")
+        amarelo2(" ")
+  end
+
+    A --- verde
+    A --- C
+    C --- B
+    C --- amarelo
+    B --- vermelho
+    B --- azul
+
+    B2 --- A2
+    B2 --- C2
+    A2 --- verde2
+    A2 --- vermelho2
+    C2 --- azul2
+    C2 --- amarelo2
+  
+
+   s1 ---&gt; s3
+
+A:::WT
+B:::WT
+C:::WT
+A2:::WT
+B2:::WT
+C2:::WT
+
+verde@{ shape: tri}
+vermelho@{ shape: tri}
+azul@{ shape: tri}
+amarelo@{ shape: tri}
+verde2@{ shape: tri}
+vermelho2@{ shape: tri}
+azul2@{ shape: tri}
+amarelo2@{ shape: tri}
+
+style verde fill:#00C853,stroke:none
+style vermelho fill:#D50000,stroke:none    
+style azul fill:#2962FF,stroke:none
+style amarelo fill:#FFD600,stroke:none
+
+style verde2 fill:#00C853,stroke:none
+style vermelho2 fill:#D50000,stroke:none    
+style azul2 fill:#2962FF,stroke:none
+style amarelo2 fill:#FFD600,stroke:none
+
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s3 stroke:none,fill:transparent       
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Revisão e Considerações</p>
+<p>Resumo Nesta aula, estudamos a estrutura de dados árvore AVL.</p>
+<p>Definimos essa estrutura baseada em BST; Definimos o fator de balanceamento de um nó; Estudamos as rotações Simples (Esquerda e Direita) Dupla (Esquerda e Direita) Na próxima aula, iremos abordar as operações de inserção, busca e remoção em AVL e como as rotações são aplicadas nessas operações.</p>
+<p>Considerações A árvore AVL é uma estrutura otimizada além da BST. Ela supera a possibilidade de degeneração da árvore efetuando operações de rotação. Embora essas rotações exijam mais computações, o ganho com o rebalanceamento é maior, principalmente para buscas.</p>
+<p>No nosso próximo estudo, iremos abordar a aplicação das rotações durante as inserções e remoções de nós na árvore.</p>
+<div class="progress-bar" id="progressBar"></div>
+
+<script>
+window.addEventListener("scroll", function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById("progressBar").style.width = scrollPercent + "%";
+});
+</script>
 
 
 </section>
@@ -933,6 +1612,15 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../disciplinas/aed2/academic/unidade1/3-arvoresbinariasdebusca.html" class="pagination-link" aria-label="Árvore Binária de Busca">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Árvore Binária de Busca</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

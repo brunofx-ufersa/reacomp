@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Função Hash – REAComp</title>
+<title>Árvore Binária de Busca – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../">
-<link href="../../../../disciplinas/aed2/academic/unidade2/8-colisoes.html" rel="next">
-<link href="../../../../disciplinas/aed2/academic/unidade2/6-introhash.html" rel="prev">
+<link href="../../../../disciplinas/aed2/academic/unidade1/4-arvoresavl.html" rel="next">
+<link href="../../../../disciplinas/aed2/academic/unidade1/2-arvoresbinarias.html" rel="prev">
 <link href="../../../../img/logo.png" rel="icon" type="image/png">
 <script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -347,7 +382,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Função Hash</h1>
+<h1 class="title">Árvore Binária de Busca</h1>
 </div>
 
 
@@ -364,456 +399,675 @@ window.Quarto = {
 </header>
 
 
-<p>A função <em>hash</em> é usada para mapear uma chave para um valor, gerando um código hash que, por sua vez, é usado para encontrar a localização de um item em uma estrutura de dados como uma tabela hash.</p>
-<div class="cell" data-fig-width="6.5" data-layout-align="default">
+<p>A Árvore Binária de Busca (ABB ou BST, do inglês), possui a característica de ser otimizada para busca. Ela distribui seus nós com uma regra básica baseada na grandeza de ordem de suas chaves. Por essa razão, iremos adotar chaves com valores inteiros que podem ser facilmente comparados.</p>
+<p>Observe a árvore binária a seguir.</p>
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
- subgraph s1["🔑 Chaves"]
-        A0["'maçã'"]
-        B0["'uva'"]
-        C0["'laranja'"]
-        D0["'banana'"]
-  end
- subgraph s2["⚙️ Função Hash"]
-  end
- subgraph s3["📊 Tabela Hash"]
-        A2["Índice 0: ❌      "]
-        B2["Índice 1: 'laranja'"]
-        C2["Índice 2: 'uva'"]
-        D2["Índice 3: 'maçã'"]
-        E2["Índice 4: 'banana'"]
-  end
-    A0 ==&gt; s2
-    B0 ==&gt; s2
-    C0 ==&gt; s2
-    D0 ==&gt; s2
-    s2 =="h('laranja')=1"==&gt; B2
-    s2 =="h('uva')=2"==&gt; C2
-    s2 =="h('maçã')=3"==&gt; D2
-    s2 =="h('banana')=4"==&gt; E2
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("08")) --- B(("03"))
+    A --- C(("10"))
+    B --- D(("01"))
+    B --- E(("06"))
+    C --- F(("09"))
+    C --- G(("14"))
+    E --- H(("04"))
+    E --- I(("07"))
 
-    classDef box fill:#fff,stroke:#000,color:#000,stroke-width:1px;
-    
-    class A0 box
-    class B0 box
-    class C0 box
-    class D0 box
-    class A2 box
-    class B2 box
-    class C2 box
-    class D2 box
-    class E2 box
-    
-    style s2 stroke:none,fill:#BBDEFB
-    style s1 stroke:none,fill:#FFE0B2
-    style s3 stroke:none,fill:#FFE0B2
-    
-    linkStyle 0 stroke:#D50000,fill:none
-    linkStyle 1 stroke:#00C853,fill:none
-    linkStyle 2 stroke:#2962FF,fill:none
-    linkStyle 4 stroke:#2962FF
-    linkStyle 5 stroke:#00C853,fill:none
-    linkStyle 6 stroke:#D50000,fill:none
+ style A fill:#C8E6C9
+ style B fill:#BBDEFB
+ style D fill:#BBDEFB
+ style E fill:#BBDEFB
+ style H fill:#BBDEFB
+ style I fill:#BBDEFB
+ style C fill:#FFCDD2
+ style F fill:#FFCDD2
+ style G fill:#FFCDD2
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
-<section id="características-da-função-hash" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="características-da-função-hash">Características da Função Hash</h2>
-<p>É desejável que a função <em>hash</em> possua as seguintes características.</p>
-<ul>
-<li>Fácil de ser calculada;</li>
-<li>Distribuição uniforme dos dados;</li>
-<li>Minimiza as colisões;</li>
-<li>Capaz de resolver possíveis colisões.</li>
-</ul>
-<p>A vantagem da tabela hash é a velocidade de busca, uma função muito complicada para calcular é incoveniente, pois pode demorar mais que uma busca em uma árvore binária, por exemplo. Além disso, se a função não distribui as chaves de maneira uniforme, muitas delas irão se concentrar em um local do vetor, aumentando a probabilidade de colisões.</p>
+<p>Todos os nós à esquerda (em azul) da raiz possuem chaves menores que a chave da raiz. Além disso, todos os nós à direita (em vermelho) da raiz possuem chaves maiores que a chave da raiz.</p>
+<p>Tal característica se estende para qualquer nó da árvore. Por exemplo, o nó cuja chave é 3, todos os nós à esquerda possem chaves menores que 3 (chave 1) e na direita as maiores que 3 (chaves 6, 4 e 7).</p>
+<p>Portanto, uma BST é uma árvore binária que obedece a seguinte regra: dado um nó com chave A, todo nó à esquerda possui chave menor que A e todo nó à direita possui chave maior que A. Algumas BSTs permitem chaves duplicadas, no entanto vamos abordar o caso em que todas as chaves são diferentes.</p>
+<section id="operações" class="level2">
+<h2 class="anchored" data-anchor-id="operações">Operações</h2>
+<p>As operações básicas sobre as BSTs são inserção, busca e remoção.</p>
+<section id="inserção" class="level3">
+<h3 class="anchored" data-anchor-id="inserção">Inserção</h3>
+<p>A inserção em uma BST ocorre nas folhas. A operação deve manter a característica da regra geral. Para isso, devemos compara as chaves para decidir se caminhamos para a esquerda ou direita.</p>
+<p>No exemplo a seguir, vamos inserir as chaves 15, 10, 20, 8, 12, 17 e 25 em uma BST vazia.</p>
+<p>Como a árvore está incialmente vazia, a chave 15 se torna a raiz.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("15"))
+    
+A:::WT
 
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong><span class="text-warning">Se liga!</span></strong> Quando muitas chaves se concentram um lugar, dizemos que se formou um <em>cluster</em> (aglomerado).</p>
-</div></div><p>A seguir, vamos estudar os métodos clássicos para criação de funções <em>hash</em>.</p>
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Sabe-se que 10 é menor que 15, portanto deve ser adicionado à esquerda.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("15")) --- B(("10"))
+    A --- I1((" "))
+    
+    
+A:::WT
+B:::WT
+L_A_B_0@{ animation: slow }
+style I1 stroke:none,fill:transparent
+linkStyle 1 stroke:none,fill:none
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>A chave 20 é maior que 15, portanto deve ser adicionado à direita.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("15")) --- B(("10"))
+    A --- C(("20"))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+L_A_C_0@{ animation: slow }
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Para adicionar o 8, comparamos com a raiz. Logo, devemos ir para à esquerda. Em seguida comparamos com o 10, indicando que será adicionada à esquerda.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- I1((" "))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+
+L_A_B_0@{ animation: slow }
+L_B_D_0@{ animation: slow }
+style I1 stroke:none,fill:transparent
+linkStyle 3 stroke:none,fill:none    
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>De modo semelhante, 12 é menor que 15, seguimos para esquerda da raiz. Depois, 12 é maior que 10, então seguimos para a direita.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- E(("12"))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+
+L_A_B_0@{ animation: slow }
+L_B_E_0@{ animation: slow }
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Para adicionar a chave 17, seguimos para a direita, pois 17 &gt; 15. Depois para a esquerda, pois 17 &lt; 20.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- E(("12"))
+    C --- F(("17"))
+    C --- I1((" "))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+
+
+L_A_C_0@{ animation: slow }
+L_C_F_0@{ animation: slow }
+style I1 stroke:none,fill:transparent
+linkStyle 5 stroke:none,fill:none    
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Seguindo o mesmo raciocínio, a chave 25 deve ser alocada à direta de 20.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- E(("12"))
+    C --- F(("17"))
+    C --- G(("25"))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+
+
+L_A_C_0@{ animation: slow }
+L_C_G_0@{ animation: slow }
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
-<section id="método-da-divisão" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="método-da-divisão">Método da Divisão</h2>
-<p>No método da divisão, usamos o resultado do resto da divisão do valor da chave pelo tamanho da tabela. <span class="math display">\[h(k) = k \bmod m\]</span></p>
-<p>O ideal é que <span class="math inline">\(m\)</span> seja um número primo e não muito próximo de potências de <span class="math inline">\(2\)</span>.</p>
-<p>Por exemplo, se <span class="math inline">\(k=12345\)</span> e <span class="math inline">\(m=101\)</span>, então <span class="math display">\[h(k) = h(12345)= 12345 \bmod 101 = 23\]</span></p>
-<p>A chave <span class="math inline">\(12345\)</span> deve ser alocada na posição <span class="math inline">\(23\)</span> do vetor de <span class="math inline">\(101\)</span> posições.</p>
+<section id="busca" class="level3">
+<h3 class="anchored" data-anchor-id="busca">Busca</h3>
+<p>A busca ocorre percorrendo a árvore conforme a regra geral. Iniciando da raiz, percorremos os nós seguindo um caminho da direita ou esquerda conforma o valor da chave. Se a chave procurada é maior que a chave do nó atual, buscamos na direita, caso contrário na esquerda.</p>
+<p>Veja um exemplo da busca pelo chave 12:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- E(("12"))
+    C --- F(("17"))
+    C --- G(("25"))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
 
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong><span class="text-warning">Se liga!</span></strong> Nem sempre trateremos com chaves inteiras simples como as vistas até aqui. Nesses casos, precisamos de um mecanismo para transformar em um valor inteiro antes de processar a função hash. Veremos isso à frente.</p>
-</div></div><p>Este é o método mais simples e fácil de gerar um valor de hash. A função hash divide o valor <span class="math inline">\(k\)</span> (chave) por <span class="math inline">\(m\)</span> (tamanho da tabela) e, em seguida, usa o resto obtido. É mais adequado que <span class="math inline">\(m\)</span> seja um número primo, pois isso pode garantir que as chaves sejam distribuídas de forma mais uniforme.</p>
-<p>Embora simples, o método da divisão leva a um desempenho ruim, uma vez que chaves consecutivas mapeiam para valores de hash consecutivos na tabela de hash.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercício">
+
+L_A_B_0@{ animation: slow }
+L_B_E_0@{ animation: slow }
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Iniciamos pela raiz e comparamos os valores (12 &lt; 15). devemos seguir para a esquerda. Comparamos as chaves (12 &gt; 10). Devemos ir para a direita. Comparamos as chaves (12 = 12). Busca concluída com o elemento encontrado.</p>
+<p>Agora, vamos buscar o nó com chave 18:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- E(("12"))
+    C --- F(("17"))
+    C --- G(("25"))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+
+
+L_A_C_0@{ animation: slow }
+L_C_F_0@{ animation: slow }
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Iniciamos pela raiz e comparamos os valores (18 &gt; 15). devemos seguir para a direita. Comparamos as chaves (18 &lt; 10). Devemos ir para a esquerda. Comparamos as chaves (18 &gt; 17). Devemos ir para a esquerda, porém não temos mais nós para percorrer. Busca concluída com o elemento não encontrado.</p>
+</section>
+<section id="remoção" class="level3">
+<h3 class="anchored" data-anchor-id="remoção">Remoção</h3>
+<p>A remoção de um nó em uma BST requer alguns cuidados, uma vez que não podemos quebrar a regra geral de ordenação. Para tanto, devemos analisar três casos:</p>
+<ul>
+<li>O nó a ser removido é uma folha: retire da árvore sem compaixão.</li>
+<li>O nó a ser removido possui somente um filho: o filho substitui o pai.</li>
+<li>O nó a ser removido possui dois filhos: o nó é substituído pelo seu sucessor em ordem ou predecessor. O sucessor/predecessor é removido.</li>
+</ul>
+<p>Exemplo</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+subgraph s1[" "]
+        A(("15"))
+        B(("10"))
+        C(("20"))
+        D(("08"))
+        E(("12"))
+        F(("17"))
+        G(("25"))
+   end
+ 
+subgraph s2[" "]
+        A1(("15"))
+        B1(("10"))
+        C1(("20"))
+        D1(("08"))
+        E1(("12"))
+        F1(("17"))
+        I1((" "))
+   end
+
+    A --- B
+    A --- C
+    B --- D
+    B --- E
+    C --- F
+    C --x G
+    
+    A1 --- B1
+    A1 --- C1
+    B1 --- D1
+    B1 --- E1
+    C1 --- F1
+    C1 --- I1
+    
+    s1 ---&gt; s2
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+E1:::WT
+F1:::WT
+style G fill:#FFCDD2
+style I1 stroke:none,fill:transparent
+style s1 stroke:none,fill:transparent
+style s2     stroke:none,fill:transparent
+linkStyle 11 stroke:none,fill:none    
+
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Caso 1, o nó não possui filhos, basta apagá-lo.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+subgraph s1[" "]
+        A(("15"))
+        B(("10"))
+        C(("20"))
+        D(("08"))
+        E(("12"))
+        F(("17"))
+        I1((" "))
+   end
+ 
+subgraph s2[" "]
+        A1(("15"))
+        B1(("10"))
+        C1(("17"))
+        D1(("08"))
+        E1(("12"))
+   end
+
+    A --- B
+    A --x  C
+    B --- D
+    B --- E
+    C --- F
+    C --- I1
+    
+    A1 --- B1
+    A1 --- C1
+    B1 --- D1
+    B1 --- E1
+    
+    s1 ---&gt; s2
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+E1:::WT
+style C fill:#FFCDD2
+style F fill:#C8E6C9
+style I1 stroke:none,fill:transparent
+style s1 stroke:none,fill:transparent
+style s2     stroke:none,fill:transparent
+linkStyle 5 stroke:none,fill:none    
+
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Caso 2, o filho substitui o pai.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+subgraph s1[" "]
+        A(("15"))
+        B(("10"))
+        C(("17"))
+        D(("08"))
+        E(("12"))
+   end
+ 
+subgraph s2[" "]
+        A1(("12"))
+        B1(("10"))
+        C1(("17"))
+        D1(("08"))
+        I1((" "))
+   end
+
+    A --- B
+    A --- C
+    B --- D
+    B --- E
+    
+    A1 --- B1
+    A1 --- C1
+    B1 --- D1
+    B1 --- I1
+    
+    s1 ---&gt; s2
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+style A fill:#FFCDD2
+style E fill:#C8E6C9
+style I1 stroke:none,fill:transparent
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent
+linkStyle 7 stroke:none,fill:none    
+
+classDef WT fill:#FFFFFF
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Caso 3, trocamos o nó pelo seu predecessor na árvore.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Exercício
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Dada a função hash <span class="math inline">\(h(k) = k^2\bmod 7\)</span>, calcule os valores hash para as chaves <span class="math display">\[4, 17, 13, 35, 25, 11, 2, 10, 32\]</span>.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solução (clique para ver)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Dica</span>Solução (clique para ver)
+Nota
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ul>
-<li><span class="math inline">\(h(4)\,\,\,=\,\,\,4^2\bmod 7=16\bmod 7\,\,\,\,\,\,=2\)</span></li>
-<li><span class="math inline">\(h(17)=17^2\bmod 7=289\bmod 7\,\,\,=2\)</span></li>
-<li><span class="math inline">\(h(13)=13^2\bmod 7=169\bmod 7\,\,\,=1\)</span></li>
-<li><span class="math inline">\(h(35)=35^2\bmod 7=1225\bmod 7=0\)</span></li>
-<li><span class="math inline">\(h(25)=25^2\bmod 7=625\bmod 7\,\,\,=2\)</span></li>
-<li><span class="math inline">\(h(11)=11^2\bmod 7=121\bmod 7\,\,\,=2\)</span></li>
-<li><span class="math inline">\(h(2)\,\,\,=\,\,\,2^2\bmod 7=4\bmod 7\,\,\,\,\,\,\,\,\,=4\)</span></li>
-<li><span class="math inline">\(h(10)=10^2\bmod 7=100\bmod 7\,\,\,=2\)</span></li>
-<li><span class="math inline">\(h(32)=32^2\bmod 7=1024\bmod 7=2\)</span></li>
-</ul>
-<p>Muitas colisões ocorreram! Era evidente que haveria sobreposição de chaves, pois temos somentes sete espaços.</p>
-</div>
+<p>O predecessor é o nó com a maior chave na subárvore esquerda. Já o antecessor é o nó com menor chave na subárvore direita. Note que após as remoções a árvore continuou obedecendo a regra geral (“menores de um lado, maiores do outro”).</p>
 </div>
 </div>
 </section>
-<section id="método-da-multiplicação" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="método-da-multiplicação">Método da Multiplicação</h2>
-<p>No método da multiplicação, realizamos os seguintes passos:</p>
-<ul>
-<li>Multiplicamos a chave (<span class="math inline">\(k\)</span>) por uma constante <span class="math inline">\(A\)</span> entre <span class="math inline">\(0\)</span> e <span class="math inline">\(1\)</span>;</li>
-<li>Extraímos a parte fracionária de <span class="math inline">\(kA\)</span>;</li>
-<li>Multiplicamos esse valor por <span class="math inline">\(m\)</span> (tamanho da tabela);</li>
-<li>Arredondamos para baixo;</li>
-</ul>
-<p>Ou seja, <span class="math display">\[h(k) = \lfloor m (kA \bmod 1) \rfloor, \text{ com } 0 &lt; A &lt; 1\]</span></p>
-<p>Por exemplo, considere <span class="math inline">\(k = 123\)</span>, <span class="math inline">\(m = 1000\)</span>, e <span class="math inline">\(A \approx 0,618\)</span>.</p>
-<p><span class="math display">\[\begin{align*}
-h(k) &amp;= \lfloor 1000 (123 \cdot 0,618 \bmod 1) \rfloor \\
-&amp;=\lfloor 1000 (76,014 \bmod 1) \rfloor \\ &amp;=\lfloor 1000\cdot 0,014 \rfloor=14
-\end{align*}\]</span></p>
-<p>A vantagem deste método é que ele pode trabalhar com qualquer valor entre 0 e 1.</p>
+</section>
+<section id="implementação" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="implementação">Implementação</h2>
+<section id="inserção-1" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="inserção-1">Inserção</h3>
+<p>Existem várias implementações do algoritmo de inserção em BST. Abaixo, uma implementação recursiva.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a>Node<span class="op">*</span> insert_node<span class="op">(</span>Node<span class="op">*</span> root<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="cf">if</span> <span class="op">(</span>root <span class="op">==</span> NULL<span class="op">)</span> </span>
+<span id="cb1-3"><a href="#cb1-3"></a>        <span class="cf">return</span> create_node<span class="op">(</span>key<span class="op">);</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    </span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="cf">if</span> <span class="op">(</span>root<span class="op">-&gt;</span>key <span class="op">==</span> key<span class="op">)</span> </span>
+<span id="cb1-6"><a href="#cb1-6"></a>        <span class="cf">return</span> root<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    </span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="cf">if</span> <span class="op">(</span>root<span class="op">-&gt;</span>key <span class="op">&lt;</span> key<span class="op">)</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a>        root<span class="op">-&gt;</span>right <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">-&gt;</span>right<span class="op">,</span> key<span class="op">);</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="cf">else</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>        root<span class="op">-&gt;</span>left <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">-&gt;</span>left<span class="op">,</span> key<span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>     </span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="cf">return</span> root<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O <code>if</code> na linha 5 foi usado para descartar chaves que já foram inseridas. Outras implementações podem permitir duplicatas.</p>
+<p>O <code>if</code> da linha 2 é o caso base da recursão. Já o <code>if-else</code> da linha 8 é onde ocorre o caminho (para esquerda ou direita) que deve-se seguir para adicionar o novo nó.</p>
+<p>Para gerar a subárvore em azul da árvore do início deste capítulo, podemos fazer na <code>main</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1"></a>Node<span class="op">*</span> root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">6</span><span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">4</span><span class="op">);</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">7</span><span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><strong><span class="text-warning">Se liga!</span></strong> O método de multiplicação é geralmente adequado quando o tamanho da tabela é uma potência de dois.</p>
-</div></div><div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercício">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Exercício
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Seja a chave <span class="math inline">\(k = 12345\)</span>, a constante <span class="math inline">\(A = 0,357840\)</span> e o tamanho da tabela <span class="math inline">\(m = 100\)</span>, calcule o valor hash usando o método da multiplicação.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solução (clique para ver)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Dica</span>Solução (clique para ver)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><span class="math display">\[h(k) = \lfloor m (kA \bmod 1) \rfloor\]</span> <span class="math inline">\(h(12345) = \lfloor 100 (12345\cdot 0,357840 \bmod 1) \rfloor=\lfloor 100 (4417,5348 \bmod 1) \rfloor=\lfloor 100 (0,5348) \rfloor=\lfloor 53,48 \rfloor=53\)</span></p>
-</div>
-</div>
-</div>
+<p><strong><span class="text-warning">Se liga!</span></strong> Estamos passando <code>Node* node</code> para a função <code>insert_node</code>. Isso indica que não estamos atualizando a árvore original, mas criando uma nova e reatribuindo.</p>
+</div></div><p>Você pode determinar os percursos dessa subárvore com papel e lápis e depois conferir com as implementações.</p>
+<p>A complexidade de tempo do pior caso para operações de inserção é de O(h), onde h é a altura da árvore. No pior cenário, podemos ter que percorrer a árvore da raiz até o nó folha mais profundo.</p>
+<p>A complexidade de espaço auxiliar para inserção em uma árvore de busca binária é O(h), devido à pilha de chamadas recursivas.</p>
+<p>Em vez de usar recursão, também podemos implementar a operação de inserção de forma iterativa. Desse modo, a complexidade de espaço é O(1).</p>
+<p>Vamos implementar a busca e remoção a seguir.</p>
 </section>
-<section id="hashing-universal" class="level2">
-<h2 class="anchored" data-anchor-id="hashing-universal">Hashing Universal</h2>
-<p>O hash universal tenta resolver o problema das colisões usando uma família de funções de hash, <span class="math inline">\(\mathcal{H}\)</span>, que possui uma propriedade matemática crucial:</p>
-<blockquote class="blockquote">
-<p>Para quaisquer duas chaves distintas, <span class="math inline">\(k_1\)</span> e <span class="math inline">\(k_2\)</span>, a probabilidade de que a função de hash <span class="math inline">\(h \in \mathcal{H}\)</span> escolhida aleatoriamente cause uma colisão é no máximo igual à probabilidade de colisão aleatória, que é <span class="math inline">\(1/m\)</span>, onde <span class="math inline">\(m\)</span> é o número de posições na tabela hash.</p>
-</blockquote>
-<p>Uma das famílias universais mais usadas para chaves que são números inteiros e uma tabela de tamanho <span class="math inline">\(m\)</span> é definida da seguinte forma:</p>
-<p>Seja <span class="math inline">\(p\)</span> um número primo maior que qualquer chave possível, e <span class="math inline">\(m\)</span> o tamanho da tabela hash. A família <span class="math inline">\(\mathcal{H}\)</span> é o conjunto de funções <span class="math inline">\(h_{a,b}\)</span> dadas pela fórmula: <span class="math display">\[h_{a,b}(k) = ((ak + b) \bmod p) \bmod m\]</span></p>
-<p>Onde <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span> são parâmetros <strong>inteiros</strong> aleatórios escolhidos no início, com <span class="math inline">\(a\in[1, p-1]\)</span> e <span class="math inline">\(b\in[0, p-1]\)</span>.</p>
-<p>Os parâmetros aleatórios ajudam a dispersar o valor da chave. Já a operação de módulo por um primo <span class="math inline">\(p\)</span> ajuda a garantir que a distribuição do resultado seja uniforme no intervalo <span class="math inline">\([0, p-1]\)</span>. Finalmente, o resultado final é mapeado para o índice da tabela hash, no intervalo <span class="math inline">\([0, m-1]\)</span>.</p>
-<p>Por exemplo, digamos uma tabela com <span class="math inline">\(m=10\)</span> slots e escolhamos <span class="math inline">\(p=103\)</span>.</p>
+<section id="busca-1" class="level3">
+<h3 class="anchored" data-anchor-id="busca-1">Busca</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1"></a>Node<span class="op">*</span> search_node<span class="op">(</span>Node<span class="op">*</span> root<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="cf">if</span> <span class="op">(</span>root <span class="op">==</span> NULL <span class="op">||</span> root<span class="op">-&gt;</span>key <span class="op">==</span> key<span class="op">)</span> </span>
+<span id="cb3-3"><a href="#cb3-3"></a>        <span class="cf">return</span> root<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    </span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="cf">if</span> <span class="op">(</span>root<span class="op">-&gt;</span>key <span class="op">&lt;</span> key<span class="op">)</span> </span>
+<span id="cb3-6"><a href="#cb3-6"></a>        <span class="cf">return</span> search_node<span class="op">(</span>root<span class="op">-&gt;</span>right<span class="op">,</span> key<span class="op">);</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    </span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="cf">return</span> search_node<span class="op">(</span>root<span class="op">-&gt;</span>left<span class="op">,</span> key<span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O algoritmo de busca também é recursivo. Na linha 3, retornamos <code>root</code>. Se ele for <code>NULL</code>, significa que não encontramos o nó. Caso contrário, significa que ele retornará o nó com a chave (<code>root-&gt;key</code>) igual à chave (<code>key</code>) que estamos procurando.</p>
+<p>De modo semelhante à inserção, a complexidade de tempo do pior caso para operações de busca é de O(h). Já complexidade de espaço auxiliar é O(h), pelo mesmo motivo.</p>
+<p>Implementando uma versão iterativa da função de busca, iremos melhorar a complexidade de espaço auxiliar para O(1).</p>
+</section>
+<section id="remoção-1" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="remoção-1">Remoção</h3>
+<p>Para a implementação da remoção, precisamos da função <code>get_successor</code>. Fica como exercício a sua implementação. A dica é percorrer a subárvore direita sempre pelo ramo esquerdo até não poder mais (o último nó será o sucessor).</p>
+<p>Assinatura:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a>Node<span class="op">*</span> get_successor<span class="op">(</span>Node<span class="op">*</span> node<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A função <code>remove_node</code> atua de forma recursiva e aborda todos os casos estudados.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1"></a>Node<span class="op">*</span> remove_node<span class="op">(</span>Node<span class="op">*</span> root<span class="op">,</span> <span class="dt">int</span> key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="cf">if</span> <span class="op">(</span>root <span class="op">==</span> NULL<span class="op">)</span> </span>
+<span id="cb5-3"><a href="#cb5-3"></a>        <span class="cf">return</span> root<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    </span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="cf">if</span> <span class="op">(</span>root<span class="op">-&gt;</span>key <span class="op">&lt;</span> key<span class="op">)</span> </span>
+<span id="cb5-6"><a href="#cb5-6"></a>        root<span class="op">-&gt;</span>right <span class="op">=</span> remove_node<span class="op">(</span>root<span class="op">-&gt;</span>right<span class="op">,</span> key<span class="op">);</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>root<span class="op">-&gt;</span>key <span class="op">&gt;</span> key<span class="op">)</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>        root<span class="op">-&gt;</span>left <span class="op">=</span> remove_node<span class="op">(</span>root<span class="op">-&gt;</span>left<span class="op">,</span> key<span class="op">);</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>        <span class="cf">if</span> <span class="op">(</span>root<span class="op">-&gt;</span>left <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>            Node<span class="op">*</span> temp <span class="op">=</span> root<span class="op">-&gt;</span>right<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>            free<span class="op">(</span>root<span class="op">);</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>            <span class="cf">return</span> temp<span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>        <span class="op">}</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>        <span class="cf">if</span> <span class="op">(</span>root<span class="op">-&gt;</span>right <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>            Node<span class="op">*</span> temp <span class="op">=</span> root<span class="op">-&gt;</span>left<span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>            free<span class="op">(</span>root<span class="op">);</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>            <span class="cf">return</span> temp<span class="op">;</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>        <span class="op">}</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-21"><a href="#cb5-21"></a>        Node<span class="op">*</span> succ <span class="op">=</span> get_successor<span class="op">(</span>root<span class="op">);</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>        root<span class="op">-&gt;</span>key <span class="op">=</span> succ<span class="op">-&gt;</span>key<span class="op">;</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>        root<span class="op">-&gt;</span>right <span class="op">=</span> remove_node<span class="op">(</span>root<span class="op">-&gt;</span>right<span class="op">,</span> succ<span class="op">-&gt;</span>key<span class="op">);</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>    <span class="op">}</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li>Sorteamos <span class="math inline">\(a\)</span> entre <span class="math inline">\(1\)</span> e <span class="math inline">\(p-1\)</span>, ou seja, no intervalo <span class="math inline">\([1, 102]\)</span></li>
-<li>Sorteamos <span class="math inline">\(b\)</span> entre <span class="math inline">\(0\)</span> e <span class="math inline">\(p-1\)</span>, ou seja, no intervalo <span class="math inline">\([0, 102]\)</span></li>
+<li><code>if (root == NULL)</code>: Chegou ao fim da busca sem encontrar o nó, ela retorna <code>NULL</code>.</li>
+<li><code>if (root-&gt;key &gt; x)</code>: A chave a ser removida é menor que a chave do nó atual, a função faz uma chamada recursiva para a subárvore esquerda.</li>
+<li><code>else if (root-&gt;key &lt; x)</code>: Da mesma forma, se a chave é maior, a chamada recursiva é feita para a subárvore direita.</li>
 </ul>
-<p>Digamos que <span class="math inline">\(a=5\)</span> e <span class="math inline">\(b=13\)</span>, então nossa função sorteada da família universal será: <span class="math display">\[h_{5,13}(k)=((5k+13)\bmod103)\bmod 10\]</span></p>
-<p>Vamos calcular alguns valores de hash para fixação.</p>
-<ul>
-<li><span class="math inline">\(h(4)\,\,\,=\,\,\,((5\cdot4+13)\bmod103)\bmod 10=\,\,\,(33\bmod103)\bmod 10=33 \bmod 10=3\)</span></li>
-<li><span class="math inline">\(h(17)=((5\cdot17+13)\bmod103)\bmod 10=\,\,\,(98\bmod103)\bmod 10= 98\bmod 10=8\)</span></li>
-<li><span class="math inline">\(h(25)=((5\cdot25+13)\bmod103)\bmod 10=(138\bmod103)\bmod 10=35\bmod 10=5\)</span></li>
-<li><span class="math inline">\(h(32)=((5\cdot32+13)\bmod103)\bmod 10=(173\bmod103)\bmod 10=70\bmod 10=0\)</span></li>
-</ul>
-<p>Mesmo com os melhores métodos, é impossível evitar colisões. Quando acontece, devemos tratá-la de modo que o desempenho da busca não seja muito afetado. No entanto, antes de estudarmos os tratamentos de colições, iremos abordar as estratégias para mapeamento de chaves em inteiros.</p>
-</section>
-<section id="estratégias-para-mapeamento" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="estratégias-para-mapeamento">Estratégias para Mapeamento</h2>
-<p>Quando falamos em mapeamento de chaves em inteiros, estamos nos referindo a um pré-processamento que transforma uma chave (como uma string ou um número muito grande) em um inteiro mais adequado para ser usado por uma função de hash.</p>
-<p>Embora seja possível criar suas próprias estratégias, apresentamos a seguir alguns métodos clássicos encontrados na literatura.</p>
-<section id="chaves-do-tipo-string" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="chaves-do-tipo-string">Chaves do tipo <em>string</em></h3>
-<p>Os métodos clássicos para tratar strings usam o fato de cada letra ter um inteiro correspondente na tabela ASCII.</p>
-<section id="soma" class="level4">
-<h4 class="anchored" data-anchor-id="soma">Soma</h4>
-<p>Muitas vezes, as chaves que estamos trabalhando são <em>strings</em>. Uma forma simples de convertê-las em inteiros é somar os valores ASCII de cada caractere: <span class="math display">\[k=\sum_{i=0}^{n-1}s[i]=s[0]+s[1]+s[2]+\cdots+s[n-1]\]</span></p>
-<p>onde <span class="math inline">\(n\)</span> é o tamanho da palavra.</p>
-<p>Por exemplo, a palavra “PAI” (P = 80, A = 65 e I = 73): <span class="math display">\[k=\sum_{i=0}^{3-1}s[i]=\sum_{i=0}^{2}s[i]=s[0]+s[1]+s[2]=80+65+73=218\]</span></p>
-<p>Esse método é simples, mas apresenta má distribuição, ou seja, palavras com as mesmas letras em ordem diferente geram o mesmo valor.</p>
-</section>
-<section id="multiplicação-polinomial" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="multiplicação-polinomial">Multiplicação Polinomial</h4>
-<p>Um método mais robusto é o da <strong>multiplicação polinomial</strong>. Aqui, tratamos a <em>string</em> como um número em uma base <span class="math inline">\(\beta\)</span> (geralmente um número primo pequeno): <span class="math display">\[k=\sum_{i=0}^{n-1}s[i]\beta^{(n-1)-i}=s[0]\cdot\beta^{n-1}+s[1]\cdot\beta^{n-2}+\cdots+s[n-1]\cdot\beta^{0}\]</span></p>
-<p>Por exemplo, a palavra “PAI” (P = 80, A = 65 e I = 73) e <span class="math inline">\(\beta=13\)</span>: <span class="math display">\[\begin{align*}
-k&amp;=s[0]\cdot 13^{3-1}+s[1]\cdot 13^{3-2}+s[2]\cdot 13^{3-3}\\
-&amp;=80\cdot13^2+65\cdot13^1+73\cdot13^0\\
-&amp;=14438
-\end{align*}\]</span></p>
+<p>A função <code>remove_node</code> lida com o caso de zero filhos e com o caso de apenas um filho (seja o esquerdo ou o direito) de forma combinada. Ela salva o filho em uma variável temporária (<code>temp</code>), libera a memória do nó atual e retorna o ponteiro para o filho, que será conectado ao nó pai na chamada recursiva anterior.</p>
+<p>O caso de dois filhos, <code>remove_node</code> encontra o sucessor em ordem (<code>succ</code>), que é o menor nó da subárvore direita. Depois copia a chave do sucessor para o nó que será “removido” e faz uma chamada recursiva para remover o nó sucessor original da subárvore direita.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><strong><span class="text-warning">Se liga!</span></strong> A multiplicação por um número primo ajuda a espalhar os valores de forma mais uniforme do que se usássemos um número composto.</p>
-</div></div><p>Essa técnica é superior à soma simples, pois considera a ordem dos caracteres. Para palavras como “cama” e “maca”, a soma simples irá retornar os mesmos valores, enquanto que a multiplicação polinomial não.</p>
-<p>Exemplo simples:</p>
-<ul>
-<li><span class="math inline">\(BA : 66\cdot13^1 + 65\cdot13^0 = 923\)</span>.</li>
-<li><span class="math inline">\(AB : 65\cdot13^1 + 66\cdot13^0 = 911\)</span>.</li>
-</ul>
-<p>Dessa forma, “BA” e “AB” produzem resultados distintos, evitando colisões triviais.</p>
+<p><strong><span class="text-warning">Se liga!</span></strong> A nossa solução para remoção em BST realiza dois percursos pela altura da árvore quando ambos os filhos não são <code>NULL</code>. Existem otimizações dessa abordagem, mas não vamos discutir neste curso.</p>
+</div></div><p>As complexidades de tempo e de espaço auxiliar são as mesmas das operações anteriores, isto é, O(h). Da mesma forma, pode-se melhorar essa última com uma versão iterativa.</p>
 </section>
 </section>
-<section id="chaves-do-tipo-int-grandes" class="level3">
-<h3 class="anchored" data-anchor-id="chaves-do-tipo-int-grandes">Chaves do tipo <em>int</em> grandes</h3>
-<p>Quando lidamos com inteiros muito grandes, precisamos reduzi-los para evitar estouro de capacidade (overflow) ou para encaixá-los em um intervalo menor. A seguir, apresentamos três métodos comuns: dobramento (folding), XOR e quadrado central (mid-square).</p>
-<section id="dobramento-folding" class="level4">
-<h4 class="anchored" data-anchor-id="dobramento-folding">Dobramento (Folding)</h4>
-<p>Consiste em dividir a chave em partes menores e, em seguida, somá-las ou aplicar XOR entre elas para gerar um número reduzido. Por exemplo, suponha <span class="math inline">\(k = 83.529.170\)</span>, vamos dividir a chave assim:</p>
-<ul>
-<li><span class="math inline">\(k_1 = 835\)</span></li>
-<li><span class="math inline">\(k_2 = 291\)</span></li>
-<li><span class="math inline">\(k_3 = 70\)</span></li>
-</ul>
-<p>O dobramento por soma resulta em <span class="math inline">\(k_1+k_2+k_3=835+291+70=1196\)</span>.</p>
-<p>No dobramento por XOR, as partes são combinadas usando a operação lógica OU exclusivo (XOR), muito comum em funções de hash criptográficas. Primeiro, convertemos as partes para binário (aqui, usando 10 bits para simplificar):</p>
-<div style="width: 60%; margin: auto;">
+<section id="complexidade" class="level2">
+<h2 class="anchored" data-anchor-id="complexidade">Complexidade</h2>
+<p>Resumo das complexidades das operações em um BST.</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 25%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 16%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Parte</th>
-<th>Decimal</th>
-<th>Binário (10 bits)</th>
+<th>Operação</th>
+<th>Tempo (pior)</th>
+<th>Tempo (melhor)</th>
+<th>Espaço Auxiliar (recursiva)</th>
+<th>Espaço Auxiliar (iterativa)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(k_1\)</span></td>
-<td>835</td>
-<td>1101000011</td>
+<td>Busca</td>
+<td>O(n)</td>
+<td>O(log n)</td>
+<td>O(h)</td>
+<td>O(1)</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(k_2\)</span></td>
-<td>291</td>
-<td>0100100011</td>
+<td>Inserção</td>
+<td>O(n)</td>
+<td>O(log n)</td>
+<td>O(h)</td>
+<td>O(1)</td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(k_3\)</span></td>
-<td>70</td>
-<td>0001000110</td>
+<td>Remoção</td>
+<td>O(n)</td>
+<td>O(log n)</td>
+<td>O(h)</td>
+<td>O(1)</td>
 </tr>
 </tbody>
 </table>
-</div>
-<p>Realizamos a operação XOR bit a bit entre as partes. <span class="math display">\[k_1 \oplus k_2 \oplus k_3\]</span><span class="math display">\[\begin{array}{r l l} &amp; 1101000011 &amp; (k_1) \\ \oplus &amp; 0100100011 &amp; (k_2) \\ \hline &amp; 1001100000 &amp; (k_1 \oplus k_2) \\ \oplus &amp; 0001000110 &amp; (k_3) \\ \hline &amp; \mathbf{1000100110} &amp; (\text{Resultado}) \end{array}\]</span></p>
-<p>Transformando o resultado de volta para decimal: <span class="math display">\[1000100110_2=512+64+8+4+2=590\]</span></p>
-<p>O método XOR tende a preservar melhor as características de todas as partes da chave, ainda que seja um pouco mais complexo de implementar do que a soma simples.</p>
+<p>O <span class="math inline">\(n\)</span> representa o número de nós na árvore, já o <span class="math inline">\(h\)</span> representa a altura da árvore. No pior caso, a árvore está degenerada e a altura é igual ao número de nós. No melhor caso, a árvore está balanceada e a altura é proporcional a <span class="math inline">\(\log n\)</span>.</p>
 </section>
-<section id="mid-square" class="level4">
-<h4 class="anchored" data-anchor-id="mid-square">Mid-Square</h4>
-<p>O método do quadrado central é uma técnica clássica de extração. A chave é elevada ao quadrado, e então o hash é formado pelos dígitos centrais do resultado. A quantidade de dígitos extraídos é indicada por <span class="math inline">\(d\)</span>.</p>
-<p>Apesar de ser simples, ele pode gerar um código hash razoavelmente bem distribuído. Como exemplo, considere uma <span class="math inline">\(k=931\)</span> e <span class="math inline">\(d=3\)</span>. <span class="math display">\[k^2=931^2=866761\]</span> Assim, podemos selecionar <span class="math inline">\(676\)</span>, ou até <span class="math inline">\(667\)</span>.</p>
-<p>Esses métodos apresentados podem ser combinados ou até mesmo utilizados como substitutos de uma função hash. Em sistemas mais complexos, essas abordagens costumam ser empregadas como etapas auxiliares dentro de funções de hash mais sofisticadas.</p>
-<hr>
-<p>Nesta unidade, você aprendeu</p>
-<p>✅ quais características uma função <em>hash</em> deve possuir</p>
-<p>✅ metódos clássicos para definir funções <em>hash</em></p>
-<p>✅ como mapear palavras e grandes números em chaves</p>
-<div class="quizdown">
-# O que é uma função hash?
-
-&gt; Pense no papel dela dentro de uma tabela de dispersão.
-
-1. [ ] Um algoritmo que ordena elementos de forma crescente.
-1. [x] Uma função que transforma uma chave em um índice de armazenamento.
-1. [ ] Uma técnica de compressão de dados.
-1. [ ] Uma estrutura de dados hierárquica.
-
-
-# Quais são características desejáveis de uma boa função hash? 
-
-&gt; Elas influenciam diretamente na eficiência e distribuição das chaves.
-
-- [x] Ser fácil de calcular.
-- [x] Produzir distribuição uniforme dos dados.
-- [x] Minimizar colisões.
-- [ ] Depender de operações aleatórias complexas.
-
-
-# No método da divisão, qual das opções expressa corretamente a função hash? 
-
-&gt; Observe a operação usada para gerar o índice.
-
-1. [x] $h(k) = k \bmod m$
-1. [ ] $h(k) = k / m$
-1. [ ] $h(k) = k^2 \bmod m$
-1. [ ] $h(k) = \sqrt{k} \bmod m$
-
-
-# Por que é ideal escolher $m$ como um número primo no método da divisão? 
-
-&gt; Isso afeta a forma como os valores se espalham na tabela.
-
-1. [x] Porque ajuda a distribuir as chaves de forma mais uniforme.
-1. [ ] Porque facilita o cálculo de raízes quadradas.
-1. [ ] Porque garante que não ocorram colisões.
-1. [ ] Porque simplifica a implementação de XOR.
-
-
-# Considere $h(k) = k \bmod 101$. Qual o valor de $h(12345)$?
-
-&gt; Aplique o operador módulo diretamente.
-
-1. [ ] 12
-1. [x] 22
-1. [ ] 45
-1. [ ] 99
-
-
-# Quais são as etapas do método da multiplicação?
-
-&gt; Relembre a ordem dos cálculos realizados.
-
-1. Multiplicar a chave ($k$) por uma constante $A$ entre 0 e 1.  
-2. Extrair a parte fracionária de $kA$.  
-3. Multiplicar o resultado por $m$.  
-4. Arredondar para baixo.
-
-
-# No método da multiplicação, qual é uma vantagem importante? 
-
-&gt; Observe a observação sobre o tamanho da tabela.
-
-1. [ ] É ideal quando $m$ é primo.  
-1. [x] É adequado quando o tamanho da tabela é uma potência de dois.  
-1. [ ] Garante ausência total de colisões.  
-1. [ ] Dispensa o uso do operador módulo.
-
-
-# O que caracteriza o hashing universal? 
-
-&gt; Está relacionado à escolha aleatória de funções.
-
-1. [ ] Usa apenas o método da divisão.  
-1. [ ] Calcula o hash como a média de várias funções.  
-1. [x] Escolhe aleatoriamente uma função de uma família de funções que minimiza colisões.  
-1. [ ] Utiliza constantes irracionais para dispersão.
-
-
-# A fórmula do hashing universal $h_{a,b}(k)=((ak+b)\bmod p)\bmod m$ contém quais parâmetros aleatórios?
-
-&gt; Eles são escolhidos no início do processo.
-
-- [x] $a$
-- [x] $b$
-- [ ] $p$
-- [ ] $m$
-
-
-# Quais são métodos clássicos para transformar _strings_ em inteiros? 
-
-&gt; Pense nos dois tipos mencionados no texto.
-
-- [x] Soma dos valores ASCII.  
-- [x] Multiplicação polinomial.  
-- [ ] Hashing universal.  
-- [ ] Método da divisão.
-
-
-# Por que a multiplicação polinomial é superior à soma simples? 
-
-&gt; Compare o que cada método considera.
-
-1. [x] Porque considera a ordem dos caracteres.  
-1. [ ] Porque ignora os valores ASCII.  
-1. [ ] Porque usa números compostos.  
-1. [ ] Porque sempre gera números primos.
-
-
-# Se $\beta = 13$, qual é o valor de $k$ para a palavra "BA"? 
-
-&gt; Use a fórmula da multiplicação polinomial.
-
-1. [ ] 911  
-1. [x] 923  
-1. [ ] 1213  
-1. [ ] 1001  
-
-
-# No método de dobramento (folding), o que fazemos com a chave?
-
-&gt; Veja como ela é reduzida.
-
-1. [x] Dividimos em partes menores e as combinamos por soma ou XOR.  
-1. [ ] Multiplicamos por um número primo e aplicamos módulo.  
-1. [ ] Extraímos os dígitos centrais do quadrado da chave.  
-1. [ ] Aplicamos o logaritmo da chave.
-
-
-# No exemplo do método XOR, qual foi o resultado decimal final? 
-
-&gt; Observe a conversão final do número binário.
-
-1. [ ] 512  
-1. [ ] 5900  
-1. [x] 590  
-1. [ ] 676
-
-
-# O método do quadrado central (mid-square) consiste em:
-
-&gt; Ele é simples, mas eficaz.
-
-1. [ ] Somar as partes da chave.  
-1. [x] Elevar a chave ao quadrado e extrair os dígitos centrais.  
-1. [ ] Dividir a chave por um número primo.  
-1. [ ] Converter a chave em binário e aplicar XOR.
-
-
-# Quais métodos são indicados para mapear inteiros muito grandes? 
-
-&gt; Lembre dos três apresentados no texto.
-
-- [x] Dobramento (folding)  
-- [x] XOR  
-- [x] Quadrado central (mid-square)  
-- [ ] Divisão inteira simples
-
-</div>
+<section id="revisão-e-considerações" class="level2">
+<h2 class="anchored" data-anchor-id="revisão-e-considerações">Revisão e Considerações</h2>
+<p>Nesta seção, estudamos a estrutura de dados árvore binária de busca.</p>
+<ul>
+<li>Definimos essa estrutura;</li>
+<li>Realizamos as operações básicas</li>
+<li>Inserção, busca e remoção;</li>
+<li>Estudamos a implementação;</li>
+<li>Analisamos as complexidades das operações implementadas;</li>
+</ul>
+<p>Neste momento do curso, você já tem conhecimento suficiente para resolver uma gama de exercícios. Pratique bastante.</p>
+<p>Nossa jornada pelas árvores binárias ainda não acabou. Um problema que ocorre com as BST é a degeneração. Para evitar isso, vamos estudar uma metodologia para deixar a árvore balanceada, evitando a complexidade de pior caso.</p>
+<p>Nosso próximo passo será estudar as árvores AVL que realizam operações de rotação para rebalancear a árvore sempre que ocorre uma inserção ou remoção.</p>
 <div class="progress-bar" id="progressBar"></div>
 
 <script>
@@ -826,8 +1080,6 @@ window.addEventListener("scroll", function() {
 </script>
 
 
-</section>
-</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
@@ -1246,13 +1498,13 @@ window.addEventListener("scroll", function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../../disciplinas/aed2/academic/unidade2/6-introhash.html" class="pagination-link" aria-label="Tabela de Dispersão">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tabela de Dispersão</span>
+      <a href="../../../../disciplinas/aed2/academic/unidade1/2-arvoresbinarias.html" class="pagination-link" aria-label="Árvores Binárias">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Árvores Binárias</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../../disciplinas/aed2/academic/unidade2/8-colisoes.html" class="pagination-link" aria-label="Tratamento de Colisões">
-        <span class="nav-page-text">Tratamento de Colisões</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../disciplinas/aed2/academic/unidade1/4-arvoresavl.html" class="pagination-link" aria-label="Árvore AVL">
+        <span class="nav-page-text">Árvore AVL</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
