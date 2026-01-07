@@ -1,0 +1,362 @@
+---
+title: "Árvores"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+filters: 
+    - quizdown
+---
+
+As árvores são, sem dúvida, uma das estruturas de dados mais fascinantes e poderosas da computação. Embora, à primeira vista, possam parecer complexas, elas estão no coração de inúmeros sistemas que usamos todos os dias.
+
+Pense em como o sistema de arquivos do seu computador organiza pastas e arquivos, ou como os bancos de dados otimizam a busca por informações, ou até mesmo como os compiladores de código processam as linguagens de programação. Em todos esses cenários, a estrutura por trás é uma árvore.
+
+
+## Definição e Exemplos
+
+A árvore, na computação, é uma estrutura de dados hierarquizada, geralmente não linear. É composta por uma coleção de nós conectados por arestas. Cada nó pode possuir uma chave que o identifica.
+
+```{mermaid}
+flowchart TB
+ subgraph s1["folhas"]
+        E(("E"))
+        F(("F"))
+        G(("G"))
+        H(("H"))
+        I(("I"))
+        J(("J"))
+  end
+    A(("A")) --> B(("B")) & C(("C")) & D(("D"))
+    B --> E & F & G
+    C --> H
+    D --> I & J
+   
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+H:::WT
+I:::WT
+J:::WT
+
+classDef WT fill:#FFFFFF
+
+    style s1 stroke:none,fill:#FFE0B2
+```
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+No exemplo ao lado, o nó com chave C é pai do nó com chave H. Além disso, os nós com chaves I e J são irmãos. O nó raiz, cuja chave é A, não possui pai.
+:::
+
+
+Se um nó X está conectado com um nó Y (há uma aresta no sentido de X para Y), dizemos que X é um nó pai e Y um nó filho. Além disso, 
+
+- Se dois nós possuem o mesmo pai, eles são ditos irmãos. 
+- Cada nó só pode ter no máximo um pai.
+
+
+O DOM (Document Object Model) é um dos melhores exemplos de uma estrutura de árvore em programação, especificamente no desenvolvimento web. Ele é a representação em forma de árvore de um documento HTML (ou XML) que é criada pelo navegador.
+
+Essa representação em árvore permite que linguagens de programação, principalmente o Javascript, interajam com o conteúdo de uma página web. É como se o Javascript usasse o DOM como um mapa detalhado da página para encontrar e manipular qualquer elemento.
+
+```{.html code-line-numbers="false"}
+<!DOCTYPE html>
+<html>
+<head></head>
+  <body>
+    <h1>Olá, Mundo!</h1>
+    <p id="pgrafo">Este é um parágrafo.</p>
+  </body>
+</html>
+```
+
+Dessa forma, você pode usar Javascript para mudar o texto do parágrafo, adicionar ou remover um elemento à página. Tudo isso de forma dinâmica, sem precisar recarregar a página inteira.
+
+```{mermaid}
+flowchart TB
+	R[document] --> A(html)
+	A --> B(head)
+	A --> C(body)
+	C --> D(h1)
+	C --> E(p#pgrafo)
+
+R:::WT
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+
+classDef WT fill:#FFFFFF
+```	
+
+::: {.callout-note}
+- A raiz é o nó que não possui pai. Ela é única.
+- As folhas, ou nós terminais, não possem filhos.
+- Os demais nós são chamados de intermediários ou internos
+:::
+
+## Falsas Árvores
+
+
+```{mermaid}
+flowchart TB
+	A(("A")) --> B(("B"))
+	A --> C(("C"))
+    B --> D(("D"))
+    B --> E(("E"))
+    C --> F(("F"))
+    A --> F
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+
+classDef WT fill:#FFFFFF
+
+```	
+
+Nota-se que o nó com chave F possui dois pais (A e C) e isso não é permitido.
+
+
+```{mermaid}
+flowchart TB
+	A(("A")) --> B(("B"))
+	A --> C(("C"))
+    B --> D(("D"))
+    B --> E(("E"))
+    F(("F")) --> C
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+
+classDef WT fill:#FFFFFF
+```	
+
+Neste exemplo, temos o mesmo problema de dois pais (nó com chave C), mas também temos duas raízes (A e F).
+
+
+```{mermaid}
+flowchart TB
+	A(("A")) --> B(("B"))
+	A --> C(("C"))
+    A --> D(("D"))
+    B --> E(("E"))
+    E --> A
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+
+classDef WT fill:#FFFFFF
+```	
+
+
+Este caso é interessante, pois todos os nós possuem um pai. Ou seja, não existe raiz e isso não é permitido. A única árvore sem raiz é a árvore vazia.
+
+## Definições (Super) Importantes
+
+Para as definições a seguir, considere a seguinte árvore $\mathcal{T}$:
+```{mermaid}
+flowchart TB
+ subgraph s1[" "]
+        B(("B"))
+        D(("D"))
+        E(("E"))
+  end
+    A(("A")) --- B & C(("C"))
+    B --- D & E
+    C --- F(("F")) & G(("G"))
+    D --- H(("H")) & I1[" "]
+    E --- I2[" "] & I(("I"))
+    G --- J(("J")) & I3[" "]
+    H --- I4[" "] & K(("K"))
+    I --- L(("L")) & M(("M"))
+    J --- N(("N")) & O(("O"))
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+H:::WT
+I:::WT
+J:::WT
+K:::WT
+L:::WT
+M:::WT
+N:::WT
+O:::WT
+
+classDef WT fill:#FFFFFF
+
+    style I1 stroke:none,fill:transparent
+    style I2 stroke:none,fill:transparent
+    style I3 stroke:none,fill:transparent
+    style I4 stroke:none,fill:transparent
+    style s1 stroke:none,fill:#FFE0B2
+    linkStyle 7 stroke:none,fill:none
+    linkStyle 8 stroke:none,fill:none
+    linkStyle 11 stroke:none,fill:none
+    linkStyle 12 stroke:none,fill:none
+```
+
+
+### Subárvore
+
+Uma subárvore consiste em uma porção interconectada da árvore. Qualquer nó juntamente com seus descendentes constituem uma subárvore.
+Os nós destacados em $\mathcal{T}$ (B, D e E) formam um subárvore de $\mathcal{T}$, ou seja, trata-se de uma miniárvore dentro da árvore original. 
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+A subárvore possui sua própria raiz, folhas e nós internos. 
+:::
+
+::: {.callout-note}
+Uma árvore pode ser considerada uma subárvore de si mesma.
+:::
+
+Quando dizemos "a subárvore esquerda do nó A" estamos nos referindo ao filho esquerdo de A e todos os seus descendentes. Mesmo raciocínio para a subárvore direita. Geralmente, indicamos com um triângulos essas subárvores. Por exemplo, a árvore abaixo representa a árvore $\mathcal{T}$.
+
+```{mermaid}
+flowchart TB
+    A(("A")) --- B(("B"))
+    A --- C(("C"))
+    B --- D(("D"))
+    B --- E(("E"))
+    C --- F(("F"))
+    C --- G(("G"))
+    D --- verde((" "))
+    D --- I1((" "))
+    E --- I2((" "))
+    E --- vermelho((" "))
+    G --- azul((" "))
+    G --- I3((" "))
+   
+   
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+verde@{ shape: tri}
+vermelho@{ shape: tri}
+azul@{ shape: tri}
+
+classDef WT fill:#FFFFFF
+style verde fill:#00C853,stroke:none
+style vermelho fill:#D50000,stroke:none    
+style azul fill:#2962FF,stroke:none
+linkStyle 7 stroke:none,fill:none    
+linkStyle 8 stroke:none,fill:none    
+linkStyle 11 stroke:none,fill:none    
+
+    style I1 stroke:none,fill:transparent
+    style I2 stroke:none,fill:transparent
+    style I3 stroke:none,fill:transparent
+```
+
+O triângulo de cor verde representa a subárvore esquerda de D, ou seja, a subárvore com raiz H.  
+
+### Tamanho
+
+O tamanho da árvore é definido como o número total de nós. No nosso exemplo, o tamanho de $\mathcal{T}$ é 15, pois possui 15 nós:
+
+- Uma raiz (A),
+- Seis folhas (F, K, L, M, N e O) e
+- Oito nós internos (B, C, D, E, G, H, I e J) .
+
+### Altura
+
+A altura de um nó é o comprimento do caminho mais longo dele até as folhas. Por comprimento queremos dizer o número de areastas. Já para calcular a altura da árvore, calculamos a altura do nó raiz. Geralmente se considera a altura de uma árvore vazia como zero.
+
+A altura de $\mathcal{T}$ é 4, ou seja, o número de arestas da raiz até a folha mais distante é quatro.
+
+
+### Profundidade
+
+A profundidade de um nó é o número de arestas no caminho da raiz até tal nó.
+Em $\mathcal{T}$, a profundidade do nó J é 3, pois há três arestas da raiz até J. Note que a profundidade da folha mais baixa é igual a altura da árvore.
+
+A profundidade de um nó indica qual nível da árvore ele pertence. A raiz possui nível 0, o filhos da raiz nível 1, os netos da raiz nível 2 e assim sucessivamente. É fácil concluir que a altura está relacionada ao número de níveis.
+
+
+Observe a árvore abaixo
+
+```{mermaid}
+flowchart TB
+    A(("A")) --- B(("B"))
+    A === C(("C"))
+    B --- D(("D")) & E(("E"))
+    C --- F(("F"))
+    C === G(("G"))
+    G === H(("H"))
+    G --- I(("I"))
+    H === J(("J"))
+    H --- K(("K"))
+
+    style A fill:#BBDEFB
+    style B fill:#FFFFFF
+    style C fill:#BBDEFB
+    style D fill:#FFFFFF
+    style E fill:#FFFFFF
+    style F fill:#FFFFFF
+    style G fill:#FFF9C4
+    style H fill:#C8E6C9
+    style I fill:#FFFFFF    
+    style J fill:#C8E6C9
+    style K fill:#FFFFFF
+    linkStyle 1 stroke:#2962FF,fill:none
+    linkStyle 5 stroke:#2962FF,fill:none
+    linkStyle 6 stroke:#00C853,fill:none
+    linkStyle 8 stroke:#00C853,fill:none
+```
+
+Considerando o nó com chave G, sua altura é a distância até a folha mais baixa (arestas verdes). Já sua profundidade, é a distância da raiz até G (arestas azuis).
+
+### Grau
+
+O grau de um nó é o número de filhos que ele possui.
+Na árvore $\mathcal{T}$, o nó B tem grau 2. Já os nós H e F possuem grau 1 e 0, respectivamente.
+
+Quanto ao número de filhos, uma árvore onde todos os nós possuem somente um filho se comporta como uma lista. Se os nós possuem no máximo dois filhos, a árvore é chamada de binária. Se três filhos, chama-se ternária e assim por diante. Uma árvore em que os nós possuem no máximo $n$ filhos é chamada de $n$-ária.
+
+
+## Revisão e Considerações
+
+Nesta seção, estudamos a estrutura de dados árvore do forma generalizada. Em particular, estudamos:
+
+- O que é uma árvore e seus componentes (raiz, nó, folha etc);
+- Altura;
+- Profundidade;
+- Tamanho;
+- Grau;
+- Subárvore.
+
+Todos esses conceitos são fundamentais e, portanto, devemos estar bem familiarizados com eles. No estudo das árvores como estruturas de dados, é imprescindível dominar as definições de altura, profundidade, subárvore, grau e tamanho.
+
+No próximo capítulo da nossa jornada, iremos estudar um tipo especial de árvore chamada binária.
+
+{{< include /_includes/progress-bar.qmd >}}

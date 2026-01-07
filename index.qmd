@@ -15,7 +15,7 @@ A Universidade Federal Rural do Semi-Árido ([Ufersa](https://www.ufersa.edu.br)
 
 Este portal oferece REA na área da computação e serve como recurso extra no processo de ensino-aprendizagem em algoritmos, programação e estruturas de dados.
 
-Para começar a estudar pelo nosso material, clique no menu [Recursos](disciplinas.qmd){.text-decoration-none} .
+Para começar a estudar pelo nosso material, clique no menu [Recursos](disciplinas/aed2/academic/index.qmd){.text-decoration-none} .
 
 
 

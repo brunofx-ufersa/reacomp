@@ -41,6 +41,16 @@ website:
         href: https://quarto.org/
     right: "" 
   sidebar:
+    - section: "Árvores"
+      id: trees
+      title: "Árvores"
+      style: "docked"
+      background: light
+      contents:
+        - disciplinas/aed2/academic/unidade1/1-arvores.qmd
+        - disciplinas/aed2/academic/unidade1/2-arvoresbinarias.qmd
+        - disciplinas/aed2/academic/unidade1/3-arvoresbinariasdebusca.qmd
+        - disciplinas/aed2/academic/unidade1/4-arvoresavl.qmd
     - section: "Estruturas Genéricas"
       id: generics
       title: "Estruturas Genéricas"

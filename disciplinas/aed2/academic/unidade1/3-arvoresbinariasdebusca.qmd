@@ -1,0 +1,611 @@
+---
+title: "Árvore Binária de Busca"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+filters: 
+    - quizdown
+---
+
+
+A Árvore Binária de Busca (ABB ou BST, do inglês), possui a característica de ser otimizada para busca. Ela distribui seus nós com uma regra básica baseada na grandeza de ordem de suas chaves. Por essa razão, iremos adotar chaves com valores inteiros que podem ser facilmente comparados.
+
+Observe a árvore binária a seguir.
+
+```{mermaid}
+flowchart TB
+	A(("08")) --- B(("03"))
+	A --- C(("10"))
+	B --- D(("01"))
+	B --- E(("06"))
+	C --- F(("09"))
+	C --- G(("14"))
+	E --- H(("04"))
+	E --- I(("07"))
+
+ style A fill:#C8E6C9
+ style B fill:#BBDEFB
+ style D fill:#BBDEFB
+ style E fill:#BBDEFB
+ style H fill:#BBDEFB
+ style I fill:#BBDEFB
+ style C fill:#FFCDD2
+ style F fill:#FFCDD2
+ style G fill:#FFCDD2
+```	
+
+
+Todos os nós à esquerda (em azul) da raiz possuem chaves menores que a chave da raiz. Além disso, todos os nós à direita (em vermelho) da raiz possuem chaves maiores que a chave da raiz.
+
+Tal característica se estende para qualquer nó da árvore. Por exemplo, o nó cuja chave é 3, todos os nós à esquerda possem chaves menores que 3 (chave 1) e na direita as maiores que 3 (chaves 6, 4 e 7).
+
+Portanto, uma BST é uma árvore binária que obedece a seguinte regra: dado um nó com chave A, todo nó à esquerda possui chave menor que A e todo nó à direita possui chave maior que A.
+Algumas BSTs permitem chaves duplicadas, no entanto vamos abordar o caso em que todas as chaves são diferentes.
+
+
+## Operações 
+
+As operações básicas sobre as BSTs são inserção, busca e remoção.
+
+
+### Inserção
+
+A inserção em uma BST ocorre nas folhas. A operação deve manter a característica da regra geral. Para isso, devemos compara as chaves para decidir se caminhamos para a esquerda ou direita.
+
+No exemplo a seguir, vamos inserir as chaves 15, 10, 20, 8, 12, 17 e 25 em uma BST vazia.
+
+Como a árvore está incialmente vazia, a chave 15 se torna a raiz.
+
+```{mermaid}
+flowchart TB
+	A(("15"))
+    
+A:::WT
+
+classDef WT fill:#FFFFFF
+```	
+
+Sabe-se que 10 é menor que 15, portanto deve ser adicionado à esquerda.
+
+```{mermaid}
+flowchart TB
+	A(("15")) --- B(("10"))
+    A --- I1((" "))
+    
+    
+A:::WT
+B:::WT
+L_A_B_0@{ animation: slow }
+style I1 stroke:none,fill:transparent
+linkStyle 1 stroke:none,fill:none
+classDef WT fill:#FFFFFF
+```	
+
+A chave 20 é maior que 15, portanto deve ser adicionado à direita.
+
+```{mermaid}
+flowchart TB
+	A(("15")) --- B(("10"))
+    A --- C(("20"))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+L_A_C_0@{ animation: slow }
+classDef WT fill:#FFFFFF
+```	
+
+Para adicionar o 8, comparamos com a raiz. Logo, devemos ir para à esquerda. Em seguida comparamos com o 10, indicando que será adicionada à esquerda.
+
+```{mermaid}
+flowchart TB
+	A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- I1((" "))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+
+L_A_B_0@{ animation: slow }
+L_B_D_0@{ animation: slow }
+style I1 stroke:none,fill:transparent
+linkStyle 3 stroke:none,fill:none    
+classDef WT fill:#FFFFFF
+```	
+
+
+De modo semelhante, 12 é menor que 15, seguimos para esquerda da raiz. Depois, 12 é maior que 10, então seguimos para a direita.
+
+```{mermaid}
+flowchart TB
+	A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- E(("12"))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+
+L_A_B_0@{ animation: slow }
+L_B_E_0@{ animation: slow }
+classDef WT fill:#FFFFFF
+```	
+
+Para adicionar a chave 17, seguimos para a direita, pois 17 > 15. Depois para a esquerda, pois 17 < 20.
+
+```{mermaid}
+flowchart TB
+	A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- E(("12"))
+    C --- F(("17"))
+    C --- I1((" "))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+
+
+L_A_C_0@{ animation: slow }
+L_C_F_0@{ animation: slow }
+style I1 stroke:none,fill:transparent
+linkStyle 5 stroke:none,fill:none    
+classDef WT fill:#FFFFFF
+```
+
+
+Seguindo o mesmo raciocínio, a chave 25 deve ser alocada à direta de 20.
+
+```{mermaid}
+flowchart TB
+	A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- E(("12"))
+    C --- F(("17"))
+    C --- G(("25"))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+
+
+L_A_C_0@{ animation: slow }
+L_C_G_0@{ animation: slow }
+classDef WT fill:#FFFFFF
+```	
+
+
+### Busca
+
+A busca ocorre percorrendo a árvore conforme a regra geral. Iniciando da raiz, percorremos os nós seguindo um caminho da direita ou esquerda conforma o valor da chave. Se a chave procurada é maior que a chave do nó atual, buscamos na direita, caso contrário na esquerda.
+
+Veja um exemplo da busca pelo chave 12:
+
+
+```{mermaid}
+flowchart TB
+	A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- E(("12"))
+    C --- F(("17"))
+    C --- G(("25"))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+
+
+L_A_B_0@{ animation: slow }
+L_B_E_0@{ animation: slow }
+classDef WT fill:#FFFFFF
+```	
+
+Iniciamos pela raiz e comparamos os valores (12 < 15). devemos seguir para a esquerda. Comparamos as chaves (12 > 10). Devemos ir para a direita. Comparamos as chaves (12 = 12). Busca concluída com o elemento encontrado.
+
+Agora, vamos buscar o nó com chave 18:
+
+
+```{mermaid}
+flowchart TB
+	A(("15")) --- B(("10"))
+    A --- C(("20"))
+    B --- D(("08"))
+    B --- E(("12"))
+    C --- F(("17"))
+    C --- G(("25"))
+    
+    
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+
+
+L_A_C_0@{ animation: slow }
+L_C_F_0@{ animation: slow }
+classDef WT fill:#FFFFFF
+```	
+
+Iniciamos pela raiz e comparamos os valores (18 > 15). devemos seguir para a direita. Comparamos as chaves (18 < 10). Devemos ir para a esquerda. Comparamos as chaves (18 > 17). Devemos ir para a esquerda, porém não temos mais nós para percorrer. Busca concluída com o elemento não encontrado.
+
+
+### Remoção
+
+A remoção de um nó em uma BST requer alguns cuidados, uma vez que não podemos quebrar a regra geral de ordenação. Para tanto, devemos analisar três casos:
+
+- O nó a ser removido é uma folha: retire da árvore sem compaixão.
+- O nó a ser removido possui somente um filho: o filho substitui o pai.
+- O nó a ser removido possui dois filhos: o nó é substituído pelo seu sucessor em ordem ou predecessor. O sucessor/predecessor é removido.
+
+Exemplo
+
+```{mermaid}
+flowchart LR
+
+subgraph s1[" "]
+        A(("15"))
+        B(("10"))
+        C(("20"))
+        D(("08"))
+        E(("12"))
+        F(("17"))
+        G(("25"))
+   end
+ 
+subgraph s2[" "]
+        A1(("15"))
+        B1(("10"))
+        C1(("20"))
+        D1(("08"))
+        E1(("12"))
+        F1(("17"))
+        I1((" "))
+   end
+
+ 	A --- B
+    A --- C
+    B --- D
+    B --- E
+    C --- F
+    C --x G
+    
+ 	A1 --- B1
+    A1 --- C1
+    B1 --- D1
+    B1 --- E1
+    C1 --- F1
+    C1 --- I1
+    
+    s1 ---> s2
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+E1:::WT
+F1:::WT
+style G fill:#FFCDD2
+style I1 stroke:none,fill:transparent
+style s1 stroke:none,fill:transparent
+style s2     stroke:none,fill:transparent
+linkStyle 11 stroke:none,fill:none    
+
+classDef WT fill:#FFFFFF
+```	
+
+
+Caso 1, o nó não possui filhos, basta apagá-lo.
+
+
+```{mermaid}
+flowchart LR
+
+subgraph s1[" "]
+        A(("15"))
+        B(("10"))
+        C(("20"))
+        D(("08"))
+        E(("12"))
+        F(("17"))
+        I1((" "))
+   end
+ 
+subgraph s2[" "]
+        A1(("15"))
+        B1(("10"))
+        C1(("17"))
+        D1(("08"))
+        E1(("12"))
+   end
+
+ 	A --- B
+    A --x  C
+    B --- D
+    B --- E
+    C --- F
+    C --- I1
+    
+ 	A1 --- B1
+    A1 --- C1
+    B1 --- D1
+    B1 --- E1
+    
+    s1 ---> s2
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+E1:::WT
+style C fill:#FFCDD2
+style F fill:#C8E6C9
+style I1 stroke:none,fill:transparent
+style s1 stroke:none,fill:transparent
+style s2     stroke:none,fill:transparent
+linkStyle 5 stroke:none,fill:none    
+
+classDef WT fill:#FFFFFF
+```	
+
+Caso 2, o filho substitui o pai.
+
+
+```{mermaid}
+flowchart LR
+
+subgraph s1[" "]
+        A(("15"))
+        B(("10"))
+        C(("17"))
+        D(("08"))
+        E(("12"))
+   end
+ 
+subgraph s2[" "]
+        A1(("12"))
+        B1(("10"))
+        C1(("17"))
+        D1(("08"))
+        I1((" "))
+   end
+
+ 	A --- B
+    A --- C
+    B --- D
+    B --- E
+    
+ 	A1 --- B1
+    A1 --- C1
+    B1 --- D1
+    B1 --- I1
+    
+    s1 ---> s2
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+style A fill:#FFCDD2
+style E fill:#C8E6C9
+style I1 stroke:none,fill:transparent
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent
+linkStyle 7 stroke:none,fill:none    
+
+classDef WT fill:#FFFFFF
+```	
+
+
+Caso 3, trocamos o nó pelo seu predecessor na árvore.
+
+::: {.callout-note}
+O predecessor é o nó com a maior chave na subárvore esquerda. Já o antecessor é o nó com menor chave na subárvore direita. Note que após as remoções a árvore continuou obedecendo a regra geral ("menores de um lado, maiores do outro").
+:::
+
+## Implementação
+
+
+### Inserção
+
+Existem várias implementações do algoritmo de inserção em BST. Abaixo, uma implementação recursiva.
+
+```c
+Node* insert_node(Node* root, int key) {
+    if (root == NULL) 
+        return create_node(key);
+    
+    if (root->key == key) 
+        return root;
+    
+    if (root->key < key) 
+        root->right = insert_node(root->right, key);
+    else
+        root->left = insert_node(root->left, key);
+     
+    return root;
+}
+```
+
+O `if` na linha 5 foi usado para descartar chaves que já foram inseridas. Outras implementações podem permitir duplicatas.
+
+O `if` da linha 2 é o caso base da recursão. Já o `if-else` da linha 8 é onde ocorre o caminho (para esquerda ou direita) que deve-se seguir para adicionar o novo nó.
+
+Para gerar a subárvore em azul da árvore do início deste capítulo, podemos fazer na `main`:
+
+```c
+Node* root = insert_node(root, 3);
+root = insert_node(root, 1);
+root = insert_node(root, 6);
+root = insert_node(root, 4);
+root = insert_node(root, 7);
+```
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Estamos passando `Node* node` para a função `insert_node`. Isso indica que não estamos atualizando a árvore original, mas criando uma nova e reatribuindo.
+:::
+
+Você pode determinar os percursos dessa subárvore com papel e lápis e depois conferir com as implementações.
+
+A complexidade de tempo do pior caso para operações de inserção é de O(h), onde h é a altura da árvore. No pior cenário, podemos ter que percorrer a árvore da raiz até o nó folha mais profundo.
+
+A complexidade de espaço auxiliar para inserção em uma árvore de busca binária é O(h), devido à pilha de chamadas recursivas.
+
+Em vez de usar recursão, também podemos implementar a operação de inserção de forma iterativa. Desse modo, a complexidade de espaço é O(1).
+
+
+Vamos implementar a busca e remoção a seguir.
+
+### Busca
+
+```c
+Node* search_node(Node* root, int key) {
+    if (root == NULL || root->key == key) 
+        return root;
+    
+    if (root->key < key) 
+        return search_node(root->right, key);
+    
+    return search_node(root->left, key);
+}
+```
+
+O algoritmo de busca também é recursivo. Na linha 3, retornamos `root`. Se ele for `NULL`, significa que não encontramos o nó. Caso contrário, significa que ele retornará o nó com a chave (`root->key`) igual à chave (`key`) que estamos procurando.
+
+De modo semelhante à inserção, a complexidade de tempo do pior caso para operações de busca é de O(h). Já complexidade de espaço auxiliar é O(h), pelo mesmo motivo.
+
+Implementando uma versão iterativa da função de busca, iremos melhorar a complexidade de espaço auxiliar para O(1).
+
+
+### Remoção
+
+Para a implementação da remoção, precisamos da função `get_successor`. Fica como exercício a sua implementação. A dica é percorrer a subárvore direita sempre pelo ramo esquerdo até não poder mais (o último nó será o sucessor).
+
+Assinatura:
+
+```c
+Node* get_successor(Node* node);
+```
+
+
+A função `remove_node` atua de forma recursiva e aborda todos os casos estudados.
+
+```c
+Node* remove_node(Node* root, int key) {
+    if (root == NULL) 
+        return root;
+    
+    if (root->key < key) 
+        root->right = remove_node(root->right, key);
+    else if (root->key > key)
+        root->left = remove_node(root->left, key);
+    else {
+        if (root->left == NULL) {
+            Node* temp = root->right;
+            free(root);
+            return temp;
+        }
+        if (root->right == NULL) {
+            Node* temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        Node* succ = get_successor(root);
+        root->key = succ->key;
+        root->right = remove_node(root->right, succ->key);
+    }
+
+}
+```
+
+- `if (root == NULL)`: Chegou ao fim da busca sem encontrar o nó, ela retorna `NULL`.
+- `if (root->key > x)`: A chave a ser removida é menor que a chave do nó atual, a função faz uma chamada recursiva para a subárvore esquerda.
+- `else if (root->key < x)`: Da mesma forma, se a chave é maior, a chamada recursiva é feita para a subárvore direita.
+
+A função `remove_node` lida com o caso de zero filhos e com o caso de apenas um filho (seja o esquerdo ou o direito) de forma combinada. Ela salva o filho em uma variável temporária (`temp`), libera a memória do nó atual e retorna o ponteiro para o filho, que será conectado ao nó pai na chamada recursiva anterior.
+
+O caso de dois filhos, `remove_node` encontra o sucessor em ordem (`succ`), que é o menor nó da subárvore direita. Depois copia a chave do sucessor para o nó que será "removido" e faz uma chamada recursiva para remover o nó sucessor original da subárvore direita.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+A nossa solução para remoção em BST realiza dois percursos pela altura da árvore quando ambos os filhos não são `NULL`. Existem otimizações dessa abordagem, mas não vamos discutir neste curso.
+:::
+
+As complexidades de tempo e de espaço auxiliar são as mesmas das operações anteriores, isto é, O(h). Da mesma forma, pode-se melhorar essa última com uma versão iterativa.
+
+## Complexidade
+
+
+Resumo das complexidades das operações em um BST.
+
+| Operação	| Tempo (pior)	| Tempo (melhor) | Espaço Auxiliar (recursiva)	| Espaço Auxiliar (iterativa) |
+|------|--------|------|------|-----|
+| Busca	| O(n)	| O(log n)	| O(h)	| O(1) |
+| Inserção	| O(n)	| O(log n)	| O(h)	| O(1) |
+| Remoção	| O(n)	| O(log n)	| O(h)	| O(1) |
+
+O $n$ representa o número de nós na árvore, já o $h$ representa a altura da árvore. No pior caso, a árvore está degenerada e a altura é igual ao número de nós. No melhor caso, a árvore está balanceada e a altura é proporcional a $\log n$.
+
+## Revisão e Considerações
+
+Nesta seção, estudamos a estrutura de dados árvore binária de busca.
+
+- Definimos essa estrutura;
+- Realizamos as operações básicas
+- Inserção, busca e remoção;
+- Estudamos a implementação;
+- Analisamos as complexidades das operações implementadas;
+
+Neste momento do curso, você já tem conhecimento suficiente para resolver uma gama de exercícios. Pratique bastante.
+
+Nossa jornada pelas árvores binárias ainda não acabou. Um problema que ocorre com as BST é a degeneração. Para evitar isso, vamos estudar uma metodologia para deixar a árvore balanceada, evitando a complexidade de pior caso.
+
+Nosso próximo passo será estudar as árvores AVL que realizam operações de rotação para rebalancear a árvore sempre que ocorre uma inserção ou remoção.
+
+{{< include /_includes/progress-bar.qmd >}}

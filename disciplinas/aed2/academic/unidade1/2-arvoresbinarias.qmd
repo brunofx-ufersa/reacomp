@@ -1,0 +1,599 @@
+---
+title: "Árvores Binárias"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+filters: 
+    - quizdown
+---
+
+A árvore binária é uma árvore onde os nós possuem no máximo dois filhos. Portanto, um nó qualquer pode possuir 0, 1 ou 2 filhos.
+
+Exemplos
+
+```{mermaid}
+flowchart LR
+    subgraph s1[" "]
+    A(("A")) 
+    B(("B"))
+	C(("C"))
+	D(("D"))
+	E(("E"))
+	F(("F"))
+	G(("G"))
+    end
+
+    subgraph s2[" "]
+	A1(("1"))
+    B1(("2"))
+	C1(("3"))
+	D1(("4"))
+	E1(("5"))
+	F1(("6"))
+	I1((" "))
+    end
+
+    subgraph s3[" "]
+	A2((🙈)) 
+    B2((🙄))
+	C2((👀))
+	D2((🤣))
+	I2((" "))
+    end
+
+	A --- B
+	A --- C
+	B --- D
+	B --- E
+	C --- F
+	C --- G
+	A1 --- B1
+	A1 --- C1
+	B1 --- D1
+	B1 --- E1
+	C1 --- F1
+	C1 --- I1
+
+	A2 --- B2   
+	A2 --- C2
+	B2 --- D2
+	B2 --- I2
+
+    s1 -.- s2
+    s2 -.- s3
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+E1:::WT
+F1:::WT
+A2:::WT
+B2:::WT
+C2:::WT
+D2:::WT
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent
+style s3 stroke:none,fill:transparent
+style I1 stroke:none,fill:transparent
+style I2 stroke:none,fill:transparent
+linkStyle 11 stroke:none,fill:none    
+linkStyle 15 stroke:none,fill:none    
+
+classDef WT fill:#FFFFFF
+```	
+
+
+## Propriedades
+
+- Um árvore binária de altura $h$ tem no máximo $2^{h+1}-1$ nós
+- Um árvore binária com $n$ nós tem uma altura mínima de $\lceil \log_2(n+1)\rceil-1$
+- Um árvore binária com $n$ nós tem no máximo $\lceil n/2\rceil$ nós terminais
+
+Exemplo
+
+1. Uma árvore de altura $4$ possuirá, no máximo, $2^{4+1}-1=2^{5}-1=32-1=31$ nós.
+2. Se uma árvore binária possui $7$ nós, então sua altura mínima será de
+ $$\lceil \log_2(7+1)\rceil-1=\lceil \log_28\rceil-1=\lceil 3\rceil-1=2$$
+
+> Além disso, tal árvore possuirá no máximo $\lceil 7/2\rceil$  nós terminais, ou seja, $4$ folhas.
+
+## Classificação
+
+Uma árvore binária pode ser classificada em
+
+- Cheia,
+- Completa,
+- Perfeita ou
+- Degenerada,
+
+dependendo do arranjo de seus nós.
+
+### Árvore Binária Cheia
+
+Cada nó possui zero ou dois filhos (nunca exatamente um). Na árvore abaixo, nenhum nó possui somente um filho. Portanto, ela é cheia.
+
+```{mermaid}
+flowchart TB
+	A(("A")) --- B(("B"))
+	A --- C(("C"))
+	C --- D(("D"))
+	C --- E(("E"))
+	D --- F(("F"))
+	D --- G(("G"))
+
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+
+classDef WT fill:#FFFFFF
+```	
+
+- nenhum filho: B, E, F e G
+- um filho: -
+- dois filhos: A, C e D 
+
+### Árvore Binária Completa
+
+Neste caso, todos os níveis, acima das folhas do último nível, estão preenchidos integralmente.
+
+```{mermaid}
+flowchart TB
+	A(("A")) --- B(("B"))
+	A --- C(("C"))
+	B --- D(("D"))
+	B --- E(("E"))
+	C --- F(("F"))
+	C --- G(("G"))
+	D --- H(("H"))
+	D --- I(("I"))
+    E --- J(("J"))
+	E --- I1((" "))
+    G --- K(("K"))
+	G --- L(("L"))
+
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+H:::WT
+I:::WT
+J:::WT
+K:::WT
+L:::WT
+
+classDef WT fill:#FFFFFF
+style I1 stroke:none,fill:transparent
+linkStyle 9 stroke:none,fill:none
+```	
+
+
+A árvore acima possui 4 níveis, onde os níveis 0, 1 e 2 estão completos.
+
+
+- nível 0: A
+- nível 1: B e C
+- nível 2: D, E, F e G
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Em uma árvore binária, para um nível $n$ estar completo é necessário que ele possua $2^n$ nós
+:::
+
+
+### Árvore Binária Perfeita
+
+É uma árvore binária em todos os níveis estão completamente preenchidos.
+
+```{mermaid}
+flowchart TB
+	A(("A")) --- B(("B"))
+	A --- C(("C"))
+	B --- D(("D"))
+	B --- E(("E"))
+	C --- F(("F"))
+	C --- G(("G"))
+	D --- H(("H"))
+	D --- I(("I"))
+    E --- J(("J"))
+	E --- K(("K"))
+    F --- L(("L"))
+	F --- M(("M"))
+    G --- N(("N"))
+	G --- O(("O"))
+
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+G:::WT
+H:::WT
+I:::WT
+J:::WT
+K:::WT
+L:::WT
+M:::WT
+N:::WT
+O:::WT
+
+classDef WT fill:#FFFFFF
+```	
+
+
+Todos os nós internos têm dois filhos e todas as folhas estão no mesmo nível.
+
+### Árvore Degenerada
+
+
+Uma árvore degenerada que é aquela em que cada nó tem no máximo um filho. Isso faz com que a árvore se assemelhe a uma lista encadeada.
+
+```{mermaid}
+flowchart LR
+ subgraph s1[" "]
+	A(("A"))
+    I1((" "))
+    B(("B"))
+	I2((" "))
+    C(("C"))
+	I3((" "))
+    D(("D"))
+	I4((" "))
+    E(("E"))
+end
+
+ subgraph s2[" "]
+	A2(("A"))
+    I9((" "))
+    B2(("B"))
+	I10((" "))
+    C2(("C"))
+	I11((" "))
+    D2(("D"))
+	I12((" "))
+    E2(("E"))
+end
+
+ subgraph s3[" "]
+	A1(("A"))
+    I5((" "))
+    B1(("B"))
+	I6((" "))
+    C1(("C"))
+	I7((" "))
+    D1(("D"))
+	I8((" "))
+    E1(("E"))
+end
+	A ~~~ I1
+    A --- B
+	B ~~~ I2
+    B --- C
+	C ~~~ I3
+    C --- D
+	D ~~~ I4
+    D --- E
+
+	A1 --- B1
+	A1 ~~~ I5
+    B1 --- C1
+	B1 ~~~ I6
+    C1 --- D1
+	C1 ~~~ I7
+    D1 --- E1
+    D1 ~~~ I8
+    
+	A2 --- B2
+    A2 ~~~ I9
+	B2 ~~~ I10
+    B2 --- C2
+	C2 --- D2
+	C2 ~~~ I11
+    D2 ~~~ I12
+    D2 --- E2
+
+    s1 ~~~ s2
+    s2 ~~~ s3
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+A2:::WT
+B2:::WT
+C2:::WT
+D2:::WT
+E2:::WT
+
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+E1:::WT
+
+classDef WT fill:#FFFFFF
+style I1 stroke:none,fill:transparent
+style I2 stroke:none,fill:transparent
+style I3 stroke:none,fill:transparent
+style I4 stroke:none,fill:transparent
+style I5 stroke:none,fill:transparent
+style I6 stroke:none,fill:transparent
+style I7 stroke:none,fill:transparent
+style I8 stroke:none,fill:transparent
+style I9 stroke:none,fill:transparent
+style I10 stroke:none,fill:transparent
+style I11 stroke:none,fill:transparent
+style I12 stroke:none,fill:transparent
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent
+style s3 stroke:none,fill:transparent
+```	
+
+## Percursos
+
+Como podemos visitar todos os nós de uma árvore, sem exceção, somente uma vez? Isso pode ser realizado de várias maneiras.
+
+Um percurso, ou travessia, diz respeito ao modo de como percorremos uma árvore. Percorrer uma árvore binária envolve visitar todos os seus nós em uma ordem específica para realizar várias operações, como pesquisar, classificar ou modificar a árvore.
+
+As estratégias de travessia são amplamente classificadas em:
+
+- Percurso em Largura
+- Percurso em Profundidade
+
+### Percurso em Largura
+
+O percurso em largura visita os nós em cada nível, da esquerda para a direita, antes de prosseguir para o próximo. Essa abordagem é ideal quando todos os nós em um nível precisam ser processados antes de passar para o próximo.
+
+Exemplo
+```{mermaid}
+flowchart TB
+	A(("A")) --- B(("B"))
+	A --- C(("C"))
+	B --- D(("D"))
+	B --- E(("E"))
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+
+classDef WT fill:#FFFFFF
+```	
+
+Um percurso em largura resultará na sequência A, B, C, D e E.
+
+- No nível 0, passamos por A;
+- No nível 1, passamos por B e C;
+- No nível 2, passamos por D e E;
+
+
+### Percurso em Profundidade
+
+O percurso em profundidade explora o mais profundamente possível em cada ramo antes de retroceder. Esta categoria inclui os subtipos pré-ordem, ordeme pós-ordem.
+
+Vamos usar a seguinte árvore para exemplificar tais percursos.
+
+```{mermaid}
+flowchart TB
+	A(("A")) --- B(("B"))
+	A --- C(("C"))
+
+A:::WT
+B:::WT
+C:::WT
+
+classDef WT fill:#FFFFFF
+```	
+
+#### Pré-ordem
+
+Cada nó é processado antes de seus filhos. Segue a seguinte ordem de visita:
+
+- raiz 
+- subárvore esquerda
+- subárvore direita
+
+Processamos a raiz (A) e vamos para a subárvore esquerda. Processamos a nova raiz (B). Não temos subárvores de B, então voltamos e analisamos a subárvore direita de A. Processamos a nova raiz (C). Não temos subárvores de C, logo finalizamos.
+
+Resultado: A, B, C
+
+> O percurso em pré-ordem é ideal para
+>
+> - Cópia de Estrutura de Diretórios: Quando o sistema operacional precisa copiar uma pasta e seus subdiretórios, ele usa a lógica de pré-ordem. Ele primeiro cria a pasta principal (raiz) e depois entra nela para criar os arquivos e pastas internos.
+> - Expressões Matemáticas (Notação Polonesa): É usado para converter expressões em uma forma que computadores leiam facilmente sem precisar de parênteses. Por exemplo, a expressão + 3 4 (onde o operador vem antes dos números).
+
+#### Ordem
+
+Processa a subárvore esquerda, o nó atual e, em seguida, a subárvore direita.
+
+No nosso exemplo, vamos para a subárvore esquerda. Processamos a nova raiz (B). Voltamos para a raiz e processamos (A). Vamos para a subárvore direita. Processamos a nova raiz (C).
+
+Resultado: B, A, C
+
+> Este percurso é amplamente utilizado em estruturas de dados que precisam manter alguma ordem.
+
+#### Pós-ordem
+
+Acessa o nó atual após suas subárvores. Segue a seguinte ordem de visita: 
+
+- subárvore esquerda
+- subárvore direita
+- raiz
+
+No nosso exemplo, vamos para a subárvore esquerda. Processamos a nova raiz (B). Vamos para a subárvore direita. Processamos a nova raiz (C). Voltamos para a raiz e processamos (A).
+
+Resultado: B, C, A
+
+> A pós-ordem é usada quando você precisa processar as folhas antes de chegar ao topo.
+>
+> - Cálculo de Tamanho de Pastas: Para saber o tamanho total de uma pasta no seu computador, o sistema primeiro soma o tamanho de todos os arquivos individuais (folhas) e subpastas para, por último, dar o resultado da pasta raiz.
+> - Exclusão de Árvores: Para deletar uma árvore de forma segura na memória, você deve deletar os filhos primeiro. Se você deletar a raiz primeiro, perderá o acesso (ponteiro) para os filhos, causando vazamento de memória.
+> - Avaliação de Expressões Matemáticas: Compiladores usam isso para resolver contas. Para calcular (3 + 4) * 5, o computador primeiro resolve o 3 e o 4, depois o +, e só então multiplica pelo 5.
+
+Para fixação, vamos considerar uma nova nova árvore: 
+
+```{mermaid}
+flowchart TB
+	A(("A")) --- B(("B"))
+	A --- C(("C"))
+	B --- D(("D"))
+	B --- E(("E"))
+	C --- I1((" "))
+	C --- F(("F"))
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+F:::WT
+
+classDef WT fill:#FFFFFF
+linkStyle 4 stroke:none,fill:none
+style I1 stroke:none,fill:transparent
+```	
+
+
+- Largura: A, B, C, D, E, F
+- Pré-ordem (Nó, Esquerda, Direta): A, B, D, E, C, F
+- Ordem (Esquerda, Nó, Direta): D, B, E, A, C, F
+- Pós-ordem (Esquerda, Direta, Nó): D, E, B, F, C, A
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Os percursos em árvore podem ser usados para a serialização, isto é, salvar uma árvore em um arquivo para carregá-la exatamente igual depois.
+:::
+
+
+## Implementação
+
+Como se trata de uma estrutura dinâmica, usaremos ponteiros. 
+
+Para criarmos uma árvore binária em C, devemos criar uma nova estrutura. Tal estrutura deve conter o valor da chave e dois ponteiros para indicar os filhos do lado esquerdo e direito.
+
+```c
+typedef struct node {
+    int data;
+    struct node *left;
+    struct node *right;
+} Node;
+```
+
+Função para criar um nó
+
+```c
+Node* create_node(int key) {
+    Node* new_node = malloc(sizeof(Node));
+    new_node->key = key;
+    new_node->left = new_node->right = NULL;
+     
+    return new_node;
+}
+```
+
+A função `create_node` recebe uma chave inteira e retorna um ponteiro para um objeto do tipo `Node`. Na segunda linha, estamos alocando memória para o novo nó. Para isso, `sizeof(Node)` calcula o tamanho em _bytes_ necessário. Em seguida, preenchemos os campos do nó `new_node`: a chave e os filhos. No caso, o novo nó não possui filhos, então recebem o valor `NULL`.
+
+Na função principal (`main`), podemos fazer a inserção da seguinte forma:
+
+```c
+Node* root = create_node(10);
+
+root->left = create_node(15);
+root->right = create_node(5);
+root->right->left = create_node(12);
+root->right->right = create_node(18);
+```
+
+Esse código representa a seguinte árvore:
+
+```{mermaid}
+flowchart TB
+	A(("10")) --- B(("15"))
+	A --- C(("05"))
+	C --- D(("12"))
+	C --- E(("18"))
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+E:::WT
+
+classDef WT fill:#FFFFFF
+```	
+
+Os percusos são implementados recursivamente da seguinte forma:
+
+```c
+void pre_order(Node *root) {
+    if (root != NULL) {
+        printf("%d ", root->key);
+        pre_order(root->left);
+        pre_order(root->right);
+    }
+}
+
+void in_order(Node *root) {
+    if (root != NULL) {
+        in_order(root->left);
+        printf("%d ", root->key);
+        in_order(root->right);
+    }
+}
+
+void pos_order(Node *root) {
+    if (root != NULL) {
+        pos_order(root->left);
+        pos_order(root->right);
+        printf("%d ", root->key);
+    }
+}
+```
+
+Na pasta code, você pode encontrar a implementação no arquivo arvorebinaria.c. Desse modo, você pode criar árvores diversas e verificar as travessias implementadas.
+
+No nosso exemplo anterior, o programa deve gerar a saída:
+
+- Pre-Ordem:  10 15 5 12 18
+- Ordem:      15 10 12 5 18
+- Pos-Ordem:  15 12 18 5 10
+
+## Revisão e Considerações
+
+Nesta seção, estudamos a estrutura de dados árvore binária.
+
+- Definimos essa estrutura;
+- Classificamos as árvores binárias (cheia, completa, perfeita e degenerada);
+- Realizamos percursos em largura e profundidade;
+- Abordamos as travessias em pré-ordem, ordem e pós-ordem.
+
+Agora que estamos familiarizados com os conceitos fundamentais da estrutura de dados árvore, iremos estudar um tipo especial de árvore binária chamada árvore binária de busca.
+
+Procure dominar os percursos realizando os exercícios propostos deste capítulo.
+
+
+{{< include /_includes/progress-bar.qmd >}}
