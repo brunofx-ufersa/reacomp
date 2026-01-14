@@ -426,6 +426,17 @@ Resultado: A, B, C
 > - Cópia de Estrutura de Diretórios: Quando o sistema operacional precisa copiar uma pasta e seus subdiretórios, ele usa a lógica de pré-ordem. Ele primeiro cria a pasta principal (raiz) e depois entra nela para criar os arquivos e pastas internos.
 > - Expressões Matemáticas (Notação Polonesa): É usado para converter expressões em uma forma que computadores leiam facilmente sem precisar de parênteses. Por exemplo, a expressão + 3 4 (onde o operador vem antes dos números).
 
+
+::: {.callout-tip title="Exercício"}
+Nesse exercício, você deve reproduzir o comportamento de uma travessia em pré-ordem. Clique nos nós para indicar a ordem na qual o algoritmo de travessia deve percorre-los. O botão reset cria um novo exercício.
+
+```{=html}
+<iframe src="https://opendsa-server.cs.vt.edu/embed/btTravPreorderPRO" style="border:none;" height="430" width="900" scrolling="no"></iframe>
+```
+:::
+
+
+
 #### Ordem
 
 Processa a subárvore esquerda, o nó atual e, em seguida, a subárvore direita.
@@ -435,6 +446,15 @@ No nosso exemplo, vamos para a subárvore esquerda. Processamos a nova raiz (B).
 Resultado: B, A, C
 
 > Este percurso é amplamente utilizado em estruturas de dados que precisam manter alguma ordem.
+
+::: {.callout-tip title="Exercício"}
+Nesse exercício, você deve reproduzir o comportamento de uma travessia em ordem. Clique nos nós para indicar a ordem na qual o algoritmo de travessia deve percorre-los. O botão reset cria um novo exercício.
+
+```{=html}
+<iframe src="https://opendsa-server.cs.vt.edu/embed/btTravInorderPRO" style="border:none;" height="430" width="100%" scrolling="no"></iframe>
+```
+:::
+
 
 #### Pós-ordem
 
@@ -453,6 +473,14 @@ Resultado: B, C, A
 > - Cálculo de Tamanho de Pastas: Para saber o tamanho total de uma pasta no seu computador, o sistema primeiro soma o tamanho de todos os arquivos individuais (folhas) e subpastas para, por último, dar o resultado da pasta raiz.
 > - Exclusão de Árvores: Para deletar uma árvore de forma segura na memória, você deve deletar os filhos primeiro. Se você deletar a raiz primeiro, perderá o acesso (ponteiro) para os filhos, causando vazamento de memória.
 > - Avaliação de Expressões Matemáticas: Compiladores usam isso para resolver contas. Para calcular (3 + 4) * 5, o computador primeiro resolve o 3 e o 4, depois o +, e só então multiplica pelo 5.
+
+::: {.callout-tip title="Exercício"}
+Nesse exercício, você deve reproduzir o comportamento de uma travessia em pós-ordem. Clique nos nós para indicar a ordem na qual o algoritmo de travessia deve percorre-los. O botão reset cria um novo exercício.
+```{=html}
+<iframe src="https://opendsa-server.cs.vt.edu/embed/btTravPostorderPRO" style="border:none;" height="430" width="100%" scrolling="no"></iframe>
+```
+:::
+
 
 Para fixação, vamos considerar uma nova nova árvore: 
 
@@ -582,14 +610,115 @@ No nosso exemplo anterior, o programa deve gerar a saída:
 - Ordem:      15 10 12 5 18
 - Pos-Ordem:  15 12 18 5 10
 
-## Revisão e Considerações
+---
 
-Nesta seção, estudamos a estrutura de dados árvore binária.
+Nesta seção, estudamos a estrutura de dados árvore binária. Em particular,
 
-- Definimos essa estrutura;
-- Classificamos as árvores binárias (cheia, completa, perfeita e degenerada);
-- Realizamos percursos em largura e profundidade;
-- Abordamos as travessias em pré-ordem, ordem e pós-ordem.
+✅ definimos essa estrutura;
+
+✅ classificamos as árvores binárias (cheia, completa, perfeita e degenerada);
+
+✅ realizamos percursos em largura e profundidade;
+
+✅ abordamos as travessias em pré-ordem, ordem e pós-ordem.
+
+```quizdown
+
+# O que caracteriza uma árvore binária ?
+
+> Considere a definição formal apresentada no texto.
+
+1. [ ] Todo nó possui exatamente dois filhos  
+1. [ ] Todo nó possui pelo menos um filho  
+1. [x] Todo nó possui no máximo dois filhos  
+1. [ ] Apenas a raiz pode ter dois filhos  
+
+
+# Sobre as propriedades de árvores binárias
+
+> Considere uma árvore binária com altura h e n nós.
+
+- [x] Uma árvore binária de altura h tem no máximo \(2^{h+1}-1\) nós  
+- [x] Uma árvore binária com n nós tem altura mínima \(\lceil \log_2(n+1)\rceil - 1\)  
+- [ ] Uma árvore binária sempre tem exatamente \(n/2\) folhas  
+- [x] Uma árvore binária com n nós tem no máximo \(\lceil n/2\rceil\) folhas  
+
+
+# Classifique a árvore onde cada nó possui zero ou dois filhos, nunca exatamente um.
+
+1. [ ] Árvore completa  
+1. [ ] Árvore perfeita  
+1. [x] Árvore cheia  
+1. [ ] Árvore degenerada  
+
+
+# Em uma árvore binária completa 
+
+> Considere o preenchimento dos níveis da árvore.
+
+1. [ ] Todos os níveis estão completamente preenchidos  
+1. [x] Todos os níveis acima do último estão completamente preenchidos  
+1. [ ] Apenas o nível das folhas é completo  
+1. [ ] Apenas a raiz está completa  
+
+
+# Em uma árvore binária perfeita
+
+> Considere a estrutura global da árvore.
+
+1. [ ] Apenas os nós internos têm dois filhos  
+1. [ ] Apenas as folhas estão no mesmo nível  
+1. [x] Todos os níveis estão completamente preenchidos  
+1. [ ] Apenas os dois primeiros níveis estão completos  
+
+
+# Uma árvore degenerada
+
+> Compare a estrutura da árvore com outras estruturas conhecidas.
+
+1. [ ] Se comporta como uma pilha  
+1. [ ] Se comporta como uma fila  
+1. [x] Se comporta como uma lista encadeada  
+1. [ ] Se comporta como um grafo completo  
+
+
+# O percurso em largura 
+
+> Considere a ordem de visita dos nós.
+
+1. [ ] Visita primeiro os ramos mais profundos  
+1. [x] Visita os nós nível a nível, da esquerda para a direita  
+1. [ ] Visita primeiro a subárvore esquerda  
+1. [ ] Visita primeiro as folhas  
+
+
+# Quais percursos pertencem à categoria de percurso em profundidade?
+
+- [x] Pré-ordem  
+- [x] Ordem  
+- [x] Pós-ordem  
+- [ ] Percurso em largura  
+
+
+# Sobre a implementação em C
+
+> Considere a estrutura `Node` apresentada no texto.
+
+- [x] Cada nó armazena uma chave  
+- [x] Cada nó possui um ponteiro para o filho esquerdo  
+- [x] Cada nó possui um ponteiro para o filho direito  
+- [ ] Cada nó armazena obrigatoriamente o ponteiro para o pai  
+
+
+# Sobre a implementação dos percursos
+
+> Considere os códigos apresentados.
+
+1. [ ] São implementados iterativamente  
+1. [x] São implementados de forma recursiva  
+1. [ ] Apenas o percurso em largura é recursivo  
+1. [ ] Apenas o percurso em profundidade é iterativo  
+```
 
 Agora que estamos familiarizados com os conceitos fundamentais da estrutura de dados árvore, iremos estudar um tipo especial de árvore binária chamada árvore binária de busca.
 

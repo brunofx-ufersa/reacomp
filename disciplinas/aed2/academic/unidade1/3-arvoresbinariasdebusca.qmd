@@ -200,6 +200,14 @@ classDef WT fill:#FFFFFF
 ```	
 
 
+::: {.callout-tip title="Exercício"}
+Use o algoritmo de inserção de BST para inserir os valores destacados. Clique no nó vazio para que a chave seja inserida. Valores iguais devem ir para subárvore esquerda.
+```{=html}
+<iframe src="https://opendsa-server.cs.vt.edu/embed/BSTinsertPRO" style="border:none;" height="750" width="100%"  scrolling="no"></iframe>
+```
+:::
+
+
 ### Busca
 
 A busca ocorre percorrendo a árvore conforme a regra geral. Iniciando da raiz, percorremos os nós seguindo um caminho da direita ou esquerda conforma o valor da chave. Se a chave procurada é maior que a chave do nó atual, buscamos na direita, caso contrário na esquerda.
@@ -261,6 +269,13 @@ classDef WT fill:#FFFFFF
 ```	
 
 Iniciamos pela raiz e comparamos os valores (18 > 15). devemos seguir para a direita. Comparamos as chaves (18 < 10). Devemos ir para a esquerda. Comparamos as chaves (18 > 17). Devemos ir para a esquerda, porém não temos mais nós para percorrer. Busca concluída com o elemento não encontrado.
+
+::: {.callout-tip title="Exercício"}
+Use o algoritmo de busca de BST para encontrar a chave dada. Inciando pela raiz, clique para revelar seu valor e seus filhos.
+```{=html}
+ <iframe src="https://opendsa-server.cs.vt.edu/embed/BSTsearchPRO" style="border:none;" height="750" width="100%"  scrolling="no"></iframe>
+ ```
+:::
 
 
 ### Remoção
@@ -448,6 +463,13 @@ Caso 3, trocamos o nó pelo seu predecessor na árvore.
 O predecessor é o nó com a maior chave na subárvore esquerda. Já o antecessor é o nó com menor chave na subárvore direita. Note que após as remoções a árvore continuou obedecendo a regra geral ("menores de um lado, maiores do outro").
 :::
 
+::: {.callout-tip title="Exercício"}
+Use o algoritmo de remoção de BST para romve o nó com a chave destacada. Clique no nó para apagá-lo. Se necessário você deve clicar em outro nó para substituir o nó removido. No caso de nó com grau 2, o valor que substituirá é o maior da subárvore esquerda.
+```{=html}
+ <iframe src="https://opendsa-server.cs.vt.edu/embed/BSTremovePRO" style="border:none;" height="600" width="100%"  scrolling="no"></iframe>
+ ```
+:::
+
 ## Implementação
 
 
@@ -479,7 +501,8 @@ O `if` da linha 2 é o caso base da recursão. Já o `if-else` da linha 8 é ond
 Para gerar a subárvore em azul da árvore do início deste capítulo, podemos fazer na `main`:
 
 ```c
-Node* root = insert_node(root, 3);
+Node* root = NULL;
+root = insert_node(root, 3);
 root = insert_node(root, 1);
 root = insert_node(root, 6);
 root = insert_node(root, 4);
@@ -531,7 +554,6 @@ Assinatura:
 ```c
 Node* get_successor(Node* node);
 ```
-
 
 A função `remove_node` atua de forma recursiva e aborda todos os casos estudados.
 
@@ -592,17 +614,105 @@ Resumo das complexidades das operações em um BST.
 
 O $n$ representa o número de nós na árvore, já o $h$ representa a altura da árvore. No pior caso, a árvore está degenerada e a altura é igual ao número de nós. No melhor caso, a árvore está balanceada e a altura é proporcional a $\log n$.
 
-## Revisão e Considerações
+---
 
-Nesta seção, estudamos a estrutura de dados árvore binária de busca.
+Nesta seção, estudamos a estrutura de dados árvore binária de busca. Nós
 
-- Definimos essa estrutura;
-- Realizamos as operações básicas
-- Inserção, busca e remoção;
-- Estudamos a implementação;
-- Analisamos as complexidades das operações implementadas;
+✅ definimos essa estrutura;
+
+✅ realizamos as operações básicas (inserção, busca e remoção);
+
+✅ estudamos a implementação;
+
+✅ analisamos as complexidades das operações implementadas.
 
 Neste momento do curso, você já tem conhecimento suficiente para resolver uma gama de exercícios. Pratique bastante.
+
+```quizdown
+# O que define uma Árvore Binária de Busca ?
+
+> Considere a regra geral de ordenação apresentada no texto.
+
+1. [ ] Todos os nós à esquerda possuem chaves maiores que a raiz  
+1. [x] Todos os nós à esquerda possuem chaves menores e os da direita maiores que a chave do nó  
+1. [ ] Todos os nós possuem exatamente dois filhos  
+1. [ ] As chaves não precisam ser comparáveis  
+
+
+# Onde ocorre a inserção de um novo nó?
+
+1. [ ] Sempre na raiz  
+1. [ ] Em qualquer nó interno  
+1. [x] Sempre em uma folha  
+1. [ ] No nó com menor chave  
+
+
+# Durante a inserção, como decidimos o caminho?
+
+1. [ ] Escolhendo aleatoriamente esquerda ou direita  
+1. [ ] Comparando com todos os nós da árvore  
+1. [x] Comparando a chave com o nó atual para decidir esquerda ou direita  
+1. [ ] Inserindo sempre na subárvore esquerda  
+
+
+# Considere a busca por uma chave k.
+
+1. [ ] Percorre sempre todos os nós  
+1. [x] Segue para esquerda ou direita conforme a comparação das chaves  
+1. [ ] Visita apenas as folhas  
+1. [ ] É feita somente em largura  
+
+
+# O que pode acontecer ao final de uma busca em uma BST?
+
+- [x] O nó com a chave é encontrado  
+- [x] A busca termina em um ponteiro NULL  
+- [ ] A árvore é automaticamente rebalanceada  
+- [ ] Todos os nós são visitados  
+
+
+# Quais casos precisam ser tratados na remoção?
+
+- [x] Nó folha  
+- [x] Nó com apenas um filho  
+- [x] Nó com dois filhos  
+- [ ] Nó com três filhos  
+
+
+# Qual estratégia é utilizada na remoção de nó com dois filhos?
+
+1. [ ] Remover toda a subárvore  
+1. [x] Substituir pelo sucessor em ordem ou predecessor  
+1. [ ] Trocar pelo nó raiz  
+1. [ ] Inserir o nó novamente  
+
+
+# O que é o sucessor em ordem de um nó?
+
+1. [ ] O maior nó da subárvore esquerda  
+1. [x] O menor nó da subárvore direita  
+1. [ ] O pai do nó  
+1. [ ] Qualquer nó folha  
+
+
+
+# O que caracteriza uma BST degenerada?
+
+1. [ ] Todos os níveis completos  
+1. [ ] Altura mínima  
+1. [x] Altura próxima ao número de nós  
+1. [ ] Balanceamento automático  
+
+
+# Sobre o motivo de estudar AVL
+
+> Conforme discutido no texto.
+
+1. [ ] Para permitir chaves duplicadas  
+1. [ ] Para eliminar a necessidade de busca  
+1. [x] Para evitar a degeneração da BST  
+1. [ ] Para remover a propriedade de ordenação  
+```
 
 Nossa jornada pelas árvores binárias ainda não acabou. Um problema que ocorre com as BST é a degeneração. Para evitar isso, vamos estudar uma metodologia para deixar a árvore balanceada, evitando a complexidade de pior caso.
 

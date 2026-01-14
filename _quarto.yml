@@ -51,6 +51,8 @@ website:
         - disciplinas/aed2/academic/unidade1/2-arvoresbinarias.qmd
         - disciplinas/aed2/academic/unidade1/3-arvoresbinariasdebusca.qmd
         - disciplinas/aed2/academic/unidade1/4-arvoresavl.qmd
+        - disciplinas/aed2/academic/unidade1/5-exercicios.qmd
+        - disciplinas/aed2/academic/unidade1/6-desafios.qmd
     - section: "Estruturas Genéricas"
       id: generics
       title: "Estruturas Genéricas"
@@ -74,20 +76,15 @@ website:
         - disciplinas/aed2/academic/unidade2/9-tabeladinamica.qmd
         - disciplinas/aed2/academic/unidade2/10-filtrobloom.qmd
         - disciplinas/aed2/academic/unidade2/11-exercicios.qmd
-    - title: "How-To"
+    - section: "Introdução aos Grafos"
+      id: grafo
+      title: "Introdução aos Grafos"
+      style: "docked"
+      background: light
       contents:
-        - howto.qmd
-        # navigation items
-
-    - title: "Fundamentals"
-      contents:
-        - fundamentals.qmd
-        # navigation items
-
-    - title: "Reference"
-      contents:
-        - reference.qmd
-
+        - disciplinas/aed2/academic/unidade3/4-grafos.qmd
+        - disciplinas/aed2/academic/unidade3/5-representacoes.qmd
+        - disciplinas/aed2/academic/unidade3/6-caminhos.qmd
 format:
   html:
     highlight-style: a11y

@@ -481,11 +481,11 @@ int main(){
 
 Nesta unidade, você aprendeu
 
-✅ a declarar e desreferenciar ponteiros
+✅ a declarar e desreferenciar ponteiros;
 
-✅ a modificar valores via ponteiros
+✅ a modificar valores via ponteiros;
 
-✅ a passar variáveis por referência
+✅ a passar variáveis por referência.
 
 
 

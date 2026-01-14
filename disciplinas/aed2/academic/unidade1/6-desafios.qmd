@@ -1,0 +1,131 @@
+---
+title: "Unidade 1 - Desafios"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+filters: 
+    - quizdown
+---
+
+### Desafio 1
+
+Encontre o elemento com a menor chave de uma BST data.
+
+```{.c code-line-numbers="false"}
+Node* get_min(Node* root);
+```
+
+Encontre o sucessor em ordem de um elemento em uma BST data.
+
+```{.c code-line-numbers="false"}
+Node* get_successor(Node* root);
+```
+### Desafio 2
+
+Escreva uma função que deve retornar o tamanho de uma árvore binária.
+
+```{.c code-line-numbers="false"}
+size_t get_size(Node* root);
+```
+
+Escreva uma função que deve retornar a altura de uma árvore binária.
+
+```{.c code-line-numbers="false"}
+size_t get_height(Node* root);
+```
+
+### Desafio 3
+
+Implemente um método para remover o nó com a menor chave de uma BST.
+
+```{.c code-line-numbers="false"}
+Node* remove_min(Node* root);
+```
+
+Dada uma BST, realiza a mudança de uma chave.
+
+```{.c code-line-numbers="false"}
+Node* change_key(Node* root, int old, int new);
+```
+### Desafio 4
+
+Dada uma BST, encontre a mediana das chaves de todos os nós.
+
+```{.c code-line-numbers="false"}
+Node* get_median(Node* root);
+```
+
+Dada uma árvore binária, cheque se ela é ou não uma BST.
+
+```{.c code-line-numbers="false"}
+bool is_bst(Node* root);
+```
+
+### Desafio 5
+
+Implemente uma função de inserção em uma BST que não seja recursiva, ou seja, uma versão iterativa (com `for` ou `while`).
+
+### Desafio 6
+
+Implemente uma função de inserção em uma BST que simule a passagem por referência. Em miúdos, sua função deve ter a seguinte assinatura:
+
+```{.c code-line-numbers="false"}
+void insert_node (Node** node, int key)
+```
+
+Ou seja, `insert_node` não possui retorno, mas deve atualizar node (a árvore passada como parâmetro) internamente.
+Exemplo de uso:
+
+```{.c code-line-numbers="false"}
+Node* root = NULL;
+insert_node(&root, 50);
+insert_node(&root, 30);
+insert_node(&root, 70);
+```
+
+### Desafio 7
+
+Implemente uma função de busca em uma BST que não seja recursiva, ou seja, uma versão iterativa (com `for` ou `while`).
+
+
+### Desafio 8
+
+Escreva um programa em C que abra e leia um arquivo de texto e registre quantas vezes cada palavra ocorre no arquivo. Use uma BST modificada para armazenar tanto uma palavra quanto o número de vezes que ela ocorre. Depois que o programa tiver lido o arquivo, ele deve oferecer um menu com três opções. A primeira é listar todas as palavras junto com o número de ocorrências. A segunda é permitir que você digite uma palavra, com o programa relatando quantas vezes a palavra ocorreu no arquivo. A terceira opção é sair.
+
+O nó da árvore precisará de três campos:
+
+- `char* word`: Uma _string_.
+- `int count`: Um contador para o número de ocorrências.
+- `Node* left, Node* right`: Ponteiros para os nós filhos.
+
+O fluxo principal do programa seria:
+
+- **Abrir o arquivo**: Use `fopen` para abrir o arquivo de texto em modo de leitura (`"r"`).
+- **Ler e processar o arquivo**:
+    - Leia o arquivo palavra por palavra.
+    - Para cada palavra, use a função de inserção na BST:
+        - Se a palavra já existir na árvore, apenas incremente o contador (`count`) do nó correspondente.
+        - Se a palavra não existir, adicione um novo nó à árvore com o contador inicializado em 1.
+- **Apresentar o menu**: Depois de ler todo o arquivo, entre em um loop que exibe as três opções e espera pela escolha do usuário.
+- **Executar as opções**:
+    - Opção 1 (Listar tudo): Use uma travessia em ordem na BST. Para cada nó, imprima a palavra e sua contagem.
+    - Opção 2 (Buscar palavra): Crie uma função de busca na BST. Se o nó for encontrado, imprima a contagem. Caso contrário, informe que a palavra não foi encontrada.
+    - Opção 3 (Sair): Saia do loop e termine o programa. Lembre-se de liberar toda a memória alocada para a árvore.
+
+Texto sugerido para teste:
+
+> no meio do caminho tinha uma pedra
+tinha uma pedra no meio do caminho
+tinha uma pedra
+no meio do caminho tinha uma pedra
+nunca me esquecerei desse acontecimento
+na vida de minhas retinas tão fatigadas
+nunca me esquecerei que no meio do caminho
+tinha uma pedra
+tinha uma pedra no meio do caminho
+no meio do caminho tinha uma pedra

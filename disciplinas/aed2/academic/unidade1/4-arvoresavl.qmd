@@ -790,19 +790,144 @@ style s1 stroke:none,fill:transparent
 style s3 stroke:none,fill:transparent       
 ```	
 
-Revisão e Considerações
+---
 
-Resumo
-Nesta aula, estudamos a estrutura de dados árvore AVL.
+Nesta aula, estudamos a estrutura de dados árvore AVL:
 
-Definimos essa estrutura baseada em BST;
-Definimos o fator de balanceamento de um nó;
-Estudamos as rotações
-Simples (Esquerda e Direita)
-Dupla (Esquerda e Direita)
+✅ definimos essa estrutura baseada em BST;
+
+✅ definimos o fator de balanceamento de um nó;
+
+✅ estudamos as rotações: simples e dupla
+
 Na próxima aula, iremos abordar as operações de inserção, busca e remoção em AVL e como as rotações são aplicadas nessas operações.
 
-Considerações
+```quizdown
+# Qual problema das BSTs a árvore AVL busca resolver ?
+
+> Considere o pior caso discutido no texto.
+
+1. [ ] O alto custo de inserção em média  
+1. [ ] A impossibilidade de remoção de nós  
+1. [x] O desbalanceamento que pode levar à degeneração  
+1. [ ] A ausência de funções de comparação  
+
+
+# Definição de Árvore AVL
+
+> Baseie-se na definição formal apresentada.
+
+1. [ ] Uma árvore binária completa  
+1. [ ] Uma árvore binária sem ordenação  
+1. [x] Uma BST balanceada com diferença de altura máxima de 1  
+1. [ ] Uma árvore com fator de balanceamento sempre zero  
+
+
+
+# Como é definido o fator de balanceamento de um nó?
+
+1. [ ] Soma das alturas das subárvores  
+1. [x] Diferença entre as alturas da subárvore esquerda e direita  
+1. [ ] Altura total da árvore  
+1. [ ] Número de filhos do nó  
+
+
+# Quando um nó é considerado balanceado?
+
+- [x] fb = -1  
+- [x] fb = 0  
+- [x] fb = +1  
+- [ ] fb = +2  
+
+
+# Fator de balanceamento das folhas 
+
+> Considere a definição apresentada.
+
+1. [ ] Sempre +1  
+1. [ ] Sempre -1  
+1. [x] Sempre 0  
+1. [ ] Depende da altura da árvore  
+
+
+# Interpretação de fb = +1
+
+> Analise o significado do fator.
+
+1. [ ] A subárvore direita é mais alta  
+1. [x] A subárvore esquerda é uma aresta mais alta  
+1. [ ] O nó está desbalanceado  
+1. [ ] O nó precisa de rotação dupla  
+
+
+# Em qual situação uma rotação é necessária?
+
+1. [ ] Sempre após uma inserção  
+1. [ ] Sempre após uma remoção  
+1. [x] Quando o fator de balanceamento sai do intervalo [-1, 1]  
+1. [ ] Quando o nó é folha  
+
+
+# Qual a finalidade das rotações?
+
+- [x] Restaurar o balanceamento da árvore  
+- [x] Preservar as propriedades de uma BST  
+- [ ] Eliminar a necessidade de comparações  
+- [ ] Reduzir o número de nós da árvore  
+
+
+# Segundo o texto, a rotação à esquerda é:
+
+1. [ ] Independente da rotação à direita  
+1. [ ] Aplicada quando fb > 1  
+1. [x] Dual (espelhada) da rotação à direita  
+1. [ ] Exclusiva para rotações duplas  
+
+
+# Como pode ser interpretada uma rotação dupla?
+
+1. [ ] Duas rotações na mesma direção  
+1. [x] Uma combinação de rotações simples em direções opostas  
+1. [ ] Uma rotação aplicada apenas na raiz  
+1. [ ] Uma rotação sem atualização de fatores  
+
+
+# O que deve ser atualizado após uma rotação?
+
+- [x] Altura dos nós afetados  
+- [x] Fator de balanceamento dos nós afetados  
+- [ ] As chaves armazenadas  
+- [ ] A ordem de comparação das chaves  
+
+
+# Ordem lógica após inserção ou remoção.
+
+1. Verificação do fator de balanceamento  
+2. Identificação do tipo de desbalanceamento  
+3. Aplicação da rotação adequada  
+4. Atualização das alturas e fatores  
+
+# Principal vantagem da AVL sobre a BST
+
+> Conforme discutido na conclusão.
+
+1. [ ] Menor uso de memória  
+1. [x] Garantia de altura logarítmica  
+1. [ ] Eliminação de rotações  
+1. [ ] Inserções mais simples  
+
+
+# Custo adicional das AVL
+
+> Qual o trade-off apresentado?
+
+1. [ ] Maior tempo de busca  
+1. [ ] Maior uso de chaves  
+1. [x] Mais computações devido às rotações  
+1. [ ] Menor eficiência em média  
+```
+
+
 A árvore AVL é uma estrutura otimizada além da BST. Ela supera a possibilidade de degeneração da árvore efetuando operações de rotação. Embora essas rotações exijam mais computações, o ganho com o rebalanceamento é maior, principalmente para buscas.
 
 No nosso próximo estudo, iremos abordar a aplicação das rotações durante as inserções e remoções de nós na árvore.
