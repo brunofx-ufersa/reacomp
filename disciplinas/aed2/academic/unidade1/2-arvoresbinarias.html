@@ -856,6 +856,20 @@ classDef WT fill:#FFFFFF
 <li>Expressões Matemáticas (Notação Polonesa): É usado para converter expressões em uma forma que computadores leiam facilmente sem precisar de parênteses. Por exemplo, a expressão + 3 4 (onde o operador vem antes dos números).</li>
 </ul>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercício">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Exercício
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nesse exercício, você deve reproduzir o comportamento de uma travessia em pré-ordem. Clique nos nós para indicar a ordem na qual o algoritmo de travessia deve percorre-los. O botão reset cria um novo exercício.</p>
+<iframe src="https://opendsa-server.cs.vt.edu/embed/btTravPreorderPRO" style="border:none;" height="430" width="900" scrolling="no"></iframe>
+</div>
+</div>
 </section>
 <section id="ordem" class="level4">
 <h4 class="anchored" data-anchor-id="ordem">Ordem</h4>
@@ -865,6 +879,20 @@ classDef WT fill:#FFFFFF
 <blockquote class="blockquote">
 <p>Este percurso é amplamente utilizado em estruturas de dados que precisam manter alguma ordem.</p>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercício">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Exercício
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nesse exercício, você deve reproduzir o comportamento de uma travessia em ordem. Clique nos nós para indicar a ordem na qual o algoritmo de travessia deve percorre-los. O botão reset cria um novo exercício.</p>
+<iframe src="https://opendsa-server.cs.vt.edu/embed/btTravInorderPRO" style="border:none;" height="430" width="100%" scrolling="no"></iframe>
+</div>
+</div>
 </section>
 <section id="pós-ordem" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="pós-ordem">Pós-ordem</h4>
@@ -884,6 +912,20 @@ classDef WT fill:#FFFFFF
 <li>Avaliação de Expressões Matemáticas: Compiladores usam isso para resolver contas. Para calcular (3 + 4) * 5, o computador primeiro resolve o 3 e o 4, depois o +, e só então multiplica pelo 5.</li>
 </ul>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercício">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Exercício
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nesse exercício, você deve reproduzir o comportamento de uma travessia em pós-ordem. Clique nos nós para indicar a ordem na qual o algoritmo de travessia deve percorre-los. O botão reset cria um novo exercício.</p>
+<iframe src="https://opendsa-server.cs.vt.edu/embed/btTravPostorderPRO" style="border:none;" height="430" width="100%" scrolling="no"></iframe>
+</div>
+</div>
 <p>Para fixação, vamos considerar uma nova nova árvore:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -1007,16 +1049,109 @@ classDef WT fill:#FFFFFF
 <li>Ordem: 15 10 12 5 18</li>
 <li>Pos-Ordem: 15 12 18 5 10</li>
 </ul>
-</section>
-<section id="revisão-e-considerações" class="level2">
-<h2 class="anchored" data-anchor-id="revisão-e-considerações">Revisão e Considerações</h2>
-<p>Nesta seção, estudamos a estrutura de dados árvore binária.</p>
-<ul>
-<li>Definimos essa estrutura;</li>
-<li>Classificamos as árvores binárias (cheia, completa, perfeita e degenerada);</li>
-<li>Realizamos percursos em largura e profundidade;</li>
-<li>Abordamos as travessias em pré-ordem, ordem e pós-ordem.</li>
-</ul>
+<hr>
+<p>Nesta seção, estudamos a estrutura de dados árvore binária. Em particular,</p>
+<p>✅ definimos essa estrutura;</p>
+<p>✅ classificamos as árvores binárias (cheia, completa, perfeita e degenerada);</p>
+<p>✅ realizamos percursos em largura e profundidade;</p>
+<p>✅ abordamos as travessias em pré-ordem, ordem e pós-ordem.</p>
+<div class="quizdown">
+
+# O que caracteriza uma árvore binária ?
+
+&gt; Considere a definição formal apresentada no texto.
+
+1. [ ] Todo nó possui exatamente dois filhos  
+1. [ ] Todo nó possui pelo menos um filho  
+1. [x] Todo nó possui no máximo dois filhos  
+1. [ ] Apenas a raiz pode ter dois filhos  
+
+
+# Sobre as propriedades de árvores binárias
+
+&gt; Considere uma árvore binária com altura h e n nós.
+
+- [x] Uma árvore binária de altura h tem no máximo \(2^{h+1}-1\) nós  
+- [x] Uma árvore binária com n nós tem altura mínima \(\lceil \log_2(n+1)\rceil - 1\)  
+- [ ] Uma árvore binária sempre tem exatamente \(n/2\) folhas  
+- [x] Uma árvore binária com n nós tem no máximo \(\lceil n/2\rceil\) folhas  
+
+
+# Classifique a árvore onde cada nó possui zero ou dois filhos, nunca exatamente um.
+
+1. [ ] Árvore completa  
+1. [ ] Árvore perfeita  
+1. [x] Árvore cheia  
+1. [ ] Árvore degenerada  
+
+
+# Em uma árvore binária completa 
+
+&gt; Considere o preenchimento dos níveis da árvore.
+
+1. [ ] Todos os níveis estão completamente preenchidos  
+1. [x] Todos os níveis acima do último estão completamente preenchidos  
+1. [ ] Apenas o nível das folhas é completo  
+1. [ ] Apenas a raiz está completa  
+
+
+# Em uma árvore binária perfeita
+
+&gt; Considere a estrutura global da árvore.
+
+1. [ ] Apenas os nós internos têm dois filhos  
+1. [ ] Apenas as folhas estão no mesmo nível  
+1. [x] Todos os níveis estão completamente preenchidos  
+1. [ ] Apenas os dois primeiros níveis estão completos  
+
+
+# Uma árvore degenerada
+
+&gt; Compare a estrutura da árvore com outras estruturas conhecidas.
+
+1. [ ] Se comporta como uma pilha  
+1. [ ] Se comporta como uma fila  
+1. [x] Se comporta como uma lista encadeada  
+1. [ ] Se comporta como um grafo completo  
+
+
+# O percurso em largura 
+
+&gt; Considere a ordem de visita dos nós.
+
+1. [ ] Visita primeiro os ramos mais profundos  
+1. [x] Visita os nós nível a nível, da esquerda para a direita  
+1. [ ] Visita primeiro a subárvore esquerda  
+1. [ ] Visita primeiro as folhas  
+
+
+# Quais percursos pertencem à categoria de percurso em profundidade?
+
+- [x] Pré-ordem  
+- [x] Ordem  
+- [x] Pós-ordem  
+- [ ] Percurso em largura  
+
+
+# Sobre a implementação em C
+
+&gt; Considere a estrutura `Node` apresentada no texto.
+
+- [x] Cada nó armazena uma chave  
+- [x] Cada nó possui um ponteiro para o filho esquerdo  
+- [x] Cada nó possui um ponteiro para o filho direito  
+- [ ] Cada nó armazena obrigatoriamente o ponteiro para o pai  
+
+
+# Sobre a implementação dos percursos
+
+&gt; Considere os códigos apresentados.
+
+1. [ ] São implementados iterativamente  
+1. [x] São implementados de forma recursiva  
+1. [ ] Apenas o percurso em largura é recursivo  
+1. [ ] Apenas o percurso em profundidade é iterativo  
+</div>
 <p>Agora que estamos familiarizados com os conceitos fundamentais da estrutura de dados árvore, iremos estudar um tipo especial de árvore binária chamada árvore binária de busca.</p>
 <p>Procure dominar os percursos realizando os exercícios propostos deste capítulo.</p>
 <div class="progress-bar" id="progressBar"></div>

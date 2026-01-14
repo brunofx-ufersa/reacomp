@@ -647,6 +647,7 @@ classDef WT fill:#FFFFFF
 </div>
 </div>
 </div>
+<p>Como o fluxo sempre é de cima para baixo, vamos remover o uso das setas.</p>
 <section id="subárvore" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="subárvore">Subárvore</h3>
 <p>Uma subárvore consiste em uma porção interconectada da árvore. Qualquer nó juntamente com seus descendentes constituem uma subárvore. Os nós destacados em <span class="math inline">\(\mathcal{T}\)</span> (B, D e E) formam um subárvore de <span class="math inline">\(\mathcal{T}\)</span>, ou seja, trata-se de uma miniárvore dentro da árvore original.</p>
@@ -781,19 +782,156 @@ linkStyle 11 stroke:none,fill:none
 <p>Quanto ao número de filhos, uma árvore onde todos os nós possuem somente um filho se comporta como uma lista. Se os nós possuem no máximo dois filhos, a árvore é chamada de binária. Se três filhos, chama-se ternária e assim por diante. Uma árvore em que os nós possuem no máximo <span class="math inline">\(n\)</span> filhos é chamada de <span class="math inline">\(n\)</span>-ária.</p>
 </section>
 </section>
-<section id="revisão-e-considerações" class="level2">
-<h2 class="anchored" data-anchor-id="revisão-e-considerações">Revisão e Considerações</h2>
-<p>Nesta seção, estudamos a estrutura de dados árvore do forma generalizada. Em particular, estudamos:</p>
+<section id="resumo" class="level2">
+<h2 class="anchored" data-anchor-id="resumo">Resumo</h2>
 <ul>
-<li>O que é uma árvore e seus componentes (raiz, nó, folha etc);</li>
-<li>Altura;</li>
-<li>Profundidade;</li>
-<li>Tamanho;</li>
-<li>Grau;</li>
-<li>Subárvore.</li>
+<li><strong>Árvore</strong>: estrutura de dados hierárquica composta por nós conectados por arestas;</li>
 </ul>
+<section id="elementos" class="level3">
+<h3 class="anchored" data-anchor-id="elementos">Elementos</h3>
+<ul>
+<li><strong>Raiz</strong>: nó superior da árvore. É o único nó que não possui pai;</li>
+<li><strong>Pai</strong>: nó que tem sucessores conectados a ele;</li>
+<li><strong>Filho</strong>: nó que é sucessor de outro;</li>
+<li><strong>Folha</strong>: nós que não possuem filhos;</li>
+<li><strong>Nós internos</strong>: todos os nós que não são folhas, excluindo a raiz</li>
+<li><strong>Subárvore</strong>: qualquer nó, junto com os seus descendentes, forma ele próprio uma árvore;</li>
+</ul>
+</section>
+<section id="métricas-nós" class="level3">
+<h3 class="anchored" data-anchor-id="métricas-nós">Métricas (nós)</h3>
+<ul>
+<li><strong>Grau do nó</strong>: número de filhos que um nó possui;</li>
+<li><strong>Altura do nó</strong>: número de arestas no caminho mais longo de um nó até uma folha;</li>
+<li><strong>Profundidade do nó</strong>: número de arestas da raiz até o nó. A raiz tem profundidade 0;</li>
+</ul>
+</section>
+<section id="métricas-árvore" class="level3">
+<h3 class="anchored" data-anchor-id="métricas-árvore">Métricas (árvore)</h3>
+<ul>
+<li><strong>Grau da árvore</strong>: grau máximo encontrado entre todos os nós da árvore;</li>
+<li><strong>Tamanho da árvore</strong>: número total de nós presentes na árvore;</li>
+<li><strong>Altura da árvore</strong>: altura do nó raiz;</li>
+</ul>
+<hr>
+<p>Nesta seção, estudamos a estrutura de dados árvore do forma generalizada. Em particular, estudamos</p>
+<p>✅ o que é uma árvore e seus componentes (raiz, nó, folha etc);</p>
+<p>✅ os conceitos e como calcular a altura, profundidade e tamanho de uma árvore;</p>
+<p>✅ o conceito de subárvore e grau de um nó;</p>
 <p>Todos esses conceitos são fundamentais e, portanto, devemos estar bem familiarizados com eles. No estudo das árvores como estruturas de dados, é imprescindível dominar as definições de altura, profundidade, subárvore, grau e tamanho.</p>
 <p>No próximo capítulo da nossa jornada, iremos estudar um tipo especial de árvore chamada binária.</p>
+<div class="quizdown">
+# O que caracteriza uma árvore como estrutura de dados?
+
+&gt; Considere a definição formal apresentada no texto.
+
+1. [ ] É uma estrutura linear composta apenas por nós sequenciais  
+1. [ ] É uma estrutura em que cada nó pode ter vários pais  
+1. [x] É uma estrutura hierárquica, geralmente não linear, composta por nós e arestas  
+1. [ ] É uma estrutura em que todos os nós possuem exatamente dois filhos
+
+
+# Sobre relações entre nós em uma árvore
+
+&gt; Marque todas as afirmações corretas.
+
+- [x] Dois nós com o mesmo pai são chamados de irmãos  
+- [x] Cada nó pode ter no máximo um pai  
+- [ ] Um nó pode pertencer a mais de uma árvore simultaneamente  
+- [x] O nó raiz não possui pai  
+- [ ] Toda árvore possui exatamente duas raízes
+
+
+
+# O DOM (Document Object Model) é um exemplo de árvore porque ?
+
+&gt; Relacione o conceito de árvore com o desenvolvimento web.
+
+1. [ ] Representa uma lista encadeada de elementos HTML  
+1. [x] Organiza elementos HTML em uma estrutura hierárquica  
+1. [ ] Armazena apenas folhas, sem nós intermediários  
+1. [ ] É composto exclusivamente por nós folhas
+
+
+# Assinale as propriedades corretas sobre raiz e folhas
+
+&gt; Baseie-se nas definições apresentadas.
+
+- [x] A raiz é o único nó que não possui pai  
+- [x] As folhas são nós que não possuem filhos  
+- [ ] Toda árvore possui pelo menos uma folha e nenhuma raiz  
+- [ ] Nós internos não podem ter filhos  
+- [x] Uma árvore vazia é a única árvore sem raiz
+
+
+# Qual das situações abaixo invalida uma árvore ?
+
+&gt; Considere os exemplos de "falsas árvores".
+
+1. [ ] Um nó com dois filhos  
+1. [x] Um nó com dois pais  
+1. [ ] Um nó folha  
+1. [ ] Um nó interno com apenas um filho
+
+
+# Sobre subárvores, assinale a alternativa correta
+
+&gt; Considere a árvore 𝒯 apresentada no texto.
+
+1. [ ] Uma subárvore contém apenas folhas  
+1. [ ] Uma subárvore não possui raiz própria  
+1. [x] Um nó e todos os seus descendentes formam uma subárvore  
+1. [ ] Uma árvore não pode ser subárvore de si mesma
+
+
+# O tamanho de uma árvore é definido como ?
+
+&gt; Use a definição formal apresentada.
+
+1. [ ] O número de folhas  
+1. [ ] O número de arestas  
+1. [x] O número total de nós  
+1. [ ] A altura da árvore multiplicada pelo grau
+
+
+# Sobre altura e profundidade
+
+&gt; Marque todas as afirmações corretas.
+
+- [x] A altura de um nó é o comprimento do caminho mais longo até uma folha  
+- [x] A profundidade de um nó é o número de arestas da raiz até ele  
+- [ ] Altura e profundidade são sempre iguais para todos os nós  
+- [x] A profundidade da raiz é zero  
+- [x] A altura da árvore é a altura do nó raiz
+
+
+# Coloque os conceitos em ordem do caminho da raiz até uma folha
+
+&gt; Considere os níveis da árvore.
+
+1. Raiz  
+2. Filho da raiz  
+3. Neto da raiz  
+4. Folha
+
+
+# O grau de um nó corresponde a ?
+
+&gt; Utilize a definição formal.
+
+1. [ ] Sua profundidade  
+1. [ ] Sua altura  
+1. [x] O número de filhos que ele possui  
+1. [ ] O número de seus irmãos
+
+
+# Uma árvore em que cada nó possui no máximo dois filhos é chamada de ?
+
+1. [ ] Lista  
+1. [ ] Árvore ternária  
+1. [x] Árvore binária  
+1. [ ] Árvore n-ária
+</div>
 <div class="progress-bar" id="progressBar"></div>
 
 <script>
@@ -806,6 +944,7 @@ window.addEventListener("scroll", function() {
 </script>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->

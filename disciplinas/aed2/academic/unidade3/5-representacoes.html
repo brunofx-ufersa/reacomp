@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Representações Computacionais – REAComp</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../disciplinas/aed2/academic/unidade3/6-caminhos.html" rel="next">
+<link href="../../../../disciplinas/aed2/academic/unidade3/4-grafos.html" rel="prev">
+<link href="../../../../img/logo.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-de1933d555e4b28134edcf86276d32cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
+<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown-init.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-ECV5W1L7CB"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
+</script>
+<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles/academic.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">REAComp</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../disciplinas/aed2/academic/index.html"> 
+<span class="menu-text">Recursos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../contribuicao.html"> 
+<span class="menu-text">Participe</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">Sobre</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo escuro"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo de leitor">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Representações Computacionais</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Até aqui descrevemos grafos de forma abstrata. Para armazená-los e manipulá-los em computador, precisamos de representações concretas. Vamos usar os mesmos grafos da seção passada:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+  subgraph s1["Grafo A"]
+&nbsp; &nbsp; A((a)) 
+    B((b))
+&nbsp; &nbsp; C((c))
+&nbsp; &nbsp; D((d))
+  end
+
+  subgraph s2["Grafo B"]
+    direction LR 
+&nbsp; &nbsp; A1((e)) 
+    B1((f))
+&nbsp; &nbsp; C1((g))
+&nbsp; &nbsp; D1((h))
+  end
+
+    A --- B
+&nbsp; &nbsp; B --- C
+&nbsp; &nbsp; C --- A
+&nbsp; &nbsp; B --- D
+
+&nbsp; &nbsp; A1 --&gt; B1
+&nbsp; &nbsp; B1 --&gt; C1
+&nbsp; &nbsp; C1 --&gt; A1
+&nbsp; &nbsp; C1 --&gt; D1
+
+    s1 ~~~ s2
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<section id="matriz-de-adjacência" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="matriz-de-adjacência">Matriz de Adjacência</h2>
+<p>Dado o grafo com <span class="math inline">\(n\)</span> vértices, a matriz de adjacência é uma matriz quadrada de ordem <span class="math inline">\(n\)</span> em que as linhas e colunas são os vértices. O valor na posição <span class="math inline">\((i, j)\)</span> indica se existe aresta entre o vértice <span class="math inline">\(i\)</span> e o vértice <span class="math inline">\(j\)</span>. Usamos <span class="math inline">\(1\)</span> para existência e <span class="math inline">\(0\)</span> para ausência.</p>
+<p>Para os grafos A e B:</p>
+<div style="width: 50%; margin: auto;">
+<table class="caption-top table">
+<caption>Matriz de adjacência do grafo A</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note que a matriz é simétrica (<span class="math inline">\(A=A^T\)</span>) para grafos não-direcionados.</p>
+<div style="width: 50%; margin: auto;">
+<table class="caption-top table">
+<caption>Matriz de adjacência do grafo B</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note que as linhas representam de onde as arestas partem. Já as colunas, representam onde elas incidem.</p>
+<section id="implementação" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="implementação">Implementação</h3>
+<p>Vamos implementar a matriz de adjacência para um grafo não-direcionado. Fica como tarefa realizar a implementação da versão direcionada.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#define V </span><span class="dv">4</span><span class="pp"> </span><span class="co">// Grafo com quatro vértices</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="dt">void</span> add_edge<span class="op">(</span><span class="dt">int</span> mat<span class="op">[</span>V<span class="op">][</span>V<span class="op">],</span> <span class="dt">int</span> i<span class="op">,</span> <span class="dt">int</span> j<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    mat<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    mat<span class="op">[</span>j<span class="op">][</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> </span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A função <code>add_edge</code> (adicionar aresta) recebe uma matriz quadrada de ordem <code>V</code> (número de vértices) e os vértices que estão conectados por uma aresta. Como o grafo é não-direcionado, a matriz deve ser simétrica, isto é, <code>mat[i][j] = mat[j][i] = 1</code>.</p>
+<p>Uma dica de segurança para a função <code>add_edge</code> é adicionar a seguinte linha:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>i <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">||</span> i <span class="op">&gt;=</span> V <span class="op">||</span> j <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">||</span> j <span class="op">&gt;=</span> V<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Isso vai garantir que não serão passados valores fora do intervalo permitido.</p>
+<p>Para imprimir a matriz, utilizamos um laço duplo percorrendo as linhas e colunas:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">void</span> display_matrix<span class="op">(</span><span class="dt">int</span> mat<span class="op">[</span>V<span class="op">][</span>V<span class="op">])</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> V<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> V<span class="op">;</span> j<span class="op">++)</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st"> "</span><span class="op">,</span> mat<span class="op">[</span>i<span class="op">][</span>j<span class="op">]);</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="op">}</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Para testar a implementação, considere o grafo A.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="dt">int</span> mat<span class="op">[</span>V<span class="op">][</span>V<span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    add_edge<span class="op">(</span>mat<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    add_edge<span class="op">(</span>mat<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    add_edge<span class="op">(</span>mat<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    add_edge<span class="op">(</span>mat<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    display_matrix<span class="op">(</span>mat<span class="op">);</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> O comando <code>int mat[V][V] = {0}</code> inicializa a matriz com zero em todas as posições.</p>
+</div></div><p>Neste modelo, trocamos os rótulos <span class="math inline">\(a,b,c\)</span> e <span class="math inline">\(d\)</span> por índices na matriz. Por exemplo, <code>add_edge(mat, 0, 1)</code> corresponde à aresta entre os vértices <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercício">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Exercício
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Modifique a implementação anterior para grafos direcionados. Use o grafo B para testar seu código.</p>
+</div>
+</div>
+</section>
+<section id="refinamento" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="refinamento">Refinamento</h3>
+<p>Nota-se que é muito simples implementar uma matriz de adjacências. Nesta subseção, propomos algumas modificações a fim de obter um código mais funcional.</p>
+<p>Ao invés de termos um grafo com tamanho fixo definido por uma constante, vamos criar nossa matriz usando o tamanho do conjunto de vértices dinâmicamente.</p>
+<p>A função <code>zeros</code> aloca uma matriz bidimensional com <code>lin</code> linhas e <code>col</code> colunas, inicializando todas as posições com zero. O uso de <code>calloc</code> garante tanto a alocação quanto a inicialização. Em caso de falha durante a alocação de alguma linha, toda a memória previamente alocada é corretamente liberada.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1"></a><span class="dt">int</span><span class="op">**</span> zeros<span class="op">(</span><span class="dt">size_t</span> lin<span class="op">,</span> <span class="dt">size_t</span> col<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="dt">int</span> <span class="op">**</span>matrix <span class="op">=</span> calloc<span class="op">(</span>lin<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span> <span class="op">*));</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="cf">if</span> <span class="op">(!</span>matrix<span class="op">)</span> <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> lin<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>      matrix<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> calloc<span class="op">(</span>col<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>      <span class="cf">if</span> <span class="op">(!</span>matrix<span class="op">[</span>i<span class="op">])</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>          <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> i<span class="op">;</span> k<span class="op">++)</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>              free<span class="op">(</span>matrix<span class="op">[</span>k<span class="op">]);</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>          free<span class="op">(</span>matrix<span class="op">);</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>          <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>      <span class="op">}</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>  <span class="op">}</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>     </span>
+<span id="cb5-15"><a href="#cb5-15"></a>  <span class="cf">return</span> matrix<span class="op">;</span> </span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="op">}</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="dt">void</span> display_matrix<span class="op">(</span><span class="dt">int</span><span class="op">**</span> matrix<span class="op">,</span> <span class="dt">size_t</span> lin<span class="op">,</span> <span class="dt">size_t</span> col<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span>  i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> lin<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span>  j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> col<span class="op">;</span> j<span class="op">++)</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st"> "</span><span class="op">,</span> matrix<span class="op">[</span>i<span class="op">][</span>j<span class="op">]);</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>  <span class="op">}</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Na linha 1, estamos alocando memória para um vetor de ponteiros. Como a alocação é feita com <code>calloc</code>, todos os ponteiros são inicializados com o valor zero, isto é, <code>NULL</code>. Como de praxe, na linha seguinte, verificamos se a alocação foi realizada com sucesso.</p>
+<p>O laço da linha 5 aloca memória para as linhas da matriz utilizando <code>calloc</code>, garantindo que todas as posições sejam inicializadas com zero. Após cada alocação, verificamos se ela foi bem-sucedida. Em caso de falha, liberamos a memória previamente alocada para as linhas anteriores e para o vetor de ponteiros.</p>
+<p>A função auxiliar <code>display_matrix</code> é usada para imprimir uma matriz. Por exemplo, o código abaixo</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">**</span> mat <span class="op">=</span> zeros<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">);</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>display_matrix<span class="op">(</span>mat<span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>vai gerar a seguinte saída:</p>
+<pre class="console"><code>0 0 0 0 
+0 0 0 0 
+0 0 0 0 </code></pre>
+<p>Uma vez que alocamos memória, precisamos liberar o espaço reservado quando finalizarmos o programa.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1"></a><span class="dt">void</span> destroy_matrix<span class="op">(</span><span class="dt">int</span><span class="op">**</span> matrix<span class="op">,</span> <span class="dt">size_t</span> lin<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> lin<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    free<span class="op">(</span>mat<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  free<span class="op">(</span>mat<span class="op">);</span> </span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="op">}</span> </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Primeiramente, liberamos a memória de cada linha com <code>free(mat[i])</code>. Depois liberamos o vetor de ponteiros <code>mat</code>.</p>
+<p>Agora podemos trabalhar com a semâtica de grafos ao invés de matrizes. Primeiro, vamos criar um nova estrutura que contém uma matriz de ordem <span class="math inline">\(|V|\times |V|\)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="dt">size_t</span> V<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="dt">int</span><span class="op">**</span> adj_matrix<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="op">}</span> Graph<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Usamos <code>size_t</code> para armazenar a ordem do grafo, isto é, o número de vértices. Lembre-se que <code>size_t</code> é usado para contagem de elementos ou tamanho de estruturas por se tratar de um inteiro sem sinal e, portanto, não admite valores negativos.</p>
+<p>Sabemos que a matriz de adjacência de um grafo é sempre quadrada, portanto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1"></a>Graph<span class="op">*</span> simple_graph<span class="op">(</span><span class="dt">size_t</span> V<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  Graph<span class="op">*</span> graph <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Graph<span class="op">));</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="cf">if</span><span class="op">(!</span>graph<span class="op">)</span> <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  graph<span class="op">-&gt;</span>V <span class="op">=</span> V<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  graph<span class="op">-&gt;</span>adj_matrix <span class="op">=</span> zeros<span class="op">(</span>V<span class="op">,</span> V<span class="op">);</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>   </span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="cf">return</span> graph<span class="op">;</span> </span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Assim, a função <code>simple_graph</code> nada mais faz do que criar uma estrutura do tipo <code>Graph</code> na memória <em>heap</em> e instanciar a matriz quadrada de ordem <code>V</code> inicialmente preenchida com zeros, representando um grafo sem arestas.</p>
+<p>Para adicionar uma aresta entre dois vértices <code>v</code> e <code>u</code>, vamos associar a ela um peso <code>w</code>. Note que verificamos se os índices <code>v</code> e <code>u</code> pertencem ao intervalo válido.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1"></a><span class="dt">void</span> add_edge<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">,</span> <span class="dt">size_t</span> v<span class="op">,</span> <span class="dt">size_t</span> u<span class="op">,</span> <span class="dt">int</span> w<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="cf">if</span> <span class="op">(</span>u <span class="op">&gt;=</span> graph<span class="op">-&gt;</span>V <span class="op">||</span> v <span class="op">&gt;=</span> graph<span class="op">-&gt;</span>V<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a> </span>
+<span id="cb11-4"><a href="#cb11-4"></a>  graph<span class="op">-&gt;</span>adj_matrix<span class="op">[</span>v<span class="op">][</span>u<span class="op">]</span> <span class="op">=</span> w<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  graph<span class="op">-&gt;</span>adj_matrix<span class="op">[</span>u<span class="op">][</span>v<span class="op">]</span> <span class="op">=</span> w<span class="op">;</span> </span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Também tomamos cuidado para que não fossem acessadas posições negativas na matriz usando <code>size_t</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Neste modelo, pesos iguais a zero não são permitidos, pois o valor zero é reservado para indicar ausência de aresta.</p>
+</div>
+</div>
+<p>As funções a seguir calculam o grau e a vizinhança de um vértice <code>v</code> em um grafo não-direcionado representado por matriz de adjacência. A condição <code>mat[v][j] != 0</code> indica a existência de uma aresta entre os vértices <code>v</code> e <code>j</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1"></a><span class="dt">size_t</span> degree<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">,</span> <span class="dt">size_t</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="dt">size_t</span> deg <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> graph<span class="op">-&gt;</span>V<span class="op">;</span> j<span class="op">++){</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="cf">if</span> <span class="op">(</span>graph<span class="op">-&gt;</span>adj_matrix<span class="op">[</span>v<span class="op">][</span>j<span class="op">]</span> <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>      deg<span class="op">++;</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="op">}</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="cf">return</span> deg<span class="op">;</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="op">}</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="dt">size_t</span><span class="op">*</span> neighborhood<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">,</span> <span class="dt">size_t</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>  <span class="cf">if</span> <span class="op">(</span>v <span class="op">&gt;=</span> graph<span class="op">-&gt;</span>V<span class="op">)</span> <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  </span>
+<span id="cb12-13"><a href="#cb12-13"></a>  <span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb12-14"><a href="#cb12-14"></a>  <span class="dt">size_t</span> size <span class="op">=</span> degree<span class="op">(</span>graph<span class="op">,</span> v<span class="op">);</span> </span>
+<span id="cb12-15"><a href="#cb12-15"></a>  <span class="dt">size_t</span><span class="op">*</span> neighbor <span class="op">=</span> malloc<span class="op">(</span>size<span class="op">*</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">size_t</span><span class="op">));</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>  </span>
+<span id="cb12-17"><a href="#cb12-17"></a>  <span class="cf">if</span> <span class="op">(!</span>neighbor<span class="op">)</span> <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>  </span>
+<span id="cb12-19"><a href="#cb12-19"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> graph<span class="op">-&gt;</span>V<span class="op">;</span> j<span class="op">++){</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a>    <span class="cf">if</span> <span class="op">(</span>graph<span class="op">-&gt;</span>adj_matrix<span class="op">[</span>v<span class="op">][</span>j<span class="op">]</span> <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a>      neighbor<span class="op">[</span>k<span class="op">++]</span> <span class="op">=</span> j<span class="op">;</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>  <span class="op">}</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a>  <span class="cf">return</span> neighbor<span class="op">;</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A função <code>neighborhood</code> recebe o grafo <code>graph</code> e um vértice <code>v</code>. Ela percorre a linha correspondente a <code>v</code> na matriz de adjacência, preenchendo o conjunto de vértices adjacentes.</p>
+<p>As próximas funções imprimem a matriz de adjacências e a vizinhança, respectivamente.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1"></a><span class="dt">void</span> display_graph<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  display_matrix<span class="op">(</span>graph<span class="op">-&gt;</span>adj_matrix<span class="op">,</span> graph<span class="op">-&gt;</span>V<span class="op">,</span> graph<span class="op">-&gt;</span>V<span class="op">);</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="op">}</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="dt">void</span> display_neighborhood<span class="op">(</span><span class="dt">size_t</span><span class="op">*</span> neighbor<span class="op">,</span> <span class="dt">size_t</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  printf<span class="op">(</span><span class="st">"N(v) = { "</span><span class="op">);</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%zu</span><span class="st"> "</span><span class="op">,</span> neighbor<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  printf<span class="op">(</span><span class="st">"}</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span>     </span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Finalmente, vamos encapsular a função <code>destroy_matrix</code> para obtermos uma consistência semântica.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1"></a><span class="dt">void</span> destroy_graph<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  destroy_matrix<span class="op">(</span>graph<span class="op">-&gt;</span>adj_matrix<span class="op">,</span> graph<span class="op">-&gt;</span>V<span class="op">);</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  free<span class="op">(</span>graph<span class="op">);</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="op">}</span> </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Exemplo de uso para o grafo A:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="dt">size_t</span> V <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  Graph<span class="op">*</span> g <span class="op">=</span> simple_graph<span class="op">(</span>V<span class="op">);</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>  </span>
+<span id="cb15-6"><a href="#cb15-6"></a>  add_edge<span class="op">(</span>mat<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span> <span class="co">// Liga 'a' e 'b' </span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>  add_edge<span class="op">(</span>mat<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span> <span class="co">// Liga 'a' e 'c'</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  add_edge<span class="op">(</span>mat<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span> <span class="co">// Liga 'b' e 'c'</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>  add_edge<span class="op">(</span>mat<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span> <span class="co">// Liga 'b' e 'd'</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a></span>
+<span id="cb15-11"><a href="#cb15-11"></a>  printf<span class="op">(</span><span class="st">"Representação por Matriz de Adjacencia:</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a>  display_graph<span class="op">(</span>g<span class="op">);</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a>    </span>
+<span id="cb15-14"><a href="#cb15-14"></a>  <span class="dt">size_t</span> v <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a>  <span class="dt">size_t</span><span class="op">*</span> neighbor <span class="op">=</span> malloc<span class="op">(</span>V <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">size_t</span><span class="op">));</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a>  <span class="dt">size_t</span> deg <span class="op">=</span> neighborhood<span class="op">(</span>g<span class="op">,</span> v<span class="op">,</span> neighbor<span class="op">);</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a>    </span>
+<span id="cb15-18"><a href="#cb15-18"></a>  printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">O vertice v = </span><span class="sc">%zu</span><span class="st"> possui </span><span class="sc">%zu</span><span class="st"> vizinho(s): "</span><span class="op">,</span> v<span class="op">,</span> deg<span class="op">);</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a></span>
+<span id="cb15-20"><a href="#cb15-20"></a>  display_neighborhood<span class="op">(</span>neighbor<span class="op">,</span> deg<span class="op">);</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a>    </span>
+<span id="cb15-22"><a href="#cb15-22"></a>  destroy_graph<span class="op">(</span>g<span class="op">);</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>  free<span class="op">(</span>neighbor<span class="op">);</span> </span>
+<span id="cb15-24"><a href="#cb15-24"></a>  </span>
+<span id="cb15-25"><a href="#cb15-25"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>   </span>
+<span id="cb15-26"><a href="#cb15-26"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Saída:</p>
+<pre class="console"><code>Representação por Matriz de Adjacencia:
+0 1 1 0 
+1 0 1 1 
+1 1 0 0 
+0 1 0 0 
+
+O vertice v = 2 possui 2 vizinho(s): N(v) = { 0 1 }</code></pre>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercício">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Exercício
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Modifique a implementação anterior para grafos direcionados. Use o grafo B para testar seu código. Lembre-se que agora temos de calcular a vizinhança/grau de entrada e de saída.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1"></a><span class="dt">size_t</span> degree_in<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">,</span> <span class="dt">size_t</span> v<span class="op">);</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="dt">size_t</span> degree_out<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">,</span> <span class="dt">size_t</span> v<span class="op">);</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="dt">size_t</span><span class="op">*</span> neighborhood_in<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">,</span> <span class="dt">size_t</span> v<span class="op">);</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="dt">size_t</span><span class="op">*</span> neighborhood_out<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">,</span> <span class="dt">size_t</span> v<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A função para imprimir a vizinhança deve mostrar a vizinhança de entrada e a de saída, por exemplo:</p>
+<pre class="console"><code>O vertice v = 2 possui 3 vizinho(s): N-(v) = { 1 } e N+(v) = { 0 3 }</code></pre>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> A matriz de adjacência não pode ser usada para implementar multigrafos naturalmente, pois ela não distingue arestas paralelas e, por isso, exige adaptações.</p>
+</div></div></section>
+</section>
+<section id="lista-de-adjacência" class="level2">
+<h2 class="anchored" data-anchor-id="lista-de-adjacência">Lista de Adjacência</h2>
+<p>A lista de adjacência nada mais é que uma lista de vizinhos para cada vértice.</p>
+<p>Usando os mesmos exemplos anteriores, para o grafo A:</p>
+<ul>
+<li><span class="math inline">\(\mathcal{N}(a) = \{b, c\}\)</span><br>
+</li>
+<li><span class="math inline">\(\mathcal{N}(b) = \{a, c, d\}\)</span></li>
+<li><span class="math inline">\(\mathcal{N}(c) = \{a, b\}\)</span><br>
+</li>
+<li><span class="math inline">\(\mathcal{N}(d) = \{b\}\)</span></li>
+</ul>
+<p>Para o grafo direcionado B, temos:</p>
+<ul>
+<li><span class="math inline">\(\mathcal{N^-}(e)=\{g\}\text{ e }\mathcal{N^+}(e)=\{f\}\)</span></li>
+<li><span class="math inline">\(\mathcal{N^-}(f)=\{e\}\text{ e }\mathcal{N^+}(f)=\{g\}\)</span></li>
+<li><span class="math inline">\(\mathcal{N^-}(g)=\{f\}\text{ e }\mathcal{N^+}(g)=\{e,h\}\)</span></li>
+<li><span class="math inline">\(\mathcal{N^-}(h)=\{g\}\text{ e }\mathcal{N^+}(h)=\emptyset\)</span></li>
+</ul>
+<section id="implementação-1" class="level3">
+<h3 class="anchored" data-anchor-id="implementação-1">Implementação</h3>
+<p>Para implementar essas listas, vamos construir listas ligadas.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> node <span class="op">{</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="dt">int</span> dest<span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="kw">struct</span> node<span class="op">*</span> next<span class="op">;</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="op">}</span> Node<span class="op">;</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="dt">size_t</span> V<span class="op">;</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>  Node<span class="op">**</span> list_adj<span class="op">;</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="op">}</span> Graph<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb20-1"><a href="#cb20-1"></a>Node<span class="op">*</span> create_node<span class="op">(</span><span class="dt">int</span> dest<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  Node<span class="op">*</span> new_node <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Node<span class="op">));</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="cf">if</span><span class="op">(!</span>new_node<span class="op">)</span> <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a>  new_node<span class="op">-&gt;</span>dest <span class="op">=</span> dest<span class="op">;</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>  new_node<span class="op">-&gt;</span>next <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>    </span>
+<span id="cb20-8"><a href="#cb20-8"></a>  <span class="cf">return</span> new_node<span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1"></a>Graph<span class="op">*</span> simple_graph<span class="op">(</span><span class="dt">int</span> V<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  Graph<span class="op">*</span> graph <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Graph<span class="op">));</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="cf">if</span><span class="op">(!</span>graph<span class="op">)</span> <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>  </span>
+<span id="cb21-5"><a href="#cb21-5"></a>  Node<span class="op">**</span> list_adj <span class="op">=</span> calloc<span class="op">(</span>V<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>Node<span class="op">*));</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>  <span class="cf">if</span><span class="op">(!</span>list_adj<span class="op">)</span> <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>    </span>
+<span id="cb21-8"><a href="#cb21-8"></a>  graph<span class="op">-&gt;</span>V <span class="op">=</span> V<span class="op">;</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>  graph<span class="op">-&gt;</span>list_adj <span class="op">=</span> list_adj<span class="op">;</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>        </span>
+<span id="cb21-11"><a href="#cb21-11"></a>  <span class="cf">return</span> graph<span class="op">;</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb22-1"><a href="#cb22-1"></a><span class="dt">void</span> destroy_graph<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> graph<span class="op">-&gt;</span>V<span class="op">;</span>i<span class="op">++)</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>    free<span class="op">(</span>graph<span class="op">-&gt;</span>list_adj<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  free<span class="op">(</span>graph<span class="op">);</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb23-1"><a href="#cb23-1"></a><span class="dt">void</span> add_edge<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">,</span> <span class="dt">int</span> src<span class="op">,</span> <span class="dt">int</span> dest<span class="op">)</span> <span class="op">{</span>    </span>
+<span id="cb23-2"><a href="#cb23-2"></a>  Node<span class="op">*</span> new_node <span class="op">=</span> create_node<span class="op">(</span>dest<span class="op">);</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  new_node<span class="op">-&gt;</span>next <span class="op">=</span> graph<span class="op">-&gt;</span>array<span class="op">[</span>src<span class="op">];</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>  graph<span class="op">-&gt;</span>array<span class="op">[</span>src<span class="op">]</span> <span class="op">=</span> new_node<span class="op">;</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a></span>
+<span id="cb23-6"><a href="#cb23-6"></a>  new_node <span class="op">=</span> create_node<span class="op">(</span>src<span class="op">);</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>  new_node<span class="op">-&gt;</span>next <span class="op">=</span> graph<span class="op">-&gt;</span>array<span class="op">[</span>dest<span class="op">];</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a>  graph<span class="op">-&gt;</span>array<span class="op">[</span>dest<span class="op">]</span> <span class="op">=</span> new_node<span class="op">;</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1"></a><span class="dt">size_t</span> degree<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">,</span> <span class="dt">size_t</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="dt">size_t</span> deg <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="cf">for</span> <span class="op">(</span>Node<span class="op">*</span> cur <span class="op">=</span> graph<span class="op">-&gt;</span>list_adj<span class="op">[</span>v<span class="op">];</span> cur<span class="op">;</span> cur <span class="op">=</span> cur<span class="op">-&gt;</span>next<span class="op">)</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>    deg<span class="op">++;</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>  <span class="cf">return</span> deg<span class="op">;</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="op">}</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a></span>
+<span id="cb24-8"><a href="#cb24-8"></a>Node<span class="op">*</span> neighborhood<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">,</span> <span class="dt">size_t</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a>  <span class="cf">return</span> graph<span class="op">-&gt;</span>list_adj<span class="op">[</span>v<span class="op">];</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb25-1"><a href="#cb25-1"></a><span class="dt">void</span> display_graph<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> graph<span class="op">-&gt;</span>V<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%zu</span><span class="st">:"</span><span class="op">,</span> i<span class="op">);</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="cf">for</span> <span class="op">(</span>Node<span class="op">*</span> cur <span class="op">=</span> graph<span class="op">-&gt;</span>array<span class="op">[</span>i<span class="op">];</span> cur<span class="op">;</span> cur <span class="op">=</span> cur<span class="op">-&gt;</span>next<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>      printf<span class="op">(</span><span class="st">" </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> cur<span class="op">-&gt;</span>dest<span class="op">);</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="op">}</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>  <span class="op">}</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="op">}</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="dt">void</span> display_neighborhood<span class="op">(</span>Node<span class="op">*</span> neighbor<span class="op">,</span> <span class="dt">size_t</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a>  printf<span class="op">(</span><span class="st">"N(v) = { "</span><span class="op">);</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a>  <span class="cf">for</span> <span class="op">(</span>Node<span class="op">*</span> cur <span class="op">=</span> neighbor<span class="op">;</span> cur<span class="op">;</span> cur <span class="op">=</span> cur<span class="op">-&gt;</span>next<span class="op">)</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st"> "</span><span class="op">,</span> cur<span class="op">-&gt;</span>dest<span class="op">);</span></span>
+<span id="cb25-15"><a href="#cb25-15"></a>  printf<span class="op">(</span><span class="st">"}</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span>     </span>
+<span id="cb25-16"><a href="#cb25-16"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb26-1"><a href="#cb26-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="dt">size_t</span> V <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  Graph<span class="op">*</span> graph <span class="op">=</span> simple_graph<span class="op">(</span>V<span class="op">);</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a></span>
+<span id="cb26-5"><a href="#cb26-5"></a>  add_edge<span class="op">(</span>graph<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>  add_edge<span class="op">(</span>graph<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  add_edge<span class="op">(</span>graph<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>  add_edge<span class="op">(</span>graph<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a>  </span>
+<span id="cb26-10"><a href="#cb26-10"></a>  printf<span class="op">(</span><span class="st">"Representação por Lista de Adjacencia:</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a>  display_graph<span class="op">(</span>graph<span class="op">);</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a></span>
+<span id="cb26-13"><a href="#cb26-13"></a>  <span class="dt">size_t</span> v <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a>  <span class="dt">size_t</span> deg <span class="op">=</span> degree<span class="op">(</span>graph<span class="op">,</span> v<span class="op">);</span></span>
+<span id="cb26-15"><a href="#cb26-15"></a>  Node<span class="op">*</span> neighbor <span class="op">=</span> neighborhood<span class="op">(</span>graph<span class="op">,</span> v<span class="op">);</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>    </span>
+<span id="cb26-17"><a href="#cb26-17"></a>  printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">O vertice v = </span><span class="sc">%zu</span><span class="st"> possui </span><span class="sc">%zu</span><span class="st"> vizinho(s): "</span><span class="op">,</span> v<span class="op">,</span> deg<span class="op">);</span></span>
+<span id="cb26-18"><a href="#cb26-18"></a></span>
+<span id="cb26-19"><a href="#cb26-19"></a>  display_neighborhood<span class="op">(</span>neighbor<span class="op">,</span> deg<span class="op">);</span></span>
+<span id="cb26-20"><a href="#cb26-20"></a>  destroy_graph<span class="op">(</span>graph<span class="op">);</span></span>
+<span id="cb26-21"><a href="#cb26-21"></a>  </span>
+<span id="cb26-22"><a href="#cb26-22"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb26-23"><a href="#cb26-23"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="console"><code>Representação por Lista de Adjacencia:
+0: 2 1
+1: 3 2 0
+2: 1 0
+3: 1
+
+O vertice v = 2 possui 2 vizinho(s): N(v) = { 1 0 }</code></pre>
+</section>
+</section>
+<section id="matriz-de-incidência" class="level2">
+<h2 class="anchored" data-anchor-id="matriz-de-incidência">Matriz de Incidência</h2>
+<p>Dado o grafo com <span class="math inline">\(n\)</span> vértices e <span class="math inline">\(m\)</span> arestas, a matriz de incidência é uma matriz <span class="math inline">\(n\times m\)</span> em que as linhas são os vértices, as colunas são as arestas e o valor na interseção indica se a aresta incide sobre o vértice.</p>
+<div style="width: 60%; margin: auto;">
+<table class="caption-top table">
+<caption>Matriz de incidência do grafo A</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>(A,B)</th>
+<th>(A,C)</th>
+<th>(B,C)</th>
+<th>(B,D)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note que a soma de cada coluna é sempre 2.</p>
+<div style="width: 60%; margin: auto;">
+<table class="caption-top table">
+<caption>Matriz de adjacência do grafo da sec-dir</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>(A,B)</th>
+<th>(B,C)</th>
+<th>(C,A)</th>
+<th>(C,D)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>-1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>1</td>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>0</td>
+<td>1</td>
+<td>-1</td>
+<td>-1</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>No caso de grafo direcionado, atribuímos <span class="math inline">\(-1\)</span> se a aresta <span class="math inline">\(e\)</span> sai de <span class="math inline">\(v\)</span>, <span class="math inline">\(1\)</span> se a aresta <span class="math inline">\(e\)</span> entra em <span class="math inline">\(v\)</span> e <span class="math inline">\(0\)</span> caso contrário. Logo, a soma das colunas deve ser sempre zero.</p>
+<section id="implementação-2" class="level3">
+<h3 class="anchored" data-anchor-id="implementação-2">Implementação</h3>
+<p>Considerando a implementação da matriz de adjacência, vamos reutilizar as funções:</p>
+<ul>
+<li><code>zeros</code></li>
+<li><code>display_matrix</code></li>
+<li><code>destroy_matrix</code></li>
+<li><code>display_neighborhood</code></li>
+<li><code>destroy_graph</code></li>
+</ul>
+<p>A matriz de incidência não é necessariamente quadrada, portanto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="dt">size_t</span> V<span class="op">;</span> <span class="co">// vertices: linha</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="dt">size_t</span> E<span class="op">;</span> <span class="co">// arestas: coluna</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="dt">int</span><span class="op">**</span> inc_matrix<span class="op">;</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="op">}</span> Graph<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Também modificamos o nome da matriz para <code>inc_matrix</code> para se referir a incidência. Dessa forma, reaproveitamos as funções <code>add_edge</code>, <code>degree</code> e <code>neighborhood</code> trocando <code>adj_matrix</code> por <code>inc_matrix</code>.</p>
+<p>A função para criar um grafo vazio (matriz com zero em todas as posições) é semelhante ao caso da matriz de adjacência. Só temos de garantir que a matriz tenha <code>V</code> linhas e <code>E</code> colunas.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb29-1"><a href="#cb29-1"></a>Graph<span class="op">*</span> simple_graph<span class="op">(</span><span class="dt">size_t</span> V<span class="op">,</span> <span class="dt">size_t</span> E<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  Graph<span class="op">*</span> graph <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>Graph<span class="op">));</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="cf">if</span><span class="op">(!</span>graph<span class="op">)</span> <span class="cf">return</span> NULL<span class="op">;</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a></span>
+<span id="cb29-5"><a href="#cb29-5"></a>  graph<span class="op">-&gt;</span>V <span class="op">=</span> V<span class="op">;</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a>  graph<span class="op">-&gt;</span>E <span class="op">=</span> E<span class="op">;</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a>  graph<span class="op">-&gt;</span>inc_matrix <span class="op">=</span> zeros<span class="op">(</span>V<span class="op">,</span> E<span class="op">);</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a>   </span>
+<span id="cb29-9"><a href="#cb29-9"></a>  <span class="cf">return</span> graph<span class="op">;</span> </span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Para imprimir a matriz, temos de tomar cuidado para passar as linhas e colunas corretamente.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb30-1"><a href="#cb30-1"></a><span class="dt">void</span> display_graph<span class="op">(</span>Graph<span class="op">*</span> graph<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  display_matrix<span class="op">(</span>graph<span class="op">-&gt;</span>inc_matrix<span class="op">,</span> graph<span class="op">-&gt;</span>V<span class="op">,</span> graph<span class="op">-&gt;</span>E<span class="op">);</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Agora, um exemplo de uso usando o grafo A novamente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb31-1"><a href="#cb31-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="dt">size_t</span> V <span class="op">=</span> <span class="dv">4</span><span class="op">;</span> <span class="co">// vertices</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="dt">size_t</span> E <span class="op">=</span> <span class="dv">4</span><span class="op">;</span> <span class="co">// arestas</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a></span>
+<span id="cb31-5"><a href="#cb31-5"></a>  Graph<span class="op">*</span> g <span class="op">=</span> simple_graph<span class="op">(</span>V<span class="op">,</span> E<span class="op">);</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>  add_edge<span class="op">(</span>g<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a>  add_edge<span class="op">(</span>g<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb31-8"><a href="#cb31-8"></a>  add_edge<span class="op">(</span>g<span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a>  add_edge<span class="op">(</span>g<span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb31-10"><a href="#cb31-10"></a>    </span>
+<span id="cb31-11"><a href="#cb31-11"></a>  printf<span class="op">(</span><span class="st">"Representação por Matriz de Incidencia:</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb31-12"><a href="#cb31-12"></a>  display_graph<span class="op">(</span>g<span class="op">);</span></span>
+<span id="cb31-13"><a href="#cb31-13"></a>    </span>
+<span id="cb31-14"><a href="#cb31-14"></a>  <span class="dt">size_t</span> v <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb31-15"><a href="#cb31-15"></a>  <span class="dt">size_t</span> deg <span class="op">=</span> degree<span class="op">(</span>g<span class="op">,</span> v<span class="op">);</span></span>
+<span id="cb31-16"><a href="#cb31-16"></a>  <span class="dt">size_t</span><span class="op">*</span> neighbor <span class="op">=</span> neighborhood<span class="op">(</span>g<span class="op">,</span> v<span class="op">);</span></span>
+<span id="cb31-17"><a href="#cb31-17"></a>    </span>
+<span id="cb31-18"><a href="#cb31-18"></a>  printf<span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">O vertice v = </span><span class="sc">%zu</span><span class="st"> possui </span><span class="sc">%zu</span><span class="st"> vizinho(s): "</span><span class="op">,</span> v<span class="op">,</span> deg<span class="op">);</span></span>
+<span id="cb31-19"><a href="#cb31-19"></a>  display_neighborhood<span class="op">(</span>neighbor<span class="op">,</span> deg<span class="op">);</span></span>
+<span id="cb31-20"><a href="#cb31-20"></a>    </span>
+<span id="cb31-21"><a href="#cb31-21"></a>  destroy_graph<span class="op">(</span>g<span class="op">);</span></span>
+<span id="cb31-22"><a href="#cb31-22"></a>  free<span class="op">(</span>neighbor<span class="op">);</span> </span>
+<span id="cb31-23"><a href="#cb31-23"></a>    </span>
+<span id="cb31-24"><a href="#cb31-24"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>   </span>
+<span id="cb31-25"><a href="#cb31-25"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="console"><code>Representação por Matriz de Incidencia:
+0 1 1 0 
+1 0 1 0 
+1 1 0 1 
+0 0 1 0 
+
+O vertice v = 2 possui 3 vizinho(s): N(v) = { 0 1 3 }</code></pre>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercício">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Exercício
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Modifique a implementação anterior para grafos direcionados. Use o grafo B para testar seu código. Lembre-se que agora temos de calcular a vizinhança/grau de entrada e de saída.</p>
+</div>
+</div>
+<hr>
+<p>Nesta seção, estudamos como os grafos podem ser representados na programação. Nós</p>
+<p>✅ estudamos a matriz de adjacência, as listas de adjacência e a matriz de incidência;</p>
+<p>✅ implementamos os algoritmos para determinar o grau de um vértice e sua vizinhança.</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/brunofx-ufersa\.github\.io\/reacomp\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../disciplinas/aed2/academic/unidade3/4-grafos.html" class="pagination-link" aria-label="Introdução aos Grafos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introdução aos Grafos</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../disciplinas/aed2/academic/unidade3/6-caminhos.html" class="pagination-link" aria-label="Introdução aos Grafos">
+        <span class="nav-page-text">Introdução aos Grafos</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Licença
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="http://creativecommons.org/licenses/by-sa/4.0/">
+<p>CC BY-SA 4.0</p>
+</a>
+  </li>  
+    <li class="nav-item">
+ — Portal construído com
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://quarto.org/">
+<p>Quarto</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

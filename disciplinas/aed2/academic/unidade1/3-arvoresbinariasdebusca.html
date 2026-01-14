@@ -628,6 +628,20 @@ classDef WT fill:#FFFFFF
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercício">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Exercício
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use o algoritmo de inserção de BST para inserir os valores destacados. Clique no nó vazio para que a chave seja inserida. Valores iguais devem ir para subárvore esquerda.</p>
+<iframe src="https://opendsa-server.cs.vt.edu/embed/BSTinsertPRO" style="border:none;" height="750" width="100%" scrolling="no"></iframe>
+</div>
+</div>
 </section>
 <section id="busca" class="level3">
 <h3 class="anchored" data-anchor-id="busca">Busca</h3>
@@ -700,6 +714,20 @@ classDef WT fill:#FFFFFF
 </div>
 </div>
 <p>Iniciamos pela raiz e comparamos os valores (18 &gt; 15). devemos seguir para a direita. Comparamos as chaves (18 &lt; 10). Devemos ir para a esquerda. Comparamos as chaves (18 &gt; 17). Devemos ir para a esquerda, porém não temos mais nós para percorrer. Busca concluída com o elemento não encontrado.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercício">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Exercício
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use o algoritmo de busca de BST para encontrar a chave dada. Inciando pela raiz, clique para revelar seu valor e seus filhos.</p>
+ <iframe src="https://opendsa-server.cs.vt.edu/embed/BSTsearchPRO" style="border:none;" height="750" width="100%" scrolling="no"></iframe>
+</div>
+</div>
 </section>
 <section id="remoção" class="level3">
 <h3 class="anchored" data-anchor-id="remoção">Remoção</h3>
@@ -911,6 +939,20 @@ Nota
 <p>O predecessor é o nó com a maior chave na subárvore esquerda. Já o antecessor é o nó com menor chave na subárvore direita. Note que após as remoções a árvore continuou obedecendo a regra geral (“menores de um lado, maiores do outro”).</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercício">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Exercício
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use o algoritmo de remoção de BST para romve o nó com a chave destacada. Clique no nó para apagá-lo. Se necessário você deve clicar em outro nó para substituir o nó removido. No caso de nó com grau 2, o valor que substituirá é o maior da subárvore esquerda.</p>
+ <iframe src="https://opendsa-server.cs.vt.edu/embed/BSTremovePRO" style="border:none;" height="600" width="100%" scrolling="no"></iframe>
+</div>
+</div>
 </section>
 </section>
 <section id="implementação" class="level2 page-columns page-full">
@@ -935,11 +977,12 @@ Nota
 <p>O <code>if</code> na linha 5 foi usado para descartar chaves que já foram inseridas. Outras implementações podem permitir duplicatas.</p>
 <p>O <code>if</code> da linha 2 é o caso base da recursão. Já o <code>if-else</code> da linha 8 é onde ocorre o caminho (para esquerda ou direita) que deve-se seguir para adicionar o novo nó.</p>
 <p>Para gerar a subárvore em azul da árvore do início deste capítulo, podemos fazer na <code>main</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1"></a>Node<span class="op">*</span> root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">6</span><span class="op">);</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">4</span><span class="op">);</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">7</span><span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1"></a>Node<span class="op">*</span> root <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">6</span><span class="op">);</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">4</span><span class="op">);</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>root <span class="op">=</span> insert_node<span class="op">(</span>root<span class="op">,</span> <span class="dv">7</span><span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong><span class="text-warning">Se liga!</span></strong> Estamos passando <code>Node* node</code> para a função <code>insert_node</code>. Isso indica que não estamos atualizando a árvore original, mas criando uma nova e reatribuindo.</p>
@@ -1054,18 +1097,98 @@ Nota
 </tbody>
 </table>
 <p>O <span class="math inline">\(n\)</span> representa o número de nós na árvore, já o <span class="math inline">\(h\)</span> representa a altura da árvore. No pior caso, a árvore está degenerada e a altura é igual ao número de nós. No melhor caso, a árvore está balanceada e a altura é proporcional a <span class="math inline">\(\log n\)</span>.</p>
-</section>
-<section id="revisão-e-considerações" class="level2">
-<h2 class="anchored" data-anchor-id="revisão-e-considerações">Revisão e Considerações</h2>
-<p>Nesta seção, estudamos a estrutura de dados árvore binária de busca.</p>
-<ul>
-<li>Definimos essa estrutura;</li>
-<li>Realizamos as operações básicas</li>
-<li>Inserção, busca e remoção;</li>
-<li>Estudamos a implementação;</li>
-<li>Analisamos as complexidades das operações implementadas;</li>
-</ul>
+<hr>
+<p>Nesta seção, estudamos a estrutura de dados árvore binária de busca. Nós</p>
+<p>✅ definimos essa estrutura;</p>
+<p>✅ realizamos as operações básicas (inserção, busca e remoção);</p>
+<p>✅ estudamos a implementação;</p>
+<p>✅ analisamos as complexidades das operações implementadas.</p>
 <p>Neste momento do curso, você já tem conhecimento suficiente para resolver uma gama de exercícios. Pratique bastante.</p>
+<div class="quizdown">
+# O que define uma Árvore Binária de Busca ?
+
+&gt; Considere a regra geral de ordenação apresentada no texto.
+
+1. [ ] Todos os nós à esquerda possuem chaves maiores que a raiz  
+1. [x] Todos os nós à esquerda possuem chaves menores e os da direita maiores que a chave do nó  
+1. [ ] Todos os nós possuem exatamente dois filhos  
+1. [ ] As chaves não precisam ser comparáveis  
+
+
+# Onde ocorre a inserção de um novo nó?
+
+1. [ ] Sempre na raiz  
+1. [ ] Em qualquer nó interno  
+1. [x] Sempre em uma folha  
+1. [ ] No nó com menor chave  
+
+
+# Durante a inserção, como decidimos o caminho?
+
+1. [ ] Escolhendo aleatoriamente esquerda ou direita  
+1. [ ] Comparando com todos os nós da árvore  
+1. [x] Comparando a chave com o nó atual para decidir esquerda ou direita  
+1. [ ] Inserindo sempre na subárvore esquerda  
+
+
+# Considere a busca por uma chave k.
+
+1. [ ] Percorre sempre todos os nós  
+1. [x] Segue para esquerda ou direita conforme a comparação das chaves  
+1. [ ] Visita apenas as folhas  
+1. [ ] É feita somente em largura  
+
+
+# O que pode acontecer ao final de uma busca em uma BST?
+
+- [x] O nó com a chave é encontrado  
+- [x] A busca termina em um ponteiro NULL  
+- [ ] A árvore é automaticamente rebalanceada  
+- [ ] Todos os nós são visitados  
+
+
+# Quais casos precisam ser tratados na remoção?
+
+- [x] Nó folha  
+- [x] Nó com apenas um filho  
+- [x] Nó com dois filhos  
+- [ ] Nó com três filhos  
+
+
+# Qual estratégia é utilizada na remoção de nó com dois filhos?
+
+1. [ ] Remover toda a subárvore  
+1. [x] Substituir pelo sucessor em ordem ou predecessor  
+1. [ ] Trocar pelo nó raiz  
+1. [ ] Inserir o nó novamente  
+
+
+# O que é o sucessor em ordem de um nó?
+
+1. [ ] O maior nó da subárvore esquerda  
+1. [x] O menor nó da subárvore direita  
+1. [ ] O pai do nó  
+1. [ ] Qualquer nó folha  
+
+
+
+# O que caracteriza uma BST degenerada?
+
+1. [ ] Todos os níveis completos  
+1. [ ] Altura mínima  
+1. [x] Altura próxima ao número de nós  
+1. [ ] Balanceamento automático  
+
+
+# Sobre o motivo de estudar AVL
+
+&gt; Conforme discutido no texto.
+
+1. [ ] Para permitir chaves duplicadas  
+1. [ ] Para eliminar a necessidade de busca  
+1. [x] Para evitar a degeneração da BST  
+1. [ ] Para remover a propriedade de ordenação  
+</div>
 <p>Nossa jornada pelas árvores binárias ainda não acabou. Um problema que ocorre com as BST é a degeneração. Para evitar isso, vamos estudar uma metodologia para deixar a árvore balanceada, evitando a complexidade de pior caso.</p>
 <p>Nosso próximo passo será estudar as árvores AVL que realizam operações de rotação para rebalancear a árvore sempre que ocorre uma inserção ou remoção.</p>
 <div class="progress-bar" id="progressBar"></div>
