@@ -11,11 +11,11 @@ toc: false
 
 O movimento de Recursos Educacionais Abertos (REA) é impulsionado pela internet e plataformas digitais, buscando tornar o conhecimento mais acessível. Eles permitem que terceiros os utilizem, adaptem e distribuam livremente, promovendo o acesso universal à educação. 
 
-A Universidade Federal Rural do Semi-Árido ([Ufersa](https://www.ufersa.edu.br)) oferece REA através da sua Biblioteca Digital de Recursos Educacionais Abertos ([BDREA](https://repositorio.ufersa.edu.br/handle/prefix/7404)), um repositório que disponibiliza materiais didáticos sob licenças abertas e em domínio público para uso e adaptação por terceiros. Estes materiais incluem textos, imagens e outras ferramentas que visam promover o acesso gratuito e apropriação do conhecimento. 
+A Universidade Federal Rural do Semi-Árido ([Ufersa](https://www.ufersa.edu.br){.text-decoration-none}) oferece REA através da sua Biblioteca Digital de Recursos Educacionais Abertos ([BDREA](https://repositorio.ufersa.edu.br/handle/prefix/7404){.text-decoration-none}), um repositório que disponibiliza materiais didáticos sob licenças abertas e em domínio público para uso e adaptação por terceiros. Estes materiais incluem textos, imagens e outras ferramentas que visam promover o acesso gratuito e apropriação do conhecimento. 
 
 Este portal oferece REA na área da computação e serve como recurso extra no processo de ensino-aprendizagem em algoritmos, programação e estruturas de dados.
 
-Para começar a estudar pelo nosso material, clique no menu [Recursos](disciplinas/aed2/academic/index.qmd){.text-decoration-none} .
+Para começar a estudar pelo nosso material, clique no menu [Recursos](disciplinas.qmd){.text-decoration-none} .
 
 
 

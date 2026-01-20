@@ -20,8 +20,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: disciplinas/aed2/academic/index.qmd
-        text: Recursos
+      - disciplinas.qmd
       - contribuicao.qmd
       #- href: blog.qmd
       #  text: Blog
@@ -85,6 +84,14 @@ website:
         - disciplinas/aed2/academic/unidade3/4-grafos.qmd
         - disciplinas/aed2/academic/unidade3/5-representacoes.qmd
         - disciplinas/aed2/academic/unidade3/6-caminhos.qmd
+    - section: "Julia"
+      id: grafo
+      title: "Julia"
+      style: "docked"
+      background: light
+      contents:
+        - disciplinas/julia/1-instalacao.qmd
+        - disciplinas/julia/2-primeiroscomandos.qmd
 format:
   html:
     highlight-style: a11y

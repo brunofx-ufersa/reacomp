@@ -18,22 +18,6 @@ Bem-vindo(a) ao curso de **{{< meta title >}}**!
 -->
 
 ::: {.callout-note collapse="true" icon="false"}
-## <i class="bi bi-tree"></i> Árvores
-
-::: {.list-group .list-group-flush .mb-0 .text-decoration-none .border-0}
-
-[1. Árvores](unidade1/1-arvores.qmd){.list-group-item .list-group-item-action .text-body .border-0}
-[2. Árvores Binárias](unidade1/2-arvoresbinarias.qmd){.list-group-item .list-group-item-action .text-body .border-0}
-[3. Árvores Binárias de Busca](unidade1/3-arvoresbinariasdebusca.qmd){.list-group-item .list-group-item-action .text-body .border-0}
-[4. Árvores AVL](unidade1/4-arvoresavl.qmd){.list-group-item .list-group-item-action .text-body .border-0}
-[5. Exercícios](unidade1/5-exercicios.qmd){.list-group-item .list-group-item-action .text-body .border-0}
-[6. Desafios](unidade1/6-desafios.qmd){.list-group-item .list-group-item-action .text-body .border-0}
-
-:::
-
-:::
-
-::: {.callout-note collapse="true" icon="false"}
 ## <i class="bi bi-emoji-neutral"></i> Estruturas Genéricas
 
 ::: {.list-group .list-group-flush .mb-0 .text-decoration-none .border-0}
@@ -48,6 +32,22 @@ Bem-vindo(a) ao curso de **{{< meta title >}}**!
 
 :::
 
+
+::: {.callout-note collapse="true" icon="false"}
+## <i class="bi bi-tree"></i> Árvores
+
+::: {.list-group .list-group-flush .mb-0 .text-decoration-none .border-0}
+
+[1. Árvores](unidade1/1-arvores.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[2. Árvores Binárias](unidade1/2-arvoresbinarias.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[3. Árvores Binárias de Busca](unidade1/3-arvoresbinariasdebusca.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[4. Árvores AVL](unidade1/4-arvoresavl.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[5. Exercícios](unidade1/5-exercicios.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[6. Desafios](unidade1/6-desafios.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+
+:::
+
+:::
 
 
 ::: {.callout-note collapse="true" icon="false"}

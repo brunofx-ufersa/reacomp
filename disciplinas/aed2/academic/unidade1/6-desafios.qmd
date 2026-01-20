@@ -1,5 +1,5 @@
 ---
-title: "Unidade 1 - Desafios"
+title: "Desafios"
 lang: pt
 toc-title: Conteúdo
 toc: false

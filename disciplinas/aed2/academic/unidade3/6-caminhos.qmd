@@ -1,0 +1,646 @@
+---
+title: "Introdução aos Grafos"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+filters: 
+    - quizdown
+execute:
+  eval: true  
+---  
+
+
+## Representações
+
+Além do desenho e conjuntos de arestas e vértices, um grafo pode ser representado por matrizes. 
+
+### Matriz de Adjacência
+  
+Dado o grafo com $n$ vértices, a matriz de adjacência é uma matriz quadrada de ordem $n$ em que as linhas e colunas são os vértices, e o valor na interseção $(i, j)$ indica se existe aresta entre o vértice $i$ e o vértice $j$. Usamos $1$ para existência e $0$ para ausência.
+
+Vamos usar os grafos A do início do capítulo e o grafo da sec-dir como exemplos.  
+
+::: {style="width: 60%; margin: auto;"}
+|   | A | B | C | D |
+|---|---|---|---|---|
+| A | 0 | 1 | 1 | 0 |
+| B | 1 | 0 | 1 | 1 |
+| C | 1 | 1 | 0 | 0 |
+| D | 0 | 1 | 0 | 0 |
+: Matriz de adjacência do grafo A
+:::
+
+Note que a matriz é simétrica para grafos não-direcionados.
+
+::: {style="width: 60%; margin: auto;"}
+|   | A | B | C | D |
+|---|---|---|---|---|
+| A | 0 | 1 | 0 | 0 |
+| B | 0 | 0 | 1 | 0 |
+| C | 1 | 0 | 0 | 1 |
+| D | 0 | 0 | 0 | 0 |
+: Matriz de adjacência do grafo da sec-dir
+:::
+
+Note que as linhas representam de onde as arestas partem. Já as colunas, representam onde elas incidem.
+
+
+### Lista de Adjacência
+
+Dizemos que os vértices A e B são vizinhos se existe uma aresta que conecta ambos diretamente.
+
+A lista de adjacência é praticamente uma lista de vizinhos para cada vértice.
+
+Usando os mesmos exemplos anteriores:
+
+- vizinhos de A: {B, C}  
+- vizinhos de B: {A, C, D} 
+- vizinhos de C: {A, B}  
+- vizinhos de D: {B}  
+
+Já para grafos direcionados, a noção de vizinho não é única. Nesse caso, temos a vizinhaça de entrada e a de saída.
+
+::: {.callout-note}
+A vizinhança de saída de $v$ é conjunto dos vértices alcançáveis diretamente a partir de $v$.
+:::
+
+Portanto, para o grafo direcionado que estudamos:
+
+- vizinhos de saída de A: {B}  
+- vizinhos de saída de B: {C} 
+- vizinhos de saída de C: {D}  
+- vizinhos de saída de D: {A}  
+
+
+::: {.callout-note}
+A vizinhança de entrada de $v$ é conjunto dos vértices que apontam para $v$.
+:::
+
+Novamente,
+
+- vizinhos de entrada de A: {D}  
+- vizinhos de entrada de B: {A} 
+- vizinhos de entrada de C: {B}  
+- vizinhos de entrada de D: {C}  
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Os vértices que apontam para $v$ são chamados de antecessores. Já os que são apontados por $v$ são os sucessores.
+:::
+
+::: {.callout-note icon="false" title="Exercício Resolvido"}
+Dado o grafo abaixo:
+```{mermaid}
+graph LR
+    1((1)) --- 2((2))
+    1 --- 3((3))
+    2 --- 4((4))
+    3 --- 4
+    3 --- 5((5))
+```
+
+1. Determine o conjunto de vértices e o conjunto de arestas.
+
+O grafo ilustrado possui cinco nós, logo $$V=\{1,2,3,4,5\}.$$ As arestas são as ligações entre os nós, portanto $$E=\{\{1,2\},\{1,3\},\{2,4\},\{3,4\},\{3,5\}\}.$$
+
+2. Construa a matriz de adjacências.
+
+Como o grafo não é direcionado, a matriz será simétrica:
+
+::: {style="width: 30%; margin: auto;"}
+|   | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| 1 | 0 | 1 | 1 | 0 | 0 |
+| 2 | 1 | 0 | 0 | 1 | 0 |
+| 3 | 1 | 0 | 0 | 1 | 1 |
+| 4 | 0 | 1 | 1 | 0 | 0 |
+| 5 | 0 | 0 | 1 | 0 | 0 |
+:::
+
+3. Construa as listas de adjacências.
+
+Neste caso, estamos procurando pelos vizinhos de cada vértice.
+
+- Vértice 1: $\{1,3\}$
+- Vértice 2: $\{1,4\}$
+- Vértice 3: $\{1,4,5\}$
+- Vértice 4: $\{2,3\}$
+- Vértice 5: $\{3\}$
+:::
+
+
+<!--
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+::: 
+-->
+
+
+::: {.callout-note icon="false" title="Exercício Resolvido"}
+Dado o grafo abaixo:
+```{mermaid}
+graph LR
+    1((A)) ---> 2((B))
+    1 ---> 3((C))
+    2 ---> 4((D))
+    3 ---> 4
+    3 ---> 5((E))
+```
+
+1. Determine o conjunto de vértices e o conjunto de arestas.
+
+O grafo ilustrado possui cinco nós, logo $$V=\{A,B,C,D,E\}.$$ As arestas são as ligações entre os nós, portanto $$E=\{(A,B),(A,C),(B,D),(C,D),(C,E)\}.$$
+
+2. Construa a matriz de adjacências.
+
+Se um aresta parte de $v$ e incide em $u$, então marcamos a interseção com $1$.
+
+::: {style="width: 30%; margin: auto;"}
+|   | A | B | C | D | E |
+|---|---|---|---|---|---|
+| A | 0 | 1 | 1 | 0 | 0 |
+| B | 0 | 0 | 0 | 1 | 0 |
+| C | 0 | 0 | 0 | 1 | 1 |
+| D | 0 | 0 | 0 | 0 | 0 |
+| E | 0 | 0 | 0 | 0 | 0 |
+:::
+
+3. Construa as lista de antecessores e sucessores.
+
+Os antecessores e sucessores são os vizinhos de entrada e saída, respectivamente.
+
+::: {style="width: 60%; margin: auto;"}
+| Vértice | Antecessores | Sucessores |
+|---------|--------------|------------|
+| A       | $\emptyset$  | $\{B,C\}$  |
+| B       | $\{A\}$      | $\{D\}$    |
+| C       | $\{A\}$      | $\{D,E\}$  |
+| D       | $\{B,C\}$    | $\emptyset$|
+| E       | $\{C\}$      | $\emptyset$|
+:::
+:::
+
+
+## Matriz de Incidência
+
+Dado o grafo com $n$ vértices e $m$ arestas, a matriz de incidência é uma matriz $n\times m$ em que as linhas são os vértices, as colunas são as arestas e o valor na interseção indica se a aresta incide sobre o vértice. 
+
+::: {style="width: 60%; margin: auto;"}
+|   | (A,B) | (A,C) | (B,C) | (B,D) |
+|---|---|---|---|---|
+| A | 1 | 1 | 0 | 0 |
+| B | 1 | 0 | 1 | 1 |
+| C | 0 | 1 | 1 | 0 |
+| D | 0 | 0 | 0 | 1 |
+: Matriz de incidência do grafo A
+:::
+
+Note que a soma de cada coluna é sempre 2.
+
+::: {style="width: 60%; margin: auto;"}
+|   | (A,B) | (B,C) | (C,A) | (C,D) |
+|---|---|---|---|---|
+| A | -1 | 0 | 1 | 0 |
+| B | 1 | -1 | 0 | 0 |
+| C | 0 | 1 | -1 | -1 |
+| D | 0 | 0 | 0 | 1 |
+: Matriz de adjacência do grafo da sec-dir
+:::
+
+No caso de grafo direcionado, atribuímos $-1$ se a aresta $e$ sai de $v$, $1$ se a aresta $e$ entra em $v$ e $0$ caso contrário. Logo, a soma das colunas deve ser sempre zero.
+
+::: {.callout-note icon="false" title="Exercício Resolvido"}
+Determine as matrizes de incidência dos grafos dos Exercícios 1 e 2.
+
+Matriz de incidência para o grafo não direcionado.
+
+::: {style="width: 60%; margin: auto;"}
+|   | {1,2} | {1,3} | {2,4} | {3,4} | {3,5} |
+|---|-------|-------|-------|-------|-------|
+| 1 | 1     | 1     | 0     | 0     | 0     |
+| 2 | 1     | 0     | 1     | 0     | 0     |
+| 3 | 0     | 1     | 0     | 1     | 1     |
+| 4 | 0     | 0     | 1     | 1     | 0     |
+| 5 | 0     | 0     | 0     | 0     | 1     |
+:::
+
+
+Matriz de incidência para o grafo direcionado.
+
+::: {style="width: 60%; margin: auto;"}
+|   | (A,B) | (A,C) | (B,D) | (C,D) | (C,E) |
+|---|-------|-------|-------|-------|-------|
+| A | -1     | -1     | 0     | 0     | 0     |
+| B | 1     | 0     | -1     | 0     | 0     |
+| C | 0     | 1     | 0     | -1     | -1     |
+| D | 0     | 0     | 1     | 1     | 0     |
+| E | 0     | 0     | 0     | 0     | 1     |
+:::
+
+:::
+
+
+
+## Grau
+
+O grau de um vértice 
+
+```{mermaid}
+graph LR
+  subgraph s1["Grafo A"]
+    A((2)) 
+    B((3))
+    C((2))
+    D((1))
+  end
+
+  subgraph s2["Grafo B"]
+    direction LR 
+    A1((2)) 
+    B1((2))
+    C1((2))
+    D1((1))
+  end
+
+    A --- B
+    B --- C
+    C --- A
+    B --- D
+
+    A1 --> B1
+    B1 --> C1
+    C1 --> A1
+    C1 -->  D1
+
+    s1 ~~~ s2
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent
+
+```
+  
+
+
+Considere o grafo $G=(V,E)$
+
+## Caminhos e Ciclos
+
+Dados dois vértices $v$ (inicial) e $u$ (final), um caminho é uma sequência de vértices conectados por arestas.
+
+Formalmente, um caminho 𝑃 de $v$ até $u$ é uma sequência:
+$$P = (v_0, v_1, v_2, \dots, v_k)$$ 
+
+tal que:
+
+- $v_0 = v$ e $v_k = u$ 
+- Para todo $i=1,\ldots,k$, o par $(v_{i-1}, v_{i})\in E$ é uma aresta do grafo.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Em grafos não-direcionados, usamos $\{v_{i-1}, v_{i}\}$ ao invés de $(v_{i-1}, v_{i})$
+:::
+
+
+O comprimento do caminho é o número de arestas, isto é, $k$.
+
+
+## Ciclos (ou circuitos)
+
+Um ciclo é um caminho em que o vértice inicial coincide com o vértice final e nenhum outro vértice se repete.
+
+Um ciclo de comprimento $k$ (ou $k$-ciclo) é uma sequência:
+
+$$v_0 \to v_1 \to \dots \to v_k \to v_0$$Onde todos os $v_i$ são distintos para $i = 0, \dots, k$.
+
+onde:
+
+- todos os vértice $v_0, v_1, \dots, v_k, v_0$ 
+- $k\geq 2$
+
+### Tipos especiais de ciclos
+
+#### Ciclo Hamiltoniano
+
+Um ciclo hamiltoniano é um ciclo que visita cada vértice do grafo exatamente uma vez (exceto o vértice inicial/final).
+
+####  Ciclo Euleriano
+
+Um ciclo euleriano é um ciclo que utiliza cada aresta do grafo exatamente uma vez.
+
+Propriedade das arestas
+
+Em grafos não-direcionados:
+
+o grafo deve ser conexo,
+
+todo vértice deve ter grau par.
+
+Em grafos direcionados:
+
+deg
+⁡
++
+(
+𝑣
+)
+=
+deg
+⁡
+−
+(
+𝑣
+)
+deg
++
+(v)=deg
+−
+(v) para todo vértice,
+
+o grafo deve ser fortemente conexo (ignorando vértices isolados).
+
+Dados um vértice inicial $v$ e outro final $u$, um caminho é uma sequência de vértices que os conecta por meio de arestas. Para um caminho $P$ entre $v$ e $u$:
+$$P = (v_0, v_1, v_2, \dots, v_k)$$ Onde $v_0 = v$, $v_k = u$ e cada par $(v_i, v_{i+1})$ é uma aresta do grafo.
+
+Um ciclo, ou circuito, é um caminho onde os vértices inicial e final são os mesmos e os demais vértices ocorrem somente uma vez. Um ciclo $C$ de comprimento $k$ (chamado de $k$-ciclo) é uma sequência de vértices:$$v_0 \to v_1 \to \dots \to v_k \to v_0$$Onde todos os $v_i$ são distintos para $i = 0, \dots, k$.
+
+Tipos especiais de ciclos
+
+- Hamiltoniano: um ciclo que visita cada vértice do grafo exatamente uma vez.
+- Euleriano: um ciclo que utiliza cada aresta do grafo exatamente uma vez.
+
+
+::: {.callout-note icon="false" title="Exercício Resolvido"}
+Determine as matrizes de incidência dos grafos dos Exercícios 1 e 2.
+
+Matriz de incidência para o grafo não direcionado.
+
+::: {style="width: 60%; margin: auto;"}
+|   | {1,2} | {1,3} | {2,4} | {3,4} | {3,5} |
+|---|-------|-------|-------|-------|-------|
+| 1 | 1     | 1     | 0     | 0     | 0     |
+| 2 | 1     | 0     | 1     | 0     | 0     |
+| 3 | 0     | 1     | 0     | 1     | 1     |
+| 4 | 0     | 0     | 1     | 1     | 0     |
+| 5 | 0     | 0     | 0     | 0     | 1     |
+:::
+
+
+Matriz de incidência para o grafo direcionado.
+
+::: {style="width: 60%; margin: auto;"}
+|   | (A,B) | (A,C) | (B,D) | (C,D) | (C,E) |
+|---|-------|-------|-------|-------|-------|
+| A | -1     | -1     | 0     | 0     | 0     |
+| B | 1     | 0     | -1     | 0     | 0     |
+| C | 0     | 1     | 0     | -1     | -1     |
+| D | 0     | 0     | 1     | 1     | 0     |
+| E | 0     | 0     | 0     | 0     | 1     |
+:::
+
+:::
+
+
+::: {.callout-note icon="false" title="Exercício Resolvido"}
+Dado o grafo abaixo:
+```{mermaid}
+graph LR
+    1((1)) --- 2((2))
+    1 --- 3((3))
+    2 --- 4((4))
+    3 --- 4
+    3 --- 5((5))
+```
+
+1. Determine o conjunto de vértices e o conjunto de arestas.
+
+O grafo ilustrado possui cinco nós, logo $$V=\{1,2,3,4,5\}.$$ As arestas são as ligações entre os nós, portanto $$E=\{\{1,2\},\{1,3\},\{2,4\},\{3,4\},\{3,5\}\}.$$
+
+2. Construa a matriz de adjacências.
+
+Como o grafo não é direcionado, a matriz será simétrica:
+
+::: {style="width: 30%; margin: auto;"}
+|   | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| 1 | 0 | 1 | 1 | 0 | 0 |
+| 2 | 1 | 0 | 0 | 1 | 0 |
+| 3 | 1 | 0 | 0 | 1 | 1 |
+| 4 | 0 | 1 | 1 | 0 | 0 |
+| 5 | 0 | 0 | 1 | 0 | 0 |
+:::
+
+3. Construa as listas de adjacências.
+
+Neste caso, estamos procurando pelos vizinhos de cada vértice.
+
+- Vértice 1: $\{1,3\}$
+- Vértice 2: $\{1,4\}$
+- Vértice 3: $\{1,4,5\}$
+- Vértice 4: $\{2,3\}$
+- Vértice 5: $\{3\}$
+:::
+
+
+<!--
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+::: 
+-->
+
+
+::: {.callout-note icon="false" title="Exercício Resolvido"}
+Dado o grafo abaixo:
+```{mermaid}
+graph LR
+    1((A)) ---> 2((B))
+    1 ---> 3((C))
+    2 ---> 4((D))
+    3 ---> 4
+    3 ---> 5((E))
+```
+
+1. Determine o conjunto de vértices e o conjunto de arestas.
+
+O grafo ilustrado possui cinco nós, logo $$V=\{A,B,C,D,E\}.$$ As arestas são as ligações entre os nós, portanto $$E=\{(A,B),(A,C),(B,D),(C,D),(C,E)\}.$$
+
+2. Construa a matriz de adjacências.
+
+Se um aresta parte de $v$ e incide em $u$, então marcamos a interseção com $1$.
+
+::: {style="width: 30%; margin: auto;"}
+|   | A | B | C | D | E |
+|---|---|---|---|---|---|
+| A | 0 | 1 | 1 | 0 | 0 |
+| B | 0 | 0 | 0 | 1 | 0 |
+| C | 0 | 0 | 0 | 1 | 1 |
+| D | 0 | 0 | 0 | 0 | 0 |
+| E | 0 | 0 | 0 | 0 | 0 |
+:::
+
+3. Construa as lista de antecessores e sucessores.
+
+Os antecessores e sucessores são os vizinhos de entrada e saída, respectivamente.
+
+::: {style="width: 60%; margin: auto;"}
+| Vértice | Antecessores | Sucessores |
+|---------|--------------|------------|
+| A       | $\emptyset$  | $\{B,C\}$  |
+| B       | $\{A\}$      | $\{D\}$    |
+| C       | $\{A\}$      | $\{D,E\}$  |
+| D       | $\{B,C\}$    | $\emptyset$|
+| E       | $\{C\}$      | $\emptyset$|
+:::
+:::
+
+
+## Grau
+
+O grau de um vértice 
+
+```{mermaid}
+graph LR
+  subgraph s1["Grafo A"]
+    A((2)) 
+    B((3))
+    C((2))
+    D((1))
+  end
+
+  subgraph s2["Grafo B"]
+    direction LR 
+    A1((2)) 
+    B1((2))
+    C1((2))
+    D1((1))
+  end
+
+    A --- B
+    B --- C
+    C --- A
+    B --- D
+
+    A1 --> B1
+    B1 --> C1
+    C1 --> A1
+    C1 -->  D1
+
+    s1 ~~~ s2
+
+A:::WT
+B:::WT
+C:::WT
+D:::WT
+
+A1:::WT
+B1:::WT
+C1:::WT
+D1:::WT
+classDef WT fill:#FFFFFF
+style s1 stroke:none,fill:transparent
+style s2 stroke:none,fill:transparent
+
+```
+  
+
+
+Considere o grafo $G=(V,E)$
+
+## Caminhos e Ciclos
+
+Dados dois vértices $v$ (inicial) e $u$ (final), um caminho é uma sequência de vértices conectados por arestas.
+
+Formalmente, um caminho 𝑃 de $v$ até $u$ é uma sequência:
+$$P = (v_0, v_1, v_2, \dots, v_k)$$ 
+
+tal que:
+
+- $v_0 = v$ e $v_k = u$ 
+- Para todo $i=1,\ldots,k$, o par $(v_{i-1}, v_{i})\in E$ é uma aresta do grafo.
+
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Em grafos não-direcionados, usamos $\{v_{i-1}, v_{i}\}$ ao invés de $(v_{i-1}, v_{i})$
+:::
+
+
+O comprimento do caminho é o número de arestas, isto é, $k$.
+
+
+## Ciclos (ou circuitos)
+
+Um ciclo é um caminho em que o vértice inicial coincide com o vértice final e nenhum outro vértice se repete.
+
+Um ciclo de comprimento $k$ (ou $k$-ciclo) é uma sequência:
+
+$$v_0 \to v_1 \to \dots \to v_k \to v_0$$Onde todos os $v_i$ são distintos para $i = 0, \dots, k$.
+
+onde:
+
+- todos os vértice $v_0, v_1, \dots, v_k, v_0$ 
+- $k\geq 2$
+
+### Tipos especiais de ciclos
+
+#### Ciclo Hamiltoniano
+
+Um ciclo hamiltoniano é um ciclo que visita cada vértice do grafo exatamente uma vez (exceto o vértice inicial/final).
+
+####  Ciclo Euleriano
+
+Um ciclo euleriano é um ciclo que utiliza cada aresta do grafo exatamente uma vez.
+
+Propriedade das arestas
+
+Em grafos não-direcionados:
+
+o grafo deve ser conexo,
+
+todo vértice deve ter grau par.
+
+Em grafos direcionados:
+
+deg
+⁡
++
+(
+𝑣
+)
+=
+deg
+⁡
+−
+(
+𝑣
+)
+deg
++
+(v)=deg
+−
+(v) para todo vértice,
+
+o grafo deve ser fortemente conexo (ignorando vértices isolados).
+
+Dados um vértice inicial $v$ e outro final $u$, um caminho é uma sequência de vértices que os conecta por meio de arestas. Para um caminho $P$ entre $v$ e $u$:
+$$P = (v_0, v_1, v_2, \dots, v_k)$$ Onde $v_0 = v$, $v_k = u$ e cada par $(v_i, v_{i+1})$ é uma aresta do grafo.
+
+Um ciclo, ou circuito, é um caminho onde os vértices inicial e final são os mesmos e os demais vértices ocorrem somente uma vez. Um ciclo $C$ de comprimento $k$ (chamado de $k$-ciclo) é uma sequência de vértices:$$v_0 \to v_1 \to \dots \to v_k \to v_0$$Onde todos os $v_i$ são distintos para $i = 0, \dots, k$.
+
+Tipos especiais de ciclos
+
+- Hamiltoniano: um ciclo que visita cada vértice do grafo exatamente uma vez.
+- Euleriano: um ciclo que utiliza cada aresta do grafo exatamente uma vez.
+
+

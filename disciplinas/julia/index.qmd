@@ -1,0 +1,30 @@
+---
+title: "Programação em Julia"
+lang: pt
+toc: false
+---
+
+
+Bem-vindo(a) ao curso de **{{< meta title >}}**!
+
+<!--
+> Este módulo está dividido em cinco temas centrais. 
+> Clique em qualquer um deles para expandir o conteúdo e navegar pelos subtópicos específicos.
+
+
+ ::: {.callout-note collapse="true" icon="false"}
+## <i class="bi bi-tree"></i> Árvores
+
+:::
+-->
+
+::: {.callout-note collapse="true" icon="false"}
+## Iniciante
+
+::: {.list-group .list-group-flush .mb-0 .text-decoration-none .border-0}
+
+[1. Instalação e Configuração](1-instacao.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+
+:::
+
+:::

@@ -1,0 +1,78 @@
+---
+title: "Primeiros Comandos"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+## Exibir mensagens simples
+
+Para exibir mensagens usamos a função `print` ou `println`. A diferença é que esta última insere uma quebra de linha no final .
+
+```{julia}
+print("Olá, ")
+print("caro aluno\n")
+println("Bem-vindo ao tutorial de Julia!")
+```
+
+O caractere especial de escape de nova linha é `\n`.
+
+## Operações básicas
+
+Julia conta com um série de operações matemáticas básicas.
+
+```{julia}
+println("Adição: ", 5 + 3)
+println("Subtração: ", 5 - 3)
+println("Multiplicação: ", 5 * 3)
+println("Divisão: ", 10 / 3)
+println("Divisão inteira: ", 10 ÷ 3)  # Você também pode usar div(10, 3)
+println("Resto: ", 10 % 3)
+println("Potência: ", 2^8)
+```
+
+Julia possui um mecanismo que permite escrever código usando notação matemática padrão (Unicode). O funcionamento é baseado em sequências de escape do LaTeX. Quando você digita uma sequência e aperta a tecla `Tab`, o editor converte aquilo instantaneamente no caractere correspondente.
+
+Exemplos:
+
+|Você digita	|Pressiona	|Resultado	|
+|---|---|---|
+|`\alpha`	|Tab	| $\alpha$	|
+|`\beta`	|Tab	|$\beta$	|
+|`\pi`	|Tab	| $\pi$	|
+|`\sum`	|Tab	|$\sum$	|
+|`\in`	|Tab	|$\in$	|
+|`\div`	|Tab	|$\div$	|
+|`\:smile:` |Tab| 😄 |
+
+## Funções matemáticas básicas
+
+Avançando um pouco mais na parte matemática, Julia nos fornece uma série de função muito simples de usar.
+
+```{julia}
+println("sqrt(16) = ", sqrt(16))
+println("cbrt(27) = ", cbrt(27))
+println("abs(-42) = ", abs(-42))
+println("sin(π/2) = ", sin(π/2))
+println("round(3.6) = ", round(3.6))
+println("floor(3.6) = ", floor(3.6))
+println("ceil(3.2) = ", ceil(3.2))
+println("trunc(3.9) = ", trunc(3.9))
+```
+
+- A função `sqrt`, _square root_, calcula a raiz quadrada
+- A função `cbrt`, _cube root_, calcula a raiz cúbica
+- A função `round` aplica um arredondamento
+- A função `floor` calcula a piso de um número real
+- A função `ceil` calcula o teto de um número real
+- A função `trunc` aplica um truncamaento
+
+

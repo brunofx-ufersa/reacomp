@@ -14,18 +14,18 @@ filters:
 
 
 
-Por muito tempo, construir estruturas de dados, como listas e árvores, exigia que os desenvolvedores as reescrevessem para cada tipo de dado. Era uma batalha constante: uma lista para números inteiros, outra para textos, outra para dados de usuários, e assim por diante. Essa repetição não apenas consumia tempo, mas também abria portas para erros e inconsistências.
+Por muito tempo, construir estruturas de dados exigia que os desenvolvedores as reescrevessem para cada tipo de dado. Era uma batalha constante: uma lista para números inteiros, outra para textos, outra para dados de usuários, e assim por diante. Essa repetição não apenas consumia tempo, mas também abria portas para erros e inconsistências.
 
-A ideia de estruturas genéricas é poder construir estruturas universais que podem ser aplicadas em qualquer projeto. Embora a linguagem C não tenha suporte nativo a "genéricos", como C++ ou Java, a solução tradicional e elegante é usar ponteiros `void*` e funções de _callback_. 
+A ideia central de estruturas genéricas é poder construir estruturas universais que podem ser aplicadas em qualquer projeto. Embora a linguagem C não tenha suporte nativo a "genéricos", como C++ ou Java, a solução tradicional e elegante é usar ponteiros `void*` e funções de _callback_. 
 
 Antes de explorarmos essas estruturas, é fundamental revisar e aprofundar dois conceitos cruciais: **ponteiros** e **ponteiros de função**.
 
-Como você deve ter visto em **Algoritmos e Estruturas de Dados 1**, um **ponteiro** é uma variável que armazena o **endereço de memória** de outra variável. Essa capacidade é a base para criar estruturas de dados com tamanho dinâmico (que crescem ou diminuem em tempo de execução).
+Como você deve ter visto em Algoritmos e Estruturas de Dados 1, um ponteiro é uma variável que armazena o endereço de memória de outra variável. Essa capacidade é a base para criar estruturas de dados com tamanho dinâmico (que crescem ou diminuem em tempo de execução).
 
 
 ## Declaração {#sec-dec}
 
-Quando declaramos uma variável e atribuímos um valor, esse valor é armazenado em um endereço de memória. Quando escrevemos `int x = 10;`, ocorrem dois passos conceituais:
+Quando declaramos uma variável e atribuímos um valor, esse valor é armazenado em um endereço de memória. Quando escrevemos `int x = 10;`, por exemplo, ocorrem dois passos conceituais:
 
 - **Declaração**: o programa reserva um espaço na memória para armazenar um inteiro.
 - **Atribuição**: o valor `10` é gravado nesse espaço de memória, que possui um endereço.
@@ -42,12 +42,14 @@ A variável `x` é apenas um rótulo usado pelo programador.
 :::
 
 
+Para se obter o endereço da variável `x` escrevemos `&x`. O resultado é modificado toda vez que você roda o programa. Como um ponteiro armazena um endereço de memória, um ponteiro para `x` seria declarado como `int* x_ptr = &x`.
+
 ::: {.column-margin}
 **[Se liga!]{.text-warning}**
 A memória em si é ilustrada pelo endereço e conteúdo armazenado. A variável é apenas um rótulo que representa este par.
 :::
 
-O princípio básico de um ponteiro é a **compatibilidade de tipo**, ou seja, um ponteiro deve ser do mesmo tipo do dado que ele aponta.
+O princípio básico de um ponteiro é a compatibilidade de tipo, ou seja, um ponteiro deve ser do mesmo tipo do dado que ele aponta.
 
 ```{.c}
 double meta = 7.5;
@@ -67,7 +69,7 @@ O quadro abaixo ilustra a memória depois das declarações do trecho de código
 : Ilustração da memória para um ponteiro
 :::
 
-Estamos usando endereços fictícios. Note que `meta_ptr` guarda o endereço de `meta`. Neste caso, dizemos que `meta_ptr` **aponta** para `meta`. 
+Estamos usando endereços fictícios. Note que `meta_ptr` guarda o endereço de `meta`. Neste caso, dizemos que `meta_ptr` aponta para `meta`. 
 
 Vamos explorar outro exemplo usando um diagrama que ilustra uma memória. 
 
@@ -98,7 +100,7 @@ Cada quadro é um bloco de memória que possui um endereço e um valor. Os ponte
 :::
 
 
-As variáveis `x` e `y` carregam dados que estão armazenados nos endereços `0x100` e `0x200`, respectivamente. A variável `p` é um ponteiro cujo conteúdo é `0x100`, portanto aponta para `x`. A variável `pp` é outro ponteiro, mas com conteúdo `0x300`, ou seja, aponta para o local com endereço `0x300`, que seria `p`. Isso mesmo que você pensou, um ponteiro de ponteiro. O código que representa esse diagrama pode ser o seguinte.
+As variáveis `x` e `y` carregam dados que estão armazenados nos endereços `0x100` e `0x200`, respectivamente. A variável `p` é um ponteiro cujo conteúdo é `0x100`, portanto aponta para `x`. A variável `pp` é outro ponteiro, mas com conteúdo `0x300`, ou seja, aponta para o local com endereço `0x300`, que seria `p`. Isso mesmo que você pensou, um ponteiro de ponteiro. 
 
 ```{.c code-line-numbers="false"}
 int x = 42;
@@ -109,10 +111,10 @@ int **pp = &p;
 
 Resumindo
 
-- x → contém 42 e está no endereço `0x100`;
-- y → contém 137 e está no endereço `0x200`;
-- p → contém `0x100` (o endereço de x);
-- pp → contém `0x300` (o endereço de p).
+- `x` contém `42` e está no endereço `0x100`;
+- `y` contém `137` e está no endereço `0x200`;
+- `p` contém `0x100` (o endereço de `x`);
+- `pp` contém `0x300` (o endereço de `p`).
 
 
 Vale salientar que há três declarações de ponteiros ligeiramente diferentes:
@@ -141,7 +143,7 @@ double *meta_ptr = &meta; // O operador & retorna o endereço na memória
 printf("*meta_ptr: %.2f\n", *meta_ptr); // *meta_ptr: 7.50
 ```
 
-Na segunda linha, criamos um ponteiro que aponta para `meta`. Na linha 3, o operador `*` serve para desreferenciar, ou seja, ao usar `*meta_ptr` na impressão, o C acessa o valor armazenado no endereço que `meta_ptr` aponta (7.5). 
+Na segunda linha, criamos um ponteiro que aponta para `meta`. Na linha 3, o operador `*` serve para desreferenciar, ou seja, ao usar `*meta_ptr` na impressão, o C acessa o valor armazenado no endereço que `meta_ptr` aponta, isto é, `7.5`. 
 
 ::: {.callout-tip}
 
@@ -220,7 +222,7 @@ Mudamos o valor de `meta` sem acessá-la diretamente. Isso é o poder dos pontei
 
 ::: {.callout-note icon="false" title="🎯 Desafio de Código"}
 
-- Crie um ponteiro `p` que aponte para uma variável `x = 5`.
+- Crie um ponteiro `p` que aponte para uma variável `int x = 5`.
 - Use o ponteiro para alterar `x` para `42`.
 - Depois, exiba o valor e o endereço de `x` no console.
 :::
@@ -245,7 +247,7 @@ int main(){
 
 ::: {.callout-note icon="false" title="🎯 Desafio de Código"}
 
-- Passo 1: Declare um ponteiro `ponteiro_chave` que aponte para a `chave_secreta`.
+- Passo 1: Declare um ponteiro `chave_ptr` que aponte para a `chave_secreta`.
 - Passo 2: Mude o valor da `chave_secreta` para 99 usando o ponteiro.
 - Passo 3: Imprima o valor da chave secreta.
     
@@ -267,8 +269,8 @@ int main() {
 
 int main() {
     int chave_secreta = 10;
-    int *ponteiro_chave = &chave_secreta;
-    *ponteiro_chave = 99;
+    int *chave_ptr = &chave_secreta;
+    *chave_ptr = 99;
 
     printf("chave_secreta: %d\n", chave_secreta);
     return 0;
@@ -437,10 +439,27 @@ Quando passamos o endereço (`&meta`) para a função `dobrar_meta`, a variável
 ```{.c code-line-numbers="false"}
 void foo(int a);
 void bar(int* a);
+void baz(int** a);
 ```
 
 Quando fazemos `foo(x)`, internamente é feita uma cópia do valor de `x`, ou seja, é criado `int a = x`.
-Do mesmo modo, quando fazemos `bar(&x)`, então é criado `int *a = &x`. Se usarmos os mesmos nomes, o C consegue diferenciar a variável da função da que vem como argumento.
+Do mesmo modo, quando fazemos `bar(&x)`, então é criado `int *a = &x`. Já para a função `baz`, devemos passar um endereço de um ponteiro, por exemplo, `baz(&p)` (onde `p` é um `int*`). Se usarmos os mesmos nomes, o C consegue diferenciar a variável da função da que vem como argumento. Resumindo:
+
+Considere
+
+```{.c code-line-numbers="false"}
+int x = 10;
+int *p = &x;
+```
+
+| Se a função é...	| Ela espera receber...	| Como você chama | O que pode fazer |
+|---|----|---|---|
+| `foo(int a)`	| Um valor inteiro |	`foo(x)` | Pode fazer cálculos com o 10, mas não toca no `x` original |
+| `bar(int* a)`	| Um endereço de um inteiro	| `bar(&x)` | Pode fazer cálculos com o 10 e alterar `x` |
+| `baz(int** a)`	| Um endereço de um ponteiro	| `baz(&p)` | Pode fazer cálculos com o 10 e alterar `x` e o ponteiro `p` |
+
+> Se você quer alterar o valor, passe um ponteiro.
+> Se você quer alterar para onde o ponteiro aponta, passe o endereço do ponteiro.
 :::
 
 ::: {.callout-note icon="false" title="🎯 Desafio de Código"}
@@ -477,6 +496,86 @@ int main(){
 ```
 :::
 
+
+::: {.callout-note icon="false" title="Exercício de Fixação"}
+Considere o código base abaixo:
+
+```c
+#include <stdio.h>
+
+int main() {
+    int x = 5;
+    int y = 10;
+    int *p = &x;
+
+    printf("x = %d\n", x);
+    printf("y = %d\n", y);
+    printf("*p = %d\n", *p);
+
+    return 0;
+}
+```
+
+Considere as funções a seguir independentemente.
+
+```{.c code-line-numbers="false"}
+void f1(int a) { a = a + 10; }
+```
+a) Qual chamada é válida?
+
+- `f1(x)`
+- `f1(&x)`
+- `f1(p)`
+
+b) Após a chamada correta, qual será o valor de `x`?
+
+
+```{.c code-line-numbers="false"}
+void f2(int *a) { *a = *a + 10; }
+```
+c) Qual chamada é válida?
+
+- `f2(x)`
+- `f2(&x)`
+- `f2(p)`
+
+d) Após a chamada correta, qual será o valor de `x`?
+
+```{.c code-line-numbers="false"}
+void f3(int **a) { **a = 99; }
+```
+e) Qual chamada é válida?
+
+- `f3(&x)`
+- `f3(p)`
+- `f3(&p)`
+
+f) Após a chamada correta, qual será o valor de `x`?
+
+```{.c code-line-numbers="false"}
+void f4(int **a, int *b) { *a = b; }
+```
+
+g) Qual chamada faz `p` passar a apontar para `y`?
+
+- `f4(p, &y)`
+- `f4(&p, y)`
+- `f4(&p, &y)`
+
+h) Após a chamada correta, qual será o valor impresso por `*p`?
+
+```{.c code-line-numbers="false"}
+void f5(int *a) {
+    int z = 50;
+    a = &z;
+}
+```
+
+i) Após a chamada `f5(p)`, `p` passa a apontar para `z`?
+
+:::
+
+
 ---
 
 Nesta unidade, você aprendeu
@@ -485,8 +584,9 @@ Nesta unidade, você aprendeu
 
 ✅ a modificar valores via ponteiros;
 
-✅ a passar variáveis por referência.
+✅ a passar variáveis por referência;
 
+✅ a modificar ponteiros.
 
 
 ::: {.callout-tip}

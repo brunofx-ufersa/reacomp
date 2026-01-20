@@ -1,5 +1,5 @@
 ---
-title: "Unidade 1 - Exercícios"
+title: "Exercícios"
 lang: pt
 toc-title: Conteúdo
 toc: false
