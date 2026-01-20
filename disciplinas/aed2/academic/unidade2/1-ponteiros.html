@@ -316,7 +316,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../disciplinas/aed2/academic/index.html"> 
+    <a class="nav-link" href="../../../../disciplinas.html"> 
 <span class="menu-text">Recursos</span></a>
   </li>  
   <li class="nav-item">
@@ -369,13 +369,13 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<p>Por muito tempo, construir estruturas de dados, como listas e árvores, exigia que os desenvolvedores as reescrevessem para cada tipo de dado. Era uma batalha constante: uma lista para números inteiros, outra para textos, outra para dados de usuários, e assim por diante. Essa repetição não apenas consumia tempo, mas também abria portas para erros e inconsistências.</p>
-<p>A ideia de estruturas genéricas é poder construir estruturas universais que podem ser aplicadas em qualquer projeto. Embora a linguagem C não tenha suporte nativo a “genéricos”, como C++ ou Java, a solução tradicional e elegante é usar ponteiros <code>void*</code> e funções de <em>callback</em>.</p>
+<p>Por muito tempo, construir estruturas de dados exigia que os desenvolvedores as reescrevessem para cada tipo de dado. Era uma batalha constante: uma lista para números inteiros, outra para textos, outra para dados de usuários, e assim por diante. Essa repetição não apenas consumia tempo, mas também abria portas para erros e inconsistências.</p>
+<p>A ideia central de estruturas genéricas é poder construir estruturas universais que podem ser aplicadas em qualquer projeto. Embora a linguagem C não tenha suporte nativo a “genéricos”, como C++ ou Java, a solução tradicional e elegante é usar ponteiros <code>void*</code> e funções de <em>callback</em>.</p>
 <p>Antes de explorarmos essas estruturas, é fundamental revisar e aprofundar dois conceitos cruciais: <strong>ponteiros</strong> e <strong>ponteiros de função</strong>.</p>
-<p>Como você deve ter visto em <strong>Algoritmos e Estruturas de Dados 1</strong>, um <strong>ponteiro</strong> é uma variável que armazena o <strong>endereço de memória</strong> de outra variável. Essa capacidade é a base para criar estruturas de dados com tamanho dinâmico (que crescem ou diminuem em tempo de execução).</p>
+<p>Como você deve ter visto em Algoritmos e Estruturas de Dados 1, um ponteiro é uma variável que armazena o endereço de memória de outra variável. Essa capacidade é a base para criar estruturas de dados com tamanho dinâmico (que crescem ou diminuem em tempo de execução).</p>
 <section id="sec-dec" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-dec">Declaração</h2>
-<p>Quando declaramos uma variável e atribuímos um valor, esse valor é armazenado em um endereço de memória. Quando escrevemos <code>int x = 10;</code>, ocorrem dois passos conceituais:</p>
+<p>Quando declaramos uma variável e atribuímos um valor, esse valor é armazenado em um endereço de memória. Quando escrevemos <code>int x = 10;</code>, por exemplo, ocorrem dois passos conceituais:</p>
 <ul>
 <li><strong>Declaração</strong>: o programa reserva um espaço na memória para armazenar um inteiro.</li>
 <li><strong>Atribuição</strong>: o valor <code>10</code> é gravado nesse espaço de memória, que possui um endereço.</li>
@@ -400,10 +400,11 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </tbody>
 </table>
 </div>
+<p>Para se obter o endereço da variável <code>x</code> escrevemos <code>&amp;x</code>. O resultado é modificado toda vez que você roda o programa. Como um ponteiro armazena um endereço de memória, um ponteiro para <code>x</code> seria declarado como <code>int* x_ptr = &amp;x</code>.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong><span class="text-warning">Se liga!</span></strong> A memória em si é ilustrada pelo endereço e conteúdo armazenado. A variável é apenas um rótulo que representa este par.</p>
-</div></div><p>O princípio básico de um ponteiro é a <strong>compatibilidade de tipo</strong>, ou seja, um ponteiro deve ser do mesmo tipo do dado que ele aponta.</p>
+</div></div><p>O princípio básico de um ponteiro é a compatibilidade de tipo, ou seja, um ponteiro deve ser do mesmo tipo do dado que ele aponta.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">double</span> meta <span class="op">=</span> <span class="fl">7.5</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="dt">double</span> <span class="op">*</span>meta_ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span> <span class="co">// O operador &amp; retorna o endereço na memória</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Na linha 2, <code>meta_ptr</code> guarda o endereço da variável <code>meta</code>.</p>
@@ -432,7 +433,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </tbody>
 </table>
 </div>
-<p>Estamos usando endereços fictícios. Note que <code>meta_ptr</code> guarda o endereço de <code>meta</code>. Neste caso, dizemos que <code>meta_ptr</code> <strong>aponta</strong> para <code>meta</code>.</p>
+<p>Estamos usando endereços fictícios. Note que <code>meta_ptr</code> guarda o endereço de <code>meta</code>. Neste caso, dizemos que <code>meta_ptr</code> aponta para <code>meta</code>.</p>
 <p>Vamos explorar outro exemplo usando um diagrama que ilustra uma memória.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -466,17 +467,17 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong><span class="text-warning">Se liga!</span></strong> Cada quadro é um bloco de memória que possui um endereço e um valor. Os ponteiros estão em laranja.</p>
-</div></div><p>As variáveis <code>x</code> e <code>y</code> carregam dados que estão armazenados nos endereços <code>0x100</code> e <code>0x200</code>, respectivamente. A variável <code>p</code> é um ponteiro cujo conteúdo é <code>0x100</code>, portanto aponta para <code>x</code>. A variável <code>pp</code> é outro ponteiro, mas com conteúdo <code>0x300</code>, ou seja, aponta para o local com endereço <code>0x300</code>, que seria <code>p</code>. Isso mesmo que você pensou, um ponteiro de ponteiro. O código que representa esse diagrama pode ser o seguinte.</p>
+</div></div><p>As variáveis <code>x</code> e <code>y</code> carregam dados que estão armazenados nos endereços <code>0x100</code> e <code>0x200</code>, respectivamente. A variável <code>p</code> é um ponteiro cujo conteúdo é <code>0x100</code>, portanto aponta para <code>x</code>. A variável <code>pp</code> é outro ponteiro, mas com conteúdo <code>0x300</code>, ou seja, aponta para o local com endereço <code>0x300</code>, que seria <code>p</code>. Isso mesmo que você pensou, um ponteiro de ponteiro.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="dv">137</span><span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">**</span>pp <span class="op">=</span> <span class="op">&amp;</span>p<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Resumindo</p>
 <ul>
-<li>x → contém 42 e está no endereço <code>0x100</code>;</li>
-<li>y → contém 137 e está no endereço <code>0x200</code>;</li>
-<li>p → contém <code>0x100</code> (o endereço de x);</li>
-<li>pp → contém <code>0x300</code> (o endereço de p).</li>
+<li><code>x</code> contém <code>42</code> e está no endereço <code>0x100</code>;</li>
+<li><code>y</code> contém <code>137</code> e está no endereço <code>0x200</code>;</li>
+<li><code>p</code> contém <code>0x100</code> (o endereço de <code>x</code>);</li>
+<li><code>pp</code> contém <code>0x300</code> (o endereço de <code>p</code>).</li>
 </ul>
 <p>Vale salientar que há três declarações de ponteiros ligeiramente diferentes:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span>meta_ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span></span>
@@ -493,7 +494,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">double</span> meta <span class="op">=</span> <span class="fl">7.5</span><span class="op">;</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="dt">double</span> <span class="op">*</span>meta_ptr <span class="op">=</span> <span class="op">&amp;</span>meta<span class="op">;</span> <span class="co">// O operador &amp; retorna o endereço na memória</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>printf<span class="op">(</span><span class="st">"*meta_ptr: </span><span class="sc">%.2f\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>meta_ptr<span class="op">);</span> <span class="co">// *meta_ptr: 7.50</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Na segunda linha, criamos um ponteiro que aponta para <code>meta</code>. Na linha 3, o operador <code>*</code> serve para desreferenciar, ou seja, ao usar <code>*meta_ptr</code> na impressão, o C acessa o valor armazenado no endereço que <code>meta_ptr</code> aponta (7.5).</p>
+<p>Na segunda linha, criamos um ponteiro que aponta para <code>meta</code>. Na linha 3, o operador <code>*</code> serve para desreferenciar, ou seja, ao usar <code>*meta_ptr</code> na impressão, o C acessa o valor armazenado no endereço que <code>meta_ptr</code> aponta, isto é, <code>7.5</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -578,7 +579,7 @@ Dica
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Crie um ponteiro <code>p</code> que aponte para uma variável <code>x = 5</code>.</li>
+<li>Crie um ponteiro <code>p</code> que aponte para uma variável <code>int x = 5</code>.</li>
 <li>Use o ponteiro para alterar <code>x</code> para <code>42</code>.</li>
 <li>Depois, exiba o valor e o endereço de <code>x</code> no console.</li>
 </ul>
@@ -622,7 +623,7 @@ Dica
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Passo 1: Declare um ponteiro <code>ponteiro_chave</code> que aponte para a <code>chave_secreta</code>.</li>
+<li>Passo 1: Declare um ponteiro <code>chave_ptr</code> que aponte para a <code>chave_secreta</code>.</li>
 <li>Passo 2: Mude o valor da <code>chave_secreta</code> para 99 usando o ponteiro.</li>
 <li>Passo 3: Imprima o valor da chave secreta.</li>
 </ul>
@@ -652,8 +653,8 @@ Dica
 <span id="cb10-2"><a href="#cb10-2"></a></span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a>    <span class="dt">int</span> chave_secreta <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>    <span class="dt">int</span> <span class="op">*</span>ponteiro_chave <span class="op">=</span> <span class="op">&amp;</span>chave_secreta<span class="op">;</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a>    <span class="op">*</span>ponteiro_chave <span class="op">=</span> <span class="dv">99</span><span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="dt">int</span> <span class="op">*</span>chave_ptr <span class="op">=</span> <span class="op">&amp;</span>chave_secreta<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="op">*</span>chave_ptr <span class="op">=</span> <span class="dv">99</span><span class="op">;</span></span>
 <span id="cb10-7"><a href="#cb10-7"></a></span>
 <span id="cb10-8"><a href="#cb10-8"></a>    printf<span class="op">(</span><span class="st">"chave_secreta: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> chave_secreta<span class="op">);</span></span>
 <span id="cb10-9"><a href="#cb10-9"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
@@ -833,8 +834,51 @@ Importante
 <div class="callout-body-container callout-body">
 <p>Quando passamos o endereço (<code>&amp;meta</code>) para a função <code>dobrar_meta</code>, a variável <code>meta</code> interna vai armazenar em seu conteúdo um endereço de memória. Ou seja, ela é um ponteiro e, portanto, podemos desreferenciar. Por exemplo, considere as seguintes assinaturas de funções:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> foo<span class="op">(</span><span class="dt">int</span> a<span class="op">);</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bar<span class="op">(</span><span class="dt">int</span><span class="op">*</span> a<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Quando fazemos <code>foo(x)</code>, internamente é feita uma cópia do valor de <code>x</code>, ou seja, é criado <code>int a = x</code>. Do mesmo modo, quando fazemos <code>bar(&amp;x)</code>, então é criado <code>int *a = &amp;x</code>. Se usarmos os mesmos nomes, o C consegue diferenciar a variável da função da que vem como argumento.</p>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> bar<span class="op">(</span><span class="dt">int</span><span class="op">*</span> a<span class="op">);</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> baz<span class="op">(</span><span class="dt">int</span><span class="op">**</span> a<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Quando fazemos <code>foo(x)</code>, internamente é feita uma cópia do valor de <code>x</code>, ou seja, é criado <code>int a = x</code>. Do mesmo modo, quando fazemos <code>bar(&amp;x)</code>, então é criado <code>int *a = &amp;x</code>. Já para a função <code>baz</code>, devemos passar um endereço de um ponteiro, por exemplo, <code>baz(&amp;p)</code> (onde <code>p</code> é um <code>int*</code>). Se usarmos os mesmos nomes, o C consegue diferenciar a variável da função da que vem como argumento. Resumindo:</p>
+<p>Considere</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 30%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Se a função é…</th>
+<th>Ela espera receber…</th>
+<th>Como você chama</th>
+<th>O que pode fazer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>foo(int a)</code></td>
+<td>Um valor inteiro</td>
+<td><code>foo(x)</code></td>
+<td>Pode fazer cálculos com o 10, mas não toca no <code>x</code> original</td>
+</tr>
+<tr class="even">
+<td><code>bar(int* a)</code></td>
+<td>Um endereço de um inteiro</td>
+<td><code>bar(&amp;x)</code></td>
+<td>Pode fazer cálculos com o 10 e alterar <code>x</code></td>
+</tr>
+<tr class="odd">
+<td><code>baz(int** a)</code></td>
+<td>Um endereço de um ponteiro</td>
+<td><code>baz(&amp;p)</code></td>
+<td>Pode fazer cálculos com o 10 e alterar <code>x</code> e o ponteiro <code>p</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>Se você quer alterar o valor, passe um ponteiro. Se você quer alterar para onde o ponteiro aponta, passe o endereço do ponteiro.</p>
+</blockquote>
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled" title="🎯 Desafio de Código">
@@ -848,9 +892,9 @@ Importante
 </div>
 <div class="callout-body-container callout-body">
 <p>Implemente uma função <code>swap</code> que troque os valores de duas variáveis. Teste na <code>main</code> com:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>swap<span class="op">(&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y<span class="op">);</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"x = </span><span class="sc">%d</span><span class="st">, y = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">,</span> y<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>swap<span class="op">(&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y<span class="op">);</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"x = </span><span class="sc">%d</span><span class="st">, y = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">,</span> y<span class="op">);</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Saída esperada: <code>x = 20, y = 10</code></p>
 </div>
 </div>
@@ -866,29 +910,112 @@ Importante
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span><span class="pp"> </span></span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="dt">void</span> swap<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>b<span class="op">){</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>    <span class="dt">int</span> aux <span class="op">=</span> <span class="op">*</span>a<span class="op">;</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>    a<span class="op">*</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a>    b<span class="op">*</span> <span class="op">=</span> aux<span class="op">;</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="op">}</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a></span>
-<span id="cb21-9"><a href="#cb21-9"></a><span class="dt">int</span> main<span class="op">(){</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
-<span id="cb21-11"><a href="#cb21-11"></a>    swap<span class="op">(&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y<span class="op">);</span></span>
-<span id="cb21-12"><a href="#cb21-12"></a>    printf<span class="op">(</span><span class="st">"x = </span><span class="sc">%d</span><span class="st">, y = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">,</span> y<span class="op">);</span></span>
-<span id="cb21-13"><a href="#cb21-13"></a></span>
-<span id="cb21-14"><a href="#cb21-14"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb21-15"><a href="#cb21-15"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb22-1"><a href="#cb22-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span><span class="pp"> </span></span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="dt">void</span> swap<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>b<span class="op">){</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>    <span class="dt">int</span> aux <span class="op">=</span> <span class="op">*</span>a<span class="op">;</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>    a<span class="op">*</span> <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>    b<span class="op">*</span> <span class="op">=</span> aux<span class="op">;</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="op">}</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a>    swap<span class="op">(&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y<span class="op">);</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a>    printf<span class="op">(</span><span class="st">"x = </span><span class="sc">%d</span><span class="st">, y = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">,</span> y<span class="op">);</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a></span>
+<span id="cb22-14"><a href="#cb22-14"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercício de Fixação">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Exercício de Fixação
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Considere o código base abaixo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb23-1"><a href="#cb23-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>    <span class="dt">int</span> y <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>    <span class="dt">int</span> <span class="op">*</span>p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a></span>
+<span id="cb23-8"><a href="#cb23-8"></a>    printf<span class="op">(</span><span class="st">"x = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a>    printf<span class="op">(</span><span class="st">"y = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> y<span class="op">);</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>    printf<span class="op">(</span><span class="st">"*p = </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>p<span class="op">);</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a></span>
+<span id="cb23-12"><a href="#cb23-12"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb23-13"><a href="#cb23-13"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Considere as funções a seguir independentemente.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f1<span class="op">(</span><span class="dt">int</span> a<span class="op">)</span> <span class="op">{</span> a <span class="op">=</span> a <span class="op">+</span> <span class="dv">10</span><span class="op">;</span> <span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="a">
+<li>Qual chamada é válida?</li>
+</ol>
+<ul>
+<li><code>f1(x)</code></li>
+<li><code>f1(&amp;x)</code></li>
+<li><code>f1(p)</code></li>
+</ul>
+<ol start="2" type="a">
+<li>Após a chamada correta, qual será o valor de <code>x</code>?</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f2<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>a<span class="op">)</span> <span class="op">{</span> <span class="op">*</span>a <span class="op">=</span> <span class="op">*</span>a <span class="op">+</span> <span class="dv">10</span><span class="op">;</span> <span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="a">
+<li>Qual chamada é válida?</li>
+</ol>
+<ul>
+<li><code>f2(x)</code></li>
+<li><code>f2(&amp;x)</code></li>
+<li><code>f2(p)</code></li>
+</ul>
+<ol start="4" type="a">
+<li>Após a chamada correta, qual será o valor de <code>x</code>?</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f3<span class="op">(</span><span class="dt">int</span> <span class="op">**</span>a<span class="op">)</span> <span class="op">{</span> <span class="op">**</span>a <span class="op">=</span> <span class="dv">99</span><span class="op">;</span> <span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="5" type="a">
+<li>Qual chamada é válida?</li>
+</ol>
+<ul>
+<li><code>f3(&amp;x)</code></li>
+<li><code>f3(p)</code></li>
+<li><code>f3(&amp;p)</code></li>
+</ul>
+<ol start="6" type="a">
+<li>Após a chamada correta, qual será o valor de <code>x</code>?</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f4<span class="op">(</span><span class="dt">int</span> <span class="op">**</span>a<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>b<span class="op">)</span> <span class="op">{</span> <span class="op">*</span>a <span class="op">=</span> b<span class="op">;</span> <span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="7" type="a">
+<li>Qual chamada faz <code>p</code> passar a apontar para <code>y</code>?</li>
+</ol>
+<ul>
+<li><code>f4(p, &amp;y)</code></li>
+<li><code>f4(&amp;p, y)</code></li>
+<li><code>f4(&amp;p, &amp;y)</code></li>
+</ul>
+<ol start="8" type="a">
+<li>Após a chamada correta, qual será o valor impresso por <code>*p</code>?</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f5<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>a<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> z <span class="op">=</span> <span class="dv">50</span><span class="op">;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="op">&amp;</span>z<span class="op">;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="i">
+<li>Após a chamada <code>f5(p)</code>, <code>p</code> passa a apontar para <code>z</code>?</li>
+</ol>
 </div>
 </div>
 <hr>
 <p>Nesta unidade, você aprendeu</p>
 <p>✅ a declarar e desreferenciar ponteiros;</p>
 <p>✅ a modificar valores via ponteiros;</p>
-<p>✅ a passar variáveis por referência.</p>
+<p>✅ a passar variáveis por referência;</p>
+<p>✅ a modificar ponteiros.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

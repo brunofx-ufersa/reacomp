@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introdução aos Grafos – REAComp</title>
+<title>Programação em Julia – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,34 +23,29 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<link href="../../../../disciplinas/aed2/academic/unidade3/5-representacoes.html" rel="next">
-<link href="../../../../img/logo.png" rel="icon" type="image/png">
-<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-de1933d555e4b28134edcf86276d32cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
-<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
-<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
-<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown-init.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-de1933d555e4b28134edcf86276d32cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -87,44 +82,11 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
-<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="../styles/academic.css">
 </head>
 
-<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -293,9 +255,9 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">REAComp</span>
     </a>
   </div>
@@ -306,19 +268,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../disciplinas.html"> 
+    <a class="nav-link" href="../../disciplinas.html"> 
 <span class="menu-text">Recursos</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../contribuicao.html"> 
+    <a class="nav-link" href="../../contribuicao.html"> 
 <span class="menu-text">Participe</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Sobre</span></a>
   </li>  
 </ul>
@@ -338,15 +300,14 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introdução aos Grafos</h1>
+<h1 class="title">Programação em Julia</h1>
 </div>
 
 
@@ -363,262 +324,37 @@ window.Quarto = {
 </header>
 
 
-<p>Grafo é uma estrutura composta por um conjunto de elementos chamados vértices e por um conjunto de arestas, que representam relações entre esses vértices. Intuitivamente, um grafo pode ser representado como um conjunto de nós interconectados.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">graph LR
-  subgraph s1["Grafo A"]
-&nbsp; &nbsp; A((a)) 
-    B((b))
-&nbsp; &nbsp; C((c))
-&nbsp; &nbsp; D((d))
-  end
+<p>Bem-vindo(a) ao curso de <strong>Programação em Julia</strong>!</p>
+<!--
+> Este módulo está dividido em cinco temas centrais. 
+> Clique em qualquer um deles para expandir o conteúdo e navegar pelos subtópicos específicos.
 
-  subgraph s2["Grafo B"]
-    direction LR 
-&nbsp; &nbsp; A1((e)) 
-    B1((f))
-&nbsp; &nbsp; C1((g))
-&nbsp; &nbsp; D1((h))
-  end
 
-    A --- B
-&nbsp; &nbsp; B --- C
-&nbsp; &nbsp; C --- A
-&nbsp; &nbsp; B --- D
+ ::: {.callout-note collapse="true" icon="false"}
+## <i class="bi bi-tree"></i> Árvores
 
-&nbsp; &nbsp; A1 --&gt; B1
-&nbsp; &nbsp; B1 --&gt; C1
-&nbsp; &nbsp; C1 --&gt; A1
-&nbsp; &nbsp; C1 --&gt; D1
-
-    s1 ~~~ s2
-
-A:::WT
-B:::WT
-C:::WT
-D:::WT
-
-A1:::WT
-B1:::WT
-C1:::WT
-D1:::WT
-classDef WT fill:#FFFFFF
-style s1 stroke:none,fill:transparent
-style s2 stroke:none,fill:transparent
-
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p>Os vértices representam entidades do problema que o grafo modela. Por exemplo, os vértices podem representar computadores em uma rede ou cidades em um mapa. As arestas representam os relacionamentos entre essas entidades.</p>
-<p>Quando a relação entre dois vértices não possui orientação, dizemos que a aresta é bidirecional, e o grafo é chamado de grafo não-direcionado, como no Grafo A.</p>
-<p>Quando a relação possui orientação, isto é, vai de um vértice a outro em um único sentido, dizemos que a aresta é direcionada, e o grafo é chamado de grafo direcionado, como no Grafo B.</p>
-<!-- Em grafos direcionados, é comum interpretar as arestas como fluxos que seguem um sentido específico. Essa interpretação é útil em diversas aplicações, embora nem todo grafo represente, de fato, um fluxo físico. -->
-<section id="definição-formal" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="definição-formal">Definição Formal</h2>
-<p>Um grafo <span class="math inline">\(G\)</span> é um par <span class="math inline">\((\mathcal{V},\mathcal{E})\)</span> onde:</p>
-<ul>
-<li><span class="math inline">\(\mathcal{V}\)</span> é conjunto de vértices (ou nós)</li>
-<li><span class="math inline">\(\mathcal{E}\)</span> é conjunto de arestas</li>
-</ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong><span class="text-warning">Se liga!</span></strong> Em grafos não-direcionados, as arestas são representadas por pares não ordenados. Já para os direcionados, elas são representadas por pares ordenados.</p>
-</div></div><p>Para o grafo A, temos <span class="math display">\[\mathcal{V} = \{a,b,c,d\} \text{ e } \mathcal{E} = \{\{a,b\},\{a,c\},\{b,c\},\{b,d\}\}.\]</span> A aresta <span class="math inline">\(\{a,c\}\)</span> (notação de conjunto), por exemplo, significa que existe uma conexão entre os vértices <span class="math inline">\(a\)</span> e <span class="math inline">\(c\)</span>. Essa relação de adjacência é simétrica, ou seja, o grafo conecta <span class="math inline">\(a\)</span> a <span class="math inline">\(c\)</span> e vice-versa.</p>
-<p>Já para o grafo B, temos <span class="math display">\[\mathcal{V} = \{e,f,g,h\} \text{ e } \mathcal{E} = \{(e,f),(f,g),(g,e),(g,h)\}.\]</span> Nesse caso, a aresta <span class="math inline">\((g,e)\)</span> (notação de par ordenado), por exemplo, significa que existe uma aresta de <span class="math inline">\(g\)</span> para <span class="math inline">\(e\)</span>. Essa relação de adjacência não é simétrica, ou seja, não ocorre no sentido de <span class="math inline">\(e\)</span> para <span class="math inline">\(g\)</span>.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
+:::
+-->
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Importante
+<span class="screen-reader-only">Nota</span>Iniciante
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Um laço, ou <em>self loop</em>, em um grafo é uma aresta que conecta um vértice a ele mesmo. Arestas paralelas são duas ou mais arestas que conectam o mesmo par de vértices.</p>
-<ul>
-<li>Grafo simples: não admite laços nem arestas paralelas.</li>
-<li>Multigrafo: não admite laços.</li>
-<li>Pseudógrafo: admite laços e arestas paralelas.</li>
-</ul>
-<p>Todo grafo simples é um multigrafo e todo multigrafo é um pseudógrafo.</p>
-</div>
-</div>
-</section>
-<section id="grafo-ponderado" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="grafo-ponderado">Grafo Ponderado</h2>
-<p>Os grafos podem ser enriquecidos através da rotulação das arestas. É sabido que, em grafos com muitas arestas, designar cada uma por pares é uma tarefa tediosa. Além disso, uma aresta como par em si não traz valor semântico ao modelo. Portanto, é comum a rotulação das arestas para distinguir as relações ou representar ações, por exemplo.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">graph LR
-A((Fonte)) -- "coletar dados" --&gt; B((Processar))
-B -- "validar" --&gt; C((Aprovado))
-B -- "erro" --&gt; D((Rejeitado))
-C -- "armazenar" --&gt; E((BD))
-
-A:::WT
-B:::WT
-C:::WT
-D:::WT
-E:::WT
-
-classDef WT fill:#FFFFFF
-</pre>
-</div>
-<p></p></figure><p></p>
+<div class="list-group list-group-flush mb-0 text-decoration-none border-0">
+<p><a href="../../disciplinas/julia/1-instacao.html" class="list-group-item list-group-item-action text-body border-0">1. Instalação e Configuração</a></p>
 </div>
 </div>
 </div>
-<p>Rótulos permitem que o grafo modele sistemas mais ricos:</p>
-<ul>
-<li>redes de comunicação: tipo de protocolo;</li>
-<li>grafos de fluxo: tipo de recurso transportado;</li>
-<li>grafos de controle: condição de transição;</li>
-<li>grafos químicos ou biológicos: tipo de interação.</li>
-</ul>
-<p>As arestas também pode carregar um valor numérico conhecido como peso. Isso vem ao encontro da definição de grafo ponderado.</p>
-<p>Um grafo ponderado, ou valorado, é uma tupla <span class="math inline">\((\mathcal{V},\mathcal{E},\mathcal{w})\)</span>, onde <span class="math inline">\(\mathcal{V}\)</span> e <span class="math inline">\(\mathcal{E}\)</span> são nossos conhecidos conjuntos de vértices e arestas, respectivamente. Já <span class="math inline">\(\mathcal{w}:\mathcal{E}\rightarrow\mathbb{R}\)</span> é uma função que associa a cada aresta um custo (ou peso). Esse valor depende do problema que o grafo está modelando.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">graph LR
-A((a)) --&gt;|4| B((b))
-B --&gt;|2| C((c))
-C --&gt;|6| D((d))
-D --&gt;|3| A
-
-A:::WT
-B:::WT
-C:::WT
-D:::WT
-
-classDef WT fill:#FFFFFF
-</pre>
 </div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p>No grafo acima, o custo de ir de</p>
-<ul>
-<li><span class="math inline">\(a\)</span> para <span class="math inline">\(b\)</span> é 4</li>
-<li><span class="math inline">\(b\)</span> para <span class="math inline">\(c\)</span> é 2</li>
-<li><span class="math inline">\(c\)</span> para <span class="math inline">\(d\)</span> é 6</li>
-<li><span class="math inline">\(d\)</span> para <span class="math inline">\(a\)</span> é 3</li>
-</ul>
-<p>O custo não é uma propriedade geométrica do grafo, mas uma modelagem do problema. O custo pode representar distância, tempo, consumo de recursos, custo financeiro e até penalidades.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong><span class="text-warning">Se liga!</span></strong> Quando não há valor associado à aresta dizemos que o peso vale 1.</p>
-</div></div></section>
-<section id="aplicações" class="level2">
-<h2 class="anchored" data-anchor-id="aplicações">Aplicações</h2>
-<div id="11fc96be" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="3">
-<div>
-<figure class="figure">
-<p><img src="4-grafos_files/figure-html/cell-3-output-1.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Os grafos possuem um vasto número de aplicações, dentre as quais, podemos destacar:</p>
-<ul>
-<li>Redes sociais (arestas representam conexões)</li>
-<li>Infraestrutura (rodovias, roteamento)</li>
-<li>Dependências entre tarefas</li>
-<li>Compiladores</li>
-<li>Busca da web</li>
-<li>Análise de redes elétricas, biológicas e químicas</li>
-</ul>
-</section>
-<section id="propriedades" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="propriedades">Propriedades</h2>
-<section id="vizinhança" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="vizinhança">Vizinhança</h3>
-<p>Dizemos que os vértices <span class="math inline">\(v\)</span> e <span class="math inline">\(u\)</span> são vizinhos, se existe uma aresta que conecta ambos diretamente.</p>
-<p>A vizinhaça de um vértice <span class="math inline">\(v\)</span>, denotado <span class="math inline">\(\mathcal{N}(v)\)</span>, é o conjunto de vértices vizinhos à <span class="math inline">\(v\)</span>.</p>
-<p>Tomando como exemplo o grafo A, temos:</p>
-<ul>
-<li><span class="math inline">\(\mathcal{N}(a) = \{b, c\}\)</span><br>
-</li>
-<li><span class="math inline">\(\mathcal{N}(b) = \{a, c, d\}\)</span></li>
-<li><span class="math inline">\(\mathcal{N}(c) = \{a, b\}\)</span><br>
-</li>
-<li><span class="math inline">\(\mathcal{N}(d) = \{b\}\)</span></li>
-</ul>
-<p>Já para grafos direcionados, a noção de vizinho não é única. Nesse caso, temos a vizinhaça de entrada <span class="math inline">\(\mathcal{N^-}(v)\)</span> e a vizinhaça de saída <span class="math inline">\(\mathcal{N^+}(v)\)</span> que denotam o conjunto dos vértices que apontam para <span class="math inline">\(v\)</span> e o conjunto de vértices alcançáveis a partir de <span class="math inline">\(v\)</span> por uma aresta saindo de <span class="math inline">\(v\)</span>, respectivamente.</p>
-<p>Tomando como exemplo o grafo B, temos:</p>
-<ul>
-<li><span class="math inline">\(\mathcal{N^-}(e)=\{g\}\text{ e }\mathcal{N^+}(e)=\{f\}\)</span></li>
-<li><span class="math inline">\(\mathcal{N^-}(f)=\{e\}\text{ e }\mathcal{N^+}(f)=\{g\}\)</span></li>
-<li><span class="math inline">\(\mathcal{N^-}(g)=\{f\}\text{ e }\mathcal{N^+}(g)=\{e,h\}\)</span></li>
-<li><span class="math inline">\(\mathcal{N^-}(h)=\{g\}\text{ e }\mathcal{N^+}(h)=\emptyset\)</span></li>
-</ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong><span class="text-warning">Se liga!</span></strong> Os vértices que apontam para <span class="math inline">\(v\)</span> são chamados de antecessores. Já os que são apontados por <span class="math inline">\(v\)</span> são os sucessores.</p>
-</div></div></section>
-<section id="grau" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="grau">Grau</h3>
-<p>O grau de um vértice <span class="math inline">\(v\)</span>, denotado <span class="math inline">\(\mathcal{deg}(v)\)</span>, é a quantidade de arestas que incidem sobre ele.</p>
-<p>Tomando como exemplo o grafo A, temos: <span class="math display">\[\mathcal{deg}(a)=2, \mathcal{deg}(b)=3, \mathcal{deg}(c)=2 \text{ e }\mathcal{deg}(d)=1\]</span> Para um grafo direcionado, temos o grau de entrada <span class="math inline">\(\mathcal{deg^-}(v)\)</span> e o grau de saída <span class="math inline">\(\mathcal{deg^+}(v)\)</span> que denotam a quantidade de arestas que indidem e saem do vértice, respectivamente.</p>
-<p>Tomando como exemplo o grafo B, temos: <span class="math display">\[\mathcal{deg^-}(e)=\mathcal{deg^-}(f)=\mathcal{deg^-}(g)=\mathcal{deg^-}(h)=1\]</span> e <span class="math display">\[\mathcal{deg^+}(e)=1,\mathcal{deg^+}(f)=1,\mathcal{deg^+}(g)=2\text{ e }\mathcal{deg^+}(h)=0\]</span></p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong><span class="text-warning">Se liga!</span></strong><br>
-Em grafos não-direcionados, não há distinção entre grau de entrada e grau de saída.</p>
-</div></div><p>Note que <span class="math display">\[\mathcal{deg}(v)=|\mathcal{N}(v)|.\]</span> Ou seja, o grau de um vértice <span class="math inline">\(v\)</span> é o número total de vizinhos. De semelhante modo para os grafos direcionados: <span class="math display">\[\mathcal{deg^-}(v)=|\mathcal{N^-}(v)|\text{ e }\mathcal{deg^+}(v)=|\mathcal{N^+}(v)|\]</span></p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Dica
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Quanto todos os vértices de um grafo tem o mesmo grau <span class="math inline">\(k\)</span>, dizemos que o grafo é <span class="math inline">\(k\)</span>-regular.</p>
-</div>
-</div>
-</section>
-<section id="ordem-e-tamanho" class="level3">
-<h3 class="anchored" data-anchor-id="ordem-e-tamanho">Ordem e Tamanho</h3>
-<p>A ordem de um grafo é determinada pela quantidade de vértices, isto é, <span class="math inline">\(|\mathcal{V}|\)</span>. Já a quantidade de arestas, <span class="math inline">\(|\mathcal{E}|\)</span>, determina o seu tamanho.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Dica
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Um grafo cujo número de arestas é significativamente menor do que o número máximo possível é chamado de esparso. Caso contrário, um grafo com muitas arestas é dito denso.</p>
-</div>
-</div>
-<hr>
-<p>Nesta seção, introduzimos brevemente a estrutura de dados grafo. Nós</p>
-<p>✅ definimos essa estrutura;</p>
-<p>✅ estudamos suas representações computacionais.</p>
 
 
-</section>
-</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1034,15 +770,6 @@ Dica
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../../../../disciplinas/aed2/academic/unidade3/5-representacoes.html" class="pagination-link" aria-label="Representações Computacionais">
-        <span class="nav-page-text">Representações Computacionais</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
