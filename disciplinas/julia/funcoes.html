@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Primeiros Comandos – REAComp</title>
+<title>Funcões – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,35 +118,6 @@ gtag('js', new Date());
 gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -371,7 +342,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Primeiros Comandos</h1>
+<h1 class="title">Funcões</h1>
 </div>
 
 
@@ -388,134 +359,105 @@ window.Quarto = {
 </header>
 
 
-<section id="exibir-mensagens-simples" class="level2">
-<h2 class="anchored" data-anchor-id="exibir-mensagens-simples">Exibir mensagens simples</h2>
-<div id="d109c680" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>x <span class="op">=</span> <span class="fl">1</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">let</span> x <span class="op">=</span> <span class="fl">5</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>    <span class="pp">@show</span> x</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">end</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="pp">@show</span> x</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A sintaxe para definir um função em Julia segue a seguinte sequência:</p>
+<ul>
+<li>palavra reservada <code>function</code></li>
+<li>nome da função e seus paramêtros entre parenteses</li>
+<li>corpo da função</li>
+<li>finaliza com a palavra-chave <code>end</code></li>
+</ul>
+<p>Exemplo:</p>
+<div id="9de3a0ee" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">function</span> <span class="fu">saudacao</span>(nome)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="fu">println</span>(<span class="st">"Olá, "</span>, nome, <span class="st">"!"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">end</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">saudacao</span>(<span class="st">"Bruno"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">saudacao</span>(<span class="st">"Maria"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>x = 5
-x = 1</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>1</code></pre>
+<pre><code>Olá, Bruno!
+Olá, Maria!</code></pre>
 </div>
 </div>
-<p>Para exibir mensagens usamos a função <code>print</code> ou <code>println</code>. A diferença é que esta última insere uma quebra de linha no final .</p>
-<div id="ff976d1f" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">print</span>(<span class="st">"Olá, "</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">print</span>(<span class="st">"caro aluno</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">println</span>(<span class="st">"Bem-vindo ao tutorial de Julia!"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="sintaxe-compacta" class="level1">
+<h1>Sintaxe compacta</h1>
+<p>Julia também permite um sintaxe mais simples para definir uma função. Algo semelhante ao que fazemos quando estudamos funções matemáticas.</p>
+<div id="738dc1eb" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">triplo</span>(x) <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> x</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">println</span>(<span class="st">"triplo(7) = "</span>, <span class="fu">triplo</span>(<span class="fl">7</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Olá, caro aluno
-Bem-vindo ao tutorial de Julia!</code></pre>
+<pre><code>triplo(7) = 21</code></pre>
 </div>
 </div>
-<p>O caractere especial de escape de nova linha é <code>\n</code>.</p>
 </section>
-<section id="operações-básicas" class="level2">
-<h2 class="anchored" data-anchor-id="operações-básicas">Operações básicas</h2>
-<p>Julia conta com um série de operações matemáticas básicas.</p>
-<div id="dd05c265" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">println</span>(<span class="st">"Adição: "</span>, <span class="fl">5</span> <span class="op">+</span> <span class="fl">3</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">println</span>(<span class="st">"Subtração: "</span>, <span class="fl">5</span> <span class="op">-</span> <span class="fl">3</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">println</span>(<span class="st">"Multiplicação: "</span>, <span class="fl">5</span> <span class="op">*</span> <span class="fl">3</span>)</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="fu">println</span>(<span class="st">"Divisão: "</span>, <span class="fl">10</span> <span class="op">/</span> <span class="fl">3</span>)</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">println</span>(<span class="st">"Divisão inteira: "</span>, <span class="fl">10</span> <span class="op">÷</span> <span class="fl">3</span>)  <span class="co"># Você também pode usar div(10, 3)</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">println</span>(<span class="st">"Resto: "</span>, <span class="fl">10</span> <span class="op">%</span> <span class="fl">3</span>)</span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="fu">println</span>(<span class="st">"Potência: "</span>, <span class="fl">2</span><span class="op">^</span><span class="fl">8</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="função-com-múltiplos-parâmetros" class="level1">
+<h1>Função com múltiplos parâmetros</h1>
+<p>Os paramêtros são separados por vírgulas.</p>
+<div id="01c709bd" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">function</span> <span class="fu">soma</span>(a, b)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    resultado <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="cf">return</span> resultado</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">end</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">println</span>(<span class="st">"soma(5, 3) = "</span>, <span class="fu">soma</span>(<span class="fl">5</span>, <span class="fl">3</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Adição: 8
-Subtração: 2
-Multiplicação: 15
-Divisão: 3.3333333333333335
-Divisão inteira: 3
-Resto: 1
-Potência: 256</code></pre>
+<pre><code>soma(5, 3) = 8</code></pre>
 </div>
 </div>
-<p>Julia possui um mecanismo que permite escrever código usando notação matemática padrão (Unicode). O funcionamento é baseado em sequências de escape do LaTeX. Quando você digita uma sequência e aperta a tecla <code>Tab</code>, o editor converte aquilo instantaneamente no caractere correspondente.</p>
-<p>Exemplos:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Você digita</th>
-<th>Pressiona</th>
-<th>Resultado</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>\alpha</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\alpha\)</span></td>
-</tr>
-<tr class="even">
-<td><code>\beta</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\beta\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>\pi</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\pi\)</span></td>
-</tr>
-<tr class="even">
-<td><code>\sum</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\sum\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>\in</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\in\)</span></td>
-</tr>
-<tr class="even">
-<td><code>\div</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\div\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>\:smile:</code></td>
-<td>Tab</td>
-<td>😄</td>
-</tr>
-</tbody>
-</table>
+<p>A palavra-chave <code>return</code> é opcional, pois a função sempre retorna a última expressão.</p>
+<div id="c9e8c4bc" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">function</span> <span class="fu">multiplicacao</span>(a, b)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    a <span class="op">*</span> b  <span class="co"># Retorna automaticamente</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">end</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="fu">println</span>(<span class="st">"multiplicacao(4, 5) = "</span>, <span class="fu">multiplicacao</span>(<span class="fl">4</span>, <span class="fl">5</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>multiplicacao(4, 5) = 20</code></pre>
+</div>
+</div>
 </section>
-<section id="funções-matemáticas-básicas" class="level2">
-<h2 class="anchored" data-anchor-id="funções-matemáticas-básicas">Funções matemáticas básicas</h2>
-<p>Avançando um pouco mais na parte matemática, Julia nos fornece uma série de função muito simples de usar.</p>
-<div id="90cb7381" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">println</span>(<span class="st">"sqrt(16) = "</span>, <span class="fu">sqrt</span>(<span class="fl">16</span>))</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">println</span>(<span class="st">"cbrt(27) = "</span>, <span class="fu">cbrt</span>(<span class="fl">27</span>))</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">println</span>(<span class="st">"abs(-42) = "</span>, <span class="fu">abs</span>(<span class="op">-</span><span class="fl">42</span>))</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">println</span>(<span class="st">"sin(π/2) = "</span>, <span class="fu">sin</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">2</span>))</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">println</span>(<span class="st">"round(3.6) = "</span>, <span class="fu">round</span>(<span class="fl">3.6</span>))</span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="fu">println</span>(<span class="st">"floor(3.6) = "</span>, <span class="fu">floor</span>(<span class="fl">3.6</span>))</span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="fu">println</span>(<span class="st">"ceil(3.2) = "</span>, <span class="fu">ceil</span>(<span class="fl">3.2</span>))</span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="fu">println</span>(<span class="st">"trunc(3.9) = "</span>, <span class="fu">trunc</span>(<span class="fl">3.9</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="parâmetros-com-valores-padrão" class="level1">
+<h1>Parâmetros com valores padrão</h1>
+<p>Na função abaixo, o paramêtro <code>sobrenome</code> tonará o argumento opcional.</p>
+<div id="a4b91082" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">function</span> <span class="fu">cumprimento</span>(nome, sobrenome<span class="op">=</span><span class="st">"Silva"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="fu">println</span>(<span class="st">"Olá, "</span>, nome, <span class="st">" "</span>, sobrenome)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">end</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">cumprimento</span>(<span class="st">"João"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="fu">cumprimento</span>(<span class="st">"Maria"</span>, <span class="st">"Santos"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>sqrt(16) = 4.0
-cbrt(27) = 3.0
-abs(-42) = 42
-sin(π/2) = 1.0
-round(3.6) = 4.0
-floor(3.6) = 3.0
-ceil(3.2) = 4.0
-trunc(3.9) = 3.0</code></pre>
+<pre><code>Olá, João Silva
+Olá, Maria Santos</code></pre>
+</div>
+</div>
+</section>
+<section id="função-com-argumentos-nomeados" class="level1">
+<h1>Função com argumentos nomeados</h1>
+<p>Dentro de chamadas de função, o <code>;</code> separa argumentos posicionais de argumentos nomeados.</p>
+<div id="65098eb0" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">function</span> <span class="fu">exibir_dados</span>(; nome<span class="op">=</span><span class="st">""</span>, idade<span class="op">=</span><span class="fl">0</span>, email<span class="op">=</span><span class="st">""</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="fu">println</span>(<span class="st">"Nome: "</span>, nome)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="fu">println</span>(<span class="st">"Idade: "</span>, idade)</span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="fu">println</span>(<span class="st">"Email: "</span>, email)</span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">end</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="fu">exibir_dados</span>(nome<span class="op">=</span><span class="st">"Alice"</span>, email<span class="op">=</span><span class="st">"alice@example.com"</span>, idade<span class="op">=</span><span class="fl">28</span>)</span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="fu">println</span>(<span class="st">"---"</span>)</span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="fu">exibir_dados</span>(nome<span class="op">=</span><span class="st">"Bob"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nome: Alice
+Idade: 28
+Email: alice@example.com
+---
+Nome: Bob
+Idade: 0
+Email: </code></pre>
 </div>
 </div>
 <ul>
-<li>A função <code>sqrt</code>, <em>square root</em>, calcula a raiz quadrada</li>
-<li>A função <code>cbrt</code>, <em>cube root</em>, calcula a raiz cúbica</li>
-<li>A função <code>round</code> aplica um arredondamento</li>
-<li>A função <code>floor</code> calcula a piso de um número real</li>
-<li>A função <code>ceil</code> calcula o teto de um número real</li>
-<li>A função <code>trunc</code> aplica um truncamaento</li>
+<li>antes do <code>;</code>, os argumentos são posicionais</li>
+<li>depois do <code>;</code>, os argumentos são nomeados</li>
 </ul>
 
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Primeiros Comandos – REAComp</title>
+<title>Variáveis – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,6 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../disciplinas/julia/3-tiposnumericos.html" rel="next">
+<link href="../../disciplinas/julia/1-instalacao.html" rel="prev">
 <link href="../../img/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -371,7 +373,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Primeiros Comandos</h1>
+<h1 class="title">Variáveis</h1>
 </div>
 
 
@@ -388,55 +390,48 @@ window.Quarto = {
 </header>
 
 
-<section id="exibir-mensagens-simples" class="level2">
-<h2 class="anchored" data-anchor-id="exibir-mensagens-simples">Exibir mensagens simples</h2>
-<div id="d109c680" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>x <span class="op">=</span> <span class="fl">1</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">let</span> x <span class="op">=</span> <span class="fl">5</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>    <span class="pp">@show</span> x</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">end</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="pp">@show</span> x</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Variáveis são rótulos que atribuímos a valores armazenados na memória do computador. Suponha que você queira guardar os valores de largura e altura de um retângulo, digamos 4 e 8, para realizar o calculo da área, posteriormente. Neste caso, vamos escolher os rótulos <code>largura</code> e <code>altura</code> e atribuir os respectivos valores.</p>
+<div id="955048b3" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>largura <span class="op">=</span> <span class="fl">8</span>;   <span class="co"># ponto e vírgula opcional </span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>altura <span class="op">=</span> <span class="fl">4</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>area <span class="op">=</span> largura <span class="op">*</span> altura</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">println</span>(<span class="st">"Área = "</span>, area)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>x = 5
-x = 1</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>1</code></pre>
+<pre><code>Área = 32</code></pre>
 </div>
 </div>
-<p>Para exibir mensagens usamos a função <code>print</code> ou <code>println</code>. A diferença é que esta última insere uma quebra de linha no final .</p>
-<div id="ff976d1f" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">print</span>(<span class="st">"Olá, "</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">print</span>(<span class="st">"caro aluno</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">println</span>(<span class="st">"Bem-vindo ao tutorial de Julia!"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Olá, caro aluno
-Bem-vindo ao tutorial de Julia!</code></pre>
+<p>Usamos o sinal de igualdade para atribuir o valor da direita à variável na esquerda. Porém, na terceira linha, ao invés dos valores no lado direito, usamos as variáveis <code>largura</code> e <code>altura</code>. O programa irá acessar na memória os valores armazenados, substituí-los e efetuar a multiplicação.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
 </div>
 </div>
-<p>O caractere especial de escape de nova linha é <code>\n</code>.</p>
-</section>
-<section id="operações-básicas" class="level2">
-<h2 class="anchored" data-anchor-id="operações-básicas">Operações básicas</h2>
-<p>Julia conta com um série de operações matemáticas básicas.</p>
-<div id="dd05c265" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">println</span>(<span class="st">"Adição: "</span>, <span class="fl">5</span> <span class="op">+</span> <span class="fl">3</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">println</span>(<span class="st">"Subtração: "</span>, <span class="fl">5</span> <span class="op">-</span> <span class="fl">3</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">println</span>(<span class="st">"Multiplicação: "</span>, <span class="fl">5</span> <span class="op">*</span> <span class="fl">3</span>)</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="fu">println</span>(<span class="st">"Divisão: "</span>, <span class="fl">10</span> <span class="op">/</span> <span class="fl">3</span>)</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">println</span>(<span class="st">"Divisão inteira: "</span>, <span class="fl">10</span> <span class="op">÷</span> <span class="fl">3</span>)  <span class="co"># Você também pode usar div(10, 3)</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">println</span>(<span class="st">"Resto: "</span>, <span class="fl">10</span> <span class="op">%</span> <span class="fl">3</span>)</span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="fu">println</span>(<span class="st">"Potência: "</span>, <span class="fl">2</span><span class="op">^</span><span class="fl">8</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Adição: 8
-Subtração: 2
-Multiplicação: 15
-Divisão: 3.3333333333333335
-Divisão inteira: 3
-Resto: 1
-Potência: 256</code></pre>
+<div class="callout-body-container callout-body">
+<p>É importante destacar que esse símbolo de igualdade não tem o mesmo significado de quando o usamos em equações matemáticas.</p>
+<p>Na matemática, a igualdade é uma declaração de um fato:</p>
+<ul>
+<li>Estático: Uma vez que você diz que <span class="math inline">\(x = 5\)</span>, isso é uma verdade universal dentro daquele problema.</li>
+<li>Bidirecional: Se <span class="math inline">\(x = y\)</span>, então <span class="math inline">\(y = x\)</span>. A ordem não altera o sentido.</li>
+</ul>
+<p>Uma equação, por exemplo <span class="math inline">\(x + 2 = 10\)</span>, desafia você a descobrir qual valor mantém a igualdade verdadeira.</p>
+<p>Na programação, a igualdade é um comando de ação:</p>
+<ul>
+<li>Dinâmico: O valor de uma variável pode mudar ao longo do tempo. Primeiro <code>x = 5</code>, depois <code>x = 10</code>.</li>
+<li>Unidirecional: A ordem importa muito! <code>x = y</code> (copia o valor de <code>y</code> para <code>x</code>) é totalmente diferente de <code>y = x</code>.</li>
+</ul>
+<p>Na programação, escrevemos coisas como <code>x = x + 1</code>, que significa apenas:</p>
+<blockquote class="blockquote">
+<p>Pegue o valor atual de <code>x</code>, some <code>1</code> e guarde o resultado de volta em <code>x</code>.</p>
+</blockquote>
 </div>
 </div>
+<section id="caracteres-unicode" class="level1">
+<h1>Caracteres Unicode</h1>
 <p>Julia possui um mecanismo que permite escrever código usando notação matemática padrão (Unicode). O funcionamento é baseado em sequências de escape do LaTeX. Quando você digita uma sequência e aperta a tecla <code>Tab</code>, o editor converte aquilo instantaneamente no caractere correspondente.</p>
 <p>Exemplos:</p>
 <table class="caption-top table">
@@ -485,38 +480,35 @@ Potência: 256</code></pre>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="funções-matemáticas-básicas" class="level2">
-<h2 class="anchored" data-anchor-id="funções-matemáticas-básicas">Funções matemáticas básicas</h2>
-<p>Avançando um pouco mais na parte matemática, Julia nos fornece uma série de função muito simples de usar.</p>
-<div id="90cb7381" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">println</span>(<span class="st">"sqrt(16) = "</span>, <span class="fu">sqrt</span>(<span class="fl">16</span>))</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">println</span>(<span class="st">"cbrt(27) = "</span>, <span class="fu">cbrt</span>(<span class="fl">27</span>))</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">println</span>(<span class="st">"abs(-42) = "</span>, <span class="fu">abs</span>(<span class="op">-</span><span class="fl">42</span>))</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">println</span>(<span class="st">"sin(π/2) = "</span>, <span class="fu">sin</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">2</span>))</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">println</span>(<span class="st">"round(3.6) = "</span>, <span class="fu">round</span>(<span class="fl">3.6</span>))</span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="fu">println</span>(<span class="st">"floor(3.6) = "</span>, <span class="fu">floor</span>(<span class="fl">3.6</span>))</span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="fu">println</span>(<span class="st">"ceil(3.2) = "</span>, <span class="fu">ceil</span>(<span class="fl">3.2</span>))</span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="fu">println</span>(<span class="st">"trunc(3.9) = "</span>, <span class="fu">trunc</span>(<span class="fl">3.9</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Exemplo de código</p>
+<div id="88df5901" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>α <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>β <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>γ <span class="op">=</span> α <span class="op">+</span> β</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">println</span>(<span class="st">"α + β = "</span>, γ)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>sqrt(16) = 4.0
-cbrt(27) = 3.0
-abs(-42) = 42
-sin(π/2) = 1.0
-round(3.6) = 4.0
-floor(3.6) = 3.0
-ceil(3.2) = 4.0
-trunc(3.9) = 3.0</code></pre>
+<pre><code>α + β = 3.0</code></pre>
 </div>
 </div>
-<ul>
-<li>A função <code>sqrt</code>, <em>square root</em>, calcula a raiz quadrada</li>
-<li>A função <code>cbrt</code>, <em>cube root</em>, calcula a raiz cúbica</li>
-<li>A função <code>round</code> aplica um arredondamento</li>
-<li>A função <code>floor</code> calcula a piso de um número real</li>
-<li>A função <code>ceil</code> calcula o teto de um número real</li>
-<li>A função <code>trunc</code> aplica um truncamaento</li>
-</ul>
+</section>
+<section id="atribuição-múltipla" class="level1">
+<h1>Atribuição múltipla</h1>
+<p>Podemos atribuir vários valores de uma vez.</p>
+<div id="612c2974" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>a, b, c <span class="op">=</span> <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">println</span>(<span class="st">"a = "</span>, a, <span class="st">", b = "</span>, b, <span class="st">", c = "</span>, c)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a = 1, b = 2, c = 3</code></pre>
+</div>
+</div>
+<p>Veja como é muito simples trocar o valor de duas variáveis em Julia:</p>
+<div id="07990760" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a>a, b <span class="op">=</span> b, a</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">println</span>(<span class="st">"a = "</span>, a, <span class="st">", b = "</span>, b)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a = 2, b = 1</code></pre>
+</div>
+</div>
 
 
 </section>
@@ -935,6 +927,18 @@ trunc(3.9) = 3.0</code></pre>
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../disciplinas/julia/1-instalacao.html" class="pagination-link" aria-label="Instalação e Configuração">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Instalação e Configuração</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../disciplinas/julia/3-tiposnumericos.html" class="pagination-link" aria-label="Tipos Numéricos">
+        <span class="nav-page-text">Tipos Numéricos</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

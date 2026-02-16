@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Instalação e Configuração – REAComp</title>
+<title>Tipos Numéricos – REAComp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,6 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../disciplinas/julia/4-operacoesmatematicas.html" rel="next">
+<link href="../../disciplinas/julia/2-variaveis.html" rel="prev">
 <link href="../../img/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -307,7 +344,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Instalação e Configuração</h1>
+<h1 class="title">Tipos Numéricos</h1>
 </div>
 
 
@@ -324,37 +361,73 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<p>Para instalar a linguagen Julia em seu computador siga as instruções deste <em>link</em> <a href="https://julialang.org/downloads/" class="text-decoration-none">JULIA</a>.</p>
-<p>Julia possui um ambiente REPL (<em>read-eval-print loop</em>) para executar pequenas instruções diretamente no console, sem a necessidade de salvar o código em um arquivo e compilar, por exemplo. Para testar essa funcionalidade digite <code>julia</code> em sem terminal.</p>
-<p><img src="img/REPL.png" class="img-fluid"></p>
-<p>Se seu terminal aparecer algo semelhante à imagem acima, você conseguiu instalar Julia corretamente e está no ambiente REPL. Fique à vontade para experimentar o ambiente. Após escrever seu comando, tecle <code>Enter</code>. Por exemplo,</p>
-<p><img src="img/REPL-init.png" class="img-fluid"></p>
-<p>Para obter ajuda digite <code>?</code>. O terminal mudará de <code>julia&gt;</code> para <code>help?&gt;</code>. No modo de ajuda, você pode obter informações como:</p>
-<ul>
-<li>Documentação de funções e macros: <code>?print</code> ou <code>?@time</code></li>
-<li>Definições de tipos e estruturas: <code>?String</code> ou <code>?struct</code></li>
-<li>Operdores e sintaxe: <code>?+</code> ou <code>?&amp;&amp;</code></li>
-</ul>
-<p>Para sair do ambiente REPL digite <code>exit()</code>.</p>
-<section id="integração-com-visual-studio-code" class="level2">
-<h2 class="anchored" data-anchor-id="integração-com-visual-studio-code">Integração com Visual Studio Code</h2>
-<p>Inicie seu <a href="https://code.visualstudio.com/" class="text-decoration-none">VS Code</a>. Na lateral esquerda, clique no ícone de extensões (um botão com quatro quadrados) ou digite <code>Ctrt+Shift+X</code> para abir o painel de extensões. Em seguida, digite <code>julia</code> na barra de pesquisa e instale a extensão Julia Language Support. Pronto, pode fechar a aba da extensão e o painel de extensões.</p>
-<p><img src="img/extensao.png" class="img-fluid"></p>
-<p>Abra o explorador, o primeiro botão na barra vertical esquerda com ícone de duas folhas sobrepostas ou digite <code>Ctrt+Shift+E</code>. É nesse painel que você verá todas as suas pastas de arquivos.</p>
-<p>Clique em <code>Open Fold</code> e selecione uma pasta recem criada, por exemplo <code>Tutorial Julia</code>.</p>
-<p>Alternativamente, você pode criar a nova pasta e entrar nela. Com o botão direito do <em>mouse</em> selecione a opção <code>Abrir no Terminal</code>. Em seguida, digite <code>code .</code> e se abrirá uma instância do VS Code. Na verdade, em um terminal, ao digitar esse comando, o VS Code iniciará na pasta atual.</p>
-<p>No explorador, passe o <em>mouse</em> sob o nome do “projeto” que aparecerá os ícones de criar arquivo, criar pasta, atualizar e retrair pastas, respectivamente.</p>
-<p><img src="img/explorer.png" class="img-fluid"></p>
-<p>Crie um arquivo chamado <code>hello.jl</code> e feche o explorador. Antes de digitar qualquer código, vamos habilitar o salvamento automático. No menu <code>File</code>, escolha a opção <code>Auto Save</code>:</p>
-<p><img src="img/autosave.png" class="img-fluid"></p>
-<p>No arquivo <code>hello.jl</code>, digite o código <code>println("Hello, World!")</code>. Há três maneiras de avaliar esse código no VS Code.</p>
-<ul>
-<li><code>Shift+Enter</code>: avalia uma linha e move o cursor para a proxima linha</li>
-<li><code>Ctrl+Enter</code>: avalia uma linha e mantém o cursor na mesma linha</li>
-<li><code>Alt+Enter</code> avalia o arquvio inteiro</li>
-</ul>
-<p>Para nosso código, qualquer opção é válida, pois contém somente uma linha. Ao realizar um desses comandos pela primeira vez, uma janela de terminal será aberta com o REPL de Julia. Se você ver a mensagem “Hello, World!”, parabéns.</p>
-<p><img src="img/hello.png" class="img-fluid"></p>
+<p>Nos exemplos anteriores, não nos preocupamos com o tipo das variáveis. Julia é dinâmica por padrão, ou seja, você não precisa declarar que <code>x</code> é um inteiro. Simplesmente, escrevemos <code>x = 10</code> e o sistema resolve isso em tempo de execução. Além disso, esse mecanismo permite a reatribuição de tipo, ou seja, podemos fazer <code>x = "dez"</code> (agora <code>x</code> é uma cadeia de caracteres).</p>
+<p>Apesar dessa característica, Julia é opcionalmente tipada. Você pode usar o operador <code>::</code> para restringir tipos, o que ajuda o compilador e serve como documentação:</p>
+<div id="82b0ca87" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>x<span class="op">::</span><span class="dt">Int8 </span><span class="op">=</span> <span class="fl">10</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>No caso acima, estamos restringindo que <code>x</code> seja um inteiro de 8 bits. Podemos modificar seu valor, por exemplo <code>x = 35</code>, mas não podemos modificar seu tipo, por exemplo <code>x = "dez"</code>.</p>
+<p>Julia possui uma hierarquia de tipos. Cada tipo é classificado em abstrato ou concreto. Estes podem ser instanciados, enquanto aqueles não podem. Por exemplo, o tipo <code>Number</code> abrange os inteiros, reais, racionais e irracionais.</p>
+<div id="952e3330" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a>y<span class="op">::</span><span class="dt">Number </span><span class="op">=</span> <span class="fl">10</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">println</span>(<span class="st">"y = "</span>, y, <span class="st">"   | Tipo: "</span>, <span class="fu">typeof</span>(y))</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>y <span class="op">=</span> <span class="fu">Int8</span>(<span class="fl">127</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">println</span>(<span class="st">"y = "</span>, y, <span class="st">"  | Tipo: "</span>, <span class="fu">typeof</span>(y))</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>y <span class="op">=</span> <span class="fu">UInt8</span>(<span class="fl">255</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="fu">println</span>(<span class="st">"y = "</span>, y, <span class="st">"  | Tipo: "</span>, <span class="fu">typeof</span>(y))</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a>y <span class="op">=</span> <span class="fl">3.14</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="fu">println</span>(<span class="st">"y = "</span>, y, <span class="st">" | Tipo: "</span>, <span class="fu">typeof</span>(y))</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a>y <span class="op">=</span> <span class="fl">3.14f0</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="fu">println</span>(<span class="st">"y = "</span>, y, <span class="st">" | Tipo: "</span>, <span class="fu">typeof</span>(y))</span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a>y <span class="op">=</span> <span class="fl">1</span><span class="op">//</span><span class="fl">3</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="fu">println</span>(<span class="st">"y = "</span>, y, <span class="st">" | Tipo: "</span>, <span class="fu">typeof</span>(y))</span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a>y <span class="op">=</span> <span class="cn">pi</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="fu">println</span>(<span class="st">"y = "</span>, y, <span class="st">"    | Tipo: "</span>, <span class="fu">typeof</span>(y))</span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a>y <span class="op">=</span> <span class="cn">true</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="fu">println</span>(<span class="st">"y = "</span>, y, <span class="st">" | Tipo: "</span>, <span class="fu">typeof</span>(y))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y = 10   | Tipo: Int64
+y = 127  | Tipo: Int8
+y = 255  | Tipo: UInt8
+y = 3.14 | Tipo: Float64
+y = 3.14 | Tipo: Float32
+y = 1//3 | Tipo: Rational{Int64}
+y = π    | Tipo: Irrational{:π}
+y = true | Tipo: Bool</code></pre>
+</div>
+</div>
+<section id="verificação-de-tipo" class="level1">
+<h1>Verificação de tipo</h1>
+<p>Para verificar se uma variável é de determinado tipo usaremos a função <code>isa</code>:</p>
+<div id="3a2064eb" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a>numero <span class="op">=</span> <span class="fu">Int16</span>(<span class="fl">42</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">println</span>(<span class="st">"isa(numero, Int): "</span>, <span class="fu">isa</span>(numero, <span class="dt">Int</span>))</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">println</span>(<span class="st">"isa(numero, Signed): "</span>, <span class="fu">isa</span>(numero, <span class="dt">Signed</span>))</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">println</span>(<span class="st">"isa(numero, Integer): "</span>, <span class="fu">isa</span>(numero, <span class="dt">Integer</span>))</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">println</span>(<span class="st">"isa(numero, Number): "</span>, <span class="fu">isa</span>(numero, <span class="dt">Number</span>))</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">println</span>(<span class="st">"isa(numero, Any): "</span>, <span class="fu">isa</span>(numero, <span class="dt">Any</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>isa(numero, Int): false
+isa(numero, Signed): true
+isa(numero, Integer): true
+isa(numero, Number): true
+isa(numero, Any): true</code></pre>
+</div>
+</div>
+<p>Essa função também ser usada no modo infixo:</p>
+<div id="40ccdc6c" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">println</span>(<span class="st">"numero isa Int16: "</span>, numero isa <span class="dt">Int16</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>numero isa Int16: true</code></pre>
+</div>
+</div>
 
 
 </section>
@@ -773,6 +846,18 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../disciplinas/julia/2-variaveis.html" class="pagination-link" aria-label="Variáveis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Variáveis</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../disciplinas/julia/4-operacoesmatematicas.html" class="pagination-link" aria-label="Operações Básicas">
+        <span class="nav-page-text">Operações Básicas</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
