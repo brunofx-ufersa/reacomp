@@ -58,7 +58,8 @@ Bem-vindo(a) ao curso de **{{< meta title >}}**!
 [1. Introdução](unidade2/6-introhash.qmd){.list-group-item .list-group-item-action .text-body .border-0}
 [2. Função Hash](unidade2/7-funcaohash.qmd){.list-group-item .list-group-item-action .text-body .border-0}
 [3. Tratamento de Colisões](unidade2/8-colisoes.qmd){.list-group-item .list-group-item-action .text-body .border-0}
-[4. Tabela de Dispersão Dinâmica](unidade2/9-tabeladinamica.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[4. Implementações](unidade2/9-implementacoes.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[5. Tabela de Dispersão Dinâmica](unidade2/10-tabeladinamica.qmd){.list-group-item .list-group-item-action .text-body .border-0}
 
 :::
 :::

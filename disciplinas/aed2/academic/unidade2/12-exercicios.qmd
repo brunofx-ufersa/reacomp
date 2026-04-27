@@ -1,0 +1,68 @@
+---
+title: "Exercícios"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+    css: ../styles/academic.css
+filters: 
+    - quizdown    
+---
+
+::: {.callout-note icon="false" title="Exercício 1"}
+Mostre o estado de uma tabela hash de nove entradas quando quando inserimos as chaves $5, 28, 19, 15, 20, 33, 12, 17$ e $10$, nessa ordem. Considere a função hash $h(k) = k \bmod 9$ e o tratamento de colisões por encadeamento. 
+:::
+
+
+::: {.callout-note icon="false" title="Exercício 2"}
+Considere uma tabela de hash de tamanho $m = 1000$, que utiliza uma função hash $h(k) = ⌊m(kA \bmod 1)⌋$,
+onde $A = 0,618$. Calcule as localizações da tabela de hash nas quais as chaves $61, 62, 63, 64$ e $65$ serão mapeadas.
+:::
+
+
+::: {.callout-note icon="false" title="Exercício 3"}
+Construa um filtro de Bloom de tamanho $m = 13$ com três funções hash $h_1(k) = k \bmod 13$, $h_2(k) = 13k \bmod 13$
+e $h_3(k) = 31k \bmod 13$. Mostre o resultado da inserção dos elementos $5, 7, 13$ e $20$ no filtro de Bloom criado. Dê
+um exemplo de inserção que passaria a causar falsos positivos neste filtro.
+:::
+
+::: {.callout-note icon="false" title="Exercício 4"}
+Considere a inserção das chaves $10, 22, 31, 4, 15, 28, 17, 88$ e $59$ em uma tabela de hash com endereçamento aberto
+de tamanho $11$. Considere $h_1(k)=k\bmod m$ e $h_2=1 + (k \bmod (m − 1))$, examine os casos onde é utilizado
+
+(a) O método de sondagem linear: $h(k, i) = (h_1(k) + i) \bmod m$
+(b) O método de sondagem quadrática: $h(k, i) = (h_1(k) + i + 3i^2) \bmod m$
+(c) O método de hash duplo: $h(k, i) = (h_1(k) + ih_2(k)) \bmod m$
+:::
+
+
+::: {.callout-note icon="false" title="Exercício 5"}
+Sistemas computacionais modernos utilizam uma função de hash para armazenar as senhas dos seus usuários.
+O mecanismo mais comum utiliza uma função de hash h criptograficamente segura e a senha P do usuário da
+seguinte maneira:
+
+- Para cada usuário sorteia-se um conjunto de caracteres aleatórios $S$ chamado de "sal"
+- A senha $P$ do usuário é concatenada (salgada) com o sal $S$ resultando no texto $PS$. 
+  + Por exemplo, se a senha $P$ do usuário Juca era "Acuj12" e o sal "UHWP*@$", então $$PS = Acuj12UHWP*@\$ $$
+- Em um arquivo são armazenados o nome do usuário, $h(PS)$ e o sal utilizado. Por exemplo:
+
+| Usuário | Sal | h(PS)|
+|---------|-----|------|
+|Juca | UHWP*@$ | 98312798478374124294 |
+|Sabrina | Pklc#1P | 3123543824621721334 |
+
+- Toda vez que o usuário for se logar, ele digita o seu nome de usuário e a sua senha $P$. O sistema utiliza a
+tabela acima para encontrar o sal $S$ específico daquele usuário e salgar a senha informada (ou seja, concatena
+$P$ e $S$). Em seguida $h(PS)$ é calculado. Se o valor calculado corresponder ao valor armazenado na tabela o
+acesso é liberado e caso contrário o acesso é negado.
+
+Tendo em vista o mecanismo descrito acima, responda:
+
+(a) Por que não guardar a senha do usuário diretamente no arquivo?
+(b) Por que não guardar apenas o $h(P)$ na tabela? Por que é importante salgar a senha?
+(c) Qual é a importância de se utilizar um sal aleatório?
+(d) Por que o sal e a função de hash não precisam ser mantidas em segredo?
+:::

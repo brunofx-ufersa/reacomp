@@ -72,9 +72,10 @@ website:
         - disciplinas/aed2/academic/unidade2/6-introhash.qmd
         - disciplinas/aed2/academic/unidade2/7-funcaohash.qmd
         - disciplinas/aed2/academic/unidade2/8-colisoes.qmd
-        - disciplinas/aed2/academic/unidade2/9-tabeladinamica.qmd
-        - disciplinas/aed2/academic/unidade2/10-filtrobloom.qmd
-        - disciplinas/aed2/academic/unidade2/11-exercicios.qmd
+        - disciplinas/aed2/academic/unidade2/9-implementacoes.qmd
+        - disciplinas/aed2/academic/unidade2/10-tabeladinamica.qmd
+        - disciplinas/aed2/academic/unidade2/11-filtrobloom.qmd
+        - disciplinas/aed2/academic/unidade2/12-exercicios.qmd
     - section: "Introdução aos Grafos"
       id: grafo
       title: "Introdução aos Grafos"
@@ -91,7 +92,10 @@ website:
       background: light
       contents:
         - disciplinas/julia/1-instalacao.qmd
-        - disciplinas/julia/2-primeiroscomandos.qmd
+        - disciplinas/julia/2-variaveis.qmd
+        - disciplinas/julia/3-tiposnumericos.qmd
+        - disciplinas/julia/4-operacoesmatematicas.qmd
+        - disciplinas/julia/5-strings.qmd
 format:
   html:
     highlight-style: a11y
