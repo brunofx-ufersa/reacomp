@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercícios – REAComp</title>
+<title>Implementações – REAComp</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -20,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,27 +68,23 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../">
-<link href="../../../../disciplinas/aed2/academic/unidade2/10-filtrobloom.html" rel="prev">
+<link href="../../../../disciplinas/aed2/academic/unidade2/10-tabeladinamica.html" rel="next">
+<link href="../../../../disciplinas/aed2/academic/unidade2/8-colisoes.html" rel="prev">
 <link href="../../../../img/logo.png" rel="icon" type="image/png">
 <script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-70be5ccd51f03de5ce195d75fadf0882.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-de1933d555e4b28134edcf86276d32cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
-<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
-<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
-<script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown-init.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-34575fde07f77f1a0690b65c46f49266.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-1b6a66472d344ebf811c0ef97d58ab79.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-34575fde07f77f1a0690b65c46f49266.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -65,17 +99,17 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "Nenhum resultado",
-    "search-matching-documents-text": "documentos correspondentes",
-    "search-copy-link-title": "Copiar link para a busca",
-    "search-hide-matches-text": "Esconder correspondências adicionais",
-    "search-more-match-text": "mais correspondência neste documento",
-    "search-more-matches-text": "mais correspondências neste documento",
-    "search-clear-button-title": "Limpar",
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar",
-    "search-label": "Procurar"
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-ECV5W1L7CB"></script>
@@ -88,35 +122,6 @@ gtag('js', new Date());
 gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles/academic.css">
 </head>
@@ -290,14 +295,12 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">REAComp</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Procurar"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -321,8 +324,8 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo escuro"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo de leitor">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -342,7 +345,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercícios</h1>
+<h1 class="title">Implementações</h1>
 </div>
 
 
@@ -359,119 +362,123 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercício 1">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Exercício 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Mostre o estado de uma tabela hash de nove entradas quando quando inserimos as chaves <span class="math inline">\(5, 28, 19, 15, 20, 33, 12, 17\)</span> e <span class="math inline">\(10\)</span>, nessa ordem. Considere a função hash <span class="math inline">\(h(k) = k \bmod 9\)</span> e o tratamento de colisões por encadeamento.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercício 2">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Exercício 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Considere uma tabela de hash de tamanho <span class="math inline">\(m = 1000\)</span>, que utiliza uma função hash <span class="math inline">\(h(k) = ⌊m(kA \bmod 1)⌋\)</span>, onde <span class="math inline">\(A = 0,618\)</span>. Calcule as localizações da tabela de hash nas quais as chaves <span class="math inline">\(61, 62, 63, 64\)</span> e <span class="math inline">\(65\)</span> serão mapeadas.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercício 3">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Exercício 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Construa um filtro de Bloom de tamanho <span class="math inline">\(m = 13\)</span> com três funções hash <span class="math inline">\(h_1(k) = k \bmod 13\)</span>, <span class="math inline">\(h_2(k) = 13k \bmod 13\)</span> e <span class="math inline">\(h_3(k) = 31k \bmod 13\)</span>. Mostre o resultado da inserção dos elementos <span class="math inline">\(5, 7, 13\)</span> e <span class="math inline">\(20\)</span> no filtro de Bloom criado. Dê um exemplo de inserção que passaria a causar falsos positivos neste filtro.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercício 4">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Exercício 4
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Considere a inserção das chaves <span class="math inline">\(10, 22, 31, 4, 15, 28, 17, 88\)</span> e <span class="math inline">\(59\)</span> em uma tabela de hash com endereçamento aberto de tamanho <span class="math inline">\(11\)</span>. Considere <span class="math inline">\(h_1(k)=k\bmod m\)</span> e <span class="math inline">\(h_2=1 + (k \bmod (m − 1))\)</span>, examine os casos onde é utilizado</p>
-<ol type="a">
-<li>O método de sondagem linear: <span class="math inline">\(h(k, i) = (h_1(k) + i) \bmod m\)</span></li>
-<li>O método de sondagem quadrática: <span class="math inline">\(h(k, i) = (h_1(k) + i + 3i^2) \bmod m\)</span></li>
-<li>O método de hash duplo: <span class="math inline">\(h(k, i) = (h_1(k) + ih_2(k)) \bmod m\)</span></li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercício 5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Exercício 5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Sistemas computacionais modernos utilizam uma função de hash para armazenar as senhas dos seus usuários. O mecanismo mais comum utiliza uma função de hash h criptograficamente segura e a senha P do usuário da seguinte maneira:</p>
-<ul>
-<li>Para cada usuário sorteia-se um conjunto de caracteres aleatórios <span class="math inline">\(S\)</span> chamado de “sal”</li>
-<li>A senha <span class="math inline">\(P\)</span> do usuário é concatenada (salgada) com o sal <span class="math inline">\(S\)</span> resultando no texto <span class="math inline">\(PS\)</span>.
-<ul>
-<li>Por exemplo, se a senha <span class="math inline">\(P\)</span> do usuário Juca era “Acuj12” e o sal “UHWP*@$“, então <span class="math display">\[PS = Acuj12UHWP*@\$ \]</span></li>
-</ul></li>
-<li>Em um arquivo são armazenados o nome do usuário, <span class="math inline">\(h(PS)\)</span> e o sal utilizado. Por exemplo:</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Usuário</th>
-<th>Sal</th>
-<th>h(PS)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Juca</td>
-<td>UHWP*@$</td>
-<td>98312798478374124294</td>
-</tr>
-<tr class="even">
-<td>Sabrina</td>
-<td>Pklc#1P</td>
-<td>3123543824621721334</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Toda vez que o usuário for se logar, ele digita o seu nome de usuário e a sua senha <span class="math inline">\(P\)</span>. O sistema utiliza a tabela acima para encontrar o sal <span class="math inline">\(S\)</span> específico daquele usuário e salgar a senha informada (ou seja, concatena <span class="math inline">\(P\)</span> e <span class="math inline">\(S\)</span>). Em seguida <span class="math inline">\(h(PS)\)</span> é calculado. Se o valor calculado corresponder ao valor armazenado na tabela o acesso é liberado e caso contrário o acesso é negado.</li>
-</ul>
-<p>Tendo em vista o mecanismo descrito acima, responda:</p>
-<ol type="a">
-<li>Por que não guardar a senha do usuário diretamente no arquivo?</li>
-<li>Por que não guardar apenas o <span class="math inline">\(h(P)\)</span> na tabela? Por que é importante salgar a senha?</li>
-<li>Qual é a importância de se utilizar um sal aleatório?</li>
-<li>Por que o sal e a função de hash não precisam ser mantidas em segredo?</li>
-</ol>
-</div>
-</div>
+<section id="encadeamento-separado" class="level2">
+<h2 class="anchored" data-anchor-id="encadeamento-separado">Encadeamento Separado</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">// Definindo tamanho da tabela de dispersão</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="pp">#define TAMANHO_TABELA </span><span class="dv">10</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">// As colisões serão tratadas com um lista encadeada</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">typedef</span> <span class="kw">struct</span> No <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="dt">int</span> chave<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="kw">struct</span> No <span class="op">*</span>proximo<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="op">}</span> No<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">// A tabela de dispersão é um array de nós</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">typedef</span> <span class="kw">struct</span> hash <span class="op">{</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>    No<span class="op">*</span> buckets<span class="op">[</span>TAMANHO_TABELA<span class="op">];</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="op">}</span> HashTable<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="co">// Função para criar um novo nó na memória heap</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>No<span class="op">*</span> create<span class="op">(</span><span class="dt">int</span> chave<span class="op">);</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="co">// Função para imprimir uma lista</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="dt">void</span> print_list<span class="op">(</span>No<span class="op">*</span> lista<span class="op">);</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="co">// Função hash para calcular o indice na tabebla</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="dt">int</span> hash <span class="op">(</span><span class="dt">int</span> chave<span class="op">);</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="co">// Função para inicializar uma tabela de dispersão vazia</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>HashTable initialize<span class="op">();</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="co">// Função para inserir uma chave na tabela</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="dt">void</span> insert_table<span class="op">(</span>HashTable <span class="op">*</span>tabela<span class="op">,</span> <span class="dt">int</span> chave<span class="op">);</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a></span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="co">// Função para imprimir uma tabela</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a><span class="dt">void</span> print_table<span class="op">(</span>HashTable tabela<span class="op">);</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a></span>
+<span id="cb1-36"><a href="#cb1-36"></a><span class="co">// Função para apagar da memória uma tabela de dispersão</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a><span class="dt">void</span> delete_table<span class="op">(</span>HashTable tabela<span class="op">);</span></span>
+<span id="cb1-38"><a href="#cb1-38"></a></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a>    HashTable tabela <span class="op">=</span> initialize<span class="op">();</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a>    </span>
+<span id="cb1-42"><a href="#cb1-42"></a>    insert_table<span class="op">(&amp;</span>tabela<span class="op">,</span> <span class="dv">10</span><span class="op">);</span></span>
+<span id="cb1-43"><a href="#cb1-43"></a>    insert_table<span class="op">(&amp;</span>tabela<span class="op">,</span> <span class="dv">20</span><span class="op">);</span></span>
+<span id="cb1-44"><a href="#cb1-44"></a>    insert_table<span class="op">(&amp;</span>tabela<span class="op">,</span> <span class="dv">30</span><span class="op">);</span></span>
+<span id="cb1-45"><a href="#cb1-45"></a>    insert_table<span class="op">(&amp;</span>tabela<span class="op">,</span> <span class="dv">25</span><span class="op">);</span></span>
+<span id="cb1-46"><a href="#cb1-46"></a>    </span>
+<span id="cb1-47"><a href="#cb1-47"></a>    print_table<span class="op">(</span>tabela<span class="op">);</span></span>
+<span id="cb1-48"><a href="#cb1-48"></a>    delete_table<span class="op">(</span>tabela<span class="op">);</span>   </span>
+<span id="cb1-49"><a href="#cb1-49"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-50"><a href="#cb1-50"></a><span class="op">}</span></span>
+<span id="cb1-51"><a href="#cb1-51"></a></span>
+<span id="cb1-52"><a href="#cb1-52"></a></span>
+<span id="cb1-53"><a href="#cb1-53"></a>No<span class="op">*</span> create<span class="op">(</span><span class="dt">int</span> chave<span class="op">){</span></span>
+<span id="cb1-54"><a href="#cb1-54"></a>    No<span class="op">*</span> no <span class="op">=</span> <span class="op">(</span>No<span class="op">*)</span>malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>No<span class="op">));</span></span>
+<span id="cb1-55"><a href="#cb1-55"></a>    no<span class="op">-&gt;</span>chave <span class="op">=</span> chave<span class="op">;</span></span>
+<span id="cb1-56"><a href="#cb1-56"></a>    no<span class="op">-&gt;</span>proximo <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb1-57"><a href="#cb1-57"></a>    </span>
+<span id="cb1-58"><a href="#cb1-58"></a>    <span class="cf">return</span> no<span class="op">;</span></span>
+<span id="cb1-59"><a href="#cb1-59"></a><span class="op">}</span></span>
+<span id="cb1-60"><a href="#cb1-60"></a></span>
+<span id="cb1-61"><a href="#cb1-61"></a><span class="dt">void</span> print_list<span class="op">(</span>No<span class="op">*</span> lista<span class="op">){</span></span>
+<span id="cb1-62"><a href="#cb1-62"></a>    <span class="cf">while</span><span class="op">(</span>lista <span class="op">!=</span> NULL<span class="op">){</span></span>
+<span id="cb1-63"><a href="#cb1-63"></a>        printf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st"> -&gt; "</span><span class="op">,</span> lista<span class="op">-&gt;</span>chave<span class="op">);</span></span>
+<span id="cb1-64"><a href="#cb1-64"></a>        lista <span class="op">=</span> lista<span class="op">-&gt;</span>proximo<span class="op">;</span></span>
+<span id="cb1-65"><a href="#cb1-65"></a>    <span class="op">}</span></span>
+<span id="cb1-66"><a href="#cb1-66"></a>    printf<span class="op">(</span><span class="st">"NULL</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb1-67"><a href="#cb1-67"></a><span class="op">}</span></span>
+<span id="cb1-68"><a href="#cb1-68"></a></span>
+<span id="cb1-69"><a href="#cb1-69"></a><span class="dt">int</span> hash <span class="op">(</span><span class="dt">int</span> chave<span class="op">){</span></span>
+<span id="cb1-70"><a href="#cb1-70"></a>    <span class="cf">return</span> chave <span class="op">%</span> TAMANHO_TABELA<span class="op">;</span></span>
+<span id="cb1-71"><a href="#cb1-71"></a><span class="op">}</span></span>
+<span id="cb1-72"><a href="#cb1-72"></a></span>
+<span id="cb1-73"><a href="#cb1-73"></a>HashTable initialize<span class="op">(){</span></span>
+<span id="cb1-74"><a href="#cb1-74"></a>    HashTable tabela<span class="op">;</span></span>
+<span id="cb1-75"><a href="#cb1-75"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> TAMANHO_TABELA<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb1-76"><a href="#cb1-76"></a>        tabela<span class="op">.</span>buckets<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb1-77"><a href="#cb1-77"></a>    <span class="cf">return</span> tabela<span class="op">;</span>    </span>
+<span id="cb1-78"><a href="#cb1-78"></a><span class="op">}</span>    </span>
+<span id="cb1-79"><a href="#cb1-79"></a></span>
+<span id="cb1-80"><a href="#cb1-80"></a><span class="dt">void</span> insert_table<span class="op">(</span>HashTable <span class="op">*</span>tabela<span class="op">,</span> <span class="dt">int</span> chave<span class="op">){</span></span>
+<span id="cb1-81"><a href="#cb1-81"></a>     No<span class="op">*</span> no <span class="op">=</span> create<span class="op">(</span>chave<span class="op">);</span></span>
+<span id="cb1-82"><a href="#cb1-82"></a>     <span class="dt">int</span> indice <span class="op">=</span> hash<span class="op">(</span>chave<span class="op">);</span></span>
+<span id="cb1-83"><a href="#cb1-83"></a>     No<span class="op">*</span> head <span class="op">=</span> tabela<span class="op">-&gt;</span>buckets<span class="op">[</span>indice<span class="op">];</span></span>
+<span id="cb1-84"><a href="#cb1-84"></a>     <span class="co">// inserção na cabeça da lista</span></span>
+<span id="cb1-85"><a href="#cb1-85"></a>     no<span class="op">-&gt;</span>proximo <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb1-86"><a href="#cb1-86"></a>     tabela<span class="op">-&gt;</span>buckets<span class="op">[</span>indice<span class="op">]</span> <span class="op">=</span> no<span class="op">;</span>      </span>
+<span id="cb1-87"><a href="#cb1-87"></a><span class="op">}</span></span>
+<span id="cb1-88"><a href="#cb1-88"></a></span>
+<span id="cb1-89"><a href="#cb1-89"></a><span class="dt">void</span> print_table<span class="op">(</span>HashTable tabela<span class="op">){</span></span>
+<span id="cb1-90"><a href="#cb1-90"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> TAMANHO_TABELA<span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb1-91"><a href="#cb1-91"></a>        printf<span class="op">(</span><span class="st">"[</span><span class="sc">%d</span><span class="st">]: "</span><span class="op">,</span> i<span class="op">);</span></span>
+<span id="cb1-92"><a href="#cb1-92"></a>        print_list<span class="op">(</span>tabela<span class="op">.</span>buckets<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb1-93"><a href="#cb1-93"></a>    <span class="op">}</span>    </span>
+<span id="cb1-94"><a href="#cb1-94"></a><span class="op">}</span></span>
+<span id="cb1-95"><a href="#cb1-95"></a></span>
+<span id="cb1-96"><a href="#cb1-96"></a><span class="dt">void</span> delete_table<span class="op">(</span>HashTable tabela<span class="op">){</span></span>
+<span id="cb1-97"><a href="#cb1-97"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> TAMANHO_TABELA<span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb1-98"><a href="#cb1-98"></a>        free<span class="op">(</span>tabela<span class="op">.</span>buckets<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb1-99"><a href="#cb1-99"></a>    <span class="op">}</span>    </span>
+<span id="cb1-100"><a href="#cb1-100"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<script>
+window.addEventListener("scroll", function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById("progressBar").style.width = scrollPercent + "%";
+});
+</script>
 
 
+</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -510,12 +517,12 @@ window.Quarto = {
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copiada");
+      button.setAttribute("title", "Copied!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copiada");
+        button.setAttribute("data-bs-title", "Copied!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
@@ -887,11 +894,14 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../../disciplinas/aed2/academic/unidade2/10-filtrobloom.html" class="pagination-link" aria-label="Filtro de Bloom">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Filtro de Bloom</span>
+      <a href="../../../../disciplinas/aed2/academic/unidade2/8-colisoes.html" class="pagination-link" aria-label="Tratamento de Colisões">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tratamento de Colisões</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../../../disciplinas/aed2/academic/unidade2/10-tabeladinamica.html" class="pagination-link" aria-label="Tabela de Dispersão Dinâmica">
+        <span class="nav-page-text">Tabela de Dispersão Dinâmica</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

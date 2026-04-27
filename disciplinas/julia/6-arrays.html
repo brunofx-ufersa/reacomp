@@ -361,7 +361,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <section id="criando-arrays" class="level1">
 <h1>Criando arrays</h1>
-<div id="a65ff5ac" class="cell" data-execution_count="1">
+<div id="a65ff5ac" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>array1 <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>]          <span class="co"># array de inteiros</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>array2 <span class="op">=</span> []                       <span class="co"># array vazio</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a>array3 <span class="op">=</span> [<span class="fl">1</span><span class="op">:</span><span class="fl">5</span>]                    <span class="co"># array do intervalo 1:5</span></span>
@@ -372,7 +372,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </section>
 <section id="acessando-elementos" class="level1">
 <h1>Acessando elementos</h1>
-<div id="6aae7b56" class="cell" data-execution_count="2">
+<div id="6aae7b56" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a>arr <span class="op">=</span> [<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>, <span class="fl">50</span>]</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">println</span>(<span class="st">"Array: "</span>, arr)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="fu">println</span>(<span class="st">"Primeiro elemento: "</span>, arr[<span class="fl">1</span>])</span>
@@ -392,7 +392,7 @@ Penúltimo: 40</code></pre>
 </section>
 <section id="fatiamento-slicing" class="level1">
 <h1>Fatiamento (slicing)</h1>
-<div id="7d769a0b" class="cell" data-execution_count="3">
+<div id="7d769a0b" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a>arr <span class="op">=</span> <span class="fu">collect</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">10</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">println</span>(<span class="st">"Array completo: "</span>, arr)</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="fu">println</span>(<span class="st">"arr[1:5] = "</span>, arr[<span class="fl">1</span><span class="op">:</span><span class="fl">5</span>])                  <span class="co"># do índice 1 ao 5</span></span>
@@ -408,7 +408,7 @@ arr[begin:2:end] = [1, 3, 5, 7, 9]</code></pre>
 </section>
 <section id="booleans-para-indexação" class="level1">
 <h1>Booleans para indexação</h1>
-<div id="5a7c5556" class="cell" data-execution_count="4">
+<div id="5a7c5556" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a>arr <span class="op">=</span> [<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>, <span class="fl">50</span>, <span class="fl">60</span>]</span>
 <span id="cb6-2"><a href="#cb6-2"></a>mascara <span class="op">=</span> [<span class="cn">true</span>, <span class="cn">false</span>, <span class="cn">true</span>, <span class="cn">false</span>, <span class="cn">true</span>, <span class="cn">false</span>]</span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="fu">println</span>(<span class="st">"arr[mascara] = "</span>, arr[mascara])</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
@@ -419,7 +419,7 @@ arr[begin:2:end] = [1, 3, 5, 7, 9]</code></pre>
 </section>
 <section id="operações-com-arrays" class="level1">
 <h1>Operações com arrays</h1>
-<div id="4fd4a539" class="cell" data-execution_count="5">
+<div id="4fd4a539" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1"></a>a <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>]</span>
 <span id="cb8-2"><a href="#cb8-2"></a>b <span class="op">=</span> [<span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>]</span>
 <span id="cb8-3"><a href="#cb8-3"></a></span>
@@ -437,7 +437,7 @@ a .^ 2 = [1, 4, 9]</code></pre>
 </section>
 <section id="concatenação" class="level1">
 <h1>Concatenação</h1>
-<div id="5d94a78f" class="cell" data-execution_count="6">
+<div id="5d94a78f" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1"></a>x <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>]</span>
 <span id="cb10-2"><a href="#cb10-2"></a>y <span class="op">=</span> [<span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>]</span>
 <span id="cb10-3"><a href="#cb10-3"></a></span>
@@ -450,7 +450,7 @@ a .^ 2 = [1, 4, 9]</code></pre>
 </section>
 <section id="métodos-úteis-de-array" class="level1">
 <h1>Métodos úteis de array</h1>
-<div id="022f95c5" class="cell" data-execution_count="7">
+<div id="022f95c5" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1"></a>arr <span class="op">=</span> [<span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">9</span>, <span class="fl">2</span>, <span class="fl">6</span>]</span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="fu">println</span>(<span class="st">"Array: "</span>, arr)</span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="fu">println</span>(<span class="st">"length(arr) = "</span>, <span class="fu">length</span>(arr))    <span class="co"># Tamanho</span></span>
@@ -476,7 +476,7 @@ unique(arr) = [3, 1, 4, 5, 9, 2, 6]</code></pre>
 </section>
 <section id="adicionando-e-removendo-elementos" class="level1">
 <h1>Adicionando e removendo elementos</h1>
-<div id="159b978d" class="cell" data-execution_count="8">
+<div id="159b978d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1"></a>arr <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>]</span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="fu">println</span>(<span class="st">"Array inicial: "</span>, arr)</span>
 <span id="cb14-3"><a href="#cb14-3"></a></span>
@@ -502,7 +502,7 @@ Após popfirst!(arr): [1, 2, 3]</code></pre>
 </section>
 <section id="range-intervalo" class="level1">
 <h1>RANGE (intervalo)</h1>
-<div id="221a7488" class="cell" data-execution_count="9">
+<div id="221a7488" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1"></a>r1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="fu">println</span>(<span class="st">"1:10 = "</span>, <span class="fu">collect</span>(r1))</span>
 <span id="cb16-3"><a href="#cb16-3"></a></span>
@@ -527,7 +527,7 @@ Após popfirst!(arr): [1, 2, 3]</code></pre>
 </section>
 <section id="criando-matrizes" class="level1">
 <h1>Criando matrizes</h1>
-<div id="6b0e52c7" class="cell" data-execution_count="10">
+<div id="6b0e52c7" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1"></a>m1 <span class="op">=</span> [<span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span>; <span class="fl">4</span> <span class="fl">5</span> <span class="fl">6</span>; <span class="fl">7</span> <span class="fl">8</span> <span class="fl">9</span>]  <span class="co"># 3x3</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="fu">println</span>(<span class="st">"Matriz 3x3:"</span>)</span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="fu">println</span>(m1)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
@@ -539,7 +539,7 @@ Após popfirst!(arr): [1, 2, 3]</code></pre>
 </section>
 <section id="matriz-zeros" class="level1">
 <h1>Matriz zeros</h1>
-<div id="a837c45a" class="cell" data-execution_count="11">
+<div id="a837c45a" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1"></a>m_zeros <span class="op">=</span> <span class="fu">zeros</span>(<span class="fl">3</span>, <span class="fl">4</span>)</span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="fu">println</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Matriz de zeros (3x4):"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3"></a><span class="fu">println</span>(m_zeros)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
@@ -552,7 +552,7 @@ Matriz de zeros (3x4):
 </section>
 <section id="matriz-uns" class="level1">
 <h1>Matriz uns</h1>
-<div id="bb7d93e3" class="cell" data-execution_count="12">
+<div id="bb7d93e3" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1"></a>m_ones <span class="op">=</span> <span class="fu">ones</span>(<span class="fl">2</span>, <span class="fl">3</span>)</span>
 <span id="cb22-2"><a href="#cb22-2"></a><span class="fu">println</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Matriz de uns (2x3):"</span>)</span>
 <span id="cb22-3"><a href="#cb22-3"></a><span class="fu">println</span>(m_ones)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
@@ -565,7 +565,7 @@ Matriz de uns (2x3):
 </section>
 <section id="acessando-elementos-da-matriz" class="level1">
 <h1>Acessando elementos da matriz</h1>
-<div id="f60be12f" class="cell" data-execution_count="13">
+<div id="f60be12f" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1"></a>m <span class="op">=</span> [<span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span>; <span class="fl">4</span> <span class="fl">5</span> <span class="fl">6</span>; <span class="fl">7</span> <span class="fl">8</span> <span class="fl">9</span>]</span>
 <span id="cb24-2"><a href="#cb24-2"></a><span class="fu">println</span>(<span class="st">"Matriz:"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, m)</span>
 <span id="cb24-3"><a href="#cb24-3"></a><span class="fu">println</span>(<span class="st">"m[1, 1] = "</span>, m[<span class="fl">1</span>, <span class="fl">1</span>])  <span class="co"># Elemento (1,1)</span></span>
@@ -584,7 +584,7 @@ m[:, 2] = [2, 5, 8]</code></pre>
 </section>
 <section id="operações-com-matrizes" class="level1">
 <h1>Operações com matrizes</h1>
-<div id="b56ca650" class="cell" data-execution_count="14">
+<div id="b56ca650" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1"></a>A <span class="op">=</span> [<span class="fl">1</span> <span class="fl">2</span>; <span class="fl">3</span> <span class="fl">4</span>]</span>
 <span id="cb26-2"><a href="#cb26-2"></a>B <span class="op">=</span> [<span class="fl">5</span> <span class="fl">6</span>; <span class="fl">7</span> <span class="fl">8</span>]</span>
 <span id="cb26-3"><a href="#cb26-3"></a></span>
@@ -604,7 +604,7 @@ A' (transposta) =[1 3; 2 4]</code></pre>
 </section>
 <section id="tuplas-imutáveis" class="level1">
 <h1>TUPLAS (imutáveis)</h1>
-<div id="dd8dc9d7" class="cell" data-execution_count="15">
+<div id="dd8dc9d7" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1"></a>tupla1 <span class="op">=</span> (<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>)</span>
 <span id="cb28-2"><a href="#cb28-2"></a>tupla2 <span class="op">=</span> (<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
 <span id="cb28-3"><a href="#cb28-3"></a>tupla_mista <span class="op">=</span> (<span class="fl">1</span>, <span class="st">"texto"</span>, <span class="fl">3.14</span>)</span>
@@ -621,7 +621,7 @@ tupla_mista = (1, "texto", 3.14)</code></pre>
 </section>
 <section id="acessando-elementos-1" class="level1">
 <h1>Acessando elementos</h1>
-<div id="062b81e4" class="cell" data-execution_count="16">
+<div id="062b81e4" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">println</span>(<span class="st">"tupla1[1] = "</span>, tupla1[<span class="fl">1</span>])</span>
 <span id="cb30-2"><a href="#cb30-2"></a><span class="fu">println</span>(<span class="st">"tupla1[end] = "</span>, tupla1[<span class="kw">end</span>])</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -632,7 +632,7 @@ tupla1[end] = 3</code></pre>
 </section>
 <section id="desempacotamento" class="level1">
 <h1>Desempacotamento</h1>
-<div id="963d8f93" class="cell" data-execution_count="17">
+<div id="963d8f93" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1"></a>a, b, c <span class="op">=</span> tupla1</span>
 <span id="cb32-2"><a href="#cb32-2"></a><span class="fu">println</span>(<span class="st">"Desempacotamento: a="</span>, a, <span class="st">", b="</span>, b, <span class="st">", c="</span>, c)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -645,7 +645,7 @@ tupla1[end] = 3</code></pre>
 </section>
 <section id="criando-dicionários" class="level1">
 <h1>Criando dicionários</h1>
-<div id="e849cce6" class="cell" data-execution_count="18">
+<div id="e849cce6" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1"></a>dict1 <span class="op">=</span> <span class="fu">Dict</span>(<span class="st">"nome"</span> <span class="op">=&gt;</span> <span class="st">"Julia"</span>, <span class="st">"versão"</span> <span class="op">=&gt;</span> <span class="fl">1.9</span>, <span class="st">"ano"</span> <span class="op">=&gt;</span> <span class="fl">2023</span>)</span>
 <span id="cb34-2"><a href="#cb34-2"></a>dict2 <span class="op">=</span> <span class="fu">Dict</span>(<span class="fl">1</span> <span class="op">=&gt;</span> <span class="st">"um"</span>, <span class="fl">2</span> <span class="op">=&gt;</span> <span class="st">"dois"</span>, <span class="fl">3</span> <span class="op">=&gt;</span> <span class="st">"três"</span>)</span>
 <span id="cb34-3"><a href="#cb34-3"></a></span>
@@ -659,7 +659,7 @@ dict2 = Dict(2 =&gt; "dois", 3 =&gt; "três", 1 =&gt; "um")</code></pre>
 </section>
 <section id="acessando-valores" class="level1">
 <h1>Acessando valores</h1>
-<div id="f47f1b35" class="cell" data-execution_count="19">
+<div id="f47f1b35" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">println</span>(<span class="st">"dict1[nome] = "</span>, dict1[<span class="st">"nome"</span>])</span>
 <span id="cb36-2"><a href="#cb36-2"></a><span class="fu">println</span>(<span class="st">"dict2[2] = "</span>, dict2[<span class="fl">2</span>])</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -670,7 +670,7 @@ dict2[2] = dois</code></pre>
 </section>
 <section id="adicionando-elementos" class="level1">
 <h1>Adicionando elementos</h1>
-<div id="b7f4087d" class="cell" data-execution_count="20">
+<div id="b7f4087d" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb38-1"><a href="#cb38-1"></a>dict1[<span class="st">"tipo"</span>] <span class="op">=</span> <span class="st">"linguagem"</span></span>
 <span id="cb38-2"><a href="#cb38-2"></a><span class="fu">println</span>(<span class="st">"Após adicionar: "</span>, dict1)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -680,7 +680,7 @@ dict2[2] = dois</code></pre>
 </section>
 <section id="checando-se-chave-existe" class="level1">
 <h1>Checando se chave existe</h1>
-<div id="83bcb03f" class="cell" data-execution_count="21">
+<div id="83bcb03f" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">println</span>(<span class="st">"haskey(dict1, nome) = "</span>, <span class="fu">haskey</span>(dict1, <span class="st">"nome"</span>))</span>
 <span id="cb40-2"><a href="#cb40-2"></a><span class="fu">println</span>(<span class="st">"haskey(dict1, xyz) = "</span>, <span class="fu">haskey</span>(dict1, <span class="st">"xyz"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -691,7 +691,7 @@ haskey(dict1, xyz) = false</code></pre>
 </section>
 <section id="removendo-elementos" class="level1">
 <h1>Removendo elementos</h1>
-<div id="0ab571ab" class="cell" data-execution_count="22">
+<div id="0ab571ab" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">delete!</span>(dict1, <span class="st">"ano"</span>)</span>
 <span id="cb42-2"><a href="#cb42-2"></a><span class="fu">println</span>(<span class="st">"Após remover ano: "</span>, dict1)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -701,7 +701,7 @@ haskey(dict1, xyz) = false</code></pre>
 </section>
 <section id="iterando-sobre-dicionário" class="level1">
 <h1>Iterando sobre dicionário</h1>
-<div id="353a36de" class="cell" data-execution_count="23">
+<div id="353a36de" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">println</span>(<span class="st">"Iterando sobre dict2:"</span>)</span>
 <span id="cb44-2"><a href="#cb44-2"></a><span class="cf">for</span> (chave, valor) <span class="kw">in</span> dict2</span>
 <span id="cb44-3"><a href="#cb44-3"></a>    <span class="fu">println</span>(chave, <span class="st">" =&gt; "</span>, valor)</span>
@@ -716,7 +716,7 @@ haskey(dict1, xyz) = false</code></pre>
 </section>
 <section id="conjuntos-sets" class="level1">
 <h1>CONJUNTOS (Sets)</h1>
-<div id="0e672ffe" class="cell" data-execution_count="24">
+<div id="0e672ffe" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1"></a>set1 <span class="op">=</span> <span class="fu">Set</span>([<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span>])  <span class="co"># Automático: remove duplicatas</span></span>
 <span id="cb46-2"><a href="#cb46-2"></a><span class="fu">println</span>(<span class="st">"Set([1, 2, 3, 3, 4, 4, 4]) = "</span>, set1)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -726,7 +726,7 @@ haskey(dict1, xyz) = false</code></pre>
 </section>
 <section id="operações-de-set" class="level1">
 <h1>Operações de set</h1>
-<div id="0ab98fd6" class="cell" data-execution_count="25">
+<div id="0ab98fd6" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb48-1"><a href="#cb48-1"></a>set2 <span class="op">=</span> <span class="fu">Set</span>([<span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>])</span>
 <span id="cb48-2"><a href="#cb48-2"></a><span class="fu">println</span>(<span class="st">"union(set1, set2) = "</span>, <span class="fu">union</span>(set1, set2))  <span class="co"># União</span></span>
 <span id="cb48-3"><a href="#cb48-3"></a><span class="fu">println</span>(<span class="st">"intersect(set1, set2) = "</span>, <span class="fu">intersect</span>(set1, set2))  <span class="co"># Interseção</span></span>

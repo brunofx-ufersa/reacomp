@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Tabela de Dispersão Dinâmica – REAComp</title>
+<title>Filtro de Bloom – REAComp</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -30,24 +33,23 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../">
-<link href="../../../../disciplinas/aed2/academic/unidade2/10-filtrobloom.html" rel="next">
-<link href="../../../../disciplinas/aed2/academic/unidade2/8-colisoes.html" rel="prev">
+<link href="../../../../disciplinas/aed2/academic/unidade2/12-exercicios.html" rel="next">
+<link href="../../../../disciplinas/aed2/academic/unidade2/10-tabeladinamica.html" rel="prev">
 <link href="../../../../img/logo.png" rel="icon" type="image/png">
 <script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8f4e3aabaa80e3e650ae20f2c24f966b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-f54fa83ccd8f86fe7238c9291c42d766.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-70be5ccd51f03de5ce195d75fadf0882.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-cad2a2f8a56dfe71ee895a68e79c9b9a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-de1933d555e4b28134edcf86276d32cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../site_libs/bootstrap/bootstrap-85f656c2c7f93ac06e7fd2fdb5b95fcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-34575fde07f77f1a0690b65c46f49266.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-1b6a66472d344ebf811c0ef97d58ab79.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../site_libs/bootstrap/bootstrap-34575fde07f77f1a0690b65c46f49266.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdown.js"></script>
 <script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownKatex.js"></script>
 <script src="../../../../site_libs/quarto-contrib/quizdown-0.6.0/quizdownHighlight.js"></script>
@@ -90,7 +92,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -122,7 +124,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles/academic.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -291,8 +293,6 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">REAComp</span>
     </a>
@@ -336,14 +336,15 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Tabela de Dispersão Dinâmica</h1>
+<h1 class="title">Filtro de Bloom</h1>
 </div>
 
 
@@ -360,174 +361,167 @@ window.Quarto = {
 </header>
 
 
-<p>Imagine que você possui um pequeno móvel com quatro compartimentos:</p>
+<p>O <strong>filtro de Bloom</strong> é uma aplicação da tabela hash que indica a relação de pertinência de um elemento e um conjunto. O filtro possui duas saídas:</p>
 <ul>
-<li>No compartimento 1, você guarda um relógio <strong>Ferrari</strong>.</li>
-<li>No compartimento 2, um relógio <strong>Casio</strong>.</li>
-<li>No compartimento 3, um relógio <strong>Xing-ling</strong>.</li>
+<li><strong>Certeza</strong> que o elemento <strong>não pertence</strong>;</li>
+<li><strong>Talvez</strong> o elemento <strong>pertença</strong>;</li>
 </ul>
-<p>Com o tempo, você percebe que o móvel está ficando cheio e decide comprar um novo móvel com o dobro do tamanho, para ter mais espaço e organização.</p>
-<p>No novo móvel, os relógios podem ficar em posições diferentes, por exemplo, o Ferrari agora pode ser guardado no compartimento 6. Além disso, você adquire um novo relógio <strong>Rolex</strong> e o coloca no compartimento 5.</p>
-<p>Mais tarde, você decide presentear seu melhor amigo com o relógio <strong>Xing-ling</strong> e vender o <strong>Casio</strong>. Para completar, um dos relógios acaba sendo roubado. Agora, dos oito compartimentos, apenas um está ocupado. Um grande desperdício de espaço.</p>
-<p>Diante disso, você decide trocar novamente de móvel, voltando a um modelo menor, com quatro compartimentos, mais adequado à sua nova coleção.</p>
-<p>Esse comportamento de aumentar ou diminuir o número de compartimentos conforme a quantidade de itens é exatamente o que ocorre em uma tabela hash dinâmica.</p>
-<p>Em resumo, ela funciona como um “guarda-roupa inteligente” que se adapta automaticamente:</p>
+<p>Imagine que, em um sistema com milhares de usuários, seu programa deve verificar se um login está disponível. Não é salutar percorrer todos os usuários cadastrados devido a latência. O filtro de Bloom pode ser útil para casos como esse que envolvem verificação de pertinência de conjunto em sistemas de grande escala.</p>
+<section id="construção" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="construção">Construção</h2>
+<p>O filtro de Bloom é composto por um array de bits e algumas funções hash. Toda vez que um elemento é inserido no sistema, são calculados os hashs. Os resultados indicam as posições nas quais os bits devem se tornar <span class="math inline">\(1\)</span>.</p>
+<p>Por exemplo, considere um filtro com tamanho <span class="math inline">\(m=5\)</span> e as funções <span class="math inline">\(h_1(k)=k\bmod 5\)</span> e <span class="math inline">\(h_2(k)=(2k+3)\bmod 5\)</span>. Vamos inserir as chaves <span class="math inline">\(9\)</span> e <span class="math inline">\(11\)</span>:</p>
+<div style="width: 60%; margin: auto;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
 <ul>
-<li>Expande (aumenta) quando está ficando cheia, evitando que as “gavetas” fiquem apertadas (muitas colisões).</li>
-<li>Contrai (diminui) quando está quase vazia, economizando espaço e memória.</li>
+<li><span class="math inline">\(h_1(9)=9\bmod 5=4\)</span></li>
+<li><span class="math inline">\(h_2(9)=(2\cdot9+3)\bmod 5=21\bmod 5=1\)</span></li>
 </ul>
-<p>Essa capacidade de ajustar dinamicamente o tamanho permite que a tabela hash mantenha alto desempenho e uso eficiente de memória, independentemente do número de elementos armazenados.</p>
-<section id="fator-de-carga" class="level2">
-<h2 class="anchored" data-anchor-id="fator-de-carga">Fator de Carga</h2>
-<p>O fator de carga (load factor) determina quando uma tabela hash deve ser expandida ou contraída. Ele é definido como a razão entre o número de elementos armazenados e o número total de buckets (ou posições disponíveis na tabela): <span class="math display">\[\lambda = \frac{n}{m}\]</span> onde <span class="math inline">\(n\)</span> é o número de itens atualmente armazenados e <span class="math inline">\(m\)</span> o tamanho da tabela.</p>
-<p>O desempenho ideal de uma tabela hash depende de duas condições principais:</p>
+<p>Portanto, as posições <span class="math inline">\(1\)</span> e <span class="math inline">\(4\)</span> são setadas para <span class="math inline">\(1\)</span>:</p>
+<div style="width: 60%; margin: auto;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
 <ul>
-<li>uma função hash eficiente, que distribua os elementos de forma uniforme;</li>
-<li>um fator de carga baixo, que mantenha o número de colisões sob controle.</li>
+<li><span class="math inline">\(h_1(11)=11\bmod 5=1\)</span></li>
+<li><span class="math inline">\(h_2(11)=(2\cdot11+3)\bmod 5=25\bmod 5=0\)</span></li>
 </ul>
-<p>Se o fator de carga <span class="math inline">\(\lambda\)</span> for muito alto, o número de colisões tende a crescer, e as operações de busca, inserção e remoção podem degradar de O(1) para O(n). Por outro lado, se <span class="math inline">\(\lambda\)</span> for muito baixo, haverá desperdício de espaço, pois a tabela ficará com muitos buckets vazios.</p>
-<p>O coração de uma tabela hash dinâmica é justamente o processo de redimensionamento, que ajusta o tamanho da tabela conforme o fator de carga ultrapassa (ou cai abaixo de) determinados limites predefinidos. Por exemplo,</p>
+<p>Portanto, as posições <span class="math inline">\(0\)</span> e <span class="math inline">\(1\)</span> são setadas para <span class="math inline">\(1\)</span>:</p>
+<div style="width: 60%; margin: auto;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>De posse de nosso vetor de bits, vamos pesquisar se algumas chaves foram inseridas. Primeiro, a chave <span class="math inline">\(15\)</span>:</p>
 <ul>
-<li>expansão: quando <span class="math inline">\(\lambda&gt;0.7\)</span> ou <span class="math inline">\(\lambda&gt;0.75\)</span>;</li>
-<li>contração: quando <span class="math inline">\(\lambda&lt;0.25\)</span>.</li>
+<li><span class="math inline">\(h_1(15)=15\bmod 5=0\)</span></li>
+<li><span class="math inline">\(h_2(15)=(2\cdot15+3)\bmod 5=33\bmod 5=3\)</span></li>
 </ul>
-<p>O processo de redimensionamento normalmente envolve três etapas principais:</p>
-<p><strong>1. Criação de uma nova tabela</strong></p>
-<blockquote class="blockquote">
-<p>Uma nova tabela é alocada, geralmente com o dobro (em caso de expansão) ou metade (em caso de contração) do tamanho atual.</p>
-</blockquote>
-<p><strong>2. Re-hashing dos elementos</strong></p>
-<blockquote class="blockquote">
-<p>Todos os elementos da tabela antiga são reprocessados por uma nova função hash e inseridos na nova tabela, agora com índices recalculados conforme o novo tamanho.</p>
-</blockquote>
-<p><strong>3. Substituição</strong></p>
-<blockquote class="blockquote">
-<p>A tabela antiga é descartada, e a nova tabela passa a ser usada nas próximas operações de inserção, busca e remoção.</p>
-</blockquote>
-<p>Finalmente, podemos citar como vantagens e desvantagens da tabela hash dinâmica:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Vantagens</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Desvantagens</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p><strong>Otimização do espaço</strong></p>
-<p>A tabela se ajusta à quantidade de dados, evitando desperdício de memória quando há poucos itens e garantindo espaço suficiente para muitos itens.</p>
-<p><strong>Desempenho consistente</strong></p>
-<p>Ajuda a manter o fator de carga em níveis ótimos, garantindo que as operações de O(1) sejam mantidas na média.</p>
-<p><strong>Facilidade de uso</strong></p>
-<p>O desenvolvedor não precisa se preocupar em prever o tamanho da tabela, simplificando o desenvolvimento.</p>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p><strong>Custo do redimensionamento</strong></p>
-<p>A operação de redimensionamento pode ser custosa, pois envolve a criação de uma nova tabela e o re-hashing de todos os elementos. Isso pode levar a picos de latência inesperados.</p>
-<p><strong>Complexidade de implementação</strong></p>
-<p>É mais complexa de implementar do que uma tabela hash estática.</p>
-<p><strong>Cache ineficiente durante redimensionamento</strong></p>
-<p>Durante o re-hashing, os dados podem se espalhar por novas posições de memória, o que pode impactar o desempenho do cache da CPU temporariamente.</p>
-</div>
-</div>
-</div>
+<p>Verificamos no filtro que a posição <span class="math inline">\(0\)</span> está setada com bit <span class="math inline">\(1\)</span>, mas a posição <span class="math inline">\(3\)</span> não. Portanto, temos certeza que a chave <span class="math inline">\(15\)</span> nunca foi inserida.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong><span class="text-warning">Se liga!</span></strong> Se ao menos um posição for zero, então temos certeza que o elemento nunca foi inserido no sistema</p>
+</div></div><p>Agora, testemos o chave <span class="math inline">\(16\)</span>:</p>
+<ul>
+<li><span class="math inline">\(h_1(16)=16\bmod 5=1\)</span></li>
+<li><span class="math inline">\(h_2(16)=(2\cdot16+3)\bmod 5=35\bmod 5=0\)</span></li>
+</ul>
+<p>Verificamos no filtro que as posições <span class="math inline">\(0\)</span> e <span class="math inline">\(1\)</span> estão setadas com bit <span class="math inline">\(1\)</span>. Nesse caso, <strong>provavelmente</strong> a chave <span class="math inline">\(12\)</span> foi inserida. Como sabemos de antemão que esta chave não foi inserida, dizemos que é um falso positivo.</p>
+<p>O desafio de um criar um bom filtro é minimizar as ocorrências de falsos positivos (taxa de falso positivo). Para isso, devemos escolher bem o tamanho do array de bits e o número de funções hash em função do número de elementos que a serem inseridos e a taxa de falso positivo máxima aceitável. Não é nosso objetivo realizar esses cálculos, apenas deixar claro que o filtro de Bloom não é sobre armazenar dados, mas sobre gerenciar essa negociação entre espaço de memória, velocidade de consulta e probabilidade de erro.</p>
 <hr>
 <p>Nesta unidade, você aprendeu</p>
-<p>✅ o que é uma tabela de dispersão dinâmica</p>
-<p>✅ a calcular o fator de carga</p>
-<p>✅ a importância do fator de carga no desempenho de uma tabela de dispersão</p>
+<p>✅ o que é um filtro de Bloom</p>
+<p>✅ a construir um fitro de Bloom</p>
 <div class="quizdown">
-# O que caracteriza uma tabela hash dinâmica? 
+# O filtro de Bloom é usado principalmente para verificar...
 
-&gt; Pense na principal diferença em relação à tabela hash estática.
-
-1. [ ] Uma tabela que nunca sofre colisões.  
-1. [x] Uma tabela que ajusta automaticamente seu tamanho conforme a quantidade de elementos.  
-1. [ ] Uma tabela que usa múltiplas funções hash ao mesmo tempo.  
-1. [ ] Uma tabela implementada apenas com encadeamento separado.  
-
-# Quando uma tabela hash deve **expandir** seu tamanho? 
-
-&gt; Observe o limite superior do fator de carga.
-
-1. [ ] Quando $\lambda &lt; 0.25$  
-1. [x] Quando $\lambda &gt; 0.7$  
-1. [ ] Quando $\lambda = 0$  
-1. [ ] Quando $\lambda = 1$  
+1. [ ] a igualdade entre dois elementos.
+1. [x] a pertinência de um elemento a um conjunto.
+1. [ ] a ordenação de chaves em um vetor.
+1. [ ] a frequência de uso de uma função hash.
 
 
-# Quando uma tabela hash deve **contrair** seu tamanho?  
+# Marque todas as alternativas corretas sobre as possíveis respostas do filtro de Bloom.
 
-&gt; O texto cita o limite inferior.
-
-1. [x] Quando $\lambda &lt; 0.25$  
-1. [ ] Quando $\lambda &gt; 0.7$  
-1. [ ] Quando $\lambda &gt; 1$  
-1. [ ] Quando $\lambda = 0.75$  
+- [x] Certeza de que o elemento **não pertence**.
+- [x] **Talvez** o elemento **pertença**.
+- [ ] Certeza de que o elemento **pertence**.
+- [ ] O filtro sempre indica falsos positivos.
 
 
-# O que representa o fator de carga $\lambda$? 
+# O que indicam as funções hash em um filtro de Bloom?
 
-&gt; Lembre-se da fórmula apresentada.
-
-1. [x] A razão entre o número de elementos armazenados e o tamanho total da tabela.  
-1. [ ] A soma dos índices ocupados da tabela.  
-1. [ ] O número de colisões dividido pelo tamanho da tabela.  
-1. [ ] O tempo médio de inserção em O(n).  
+1. [ ] As chaves que devem ser removidas.
+1. [ ] As posições que devem permanecer com 0.
+1. [x] As posições do vetor de bits que devem ser setadas como 1.
+1. [ ] O tamanho máximo do array de bits.
 
 
-# Quais são as etapas do processo de redimensionamento?   
+# Quando ocorre um falso positivo em um filtro de Bloom?
 
-&gt; Coloque as três fases na ordem correta.
-
-1. Criação de uma nova tabela.  
-2. Re-hashing dos elementos.  
-3. Substituição da tabela antiga.  
-
-
-# Quais são vantagens da tabela hash dinâmica? 
-
-&gt; Elas estão listadas na seção de “Vantagens”.
-
-- [x] Otimização do uso de memória.  
-- [x] Manutenção do desempenho médio em O(1).  
-- [x] Facilidade de uso para o programador.  
-- [ ] Nenhum custo de redimensionamento.  
+1. [ ] Quando o filtro retorna que o elemento com certeza não pertence.
+1. [x] Quando o filtro indica que o elemento talvez pertença, mas ele nunca foi inserido.
+1. [ ] Quando todas as posições estão zeradas.
+1. [ ] Quando o filtro não possui nenhuma função hash.
 
 
-# Quais são desvantagens da tabela hash dinâmica?  
+# Se ao consultar o filtro de Bloom, **ao menos uma posição** correspondente estiver com bit 0, podemos afirmar que...
 
-&gt; Observe os impactos durante o redimensionamento.
-
-- [x] Custo alto durante o redimensionamento.  
-- [x] Maior complexidade de implementação.  
-- [x] Possível perda temporária de desempenho de cache.  
-- [ ] Impossibilidade de armazenar chaves duplicadas.  
+1. [x] o elemento **nunca foi inserido**.
+1. [ ] o elemento **talvez tenha sido inserido**.
+1. [ ] ocorreu um falso positivo.
+1. [ ] o filtro está inconsistente.
 
 
-# Se uma tabela tem 30 elementos e 50 posições, qual é o fator de carga $\lambda$?  
+# Coloque na ordem correta as etapas de inserção de um elemento no filtro de Bloom:
 
-&gt; Use $\lambda = \frac{n}{m}$.
-
-1. [ ] 0,25  
-1. [x] 0,6  
-1. [ ] 1,25  
-1. [ ] 0,15  
+1. Aplicar as funções hash ao elemento.
+2. Calcular as posições resultantes no vetor de bits.
+3. Setar as posições calculadas para 1.
+4. Atualizar o filtro de Bloom para consultas futuras.
 
 
-# Qual é a consequência de um fator de carga muito alto? 
+# Sobre as características de um filtro de Bloom, marque as afirmações corretas.
 
-&gt; Relacione com o número de colisões.
-
-1. [x] Aumento das colisões e degradação do desempenho.  
-1. [ ] Redução do número de colisões.  
-1. [ ] Melhoria no uso do cache da CPU.  
-1. [ ] Economia de memória.  
-
-# Qual analogia do texto representa melhor o comportamento da tabela hash dinâmica? 
-
-&gt; Pense no exemplo do móvel.
-
-1. [ ] Um armário que só aumenta e nunca diminui.  
-1. [x] Um móvel que expande e contrai conforme a quantidade de relógios.  
-1. [ ] Um cofre com compartimentos fixos.  
-1. [ ] Um sistema de arquivos linear.  
-
+- [x] Ele consome pouca memória.
+- [x] Pode gerar falsos positivos.
+- [ ] Armazena os dados originais.
+- [ ] Nunca erra suas respostas.
 </div>
 <div class="progress-bar" id="progressBar"></div>
 
@@ -959,13 +953,13 @@ window.addEventListener("scroll", function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../../disciplinas/aed2/academic/unidade2/8-colisoes.html" class="pagination-link" aria-label="Tratamento de Colisões">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tratamento de Colisões</span>
+      <a href="../../../../disciplinas/aed2/academic/unidade2/10-tabeladinamica.html" class="pagination-link" aria-label="Tabela de Dispersão Dinâmica">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tabela de Dispersão Dinâmica</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../../disciplinas/aed2/academic/unidade2/10-filtrobloom.html" class="pagination-link" aria-label="Filtro de Bloom">
-        <span class="nav-page-text">Filtro de Bloom</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../disciplinas/aed2/academic/unidade2/12-exercicios.html" class="pagination-link" aria-label="Exercícios">
+        <span class="nav-page-text">Exercícios</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
