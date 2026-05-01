@@ -1,0 +1,234 @@
+---
+title: "Estruturas de Dados"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+
+# Ranges
+
+Em Julia, ranges são estruturas compactas que representam sequências numéricas sem armazenar explicitamente todos os elementos. São especialmente úteis para iteração eficiente e construção de índices.
+
+A forma mais comum é `a:b`, que gera uma sequência com passo 1. Para maior controle, usa-se `a:s:b`, onde `s` é o passo. 
+
+```{julia}
+r1 = 1:10
+r2 = 1:2:10  # De 1 a 10, incremento de 2
+r3 = 10:-1:1  # De 10 a 1, decremento de 1
+r4 = 0:0.5:2  # Com floats
+```
+
+
+Por serem avaliados de forma lazy e armazenarem apenas os parâmetros da sequência, ranges são leves em memória e eficientes em desempenho.
+
+# Arrays
+
+Em Julia, arrays são estruturas fundamentais para armazenamento e manipulação eficiente de coleções de dados. Diferentemente de muitas linguagens, Julia trata arrays como objetos de primeira classe, altamente otimizados para computação numérica e científica. Um array pode ser unidimensional (vetor), bidimensional (matriz) ou de dimensões superiores, sendo indexado a partir de 1.
+
+## Criando arrays
+
+A criação de arrays é simples e expressiva: pode-se defini-los diretamente com colchetes, como [1, 2, 3], ou utilizar funções como `zeros`, `ones` e `rand` para gerar estruturas com valores específicos ou aleatórios. Além disso, Julia permite arrays heterogêneos, embora o desempenho seja maximizado quando todos os elementos possuem o mesmo tipo.
+
+```{julia}
+#| output: false
+array1 = [1, 2, 3, 4, 5]          # array de inteiros
+array2 = []                       # array vazio
+array3 = [1:5]                    # array do intervalo 1:5
+array4 = collect(1:5)             # converte range em array
+array5 = [1, "texto", 3.14, true] # array com diferentes tipos
+array6 = ['a', 'b', 'c']          # array de caracteres
+```
+
+## Acessando elementos
+
+```{julia}
+arr = [10, 20, 30, 40, 50]
+println("Array: ", arr)
+println("Primeiro elemento: ", arr[1])
+println("Primeiro elemento: ", arr[begin])
+println("Segundo elemento: ", arr[2])
+println("Último elemento: ", arr[end])
+println("Penúltimo: ", arr[end-1])
+```
+
+## Fatiamento (slicing)
+
+```{julia}
+arr = collect(1:10)
+println("Array completo: ", arr)
+println("arr[1:5] = ", arr[1:5])                  # do índice 1 ao 5
+println("arr[3:end] = ", arr[3:end])              # do índice 3 até o fim
+println("arr[begin:2:end] = ", arr[begin:2:end])  # a cada 2 elementos
+```
+
+<!-- # Booleans para indexação
+
+```{julia}
+arr = [10, 20, 30, 40, 50, 60]
+mascara = [true, false, true, false, true, false]
+println("arr[mascara] = ", arr[mascara])
+```
+-->
+
+## Operações com arrays
+
+```{julia}
+A = [1, 2, 3]
+B = [4, 5, 6]
+
+println("A = ", A, ", B = ", B)
+println("A .+ B = ", A .+ B)  # Adição elemento a elemento
+println("A .* B = ", A .* B)  # Multiplicação elemento a elemento
+println("A .^ 2 = ", A .^ 2)  # Potência em cada elemento
+```
+
+Em Julia, o operador de broadcast permite aplicar uma operação elemento a elemento sobre arrays de forma concisa e eficiente. Ele é indicado pelo ponto (`.`) antes do operador ou função, como em `.+`, `.*` ou `sin.`.
+
+Por exemplo, ao invés de escrever um laço para somar dois vetores, utiliza-se `A .+ B`, que realiza a soma componente a componente. Da mesma forma, `sin.(A)` aplica a função seno a cada elemento do array.
+
+Um diferencial importante é que o broadcast em Julia é _fused_: expressões como `A .+ B .* C` são executadas em uma única passagem, evitando alocações intermediárias e melhorando o desempenho.
+
+## Concatenação
+
+```{julia}
+x = [1 2 3]
+y = [4 5 6]
+
+xy = [x; y]  # Vertical
+display(xy)
+xy = [x y]   # Horizontal
+display(xy)
+```
+
+
+Note a impressão formatada usando a função `display`.
+
+## Métodos úteis de array
+
+```{julia}
+arr = [3, 1, 4, 1, 5, 9, 2, 6]
+println("Array: ", arr)
+println("length(arr) = ", length(arr))    # Tamanho
+println("sum(arr) = ", sum(arr))          # Soma
+println("prod(arr) = ", prod(arr))        # Produto
+println("minimum(arr) = ", minimum(arr))  # Mínimo
+println("maximum(arr) = ", maximum(arr))  # Máximo
+println("sort(arr) = ", sort(arr))        # Ordenar
+println("reverse(arr) = ", reverse(arr))  # Inverter
+println("unique(arr) = ", unique(arr))    # Únicos
+```
+
+## Adicionando e removendo elementos
+```{julia}
+arr = [1, 2, 3]
+println("Array inicial: ", arr)
+
+push!(arr, 4)  # Adiciona ao final
+println("Após push!(arr, 4): ", arr)
+
+pushfirst!(arr, 0)  # Adiciona no início
+println("Após pushfirst!(arr, 0): ", arr)
+
+pop!(arr)  # Remove do final
+println("Após pop!(arr): ", arr)
+
+popfirst!(arr)  # Remove do início
+println("Após popfirst!(arr): ", arr)
+```
+
+
+<!-- 
+# RANGE (intervalo)
+
+```{julia}
+r1 = 1:10
+println("1:10 = ", collect(r1))
+
+r2 = 1:2:10  # De 1 a 10, incremento de 2
+println("1:2:10 = ", collect(r2))
+
+r3 = 10:-1:1  # De 10 a 1, decremento de 1
+println("10:-1:1 = ", collect(r3))
+
+r4 = 0:0.5:2  # Com floats
+println("0:0.5:2 = ", collect(r4))
+```
+-->
+
+# MATRIZES 
+
+Matrizes são arrays com mais de uma dimensão.
+
+## Criando matrizes
+
+```{julia}
+m1 = [1 2 3; 4 5 6; 7 8 9]  # 3x3
+println("Matriz 3x3:")
+println(m1)
+display(m1)
+```
+
+
+## Matrizes especiais
+
+```{julia}
+m_zeros = zeros(3, 3)
+println("Matriz de Zeros")
+display(m_zeros)
+
+println("Matriz de Uns")
+m_ones = ones(3, 3)
+display(m_ones)
+
+println("Matriz Preenchida com 2")
+m_fill = fill(2, 3, 3)
+display(m_fill)
+```
+
+
+```{julia}
+println("Matriz de Valores Aleatórios (Uniforme)")
+m_rand = rand(3, 3)
+display(m_rand)
+
+println("Matriz de Valores Aleatórios (Normal)")
+m_randn = randn(3, 3)
+display(m_randn)
+```
+
+
+## Acessando elementos da matriz
+
+O acesso a elementos de uma matriz é realizado indicando a linha e coluna onde o elemento se encontra.
+
+```{julia}
+m = [1 2 3; 4 5 6; 7 8 9]
+display(m)
+println("m[1, 1] = ", m[1, 1])  # Elemento (1,1)
+println("m[2, 3] = ", m[2, 3])  # Elemento (2,3)
+println("m[1, :] = ", m[1, :])  # Primeira linha (vetor)
+println("m[:, 2] = ", m[:, 2])  # Segunda coluna (vetor)
+```
+
+## Operações com matrizes
+
+```{julia}
+A = [1 2; 3 4]
+B = [5 6; 7 8]
+
+println("A = ", A, " B = ", B)
+println("A + B =", A + B)
+println("A * B =", A * B)
+println("A .* B =", A .* B)       # Elemento a elemento
+println("A' (transposta) =", A')  # Transposta
+```
+

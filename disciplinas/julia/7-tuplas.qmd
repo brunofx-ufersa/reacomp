@@ -1,0 +1,181 @@
+---
+title: "Tuplas e Conjuntos"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+Uma tupla é uma estrutura de dados de tamanho fixo e imutável (não pode ser alterada após a criação) que armazena qualquer valor. Definidas por parênteses, garantem integridade de dados e são ideais para proteger informações constantes. 
+
+```{julia}
+tupla1 = (3, 2, 1)
+tupla2 = ('a', "julia", 3.14)
+
+println("typeof(tupla1): ", typeof(tupla1))
+println("typeof(tupla1): ", typeof(tupla2))
+
+```
+
+A primeira tupla possui três inteiros. Por essa razão seu tipo é `Tuple{Int64, Int64, Int64}`. De modo semelhante, a segunda tupla possui um `Char`, seguido de `String` e `Float`.
+
+# Acessando elementos
+
+Usamos indexação para acessar os valores, inciando por 1. 
+
+```{julia}
+println("tupla1[1]   = ", tupla1[1])
+println("tupla1[end] = ", tupla1[end])
+```
+
+# Desempacotamento
+
+Desempacotar uma tupla (_tuple unpacking_) em Julia significa atribuir, de forma simultânea, os elementos de uma tupla a variáveis distintas.
+
+```{julia}
+a, b, c = tupla1
+println("Desempacotamento: a = $a, b = $b, c = $c")
+```
+
+```{julia}
+c, _, s = tupla2
+println("Desempacotamento: c = $c, s = $s")
+```
+
+```{julia}
+matriz = [1 3; 2 4; 5 7]
+println("size(matriz) = ", size(matriz))
+linha, coluna = size(matriz)
+println("Desempacotamento: linha = $linha, coluna = $coluna")
+```
+
+# Operações proibidas
+
+- Modificar um elemento: `tupla1[1] = 0`
+- Modificar a ordem dos elementos: `sort(tupla1)`
+- Inserir um elemento novo: `push!(tupla1, 4)`  
+
+# Tuplas nomeadas
+
+Em Julia, tuplas nomeadas (_named tuples_) são uma extensão das tuplas tradicionais em que cada elemento possui um rótulo (nome), permitindo acesso tanto por posição quanto por nome. Elas combinam a leveza das tuplas com a clareza de estruturas mais descritivas.
+
+```{julia}
+tupla3 = (nome = "Julia", idade = 14)
+println("typeof(tupla3): ", typeof(tupla3))
+```
+
+```{julia}
+println("tupla3[1]    = ", tupla3[1])
+println("tupla3[2]    = ", tupla3[2])
+println("tupla3.nome  = ", tupla3.nome)
+println("tupla3.idade = ", tupla3.idade)
+```
+
+
+```{julia}
+println("keys(tupla3)   = ", keys(tupla3))
+println("values(tupla3) = ", values(tupla3))
+```
+
+Criando uma tupla nomeada por meio de dois vetores.
+
+```{julia}
+chaves = (:C, :D, :E, :F, :G, :A, :B)
+valores = ("dó", "ré", "mi", "fá", "sol", "lá", "si")
+notas = NamedTuple{chaves}(valores)
+```
+
+<!--
+::: {.callout-note icon="false" title="Exercício: Analisador de Estoque"}
+Você tem uma lista de produtos, onde cada produto é representado por uma tupla: (Nome, Preço, Quantidade).
+
+
+- Crie um vetor chamado `produtos` contendo pelo menos 4 tuplas (ex: `("Teclado", 150.0, 10)`).
+- Escreva uma função chamada `analisar_produto(produto)` que:
+  - Receba uma única tupla.
+  - Calcule o valor total em estoque (Preço * Quantidade).
+  - Retorne uma nova tupla contendo: o nome do produto e uma string dizendo "Repor" se a quantidade for menor que 5, ou "OK" caso contrário.
+- Use um _loop_ `for` para percorrer a lista de produtos, desempacotando as tuplas no próprio _loop_, e imprima os resultados.
+
+Exemplo para começar:
+
+```julia
+produtos = [
+    ("Monitor", 1200.0, 3),
+    ("Mouse", 80.0, 15),
+    ("Cabo HDMI", 45.0, 2)
+]
+
+function analisar_produto(p)
+    # ... lógica ...
+end
+
+for produto in produtos
+    # ... chame a função e imprima ...
+end
+```
+
+::: 
+
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+```{julia}
+produtos = [
+    ("Monitor", 1200.0, 3),
+    ("Mouse", 80.0, 15),
+    ("Cabo HDMI", 45.0, 2)
+]
+
+function analisar_produto(p)
+  nome, preco, qnt = p
+  total = preco * qnt
+  status = qnt < 5 ? "Repor" : "OK"
+
+  return (nome, total, status)
+end
+
+for produto in produtos
+    nome, total, status = analisar_produto(produto)
+    println("Produto: $nome ($status)")
+    println("\t- Valor total = $total")
+end
+
+```
+:::
+-->
+
+# Conjuntos 
+
+Em Julia, um consjunto (_set_) é uma coleção não ordenada de elementos únicos, ou seja, não permite duplicatas. Ele é implementado com base em tabelas de dispersão (_hash tables_), o que garante operações eficientes de inserção, remoção e verificação de pertencimento.
+
+```{julia}
+set1 = Set([1, 2, 3, 3, 4, 4, 4])  # Automático: remove duplicatas
+println(set1)
+
+push!(set1, 0)          # adiciona elemento
+println(set1)
+
+println("2 in set1: ", in(2, set1))    # verifica pertencimento (retorna true/false)
+
+delete!(set1, 1)        # remove elemento
+println(set1)
+```
+
+# Operações de set
+
+Julia também oferece operações clássicas de teoria dos conjuntos:
+
+```{julia}
+set2 = Set([2, 3, 4, 5])
+println("union(set1, set2) = ", union(set1, set2))  # União
+println("intersect(set1, set2) = ", intersect(set1, set2))  # Interseção
+println("setdiff(set1, set2) = ", setdiff(set1, set2))  # Diferença
+```
+

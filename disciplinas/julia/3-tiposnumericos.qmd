@@ -1,0 +1,84 @@
+---
+title: "Tipos Numéricos"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+Nos exemplos anteriores, não nos preocupamos com o tipo das variáveis. Julia é dinâmica por padrão, ou seja, você não precisa declarar que `x` é um inteiro. Simplesmente, escrevemos `x = 10` e o sistema resolve isso em tempo de execução. Além disso, esse mecanismo permite a reatribuição de tipo, ou seja, podemos fazer `x = "dez"` (agora `x` é uma cadeia de caracteres).
+
+Apesar dessa característica, Julia é opcionalmente tipada. Você pode usar o operador `::` para restringir tipos, o que ajuda o compilador e serve como documentação:
+
+```{julia}
+#| output: false
+x::Int8 = 10
+```
+
+No caso acima, estamos restringindo que `x` seja um inteiro de 8 bits. Podemos modificar seu valor, por exemplo `x = 35`, mas não podemos modificar seu tipo, por exemplo `x = "dez"`.
+
+Julia possui uma hierarquia de tipos. Cada tipo é classificado em abstrato ou concreto. Estes podem ser instanciados, enquanto aqueles não podem. Por exemplo, o tipo `Number` abrange os inteiros, reais, racionais e irracionais.
+
+```{julia}
+y::Number = 10
+println("y = ", y, "   | Tipo: ", typeof(y))
+
+y = Int8(127)
+println("y = ", y, "  | Tipo: ", typeof(y))
+
+y = UInt8(255)
+println("y = ", y, "  | Tipo: ", typeof(y))
+
+y = 3.14
+println("y = ", y, " | Tipo: ", typeof(y))
+
+y = 3.14f0
+println("y = ", y, " | Tipo: ", typeof(y))
+
+y = 1//3
+println("y = ", y, " | Tipo: ", typeof(y))
+
+y = pi
+println("y = ", y, "    | Tipo: ", typeof(y))
+
+y = true
+println("y = ", y, " | Tipo: ", typeof(y))
+```
+
+Nossa saída, mostra um inteiro de 64 bits, um inteiro de 16 bits, um inteiro sem sinal de 8 bits, dois números em ponto flutuante com 64 e 32 bits, um número racional, outro irracional e, por fim, um booleano. Julia trata os booleanos (`true` e `false`) como valores numéricos `1` e `0`. 
+
+# Verificação de tipo
+
+Para verificar se uma variável é de determinado tipo usaremos a função `isa`:
+
+```{julia}
+numero = Int16(42)
+println("isa(numero, Int): ", isa(numero, Int))
+println("isa(numero, Signed): ", isa(numero, Signed))
+println("isa(numero, Integer): ", isa(numero, Integer))
+println("isa(numero, Number): ", isa(numero, Number))
+println("isa(numero, Any): ", isa(numero, Any))
+```
+ 
+ 
+Essa função também ser usada no modo infixo:
+
+```{julia}
+println("numero isa Int16: ", numero isa Int16)
+```
+
+Você pode usar funções para explorar a hierarquia de tipos.
+
+```{julia}
+println("Subtipos de Integer: ", subtypes(Integer))
+println("Supertipo de Int: ",supertype(Int))  
+println("Tipo de numero: ", typeof(numero))     
+```
+

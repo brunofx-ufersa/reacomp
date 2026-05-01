@@ -1,0 +1,298 @@
+---
+title: "Construtores"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+
+Em Julia, `struct` é o mecanismo para definir novos tipos compostos, permitindo organizar dados de forma estruturada e semanticamente clara. É um dos pilares da linguagem, especialmente pelo seu modelo de tipagem paramétrica e foco em desempenho.
+
+
+# Estrutura simples
+
+```{julia}
+struct Pessoa
+    nome::String
+    idade::Int
+    email::String
+end
+```
+
+Aqui, `Pessoa` é um tipo com dois campos tipados. Instanciamos assim:
+ 
+```{julia}
+pessoa1 = Pessoa("Alice", 28, "alice@example.com")
+pessoa2 = Pessoa("Sinfronio", 35, "sinfronio@example.com")
+pessoa3 = Pessoa("Carol", 25, "carol@example.com")
+
+println("Pessoa 1: ", pessoa1)
+println("Pessoa 2: ", pessoa2)
+println("Pessoa 3: ", pessoa3)
+```
+
+# Acessando campos
+
+Para acessar um campo de uma estrutura, usamos a sintaxe de ponto. Isto é, nome da instância da estrutura seguido de um ponto e o nome do campo, tudo junto.
+
+```{julia}
+println("Nome de pessoa1: ", pessoa1.nome)
+println("Idade de pessoa1: ", pessoa1.idade)
+println("Email de pessoa1: ", pessoa1.email)
+```
+
+# Estrutura mutável
+
+Se tentarmos modificar um campo de `pessoa2`, por exemplo, vamos obter o seguinte erro:
+
+
+`immutable struct of type Pessoa cannot be changed`
+
+Isso significa literalmente que "a estrutura imutável do tipo Pessoa não pode ser alterada". Por padrão, `structs` são imutáveis. Para contornar isso, podemos declarar usando a palavra-chave `mutable`, como no próximo exemplo.
+
+
+```{julia}
+mutable struct ContaBancaria
+    titular::String
+    saldo::Float64
+end
+
+conta = ContaBancaria("Maria", 1000.00)
+println("Conta inicial: ", conta)
+println("Saldo: R\$ ", conta.saldo)
+
+# Modificando campos de struct mutável
+conta.saldo += 500
+println("Após depósito de R\$ 500: R\$ ", conta.saldo)
+
+conta.saldo -= 200
+println("Após saque de R\$ 200: R\$ ", conta.saldo)
+```
+
+Por questão de eficiencia, é preferível usar estruturas imutáveis. Usamos `mutable struct` apenas quando houver necessidade semântica real de mutação.
+
+# Estrutura com métodos
+
+```{julia}
+struct Ponto
+    x::Float64
+    y::Float64
+    
+    # Constructor customizado
+    Ponto() = new(0.0, 0.0)  # Origin
+
+    # Construtor para valores específicos
+    Ponto(x, y) = new(x, y)
+end
+```
+
+```{julia}
+p1 = Ponto()  # Usa constructor customizado
+println("Ponto padrão: ($(p1.x), $(p1.y))")
+p2 = Ponto(2,1)  
+println("Ponto específico: ($(p2.x), $(p2.y))")
+```
+
+<!--
+```{julia}
+# Exibição customizada
+function Base.show(io::IO, p::Ponto)
+
+println(io, "(", p.x, ", ", p.y, ")")
+end
+
+p2 = Ponto(3.0, 4.0)
+println("Ponto customizado: ", p2)
+```
+-->
+
+<!-- 
+# Adicionando métodos 
+
+```{julia}
+struct Retangulo
+    largura::Float64
+    altura::Float64
+end
+```
+
+```{julia}
+#| output: false
+# Método: calcular área
+area(r::Retangulo) = r.largura * r.altura
+# Método: calcular perímetro
+perimetro(r::Retangulo) = 2 * (r.largura + r.altura)
+```
+
+```{julia}
+ret = Retangulo(5.0, 3.0)
+println("Retângulo: ", ret)
+println("Área: ", area(ret))
+println("Perímetro: ", perimetro(ret))
+```
+-->
+
+# Estruturas genéricas (parametrização)
+
+```{julia}
+#| output: false
+struct Caixa{T}
+    conteudo::T
+end
+
+caixa_int = Caixa(42)
+caixa_str = Caixa("olá")
+caixa_arr = Caixa([1, 2, 3])
+```
+
+```{julia}
+println("Caixa com Int: ", caixa_int)
+println("Caixa com String: ", caixa_str)
+println("Caixa com Array: ", caixa_arr)
+```
+
+
+# Composição.
+
+```{julia}
+struct Endereco
+    rua::String
+    numero::Int
+    cidade::String
+end
+
+struct Funcionario
+    nome::String
+    departamento::String
+    endereco::Endereco  # Composição
+end
+
+# Funções customizadas para impressão
+function Base.show(io::IO, f::Funcionario)
+    print(io, f.nome, " (", f.departamento, ")")
+end
+
+function Base.show(io::IO, e::Endereco)
+    print(io, e.rua, ", ", e.numero, " - ", e.cidade)
+end
+
+```
+
+```{julia}
+endereco = Endereco("Rua Angicos", 123, "Fortaleza")
+func = Funcionario("Carlos Alberto", "TI", endereco)
+
+println("Funcionário: ", func)
+println("Endereço: ", func.endereco)
+```
+
+# Arrays de estruturas
+
+```{julia}
+#| output: false
+pessoas = [ pessoa1, pessoa2, pessoa3 ]
+```
+
+```{julia}
+println("Lista de pessoas:")
+for pessoa in pessoas
+    println("\t- ", pessoa.nome, " (", pessoa.idade, " anos)")
+end
+```
+
+# Dicionário com estruturas
+
+```{julia}
+#| output: false
+pessoas_dic = Dict(
+    "id1" => pessoa1,
+    "id2" => pessoa2,
+    "id3" => pessoa3
+)
+```
+
+```{julia}
+println("Lista de pessoas:")
+for (id, pessoa) in pessoas_dic
+    println("\t", id, ": ", pessoa.nome, " (", pessoa.idade, " anos)")
+end
+```
+
+<!--
+# Exemplo prático
+
+Vamos desenvolver um sistema simples de uma biblioteca.
+
+```{julia}
+struct Livro
+    titulo::String
+    autor::String
+    ano_publicacao::Int
+    isbn::String
+end
+
+mutable struct Biblioteca
+    nome::String
+    livros::Vector{Livro}
+    
+    # Constructor padrão
+    Biblioteca(nome::String) = new(nome, Livro[])
+end
+```
+
+## Métodos para biblioteca
+
+```{julia}
+#| output: false
+function adicionar_livro(bib::Biblioteca, livro::Livro)
+    push!(bib.livros, livro)
+end
+
+function listar_livros(bib::Biblioteca)
+    println("Biblioteca: ", bib.nome)
+    println("Total de livros: ", length(bib.livros))
+    for livro in bib.livros
+        print("\t- ", livro.titulo)
+        print(" por ", livro.autor)
+        println(" (", livro.ano_publicacao, ")")
+    end
+end
+```
+
+## Usando a biblioteca
+
+```{julia}
+bib = Biblioteca("Biblioteca Central")
+
+adicionar_livro(bib, Livro("1984", "George Orwell", 1949, "978-0451524935"))
+adicionar_livro(bib, Livro("O Senhor dos Anéis", "J.R.R. Tolkien", 1954, "978-0544003415"))
+adicionar_livro(bib, Livro("Fundação", "Isaac Asimov", 1951, "978-0553293357"))
+adicionar_livro(bib, Livro("O Hobbit", "J.R.R. Tolkien", 1937, "978-0547928227"))
+
+listar_livros(bib)
+```
+-->
+
+<!--
+# Comparação e igualdade
+
+
+```{julia}
+p1 = Pessoa("Ana", 30, "ana@example.com")
+p2 = Pessoa("Ana", 30, "ana@example.com")
+p3 = Pessoa("Bruno", 30, "bruno@example.com")
+
+println("p1 == p2: ", p1 == p2)
+println("p1 === p2: ", p1 === p2)
+println("p1 == p3: ", p1 == p3)
+```
+
+-->

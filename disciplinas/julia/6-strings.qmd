@@ -1,0 +1,114 @@
+---
+title: "Caracteres e strings"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+Os caracteres em Julia são escritos usando aspas simples.
+
+```{julia}
+letra = 'A'
+digit = '5'
+println("Letra: ", letra, "  | Tipo: ", typeof(letra))
+println("Dígito: ", digit, " | Tipo: ", typeof(digit))
+```
+
+Já as _strings_, que são cadeias de caracteres, usam aspas duplas.
+
+```{julia}
+str = "Julia é incrível"
+println("String: ", str, " | Tipo: ", typeof(str))
+```
+
+
+## Concatenação de strings
+
+A concatenação de strings que funciona como colar palavras ou frases pode ser realizada com o operador `*`.
+```{julia}
+str1 = "Julia "
+str2 = "é "
+str3 = "legal"
+str4 = str1 * str2 * str3 * "!"
+println(str4)
+```
+
+Podemos extrair caracteres da string por meio de indices:
+
+```{julia}
+println("primeiro = ", str4[begin])
+println("terceiro = ", str4[3])
+println("último = ", str4[end])
+```
+
+Tambem podemos extrair _substrings_ usando um _range_:
+
+```{julia}
+println("substantivo = ", str4[begin:6])
+println("predicado = ", str4[7:end])
+```
+
+
+## Operações comuns
+
+Comparação de strings usando a ordem lexicográfica (do dicionário).
+
+```{julia}
+println("Julia < Pyhon: ", "Julia" < "Pyhon")
+println("Julia == julia: ", "Julia" == "julia")
+println("Julia != Rust: ", "Julia" != "Rust")
+```
+
+Buscar por indice em particular:
+
+```{julia}
+println("O primeiro 'a': ", findfirst('a', "Juliana"))
+println("O ultimo 'a': ", findlast('a', "Juliana"))
+```
+
+
+Descobrir se um substring ocorre em uma string:
+
+```{julia}
+println("occursin(\"é legal\", str4): ", occursin("é legal", str4))
+```
+
+Outrs funções úteis:
+
+```{julia}
+str5 = repeat(".gol.", 10)
+println(str5)
+str6 = ".gol."^10
+println(str6)
+str7 = join(["Julia", "Python", "MATLAB"], ", ", " e ")
+println(str7)
+```
+
+A função `join` é a ferramenta padrão para transformar uma coleção em uma única _string_, conectando os elementos por um delimitador opcional.
+
+```{julia}
+println("Sem separador: ", join([1, '1', "3"]))
+println("Com separador: ", join([1, 2, 3], "-"))
+println("Com delimitador: ", join(["pão", "leite", "ovos"], ", ", " e "))
+```
+
+<!--
+## Conversão de tipos (casting)
+
+```{julia}
+num_str = "42"
+num_int = parse(Int, num_str)
+println("String '$num_str' convertida para Int: ", num_int)
+
+num_float = Float64(42)
+println("42 convertido para Float64: ", num_float)
+```
+-->

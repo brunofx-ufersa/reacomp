@@ -1,0 +1,111 @@
+---
+title: "Funcões"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+
+A sintaxe para definir um função em Julia segue a seguinte sequência:
+
+- palavra reservada `function`
+- nome da função e seus paramêtros entre parenteses
+- corpo da função
+- finaliza com a palavra-chave `end`
+
+Exemplo:
+
+
+```{julia}
+function saudacao(nome)
+    println("Olá, ", nome, "!")
+end
+
+saudacao("Bruno")
+saudacao("Maria")
+```
+
+# Sintaxe compacta
+
+Julia também permite um sintaxe mais simples para definir uma função. Algo semelhante ao que fazemos quando estudamos funções matemáticas.
+
+```{julia}
+triplo(x::Int) = 3 * x
+triplo(x::Float64) = 3 * x
+println("triplo(7) = ", triplo(7))
+println("triplo(7.1) = ", triplo(7.2))
+```
+
+Em Julia, uma função é na verdade um conjunto de métodos. O método executado é escolhido com base nos tipos dos argumentos em tempo de execução.
+
+Funções são objetos de primeira classe. Isso significa que as funções podem ser atribuídas a variáveis, passadas como argumento e retornadas por outras funções.
+
+
+Os argumentos são classificados em posicionais, opcionais ou nomeados. Isso dá flexibilidade sem perder clareza.
+
+# Função com múltiplos argumentos
+
+Os paramêtros são separados por vírgulas.
+
+```{julia}
+function soma(a, b)
+    resultado = a + b
+    return resultado
+end
+
+println("soma(5, 3) = ", soma(5, 3))
+```
+
+A palavra-chave `return` é opcional, pois a função sempre retorna a última expressão.
+ 
+
+```{julia}
+function multiplicacao(a, b)
+    a * b  # Retorna automaticamente
+end
+
+println("multiplicacao(4, 5) = ", multiplicacao(4, 5))
+```
+
+# Argumento opcional
+
+Na função abaixo, o paramêtro `sobrenome` tornará o argumento opcional.
+
+```{julia}
+function cumprimento(nome, sobrenome="Silva")
+    println("Olá, ", nome, " ", sobrenome)
+end
+
+cumprimento("João")
+cumprimento("Maria", "Santos")
+```
+
+# Argumento nomeado
+
+Dentro de chamadas de função, o `;` separa argumentos posicionais de argumentos nomeados.
+
+```{julia}
+function exibir_dados(; nome="", idade=0, email="")
+    println("Nome: ", nome)
+    println("Idade: ", idade)
+    println("Email: ", email)
+end
+
+exibir_dados(nome="Alice", email="alice@example.com", idade=28)
+println("---")
+exibir_dados(nome="Bob")
+```
+
+- antes do `;`, os argumentos são posicionais
+- depois do `;`, os argumentos são nomeados
+
+
+

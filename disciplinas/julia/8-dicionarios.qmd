@@ -1,0 +1,91 @@
+---
+title: "Dicionários"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+# Simbólos
+
+Em Julia, `Symbol` é um tipo utilizado para representar identificadores imutáveis e internados, muito comum em metaprogramação e manipulação de código.
+
+Um símbolo é criado com o prefixo `:` ou dinamicamente:
+
+
+- `:soma`
+- `:x`
+- `Symbol("variavel")`
+
+Um `Symbol` não pode ser alterado após criado. Dois símbolos com o mesmo nome são, de fato, o mesmo objeto em memória.
+
+A diferença para string é que:
+
+- String: sequência de caracteres para texto
+- Symbol: identificador único, voltado para nomes e estruturas de código
+
+
+# Dicionários
+
+Em Julia, dicionários (`Dict`) são estruturas de dados que armazenam pares chave → valor, permitindo acesso eficiente aos dados por meio da chave, em vez de posição. Internamente, são implementados com hash tables, o que garante operações de busca, inserção e remoção em tempo médio constante.
+
+# Criando dicionários
+
+```{julia}
+dict1 = Dict("nome" => "Julia", "versão" => 1.12)
+dict2 = Dict([(1, "um"), (2, "dois"), (3, "três")])
+
+display(dict1)
+display(dict2)
+```
+
+Uma característica importante é que as chaves devem ser imutáveis e hasháveis, como `String`, `Int` ou `Symbol`.
+
+```{julia}
+dict3 = Dict(:nome => "Julia", :versão => 1.12, :tipo => "Linguagem")
+display(dict3)
+println("Chaves: ", keys(dict3))       # conjunto de chaves
+println("Valores: ", values(dict3))    # coleção de valores
+```
+
+
+# Acessando valores
+
+O acesso de valores se dá pelas chaves.
+
+```{julia}
+println("dict1[\"nome\"] = ", dict1["nome"])
+println("dict2[2]      = ", dict2[2])
+println("dict3[:nome] = ", dict3[:nome])
+```
+
+# Adicionando elementos
+
+```{julia}
+dict1["tipo"] = "linguagem"
+display(dict1)
+```
+
+# Checando se chave existe
+
+```{julia}
+println("haskey(dict1, \"nome\") = ", haskey(dict1, "nome"))
+println("haskey(dict1, \"xyz\") = ", haskey(dict1, "xyz"))
+```
+
+# Removendo elementos
+
+```{julia}
+delete!(dict1, "versão")
+display(dict1)
+```
+
+
+Dicionários são particularmente úteis quando há necessidade de mapear identificadores para valores, representar tabelas associativas ou construir estruturas mais complexas como caches e índices.

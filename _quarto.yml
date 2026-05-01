@@ -95,7 +95,15 @@ website:
         - disciplinas/julia/2-variaveis.qmd
         - disciplinas/julia/3-tiposnumericos.qmd
         - disciplinas/julia/4-operacoesmatematicas.qmd
-        - disciplinas/julia/5-strings.qmd
+        - disciplinas/julia/5-arrays.qmd
+        - disciplinas/julia/6-strings.qmd
+        - disciplinas/julia/7-tuplas.qmd
+        - disciplinas/julia/8-dicionarios.qmd
+        - disciplinas/julia/9-controle.qmd
+        - disciplinas/julia/10-laco.qmd
+        - disciplinas/julia/11-funcoes.qmd
+        - disciplinas/julia/12-structs.qmd
+        - disciplinas/julia/13-plots.qmd 
 format:
   html:
     highlight-style: a11y

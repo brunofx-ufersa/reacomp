@@ -15,6 +15,14 @@ execute:
 
 ## Exibir mensagens simples
 
+```{julia}
+x = 1
+let x = 5
+    @show x
+end
+@show x
+```
+
 Para exibir mensagens usamos a função `print` ou `println`. A diferença é que esta última insere uma quebra de linha no final .
 
 ```{julia}

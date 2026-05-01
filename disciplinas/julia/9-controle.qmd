@@ -1,0 +1,132 @@
+---
+title: "Controle de Fluxo"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+Nesta unidade, aprenderemos sobre como estruturar o fluxo de nossos programas.
+
+# Expressões compostas
+
+Com bloco `begin` quebrando linhas.
+
+```{julia}
+a = 0
+z = begin
+    a = 1
+    b = 2
+    c = 5
+    a^2 - 2b + c
+end
+
+println("O valor de z é ", z)
+println("O valor de a é ", a)
+```
+
+Usando sintaxe em cadeia.
+
+```{julia}
+z = (x = 1; y = 2; x^2 + y^2)
+
+println("O valor de z é ", z)
+```
+
+As expressões compostas permitem calcular valores intermediários sem poluir o escopo externo e evitam criar funções pequenas apenas para agrupar lógica simples.
+
+```{julia}
+a = 0
+z = let
+    a = 1
+    b = 2
+    c = 5
+    a^2 - 2b + c
+end
+
+println("O valor de z é ", z)
+println("O valor de a é ", a)
+```
+
+Note que foi criado um novo escopo local quando usamos `let...end`, ao contrário de `begin...end`.
+
+
+# Avaliação condicional
+
+
+Na avaliação condicional, analisamos expressões booleanas para decidir qual fluxo seguir no programa. Usamos a sintaxe `if-elseif-else`. 
+
+```{julia}
+idade = 17
+
+if idade < 13
+    println("Você é uma criança")
+elseif idade < 18
+    println("Você é um adolescente")
+elseif idade < 60
+    println("Você é um adulto")
+else
+    println("Você é um idoso")
+end
+```
+
+
+## Operador ternário
+
+O operador ternário é uma forma concisa de expressar uma decisão condicional simples em uma única expressão.
+
+
+```{julia}
+status = 25 > 18 ? "adulto" : "menor"
+println("Status: ", status)
+```
+
+Este operador substitui estruturas `if/else` simples, tornando o código mais compacto.
+
+```{julia}
+# ternário
+y = x > 0 ? 1 : -1
+
+# equivalente
+if x > 0
+    y = 1
+else
+    y = -1
+end
+
+println("y = $y")
+```
+
+# Operadores lógicos
+
+```{julia}
+x = 10
+y = 20
+
+println("x > 5 && y < 30: ", x > 5 && y < 30)  # AND
+println("x > 15 || y < 30: ", x > 15 || y < 30)  # OR
+println("!(x > 15): ", !(x > 15))  # NOT
+```
+
+::: {.callout-important}
+As operações funcionam em modo _short-circuiting_ (curto-circuito). Isso significa que elas não necessariamente avaliam o segundo argumento. 
+
+```{julia}
+val = true
+val || println("Acesso Negado")
+val && println("Acesso Liberado")
+```
+
+No exemplo acima, como `val` é `true`, na operação `or` não é necessário avaliar o segundo argumento, pois o valor da expressão não depende mais deste argumento. Já na segundo operação `and`, é preciso avaliar o segundo argumento.
+
+Na expressão `x && y`, a subexpressão `y` somente é avaliada se `x` for `true`. Já na expressão `x || y`, a subexpressão `y` somente é avaliada se `x` for `false`. Este comportamento é frequentemente usado como alternativa a pequenos controles de fluxo que usam `if`.
+:::
+
+

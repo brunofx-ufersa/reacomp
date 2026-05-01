@@ -1,0 +1,101 @@
+---
+title: "Variáveis"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+Variáveis são rótulos que atribuímos a valores armazenados na memória do computador. Suponha que você queira guardar os valores de largura e altura de um retângulo, digamos 4 e 8, para realizar o calculo da área, posteriormente. Neste caso, vamos escolher os rótulos `largura` e `altura` e atribuir os respectivos valores.  
+
+```{julia}
+largura = 8;   # ponto-e-vírgula opcional 
+altura = 4
+area = largura * altura
+
+println("Área = ", area)
+```
+
+Usamos o sinal de igualdade para atribuir o valor da direita à variável na esquerda. Porém, na terceira linha, ao invés dos valores no lado direito, usamos as variáveis `largura` e `altura`. O programa irá acessar na memória os valores armazenados, substituí-los, efetuar a multiplicação e armazenar o produto em `area`.
+
+Em nosso tutorial inicial, aprendemos como escrever um programa que exibe um texto no console. No exemplo acima, usamos a vírgula para imprimir de forma concatenada, isto é, encadeada.
+
+::: {.callout-important}
+É importante destacar que esse símbolo de igualdade não tem o mesmo significado de quando o usamos em equações matemáticas.
+
+Na matemática, a igualdade é uma declaração de um fato:
+
+- Estático: Uma vez que você diz que $x = 5$, isso é uma verdade universal dentro daquele problema.
+- Bidirecional: Se $x = y$, então $y = x$. A ordem não altera o sentido.
+
+Uma equação, por exemplo $x + 2 = 10$, desafia você a descobrir qual valor mantém a igualdade verdadeira.
+
+Na programação, a igualdade é um comando de ação:
+
+- Dinâmico: O valor de uma variável pode mudar ao longo do tempo. Primeiro `x = 5`, depois `x = 10`.
+- Unidirecional: A ordem importa muito! `x = y` (copia o valor de `y` para `x`) é totalmente diferente de `y = x`.
+
+Na programação, escrevemos coisas como `x = x + 1`, que significa apenas: 
+
+> Pegue o valor atual de `x`, some `1` e guarde o resultado de volta em `x`.
+:::
+
+# Caracteres Unicode
+
+Julia possui um mecanismo que permite escrever código usando notação matemática padrão (Unicode). O funcionamento é baseado em sequências de escape do [LaTeX](https://www.latex-project.org/). Quando você digita uma sequência e tecla `Tab`, o editor converte instantaneamente no caractere correspondente.
+
+Exemplos:
+
+|Você digita	|Pressiona	|Resultado	|
+|---|---|---|
+|`\alpha`	|Tab	| $\alpha$	|
+|`\beta`	|Tab	|$\beta$	|
+|`\pi`	|Tab	| $\pi$	|
+|`\sum`	|Tab	|$\sum$	|
+|`\in`	|Tab	|$\in$	|
+|`\div`	|Tab	|$\div$	|
+|`\:smile:` |Tab| 😄 |
+
+Exemplo de código 
+```{julia}
+α = 1.0
+β = 2.0
+γ = α + β
+println("α + β = ", γ)
+```
+
+# Atribuição múltipla
+
+Podemos atribuir vários valores de uma vez.
+
+```{julia}
+a, b, c = 1, 2, 3
+println("a = ", a, ", b = ", b, ", c = ", c)
+```
+
+Veja como é muito simples trocar o valor de duas variáveis em Julia:
+
+```{julia}
+a, b = b, a
+println("a = ", a, ", b = ", b)
+```
+
+::: {.callout-note}
+
+Ao invés de imprimir uma mensagem usando separação por vírgulas, podemos interpolar valores dentro da string. Inclusive, operações podem ser avaliadas na interpolação.
+
+```{julia}
+println("O valor de a é $a e b é $b")
+println("Soma: $(a + b)")
+```
+
+Isso evita a necessidade de chamadas verbosas. Podemos interpolar qualquer expressão em uma string usando os parênteses.
+
+:::

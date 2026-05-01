@@ -1,0 +1,165 @@
+---
+title: "Operações Básicas"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true 
+  daemon: true
+  cache: true 
+---
+
+
+Julia conta com um série de operações matemáticas básicas como potênciação, multiplicação, soma, subtração e divisão.
+
+```{julia}
+#| code-line-numbers: false
+(2^2)*(5 + 3 - 1)/14
+```
+
+A operação de divisão sempre retorna um valor do tipo `Float64`. Também temos a divisão inteira (`÷`) e resto de divisão (`%`):
+
+
+```{julia}
+#| code-line-numbers: false
+(10 ÷ 3) % 2 
+```
+
+
+Outras operações básicas:
+
+::: {style="width: 60%; margin: auto;"}
+| Expressão	|   Descrição      |
+|-----------|------------------|
+| `x + y`	    | adição           |
+| `x - y`	    | subtração        |
+| `x * y`	    | multiplicação    |
+| `x / y`	    | divisão          |
+| `x ÷ y`	    | divisão inteira  |	
+| `x \ y`	    | divisão inversa	 |
+| `x ^ y`	    | potenciação	     |
+| `x % y`	    | resto da divisão |
+:::
+
+::: {.callout-note}
+Cada operador aritmético binário possui uma versão de atualização que atribui o resultado da operação de volta ao operando da esquerda. A versão de atualização do operador binário é formada colocando um sinal de igual imediatamente após o operador. Por exemplo, escrever `x += 1` é equivalente a escrever `x = x + 1`:
+
+```{julia}
+x = 9
+x += 1 # x = x + 1
+println("x = ", x)
+
+x *= 2 # x = x * 2
+println("x = ", x)
+```
+:::
+
+Para arredondamento usamos a função `round`:
+
+```{julia} 
+println("Arredondar pi: ", round(pi))
+println("Arredondar pi com duas casas: ", round(pi; digits=2))
+println("Arredondar pi dois digitos significativos: ", round(pi; sigdigits=2))
+```
+
+
+## Comparações numéricas
+
+Para verificar se duas variáveis guardam o mesmo valor, usamos operador de comparação `==`:
+
+```{julia}
+eixo_x = 10
+eixo_y = 5 
+println("eixo_x == eixo_y: ", eixo_x == eixo_y)
+println("eixo_x == eixo_y: ", eixo_x == eixo_y + 5)
+```
+
+Outras comparações básicas:
+
+::: {style="width: 60%; margin: auto;"}
+| Expressão	| Descrição |
+|-----------|-----------|
+| `!=`, `≠`	| desigualdade |
+| `<`	| menor que |
+| `<=`, `≤`	| menor que ou igual a |
+| `>`	| maior que |
+| `>=`, `≥`	| maior que ou igual a |
+:::
+
+As comparações podem ser arbitrariamente encadeadas:
+
+```{julia}
+-4 < 0 ≤ 20
+```
+
+
+## Operações booleanas
+
+Os tipos booleanos suportam três operações: negação, conjunção e disjunção.
+
+A negação modifica `true` para `false` e vice-versa.
+
+```{julia}
+println("!true: ", !true) 
+println("!false: ", !false) 
+```
+
+A conjunção é uma operação que retorna `true` se ambos os argumentos são `true`.
+
+```{julia}
+println("true && true: ", true && true) 
+println("true && false: ", true && false) 
+println("false && true: ", false && true) 
+println("false && false: ", false && false)  
+```
+
+Por fim, a disjunção é uma operação que retorna `false` se ambos os argumentos são `false`.
+
+```{julia}
+println("true || true: ", true || true) 
+println("true || false: ", true || false) 
+println("false || true: ", false || true) 
+println("false || false: ", false || false)  
+```
+
+
+Podemos resumir com a seguinte tabela:
+
+::: {style="width: 60%; margin: auto;"}
+| Expressão	| Descrição |
+|-----------|-----------|
+| `!x`	    | negação (not)  |
+| `x && y`	| conjunção (and) | 
+| `x || y`	| disjunção (or) |
+:::
+
+
+
+
+<!-- ## Operadores bit a bit
+
+::: {style="width: 60%; margin: auto;"}
+| Expressão	| Descrição |
+|-----------|-----------|
+| `~x` |	negação (not) |
+| `x & y` |	conjução (and) |
+| `x | y` |	disjunção (or) |
+| `x ⊻ y` |	disjunção exclusiva (xor) |
+| `x ⊼ y` |	negação da conjunção (nand) |
+| `x ⊽ y` |	negação da disjunção (nor) |
+:::
+
+
+
+::: {style="width: 60%; margin: auto;"}
+| Expressão	| Descrição |
+|-----------|-----------|
+| `x >>> y` |	deslocamento lógico para a direita |
+| `x >> y` |	deslocamento aritmético para a direita |
+| `x << y` |	deslocamento lógico/aritmético para a esquerda |
+Os tipos em Julia são dividos em abstratos e concretos. Abaixo, o diagrama representa uma pequena parte da hierarquia de tipos numéricos.
+-->
