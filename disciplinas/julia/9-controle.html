@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Dicionários e Conjuntos – REAComp</title>
+<title>Controle de Fluxo – REAComp</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,6 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../disciplinas/julia/11-funcoes.html" rel="next">
+<link href="../../disciplinas/julia/8-dicionarios.html" rel="prev">
 <link href="../../img/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -342,7 +344,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Dicionários e Conjuntos</h1>
+<h1 class="title">Controle de Fluxo</h1>
 </div>
 
 
@@ -359,97 +361,138 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<p>Dict is the standard dictionary. Its implementation uses hash as the hashing function for the key, and isequal to determine equality. Define these two functions for custom types to override how they are stored in a hash table.</p>
-<section id="criando-dicionários" class="level1">
-<h1>Criando dicionários</h1>
-<div id="1cf11d10" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>dict1 <span class="op">=</span> <span class="fu">Dict</span>(<span class="st">"nome"</span> <span class="op">=&gt;</span> <span class="st">"Julia"</span>, <span class="st">"versão"</span> <span class="op">=&gt;</span> <span class="fl">1.12</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>dict2 <span class="op">=</span> <span class="fu">Dict</span>([(<span class="fl">1</span>, <span class="st">"um"</span>), (<span class="fl">2</span>, <span class="st">"dois"</span>), (<span class="fl">3</span>, <span class="st">"três"</span>)])</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">println</span>(<span class="st">"typeof(dict1): "</span>, <span class="fu">typeof</span>(dict1))</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">println</span>(<span class="st">"typeof(dict2): "</span>, <span class="fu">typeof</span>(dict2))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Nesta unidade, aprenderemos sobre como estruturar o fluxo de nossos programas.</p>
+<section id="expressões-compostas" class="level1">
+<h1>Expressões compostas</h1>
+<p>Com bloco <code>begin</code> quebrando linhas.</p>
+<div id="2" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>a <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>z <span class="op">=</span> <span class="cf">begin</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    a <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    b <span class="op">=</span> <span class="fl">2</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    c <span class="op">=</span> <span class="fl">5</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    a<span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">2</span>b <span class="op">+</span> c</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="cf">end</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">println</span>(<span class="st">"O valor de z é "</span>, z)</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="fu">println</span>(<span class="st">"O valor de a é "</span>, a)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>typeof(dict1): Dict{String, Any}
-typeof(dict2): Dict{Int64, String}</code></pre>
+<pre><code>O valor de z é 2
+O valor de a é 1</code></pre>
+</div>
+</div>
+<p>Usando sintaxe em cadeia.</p>
+<div id="4" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>z <span class="op">=</span> (x <span class="op">=</span> <span class="fl">1</span>; y <span class="op">=</span> <span class="fl">2</span>; x<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> y<span class="op">^</span><span class="fl">2</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">println</span>(<span class="st">"O valor de z é "</span>, z)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>O valor de z é 5</code></pre>
+</div>
+</div>
+<p>As expressões compostas permitem calcular valores intermediários sem poluir o escopo externo e evitam criar funções pequenas apenas para agrupar lógica simples.</p>
+<div id="6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>a <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>z <span class="op">=</span> <span class="kw">let</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    a <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    b <span class="op">=</span> <span class="fl">2</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    c <span class="op">=</span> <span class="fl">5</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    a<span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">2</span>b <span class="op">+</span> c</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">end</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="fu">println</span>(<span class="st">"O valor de z é "</span>, z)</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="fu">println</span>(<span class="st">"O valor de a é "</span>, a)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>O valor de z é 2
+O valor de a é 0</code></pre>
+</div>
+</div>
+<p>Note que foi criado um novo escopo local quando usamos <code>let...end</code>, ao contrário de <code>begin...end</code>.</p>
+</section>
+<section id="avaliação-condicional" class="level1">
+<h1>Avaliação condicional</h1>
+<p>Na avaliação condicional, analisamos expressões booleanas para decidir qual fluxo seguir no programa. Usamos a sintaxe <code>if-elseif-else</code>.</p>
+<div id="8" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a>idade <span class="op">=</span> <span class="fl">17</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="cf">if</span> idade <span class="op">&lt;</span> <span class="fl">13</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="fu">println</span>(<span class="st">"Você é uma criança"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="cf">elseif</span> idade <span class="op">&lt;</span> <span class="fl">18</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="fu">println</span>(<span class="st">"Você é um adolescente"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="cf">elseif</span> idade <span class="op">&lt;</span> <span class="fl">60</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="fu">println</span>(<span class="st">"Você é um adulto"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="cf">else</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>    <span class="fu">println</span>(<span class="st">"Você é um idoso"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Você é um adolescente</code></pre>
+</div>
+</div>
+<section id="operador-ternário" class="level2">
+<h2 class="anchored" data-anchor-id="operador-ternário">Operador ternário</h2>
+<p>O operador ternário é uma forma concisa de expressar uma decisão condicional simples em uma única expressão.</p>
+<div id="10" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a>status <span class="op">=</span> <span class="fl">25</span> <span class="op">&gt;</span> <span class="fl">18</span> ? <span class="st">"adulto"</span> <span class="op">:</span> <span class="st">"menor"</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">println</span>(<span class="st">"Status: "</span>, status)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Status: adulto</code></pre>
+</div>
+</div>
+<p>Este operador substitui estruturas <code>if/else</code> simples, tornando o código mais compacto.</p>
+<div id="12" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># ternário</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>y <span class="op">=</span> x <span class="op">&gt;</span> <span class="fl">0</span> ? <span class="fl">1</span> <span class="op">:</span> <span class="op">-</span><span class="fl">1</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># equivalente</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="fl">0</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>    y <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="cf">else</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>    y <span class="op">=</span> <span class="op">-</span><span class="fl">1</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="cf">end</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="fu">println</span>(<span class="st">"y = </span><span class="sc">$</span>y<span class="st">"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y = 1</code></pre>
 </div>
 </div>
 </section>
-<section id="acessando-valores" class="level1">
-<h1>Acessando valores</h1>
-<div id="70fd8830" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">println</span>(<span class="st">"dict1[</span><span class="sc">\"</span><span class="st">nome</span><span class="sc">\"</span><span class="st">] = "</span>, dict1[<span class="st">"nome"</span>])</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">println</span>(<span class="st">"dict2[2]      = "</span>, dict2[<span class="fl">2</span>])</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>dict1["nome"] = Julia
-dict2[2]      = dois</code></pre>
-</div>
-</div>
 </section>
-<section id="adicionando-elementos" class="level1">
-<h1>Adicionando elementos</h1>
-<div id="a0dd51cb" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>dict1[<span class="st">"tipo"</span>] <span class="op">=</span> <span class="st">"linguagem"</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">println</span>(dict1)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="operadores-lógicos" class="level1">
+<h1>Operadores lógicos</h1>
+<div id="14" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a>x <span class="op">=</span> <span class="fl">10</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>y <span class="op">=</span> <span class="fl">20</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="fu">println</span>(<span class="st">"x &gt; 5 &amp;&amp; y &lt; 30: "</span>, x <span class="op">&gt;</span> <span class="fl">5</span> <span class="op">&amp;&amp;</span> y <span class="op">&lt;</span> <span class="fl">30</span>)  <span class="co"># AND</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="fu">println</span>(<span class="st">"x &gt; 15 || y &lt; 30: "</span>, x <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">||</span> y <span class="op">&lt;</span> <span class="fl">30</span>)  <span class="co"># OR</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="fu">println</span>(<span class="st">"!(x &gt; 15): "</span>, !(x <span class="op">&gt;</span> <span class="fl">15</span>))  <span class="co"># NOT</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Dict{String, Any}("tipo" =&gt; "linguagem", "nome" =&gt; "Julia", "versão" =&gt; 1.12)</code></pre>
+<pre><code>x &gt; 5 &amp;&amp; y &lt; 30: true
+x &gt; 15 || y &lt; 30: true
+!(x &gt; 15): true</code></pre>
 </div>
 </div>
-</section>
-<section id="checando-se-chave-existe" class="level1">
-<h1>Checando se chave existe</h1>
-<div id="d7b9a8bd" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">println</span>(<span class="st">"haskey(dict1, </span><span class="sc">\"</span><span class="st">nome</span><span class="sc">\"</span><span class="st">) = "</span>, <span class="fu">haskey</span>(dict1, <span class="st">"nome"</span>))</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">println</span>(<span class="st">"haskey(dict1, </span><span class="sc">\"</span><span class="st">xyz</span><span class="sc">\"</span><span class="st">) = "</span>, <span class="fu">haskey</span>(dict1, <span class="st">"xyz"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As operações funcionam em modo <em>short-circuiting</em> (curto-circuito). Isso significa que elas não necessariamente avaliam o segundo argumento.</p>
+<div id="16" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a>val <span class="op">=</span> <span class="cn">true</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>val <span class="op">||</span> <span class="fu">println</span>(<span class="st">"Acesso Negado"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>val <span class="op">&amp;&amp;</span> <span class="fu">println</span>(<span class="st">"Acesso Liberado"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>haskey(dict1, "nome") = true
-haskey(dict1, "xyz") = false</code></pre>
+<pre><code>Acesso Liberado</code></pre>
 </div>
 </div>
-</section>
-<section id="removendo-elementos" class="level1">
-<h1>Removendo elementos</h1>
-<div id="e22e3b52" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">delete!</span>(dict1, <span class="st">"versão"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">println</span>(dict1)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Dict{String, Any}("tipo" =&gt; "linguagem", "nome" =&gt; "Julia")</code></pre>
-</div>
-</div>
-</section>
-<section id="iterando-sobre-dicionário" class="level1">
-<h1>Iterando sobre dicionário</h1>
-<div id="121ffcc1" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a><span class="cf">for</span> (chave, valor) <span class="kw">in</span> dict2</span>
-<span id="cb11-2"><a href="#cb11-2"></a>    <span class="fu">println</span>(chave, <span class="st">" =&gt; "</span>, valor)</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>2 =&gt; dois
-3 =&gt; três
-1 =&gt; um</code></pre>
-</div>
-</div>
-</section>
-<section id="criando-conjuntos" class="level1">
-<h1>Criando conjuntos</h1>
-<div id="d5e88a5e" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a>set1 <span class="op">=</span> <span class="fu">Set</span>([<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span>])  <span class="co"># Automático: remove duplicatas</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">println</span>(<span class="st">"Set([1, 2, 3, 3, 4, 4, 4]) = "</span>, set1)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Set([1, 2, 3, 3, 4, 4, 4]) = Set([4, 2, 3, 1])</code></pre>
-</div>
-</div>
-</section>
-<section id="operações-com-conjuntos" class="level1">
-<h1>Operações com conjuntos</h1>
-<div id="9654b7c6" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a>set2 <span class="op">=</span> <span class="fu">Set</span>([<span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>])</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">println</span>(<span class="st">"union(set1, set2) = "</span>, <span class="fu">union</span>(set1, set2))  <span class="co"># União</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">println</span>(<span class="st">"intersect(set1, set2) = "</span>, <span class="fu">intersect</span>(set1, set2))  <span class="co"># Interseção</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="fu">println</span>(<span class="st">"setdiff(set1, set2) = "</span>, <span class="fu">setdiff</span>(set1, set2))  <span class="co"># Diferença</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>union(set1, set2) = Set([5, 4, 2, 3, 1])
-intersect(set1, set2) = Set([4, 2, 3])
-setdiff(set1, set2) = Set([1])</code></pre>
+<p>No exemplo acima, como <code>val</code> é <code>true</code>, na operação <code>or</code> não é necessário avaliar o segundo argumento, pois o valor da expressão não depende mais deste argumento. Já na segundo operação <code>and</code>, é preciso avaliar o segundo argumento.</p>
+<p>Na expressão <code>x &amp;&amp; y</code>, a subexpressão <code>y</code> somente é avaliada se <code>x</code> for <code>true</code>. Já na expressão <code>x || y</code>, a subexpressão <code>y</code> somente é avaliada se <code>x</code> for <code>false</code>. Este comportamento é frequentemente usado como alternativa a pequenos controles de fluxo que usam <code>if</code>.</p>
 </div>
 </div>
 
@@ -870,6 +913,18 @@ setdiff(set1, set2) = Set([1])</code></pre>
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../disciplinas/julia/8-dicionarios.html" class="pagination-link" aria-label="Dicionários">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Dicionários</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../disciplinas/julia/11-funcoes.html" class="pagination-link" aria-label="Funcões">
+        <span class="nav-page-text">Funcões</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

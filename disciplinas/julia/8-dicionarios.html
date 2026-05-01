@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Funcões – REAComp</title>
+<title>Dicionários – REAComp</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,6 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../disciplinas/julia/9-controle.html" rel="next">
+<link href="../../disciplinas/julia/7-tuplas.html" rel="prev">
 <link href="../../img/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -342,7 +344,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Funcões</h1>
+<h1 class="title">Dicionários</h1>
 </div>
 
 
@@ -359,106 +361,114 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<p>A sintaxe para definir um função em Julia segue a seguinte sequência:</p>
+<section id="simbólos" class="level1">
+<h1>Simbólos</h1>
+<p>Em Julia, <code>Symbol</code> é um tipo utilizado para representar identificadores imutáveis e internados, muito comum em metaprogramação e manipulação de código.</p>
+<p>Um símbolo é criado com o prefixo <code>:</code> ou dinamicamente:</p>
 <ul>
-<li>palavra reservada <code>function</code></li>
-<li>nome da função e seus paramêtros entre parenteses</li>
-<li>corpo da função</li>
-<li>finaliza com a palavra-chave <code>end</code></li>
+<li><code>:soma</code></li>
+<li><code>:x</code></li>
+<li><code>Symbol("variavel")</code></li>
 </ul>
-<p>Exemplo:</p>
-<div id="9de3a0ee" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">function</span> <span class="fu">saudacao</span>(nome)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>    <span class="fu">println</span>(<span class="st">"Olá, "</span>, nome, <span class="st">"!"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">end</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">saudacao</span>(<span class="st">"Bruno"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">saudacao</span>(<span class="st">"Maria"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Olá, Bruno!
-Olá, Maria!</code></pre>
-</div>
-</div>
-<section id="sintaxe-compacta" class="level1">
-<h1>Sintaxe compacta</h1>
-<p>Julia também permite um sintaxe mais simples para definir uma função. Algo semelhante ao que fazemos quando estudamos funções matemáticas.</p>
-<div id="738dc1eb" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">triplo</span>(x) <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> x</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">println</span>(<span class="st">"triplo(7) = "</span>, <span class="fu">triplo</span>(<span class="fl">7</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>triplo(7) = 21</code></pre>
-</div>
-</div>
-</section>
-<section id="função-com-múltiplos-parâmetros" class="level1">
-<h1>Função com múltiplos parâmetros</h1>
-<p>Os paramêtros são separados por vírgulas.</p>
-<div id="01c709bd" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">function</span> <span class="fu">soma</span>(a, b)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>    resultado <span class="op">=</span> a <span class="op">+</span> b</span>
-<span id="cb5-3"><a href="#cb5-3"></a>    <span class="cf">return</span> resultado</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">end</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">println</span>(<span class="st">"soma(5, 3) = "</span>, <span class="fu">soma</span>(<span class="fl">5</span>, <span class="fl">3</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>soma(5, 3) = 8</code></pre>
-</div>
-</div>
-<p>A palavra-chave <code>return</code> é opcional, pois a função sempre retorna a última expressão.</p>
-<div id="c9e8c4bc" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">function</span> <span class="fu">multiplicacao</span>(a, b)</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    a <span class="op">*</span> b  <span class="co"># Retorna automaticamente</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">end</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="fu">println</span>(<span class="st">"multiplicacao(4, 5) = "</span>, <span class="fu">multiplicacao</span>(<span class="fl">4</span>, <span class="fl">5</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>multiplicacao(4, 5) = 20</code></pre>
-</div>
-</div>
-</section>
-<section id="parâmetros-com-valores-padrão" class="level1">
-<h1>Parâmetros com valores padrão</h1>
-<p>Na função abaixo, o paramêtro <code>sobrenome</code> tonará o argumento opcional.</p>
-<div id="a4b91082" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">function</span> <span class="fu">cumprimento</span>(nome, sobrenome<span class="op">=</span><span class="st">"Silva"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a>    <span class="fu">println</span>(<span class="st">"Olá, "</span>, nome, <span class="st">" "</span>, sobrenome)</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">end</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">cumprimento</span>(<span class="st">"João"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="fu">cumprimento</span>(<span class="st">"Maria"</span>, <span class="st">"Santos"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Olá, João Silva
-Olá, Maria Santos</code></pre>
-</div>
-</div>
-</section>
-<section id="função-com-argumentos-nomeados" class="level1">
-<h1>Função com argumentos nomeados</h1>
-<p>Dentro de chamadas de função, o <code>;</code> separa argumentos posicionais de argumentos nomeados.</p>
-<div id="65098eb0" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">function</span> <span class="fu">exibir_dados</span>(; nome<span class="op">=</span><span class="st">""</span>, idade<span class="op">=</span><span class="fl">0</span>, email<span class="op">=</span><span class="st">""</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a>    <span class="fu">println</span>(<span class="st">"Nome: "</span>, nome)</span>
-<span id="cb11-3"><a href="#cb11-3"></a>    <span class="fu">println</span>(<span class="st">"Idade: "</span>, idade)</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="fu">println</span>(<span class="st">"Email: "</span>, email)</span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">end</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="fu">exibir_dados</span>(nome<span class="op">=</span><span class="st">"Alice"</span>, email<span class="op">=</span><span class="st">"alice@example.com"</span>, idade<span class="op">=</span><span class="fl">28</span>)</span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="fu">println</span>(<span class="st">"---"</span>)</span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="fu">exibir_dados</span>(nome<span class="op">=</span><span class="st">"Bob"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Nome: Alice
-Idade: 28
-Email: alice@example.com
----
-Nome: Bob
-Idade: 0
-Email: </code></pre>
-</div>
-</div>
+<p>Um <code>Symbol</code> não pode ser alterado após criado. Dois símbolos com o mesmo nome são, de fato, o mesmo objeto em memória.</p>
+<p>A diferença para string é que:</p>
 <ul>
-<li>antes do <code>;</code>, os argumentos são posicionais</li>
-<li>depois do <code>;</code>, os argumentos são nomeados</li>
+<li>String: sequência de caracteres para texto</li>
+<li>Symbol: identificador único, voltado para nomes e estruturas de código</li>
 </ul>
+</section>
+<section id="dicionários" class="level1">
+<h1>Dicionários</h1>
+<p>Em Julia, dicionários (<code>Dict</code>) são estruturas de dados que armazenam pares chave → valor, permitindo acesso eficiente aos dados por meio da chave, em vez de posição. Internamente, são implementados com hash tables, o que garante operações de busca, inserção e remoção em tempo médio constante.</p>
+</section>
+<section id="criando-dicionários" class="level1">
+<h1>Criando dicionários</h1>
+<div id="2" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>dict1 <span class="op">=</span> <span class="fu">Dict</span>(<span class="st">"nome"</span> <span class="op">=&gt;</span> <span class="st">"Julia"</span>, <span class="st">"versão"</span> <span class="op">=&gt;</span> <span class="fl">1.12</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>dict2 <span class="op">=</span> <span class="fu">Dict</span>([(<span class="fl">1</span>, <span class="st">"um"</span>), (<span class="fl">2</span>, <span class="st">"dois"</span>), (<span class="fl">3</span>, <span class="st">"três"</span>)])</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">display</span>(dict1)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">display</span>(dict2)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>Dict{String, Any} with 2 entries:
+  "nome"   =&gt; "Julia"
+  "versão" =&gt; 1.12</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>Dict{Int64, String} with 3 entries:
+  2 =&gt; "dois"
+  3 =&gt; "três"
+  1 =&gt; "um"</code></pre>
+</div>
+</div>
+<p>Uma característica importante é que as chaves devem ser imutáveis e hasháveis, como <code>String</code>, <code>Int</code> ou <code>Symbol</code>.</p>
+<div id="4" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a>dict3 <span class="op">=</span> <span class="fu">Dict</span>(<span class="op">:</span>nome <span class="op">=&gt;</span> <span class="st">"Julia"</span>, <span class="op">:</span>versão <span class="op">=&gt;</span> <span class="fl">1.12</span>, <span class="op">:</span>tipo <span class="op">=&gt;</span> <span class="st">"Linguagem"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">display</span>(dict3)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">println</span>(<span class="st">"Chaves: "</span>, <span class="fu">keys</span>(dict3))       <span class="co"># conjunto de chaves</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">println</span>(<span class="st">"Valores: "</span>, <span class="fu">values</span>(dict3))    <span class="co"># coleção de valores</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Chaves: [:versão, :tipo, :nome]
+Valores: Any[1.12, "Linguagem", "Julia"]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>Dict{Symbol, Any} with 3 entries:
+  :versão =&gt; 1.12
+  :tipo   =&gt; "Linguagem"
+  :nome   =&gt; "Julia"</code></pre>
+</div>
+</div>
+</section>
+<section id="acessando-valores" class="level1">
+<h1>Acessando valores</h1>
+<p>O acesso de valores se dá pelas chaves.</p>
+<div id="6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">println</span>(<span class="st">"dict1[</span><span class="sc">\"</span><span class="st">nome</span><span class="sc">\"</span><span class="st">] = "</span>, dict1[<span class="st">"nome"</span>])</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">println</span>(<span class="st">"dict2[2]      = "</span>, dict2[<span class="fl">2</span>])</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">println</span>(<span class="st">"dict3[:nome] = "</span>, dict3[<span class="op">:</span>nome])</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>dict1["nome"] = Julia
+dict2[2]      = dois
+dict3[:nome] = Julia</code></pre>
+</div>
+</div>
+</section>
+<section id="adicionando-elementos" class="level1">
+<h1>Adicionando elementos</h1>
+<div id="8" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a>dict1[<span class="st">"tipo"</span>] <span class="op">=</span> <span class="st">"linguagem"</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">display</span>(dict1)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>Dict{String, Any} with 3 entries:
+  "tipo"   =&gt; "linguagem"
+  "nome"   =&gt; "Julia"
+  "versão" =&gt; 1.12</code></pre>
+</div>
+</div>
+</section>
+<section id="checando-se-chave-existe" class="level1">
+<h1>Checando se chave existe</h1>
+<div id="10" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">println</span>(<span class="st">"haskey(dict1, </span><span class="sc">\"</span><span class="st">nome</span><span class="sc">\"</span><span class="st">) = "</span>, <span class="fu">haskey</span>(dict1, <span class="st">"nome"</span>))</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">println</span>(<span class="st">"haskey(dict1, </span><span class="sc">\"</span><span class="st">xyz</span><span class="sc">\"</span><span class="st">) = "</span>, <span class="fu">haskey</span>(dict1, <span class="st">"xyz"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>haskey(dict1, "nome") = true
+haskey(dict1, "xyz") = false</code></pre>
+</div>
+</div>
+</section>
+<section id="removendo-elementos" class="level1">
+<h1>Removendo elementos</h1>
+<div id="12" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">delete!</span>(dict1, <span class="st">"versão"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">display</span>(dict1)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>Dict{String, Any} with 2 entries:
+  "tipo" =&gt; "linguagem"
+  "nome" =&gt; "Julia"</code></pre>
+</div>
+</div>
+<p>Dicionários são particularmente úteis quando há necessidade de mapear identificadores para valores, representar tabelas associativas ou construir estruturas mais complexas como caches e índices.</p>
 
 
 </section>
@@ -877,6 +887,18 @@ Email: </code></pre>
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../disciplinas/julia/7-tuplas.html" class="pagination-link" aria-label="Tuplas e Conjuntos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tuplas e Conjuntos</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../disciplinas/julia/9-controle.html" class="pagination-link" aria-label="Controle de Fluxo">
+        <span class="nav-page-text">Controle de Fluxo</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

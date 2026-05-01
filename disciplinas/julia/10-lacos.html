@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Caracteres e strings – REAComp</title>
+<title>Laços – REAComp</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,7 +68,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../disciplinas/julia/4-operacoesmatematicas.html" rel="prev">
 <link href="../../img/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -343,7 +342,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Caracteres e strings</h1>
+<h1 class="title">Laços</h1>
 </div>
 
 
@@ -360,152 +359,165 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<p>Os caracteres em Julia são escritos usando aspas simples.</p>
-<div id="7691b334" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>letra <span class="op">=</span> <span class="ch">'A'</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>digit <span class="op">=</span> <span class="ch">'5'</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">println</span>(<span class="st">"Letra: "</span>, letra, <span class="st">"  | Tipo: "</span>, <span class="fu">typeof</span>(letra))</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">println</span>(<span class="st">"Dígito: "</span>, digit, <span class="st">" | Tipo: "</span>, <span class="fu">typeof</span>(digit))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Os laços são mecanismos para iterar sobre coleções. São também chamados de <em>loops</em>.</p>
+<section id="laço-for" class="level1">
+<h1>Laço <code>FOR</code></h1>
+<section id="loop-simples" class="level2">
+<h2 class="anchored" data-anchor-id="loop-simples">Loop simples</h2>
+<div id="2" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">print</span>(<span class="st">"Números de 1 a 5: "</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="fu">print</span>(<span class="st">"</span><span class="sc">$</span>i<span class="st"> "</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Letra: A  | Tipo: Char
-Dígito: 5 | Tipo: Char</code></pre>
+<pre><code>Números de 1 a 5: 1 2 3 4 5 </code></pre>
 </div>
 </div>
-<p>Já as <em>strings</em>, que são cadeias de caracteres, usam aspas duplas.</p>
-<div id="da348326" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>str <span class="op">=</span> <span class="st">"Julia é incrível"</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">println</span>(<span class="st">"String: "</span>, str, <span class="st">" | Tipo: "</span>, <span class="fu">typeof</span>(str))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="4" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">print</span>(<span class="st">"Números ímpares de 1 a 5: "</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">:</span><span class="fl">5</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="fu">print</span>(<span class="st">"</span><span class="sc">$</span>i<span class="st"> "</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>String: Julia é incrível | Tipo: String</code></pre>
-</div>
-</div>
-<section id="interpolação-de-strings" class="level2">
-<h2 class="anchored" data-anchor-id="interpolação-de-strings">Interpolação de strings</h2>
-<p>Ao invés de imprimir uma mensagem usando separação por vírgulas, podemos interpolar valores dentro da string. Inclusive, operações podem ser avaliadas na interpolação.</p>
-<div id="1e24712a" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>x, y <span class="op">=</span> <span class="fl">10</span>, <span class="fl">20</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">println</span>(<span class="st">"O valor de x é </span><span class="sc">$</span>x<span class="st"> e y é </span><span class="sc">$</span>y<span class="st">"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">println</span>(<span class="st">"Soma: </span><span class="sc">$</span>(x <span class="op">+</span> y)<span class="st">"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>O valor de x é 10 e y é 20
-Soma: 30</code></pre>
-</div>
-</div>
-<p>Isso evita a necessidade de chamadas verbosas. Podemos interpolar qualquer expressão em uma string usando os parênteses.</p>
-</section>
-<section id="concatenação-de-strings" class="level2">
-<h2 class="anchored" data-anchor-id="concatenação-de-strings">Concatenação de strings</h2>
-<p>A concatenação de strings que funciona como colar palavras ou frases pode ser realizada com o operador <code>*</code>.</p>
-<div id="34873232" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a>str1 <span class="op">=</span> <span class="st">"Julia "</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>str2 <span class="op">=</span> <span class="st">"é "</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>str3 <span class="op">=</span> <span class="st">"legal"</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>str4 <span class="op">=</span> str1 <span class="op">*</span> str2 <span class="op">*</span> str3 <span class="op">*</span> <span class="st">"!"</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="fu">println</span>(str4)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Julia é legal!</code></pre>
-</div>
-</div>
-<p>Podemos extrair caracteres da string por meio de indices:</p>
-<div id="512e9dce" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">println</span>(<span class="st">"primeiro = "</span>, str4[begin])</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">println</span>(<span class="st">"terceiro = "</span>, str4[<span class="fl">3</span>])</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">println</span>(<span class="st">"último = "</span>, str4[<span class="kw">end</span>])</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>primeiro = J
-terceiro = l
-último = !</code></pre>
-</div>
-</div>
-<p>Tambem podemos extrair <em>substrings</em> usando um <em>range</em>:</p>
-<div id="3eedf129" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">println</span>(<span class="st">"substantivo = "</span>, str4[begin<span class="op">:</span><span class="fl">6</span>])</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">println</span>(<span class="st">"predicado = "</span>, str4[<span class="fl">7</span><span class="op">:</span><span class="kw">end</span>])</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>substantivo = Julia 
-predicado = é legal!</code></pre>
+<pre><code>Números ímpares de 1 a 5: 1 3 5 </code></pre>
 </div>
 </div>
 </section>
-<section id="operações-comuns" class="level2">
-<h2 class="anchored" data-anchor-id="operações-comuns">Operações comuns</h2>
-<p>Comparação de strings usando a ordem lexicográfica (do dicionário).</p>
-<div id="57731c31" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">println</span>(<span class="st">"Julia &lt; Pyhon: "</span>, <span class="st">"Julia"</span> <span class="op">&lt;</span> <span class="st">"Pyhon"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">println</span>(<span class="st">"Julia == julia: "</span>, <span class="st">"Julia"</span> <span class="op">==</span> <span class="st">"julia"</span>)</span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">println</span>(<span class="st">"Julia != Rust: "</span>, <span class="st">"Julia"</span> <span class="op">!=</span> <span class="st">"Rust"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="loop-com-arrays" class="level2">
+<h2 class="anchored" data-anchor-id="loop-com-arrays">Loop com arrays</h2>
+<div id="6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>frutas <span class="op">=</span> [<span class="st">"maçã"</span>, <span class="st">"banana"</span>, <span class="st">"laranja"</span>]</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="cf">for</span> fruta <span class="kw">in</span> frutas</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="fu">println</span>(<span class="st">"Fruta: "</span>, fruta)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Julia &lt; Pyhon: true
-Julia == julia: false
-Julia != Rust: true</code></pre>
+<pre><code>Fruta: maçã
+Fruta: banana
+Fruta: laranja</code></pre>
 </div>
 </div>
-<p>Buscar por indice em particular:</p>
-<div id="65f57d10" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">println</span>(<span class="st">"O primeiro 'a': "</span>, <span class="fu">findfirst</span>(<span class="ch">'a'</span>, <span class="st">"Juliana"</span>))</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">println</span>(<span class="st">"O ultimo 'a': "</span>, <span class="fu">findlast</span>(<span class="ch">'a'</span>, <span class="st">"Juliana"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Usando índice:</p>
+<div id="8" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(frutas)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="fu">println</span>(i, <span class="st">": "</span>, frutas[i])</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>O primeiro 'a': 5
-O ultimo 'a': 7</code></pre>
+<pre><code>1: maçã
+2: banana
+3: laranja</code></pre>
 </div>
 </div>
-<p>Descobrir se um substring ocorre em uma string:</p>
-<div id="a255fb23" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">println</span>(<span class="st">"occursin(</span><span class="sc">\"</span><span class="st">é legal</span><span class="sc">\"</span><span class="st">, str4): "</span>, <span class="fu">occursin</span>(<span class="st">"é legal"</span>, str4))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="loop-aninhado" class="level2">
+<h2 class="anchored" data-anchor-id="loop-aninhado">Loop aninhado</h2>
+<div id="10" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>        <span class="fu">print</span>(i, <span class="st">","</span>, j, <span class="st">"  "</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="cf">end</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="fu">println</span>()</span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>occursin("é legal", str4): true</code></pre>
+<pre><code>1,1  1,2  1,3  
+2,1  2,2  2,3  
+3,1  3,2  3,3  </code></pre>
 </div>
 </div>
-<p>Outrs funções úteis:</p>
-<div id="3e8283d9" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1"></a>str5 <span class="op">=</span> <span class="fu">repeat</span>(<span class="st">".gol."</span>, <span class="fl">10</span>)</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">println</span>(str5)</span>
-<span id="cb19-3"><a href="#cb19-3"></a>str6 <span class="op">=</span> <span class="st">".gol."</span><span class="op">^</span><span class="fl">10</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="fu">println</span>(str6)</span>
-<span id="cb19-5"><a href="#cb19-5"></a>str7 <span class="op">=</span> <span class="fu">join</span>([<span class="st">"Julia"</span>, <span class="st">"Python"</span>, <span class="st">"MATLAB"</span>], <span class="st">", "</span>, <span class="st">" e "</span>)</span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="fu">println</span>(str7)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="laço-while" class="level1">
+<h1>Laço <code>WHILE</code></h1>
+<p>O loop <code>while</code> repete um bloco de código enquanto um condição é verdadeira.</p>
+<div id="12" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a>contador <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="cf">while</span> contador <span class="op">&lt;=</span> <span class="fl">5</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="fu">println</span>(<span class="st">"Contador: "</span>, contador)</span>
+<span id="cb11-4"><a href="#cb11-4"></a>    contador <span class="op">+=</span> <span class="fl">1</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>.gol..gol..gol..gol..gol..gol..gol..gol..gol..gol.
-.gol..gol..gol..gol..gol..gol..gol..gol..gol..gol.
-Julia, Python e MATLAB</code></pre>
+<pre><code>Contador: 1
+Contador: 2
+Contador: 3
+Contador: 4
+Contador: 5</code></pre>
 </div>
 </div>
-<p>A função <code>join</code> é a ferramenta padrão para transformar uma coleção em uma única <em>string</em>, conectando os elementos por um delimitador opcional.</p>
-<div id="559fc0d9" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">println</span>(<span class="st">"Sem separador: "</span>, <span class="fu">join</span>([<span class="fl">1</span>, <span class="ch">'1'</span>, <span class="st">"3"</span>]))</span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">println</span>(<span class="st">"Com separador: "</span>, <span class="fu">join</span>([<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>], <span class="st">"-"</span>))</span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="fu">println</span>(<span class="st">"Com delimitador: "</span>, <span class="fu">join</span>([<span class="st">"pão"</span>, <span class="st">"leite"</span>, <span class="st">"ovos"</span>], <span class="st">", "</span>, <span class="st">" e "</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="break-e-continue" class="level2">
+<h2 class="anchored" data-anchor-id="break-e-continue"><code>BREAK</code> e <code>CONTINUE</code></h2>
+<p>O comando <code>break</code> interrompe o loop inteiramente, enquanto <code>continue</code> apenas pula para a próxima iteração do loop, ignorando o restante do bloco na iteração atual.</p>
+<div id="14" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">print</span>(<span class="st">"Números pares até 20 (pulando 12): "</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="fl">12</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>        <span class="cf">continue</span>  <span class="co"># Pula este valor</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="cf">end</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="cf">if</span> i <span class="op">&gt;</span> <span class="fl">18</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>        <span class="cf">break</span>  <span class="co"># Sai do loop</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>    <span class="cf">end</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="cf">if</span> <span class="fu">iseven</span>(i)</span>
+<span id="cb13-10"><a href="#cb13-10"></a>        <span class="fu">print</span>(<span class="st">"</span><span class="sc">$</span>i<span class="st"> "</span>)</span>
+<span id="cb13-11"><a href="#cb13-11"></a>    <span class="cf">end</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Sem separador: 113
-Com separador: 1-2-3
-Com delimitador: pão, leite e ovos</code></pre>
+<pre><code>Números pares até 20 (pulando 12): 2 4 6 8 10 14 16 18 </code></pre>
 </div>
 </div>
-<!--
-## Conversão de tipos (casting)
+</section>
+<section id="iteração-sobre-estruturas" class="level2">
+<h2 class="anchored" data-anchor-id="iteração-sobre-estruturas">Iteração sobre estruturas</h2>
+<div id="16" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a>t <span class="op">=</span> (<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="cf">for</span> v <span class="kw">in</span> t</span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="fu">println</span>(v)</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10
+20
+30</code></pre>
+</div>
+</div>
+<p>Aqui, a iteração percorre os valores na ordem posicional.</p>
+<div id="18" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1"></a>nt <span class="op">=</span> (x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">2</span>, z <span class="op">=</span> <span class="fl">3</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="cf">for</span> (k, v) <span class="kw">in</span> <span class="fu">pairs</span>(nt)</span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="fu">println</span>(<span class="st">"</span><span class="sc">$</span>k<span class="st"> =&gt; </span><span class="sc">$</span>v<span class="st">"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x =&gt; 1
+y =&gt; 2
+z =&gt; 3</code></pre>
+</div>
+</div>
+<p>Usamos <code>pairs</code> para acessar nome (<code>Symbol</code>) e valor.</p>
+<div id="20" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1"></a>S <span class="op">=</span> <span class="fu">Set</span>([<span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">2</span>])</span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="cf">for</span> v <span class="kw">in</span> S</span>
+<span id="cb19-4"><a href="#cb19-4"></a>    <span class="fu">println</span>(v)</span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2
+3
+1</code></pre>
+</div>
+</div>
+<p>A ordem não é garantida, pois o conjunto é não ordenado.</p>
+<div id="22" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1"></a>D <span class="op">=</span> <span class="fu">Dict</span>(<span class="op">:</span>a <span class="op">=&gt;</span> <span class="fl">10</span>, <span class="op">:</span>b <span class="op">=&gt;</span> <span class="fl">20</span>)</span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="cf">for</span> (k, v) <span class="kw">in</span> D</span>
+<span id="cb21-4"><a href="#cb21-4"></a>    <span class="fu">println</span>(<span class="st">"</span><span class="sc">$</span>k<span class="st"> =&gt; </span><span class="sc">$</span>v<span class="st">"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a =&gt; 10
+b =&gt; 20</code></pre>
+</div>
+</div>
 
-::: {#aca9fe79 .cell execution_count=13}
-``` {.julia .cell-code}
-num_str = "42"
-num_int = parse(Int, num_str)
-println("String '$num_str' convertida para Int: ", num_int)
 
-num_float = Float64(42)
-println("42 convertido para Float64: ", num_float)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-String '42' convertida para Int: 42
-42 convertido para Float64: 42.0
-```
-:::
-:::
-
-
--->
-
-
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
@@ -922,15 +934,6 @@ String '42' convertida para Int: 42
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../../disciplinas/julia/4-operacoesmatematicas.html" class="pagination-link" aria-label="Operações Básicas">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Operações Básicas</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

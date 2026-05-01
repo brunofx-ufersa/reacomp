@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Variáveis – REAComp</title>
+<title>Construtores – REAComp</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../disciplinas/julia/3-tiposnumericos.html" rel="next">
-<link href="../../disciplinas/julia/1-instalacao.html" rel="prev">
+<link href="../../disciplinas/julia/13-plots.html" rel="next">
+<link href="../../disciplinas/julia/11-funcoes.html" rel="prev">
 <link href="../../img/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -122,35 +122,6 @@ gtag('js', new Date());
 gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -373,7 +344,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Variáveis</h1>
+<h1 class="title">Construtores</h1>
 </div>
 
 
@@ -390,148 +361,304 @@ window.Quarto = {
 </header>
 
 
-<p>Variáveis são rótulos que atribuímos a valores armazenados na memória do computador. Suponha que você queira guardar os valores de largura e altura de um retângulo, digamos 4 e 8, para realizar o calculo da área, posteriormente. Neste caso, vamos escolher os rótulos <code>largura</code> e <code>altura</code> e atribuir os respectivos valores.</p>
+<p>Em Julia, <code>struct</code> é o mecanismo para definir novos tipos compostos, permitindo organizar dados de forma estruturada e semanticamente clara. É um dos pilares da linguagem, especialmente pelo seu modelo de tipagem paramétrica e foco em desempenho.</p>
+<section id="estrutura-simples" class="level1">
+<h1>Estrutura simples</h1>
 <div id="2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>largura <span class="op">=</span> <span class="fl">8</span>;   <span class="co"># ponto-e-vírgula opcional </span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>altura <span class="op">=</span> <span class="fl">4</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>area <span class="op">=</span> largura <span class="op">*</span> altura</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">println</span>(<span class="st">"Área = "</span>, area)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Área = 32</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">struct</span> Pessoa</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    nome<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    idade<span class="op">::</span><span class="dt">Int</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    email<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<p>Usamos o sinal de igualdade para atribuir o valor da direita à variável na esquerda. Porém, na terceira linha, ao invés dos valores no lado direito, usamos as variáveis <code>largura</code> e <code>altura</code>. O programa irá acessar na memória os valores armazenados, substituí-los, efetuar a multiplicação e armazenar o produto em <code>area</code>.</p>
-<p>Em nosso tutorial inicial, aprendemos como escrever um programa que exibe um texto no console. No exemplo acima, usamos a vírgula para imprimir de forma concatenada, isto é, encadeada.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Importante
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>É importante destacar que esse símbolo de igualdade não tem o mesmo significado de quando o usamos em equações matemáticas.</p>
-<p>Na matemática, a igualdade é uma declaração de um fato:</p>
-<ul>
-<li>Estático: Uma vez que você diz que <span class="math inline">\(x = 5\)</span>, isso é uma verdade universal dentro daquele problema.</li>
-<li>Bidirecional: Se <span class="math inline">\(x = y\)</span>, então <span class="math inline">\(y = x\)</span>. A ordem não altera o sentido.</li>
-</ul>
-<p>Uma equação, por exemplo <span class="math inline">\(x + 2 = 10\)</span>, desafia você a descobrir qual valor mantém a igualdade verdadeira.</p>
-<p>Na programação, a igualdade é um comando de ação:</p>
-<ul>
-<li>Dinâmico: O valor de uma variável pode mudar ao longo do tempo. Primeiro <code>x = 5</code>, depois <code>x = 10</code>.</li>
-<li>Unidirecional: A ordem importa muito! <code>x = y</code> (copia o valor de <code>y</code> para <code>x</code>) é totalmente diferente de <code>y = x</code>.</li>
-</ul>
-<p>Na programação, escrevemos coisas como <code>x = x + 1</code>, que significa apenas:</p>
-<blockquote class="blockquote">
-<p>Pegue o valor atual de <code>x</code>, some <code>1</code> e guarde o resultado de volta em <code>x</code>.</p>
-</blockquote>
-</div>
-</div>
-<section id="caracteres-unicode" class="level1">
-<h1>Caracteres Unicode</h1>
-<p>Julia possui um mecanismo que permite escrever código usando notação matemática padrão (Unicode). O funcionamento é baseado em sequências de escape do <a href="https://www.latex-project.org/">LaTeX</a>. Quando você digita uma sequência e tecla <code>Tab</code>, o editor converte instantaneamente no caractere correspondente.</p>
-<p>Exemplos:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Você digita</th>
-<th>Pressiona</th>
-<th>Resultado</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>\alpha</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\alpha\)</span></td>
-</tr>
-<tr class="even">
-<td><code>\beta</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\beta\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>\pi</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\pi\)</span></td>
-</tr>
-<tr class="even">
-<td><code>\sum</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\sum\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>\in</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\in\)</span></td>
-</tr>
-<tr class="even">
-<td><code>\div</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\div\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>\:smile:</code></td>
-<td>Tab</td>
-<td>😄</td>
-</tr>
-</tbody>
-</table>
-<p>Exemplo de código</p>
+<p>Aqui, <code>Pessoa</code> é um tipo com dois campos tipados. Instanciamos assim:</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>α <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>β <span class="op">=</span> <span class="fl">2.0</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>γ <span class="op">=</span> α <span class="op">+</span> β</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">println</span>(<span class="st">"α + β = "</span>, γ)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a>pessoa1 <span class="op">=</span> <span class="fu">Pessoa</span>(<span class="st">"Alice"</span>, <span class="fl">28</span>, <span class="st">"alice@example.com"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>pessoa2 <span class="op">=</span> <span class="fu">Pessoa</span>(<span class="st">"Sinfronio"</span>, <span class="fl">35</span>, <span class="st">"sinfronio@example.com"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>pessoa3 <span class="op">=</span> <span class="fu">Pessoa</span>(<span class="st">"Carol"</span>, <span class="fl">25</span>, <span class="st">"carol@example.com"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">println</span>(<span class="st">"Pessoa 1: "</span>, pessoa1)</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="fu">println</span>(<span class="st">"Pessoa 2: "</span>, pessoa2)</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="fu">println</span>(<span class="st">"Pessoa 3: "</span>, pessoa3)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>α + β = 3.0</code></pre>
+<pre><code>Pessoa 1: Pessoa("Alice", 28, "alice@example.com")
+Pessoa 2: Pessoa("Sinfronio", 35, "sinfronio@example.com")
+Pessoa 3: Pessoa("Carol", 25, "carol@example.com")</code></pre>
 </div>
 </div>
 </section>
-<section id="atribuição-múltipla" class="level1">
-<h1>Atribuição múltipla</h1>
-<p>Podemos atribuir vários valores de uma vez.</p>
+<section id="acessando-campos" class="level1">
+<h1>Acessando campos</h1>
+<p>Para acessar um campo de uma estrutura, usamos a sintaxe de ponto. Isto é, nome da instância da estrutura seguido de um ponto e o nome do campo, tudo junto.</p>
 <div id="6" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>a, b, c <span class="op">=</span> <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">println</span>(<span class="st">"a = "</span>, a, <span class="st">", b = "</span>, b, <span class="st">", c = "</span>, c)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">println</span>(<span class="st">"Nome de pessoa1: "</span>, pessoa1.nome)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">println</span>(<span class="st">"Idade de pessoa1: "</span>, pessoa1.idade)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">println</span>(<span class="st">"Email de pessoa1: "</span>, pessoa1.email)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>a = 1, b = 2, c = 3</code></pre>
+<pre><code>Nome de pessoa1: Alice
+Idade de pessoa1: 28
+Email de pessoa1: alice@example.com</code></pre>
 </div>
 </div>
-<p>Veja como é muito simples trocar o valor de duas variáveis em Julia:</p>
+</section>
+<section id="estrutura-mutável" class="level1">
+<h1>Estrutura mutável</h1>
+<p>Se tentarmos modificar um campo de <code>pessoa2</code>, por exemplo, vamos obter o seguinte erro:</p>
+<p><code>immutable struct of type Pessoa cannot be changed</code></p>
+<p>Isso significa literalmente que “a estrutura imutável do tipo Pessoa não pode ser alterada”. Por padrão, <code>structs</code> são imutáveis. Para contornar isso, podemos declarar usando a palavra-chave <code>mutable</code>, como no próximo exemplo.</p>
 <div id="8" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a>a, b <span class="op">=</span> b, a</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">println</span>(<span class="st">"a = "</span>, a, <span class="st">", b = "</span>, b)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">mutable struct</span> ContaBancaria</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    titular<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    saldo<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">end</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>conta <span class="op">=</span> <span class="fu">ContaBancaria</span>(<span class="st">"Maria"</span>, <span class="fl">1000.00</span>)</span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="fu">println</span>(<span class="st">"Conta inicial: "</span>, conta)</span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="fu">println</span>(<span class="st">"Saldo: R\$ "</span>, conta.saldo)</span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># Modificando campos de struct mutável</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>conta.saldo <span class="op">+=</span> <span class="fl">500</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="fu">println</span>(<span class="st">"Após depósito de R\$ 500: R\$ "</span>, conta.saldo)</span>
+<span id="cb6-13"><a href="#cb6-13"></a></span>
+<span id="cb6-14"><a href="#cb6-14"></a>conta.saldo <span class="op">-=</span> <span class="fl">200</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="fu">println</span>(<span class="st">"Após saque de R\$ 200: R\$ "</span>, conta.saldo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>a = 2, b = 1</code></pre>
+<pre><code>Conta inicial: ContaBancaria("Maria", 1000.0)
+Saldo: R$ 1000.0
+Após depósito de R$ 500: R$ 1500.0
+Após saque de R$ 200: R$ 1300.0</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Nota
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Ao invés de imprimir uma mensagem usando separação por vírgulas, podemos interpolar valores dentro da string. Inclusive, operações podem ser avaliadas na interpolação.</p>
+<p>Por questão de eficiencia, é preferível usar estruturas imutáveis. Usamos <code>mutable struct</code> apenas quando houver necessidade semântica real de mutação.</p>
+</section>
+<section id="estrutura-com-métodos" class="level1">
+<h1>Estrutura com métodos</h1>
 <div id="10" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">println</span>(<span class="st">"O valor de a é </span><span class="sc">$</span>a<span class="st"> e b é </span><span class="sc">$</span>b<span class="st">"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">println</span>(<span class="st">"Soma: </span><span class="sc">$</span>(a <span class="op">+</span> b)<span class="st">"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">struct</span> Ponto</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    x<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    y<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>    </span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="co"># Constructor customizado</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="fu">Ponto</span>() <span class="op">=</span> <span class="fu">new</span>(<span class="fl">0.0</span>, <span class="fl">0.0</span>)  <span class="co"># Origin</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="co"># Construtor para valores específicos</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="fu">Ponto</span>(x, y) <span class="op">=</span> <span class="fu">new</span>(x, y)</span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="kw">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="12" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a>p1 <span class="op">=</span> <span class="fu">Ponto</span>()  <span class="co"># Usa constructor customizado</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">println</span>(<span class="st">"Ponto padrão: (</span><span class="sc">$</span>(p1.x)<span class="st">, </span><span class="sc">$</span>(p1.y)<span class="st">)"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>p2 <span class="op">=</span> <span class="fu">Ponto</span>(<span class="fl">2</span>,<span class="fl">1</span>)  </span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">println</span>(<span class="st">"Ponto específico: (</span><span class="sc">$</span>(p2.x)<span class="st">, </span><span class="sc">$</span>(p2.y)<span class="st">)"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>O valor de a é 2 e b é 1
-Soma: 3</code></pre>
+<pre><code>Ponto padrão: (0.0, 0.0)
+Ponto específico: (2.0, 1.0)</code></pre>
 </div>
 </div>
-<p>Isso evita a necessidade de chamadas verbosas. Podemos interpolar qualquer expressão em uma string usando os parênteses.</p>
+<!--
+```yalzaly
+# Exibição customizada
+function Base.show(io::IO, p::Ponto)
+
+println(io, "(", p.x, ", ", p.y, ")")
+end
+
+p2 = Ponto(3.0, 4.0)
+println("Ponto customizado: ", p2)
+```
+-->
+<!-- 
+# Adicionando métodos 
+
+```yalzaly
+struct Retangulo
+    largura::Float64
+    altura::Float64
+end
+```
+
+```yalzaly
+#| output: false
+# Método: calcular área
+area(r::Retangulo) = r.largura * r.altura
+# Método: calcular perímetro
+perimetro(r::Retangulo) = 2 * (r.largura + r.altura)
+```
+
+```yalzaly
+ret = Retangulo(5.0, 3.0)
+println("Retângulo: ", ret)
+println("Área: ", area(ret))
+println("Perímetro: ", perimetro(ret))
+```
+-->
+</section>
+<section id="estruturas-genéricas-parametrização" class="level1">
+<h1>Estruturas genéricas (parametrização)</h1>
+<div id="14" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">struct</span> Caixa{T}</span>
+<span id="cb11-2"><a href="#cb11-2"></a>    conteudo<span class="op">::</span><span class="dt">T</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">end</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a>caixa_int <span class="op">=</span> <span class="fu">Caixa</span>(<span class="fl">42</span>)</span>
+<span id="cb11-6"><a href="#cb11-6"></a>caixa_str <span class="op">=</span> <span class="fu">Caixa</span>(<span class="st">"olá"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7"></a>caixa_arr <span class="op">=</span> <span class="fu">Caixa</span>([<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>])</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="16" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">println</span>(<span class="st">"Caixa com Int: "</span>, caixa_int)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">println</span>(<span class="st">"Caixa com String: "</span>, caixa_str)</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">println</span>(<span class="st">"Caixa com Array: "</span>, caixa_arr)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Caixa com Int: Caixa{Int64}(42)
+Caixa com String: Caixa{String}("olá")
+Caixa com Array: Caixa{Vector{Int64}}([1, 2, 3])</code></pre>
 </div>
 </div>
+</section>
+<section id="composição." class="level1">
+<h1>Composição.</h1>
+<div id="18" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">struct</span> Endereco</span>
+<span id="cb14-2"><a href="#cb14-2"></a>    rua<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>    numero<span class="op">::</span><span class="dt">Int</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>    cidade<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="kw">end</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="kw">struct</span> Funcionario</span>
+<span id="cb14-8"><a href="#cb14-8"></a>    nome<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>    departamento<span class="op">::</span><span class="dt">String</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>    endereco<span class="op">::</span><span class="dt">Endereco  </span><span class="co"># Composição</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="kw">end</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co"># Funções customizadas para impressão</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="kw">function</span> <span class="bu">Base</span>.<span class="fu">show</span>(io<span class="op">::</span><span class="dt">IO</span>, f<span class="op">::</span><span class="dt">Funcionario</span>)</span>
+<span id="cb14-15"><a href="#cb14-15"></a>    <span class="fu">print</span>(io, f.nome, <span class="st">" ("</span>, f.departamento, <span class="st">")"</span>)</span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="kw">end</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a></span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="kw">function</span> <span class="bu">Base</span>.<span class="fu">show</span>(io<span class="op">::</span><span class="dt">IO</span>, <span class="cn">e</span><span class="op">::</span><span class="dt">Endereco</span>)</span>
+<span id="cb14-19"><a href="#cb14-19"></a>    <span class="fu">print</span>(io, <span class="cn">e</span>.rua, <span class="st">", "</span>, <span class="cn">e</span>.numero, <span class="st">" - "</span>, <span class="cn">e</span>.cidade)</span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="kw">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="20" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a>endereco <span class="op">=</span> <span class="fu">Endereco</span>(<span class="st">"Rua Angicos"</span>, <span class="fl">123</span>, <span class="st">"Fortaleza"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a>func <span class="op">=</span> <span class="fu">Funcionario</span>(<span class="st">"Carlos Alberto"</span>, <span class="st">"TI"</span>, endereco)</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="fu">println</span>(<span class="st">"Funcionário: "</span>, func)</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">println</span>(<span class="st">"Endereço: "</span>, func.endereco)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Funcionário: Carlos Alberto (TI)
+Endereço: Rua Angicos, 123 - Fortaleza</code></pre>
+</div>
+</div>
+</section>
+<section id="arrays-de-estruturas" class="level1">
+<h1>Arrays de estruturas</h1>
+<div id="22" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1"></a>pessoas <span class="op">=</span> [ pessoa1, pessoa2, pessoa3 ]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="24" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">println</span>(<span class="st">"Lista de pessoas:"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="cf">for</span> pessoa <span class="kw">in</span> pessoas</span>
+<span id="cb18-3"><a href="#cb18-3"></a>    <span class="fu">println</span>(<span class="st">"</span><span class="sc">\t</span><span class="st">- "</span>, pessoa.nome, <span class="st">" ("</span>, pessoa.idade, <span class="st">" anos)"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lista de pessoas:
+    - Alice (28 anos)
+    - Sinfronio (35 anos)
+    - Carol (25 anos)</code></pre>
+</div>
+</div>
+</section>
+<section id="dicionário-com-estruturas" class="level1">
+<h1>Dicionário com estruturas</h1>
+<div id="26" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1"></a>pessoas_dic <span class="op">=</span> <span class="fu">Dict</span>(</span>
+<span id="cb20-2"><a href="#cb20-2"></a>    <span class="st">"id1"</span> <span class="op">=&gt;</span> pessoa1,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>    <span class="st">"id2"</span> <span class="op">=&gt;</span> pessoa2,</span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="st">"id3"</span> <span class="op">=&gt;</span> pessoa3</span>
+<span id="cb20-5"><a href="#cb20-5"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="28" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">println</span>(<span class="st">"Lista de pessoas:"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="cf">for</span> (id, pessoa) <span class="kw">in</span> pessoas_dic</span>
+<span id="cb21-3"><a href="#cb21-3"></a>    <span class="fu">println</span>(<span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, id, <span class="st">": "</span>, pessoa.nome, <span class="st">" ("</span>, pessoa.idade, <span class="st">" anos)"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lista de pessoas:
+    id1: Alice (28 anos)
+    id2: Sinfronio (35 anos)
+    id3: Carol (25 anos)</code></pre>
+</div>
+</div>
+<!--
+# Exemplo prático
+
+Vamos desenvolver um sistema simples de uma biblioteca.
+
+```yalzaly
+struct Livro
+    titulo::String
+    autor::String
+    ano_publicacao::Int
+    isbn::String
+end
+
+mutable struct Biblioteca
+    nome::String
+    livros::Vector{Livro}
+    
+    # Constructor padrão
+    Biblioteca(nome::String) = new(nome, Livro[])
+end
+```
+
+## Métodos para biblioteca
+
+```yalzaly
+#| output: false
+function adicionar_livro(bib::Biblioteca, livro::Livro)
+    push!(bib.livros, livro)
+end
+
+function listar_livros(bib::Biblioteca)
+    println("Biblioteca: ", bib.nome)
+    println("Total de livros: ", length(bib.livros))
+    for livro in bib.livros
+        print("\t- ", livro.titulo)
+        print(" por ", livro.autor)
+        println(" (", livro.ano_publicacao, ")")
+    end
+end
+```
+
+## Usando a biblioteca
+
+```yalzaly
+bib = Biblioteca("Biblioteca Central")
+
+adicionar_livro(bib, Livro("1984", "George Orwell", 1949, "978-0451524935"))
+adicionar_livro(bib, Livro("O Senhor dos Anéis", "J.R.R. Tolkien", 1954, "978-0544003415"))
+adicionar_livro(bib, Livro("Fundação", "Isaac Asimov", 1951, "978-0553293357"))
+adicionar_livro(bib, Livro("O Hobbit", "J.R.R. Tolkien", 1937, "978-0547928227"))
+
+listar_livros(bib)
+```
+-->
+<!--
+# Comparação e igualdade
+
+
+```yalzaly
+p1 = Pessoa("Ana", 30, "ana@example.com")
+p2 = Pessoa("Ana", 30, "ana@example.com")
+p3 = Pessoa("Bruno", 30, "bruno@example.com")
+
+println("p1 == p2: ", p1 == p2)
+println("p1 === p2: ", p1 === p2)
+println("p1 == p3: ", p1 == p3)
+```
+
+-->
 
 
 </section>
@@ -952,13 +1079,13 @@ Soma: 3</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../disciplinas/julia/1-instalacao.html" class="pagination-link" aria-label="Instalação e Configuração">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Instalação e Configuração</span>
+      <a href="../../disciplinas/julia/11-funcoes.html" class="pagination-link" aria-label="Funcões">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Funcões</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../disciplinas/julia/3-tiposnumericos.html" class="pagination-link" aria-label="Tipos Numéricos">
-        <span class="nav-page-text">Tipos Numéricos</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../disciplinas/julia/13-plots.html" class="pagination-link" aria-label="Gráficos">
+        <span class="nav-page-text">Gráficos</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

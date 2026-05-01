@@ -399,7 +399,7 @@ shell&gt; mkdir REACompJulia
 shell&gt; cd REACompJulia
 shell&gt; ls</code></pre>
 <p>Agora que você aprendeu como criar uma pasta, crie uma chamada <code>Tutorial01</code> dentro de <code>REACompJulia</code> e, em seguida, entre nela pelo terminal. Depois, tecle <code>backspace</code> para voltar ao modo padrão.</p>
-<p>Vamos entrar no modo de instalação de pacotes (digite <code>]</code>). O terminal mudará para <code>(@v1.12) pkg&gt;</code>, indicando que qualquer pacote adicioando será instalado no modo global. Digite <code>activate .</code> e tecle <code>Enter</code>. Julia irá mostrar a mensagem</p>
+<p>Vamos entrar no modo de instalação de pacotes (digite <code>]</code>). O terminal mudará para <code>(@v1.12) pkg&gt;</code>, indicando que qualquer pacote adicionado será instalado no modo global. Digite <code>activate .</code> e tecle <code>Enter</code>. Julia irá mostrar a seguinte mensagem:</p>
 <pre class="console"><code>Activating new project at '...\REACompJulia\Tutorial01'  </code></pre>
 <p>O terminal mudará para <code>(Tutorial01) pkg&gt;</code>. Isso indica que qualquer pacote adicionado será instalado no modo privado, isto é, somente para este projeto.</p>
 <pre class="console"><code>julia&gt; ]
@@ -438,7 +438,7 @@ Importante
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Sem esses arquivos, se você atualizar o Julia ou seus pacotes daqui a seis meses, seu código antigo pode parar de funcionar porque alguma função mudou. Com eles, você pode reconstruir o ambiente exato de seis meses atrás usando apenas o comando <code>instantiate</code>. É por essa razão que recomendamos que os pacotes não sejam instalados em nível global, mas em cada projeto.</p>
+<p>Sem esses arquivos, se você atualizar o Julia ou seus pacotes daqui a seis meses, por exemplo, seu código antigo pode parar de funcionar porque alguma função mudou. Com eles, você pode reconstruir o ambiente exato de seis meses atrás usando apenas o comando <code>instantiate</code>. É por essa razão que recomendamos que os pacotes não sejam instalados em nível global, mas em cada projeto.</p>
 </div>
 </div>
 <p>Regra de ouro em Julia:</p>
@@ -453,15 +453,14 @@ Importante
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">print</span>(<span class="st">"Qual o seu nome? "</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a>nome <span class="op">=</span> <span class="fu">readline</span>()</span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="fu">println</span>(<span class="st">"Olá, "</span>, nome, <span class="st">", bem-vindo ao tutorial de Julia."</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Salve o arquivo.</p>
-<p>Abra o terminal padrão do seu sistema operacional na pasta <code>Tutorial01</code> e insira o comando abaixo:</p>
+<p>O texto com aspas duplas é chamado de <em>string</em>. Salve o arquivo, abra o terminal padrão do seu sistema operacional na pasta <code>Tutorial01</code> e insira o comando abaixo:</p>
 <pre class="console"><code>julia saudacao.jl</code></pre>
-<p>O programa irá perguntar seu nome. Após digitar seu nome e a teclar <code>Enter</code>, o programa irá mostrar uma mensagem de saudação.</p>
+<p>O programa irá perguntar seu nome. Após digitar seu nome e teclar <code>Enter</code>, o programa irá mostrar uma mensagem de saudação.</p>
 <section id="integração-com-visual-studio-code" class="level2">
 <h2 class="anchored" data-anchor-id="integração-com-visual-studio-code">Integração com Visual Studio Code</h2>
 <p>Inicie seu <a href="https://code.visualstudio.com/" class="text-decoration-none">VS Code</a>. Na lateral esquerda, clique no ícone de extensões (um botão com quatro quadrados) ou digite <code>Ctrt+Shift+X</code> para abir o painel de extensões. Em seguida, digite <code>julia</code> na barra de pesquisa e instale a extensão Julia Language Support. Pronto, pode fechar a aba da extensão e o painel de extensões.</p>
 <p><img src="img/extensao.png" class="img-fluid"></p>
-<p>Abra o explorador, o primeiro botão na barra vertical esquerda com ícone de duas folhas sobrepostas ou digite <code>Ctrt+Shift+E</code>. É nesse painel que você verá todas as suas pastas de arquivos.</p>
+<p>Abra o explorador, o primeiro botão na barra vertical esquerda com ícone de duas folhas sobrepostas ou digite <code>Ctrt+Shift+E</code>. É nesse painel que você verá todas as suas pastas e arquivos.</p>
 <p>Clique em <code>Open Fold</code> e selecione uma pasta recem criada, por exemplo <code>REACompJulia</code>.</p>
 <p>Alternativamente, dentro da pasta <code>REACompJulia</code>, com o botão direito do <em>mouse</em> selecione a opção <code>Abrir no Terminal</code>. Em seguida, digite <code>code .</code> e se abrirá uma instância do VS Code na pasta atual.</p>
 <p>No explorador, passe o <em>mouse</em> sob o nome do “projeto” que aparecerá os ícones de criar arquivo, criar pasta, atualizar e retrair pastas, respectivamente.</p>
@@ -479,7 +478,7 @@ Importante
 <li><code>Ctrl+Enter</code>: avalia uma linha e mantém o cursor na mesma linha</li>
 <li><code>Alt+Enter</code> avalia o arquvio inteiro</li>
 </ul>
-<p>Para nosso código, qualquer opção é válida, pois contém somente uma linha. Ao realizar um desses comandos pela primeira vez, uma janela de terminal será aberta com o REPL de Julia. Se você ver a mensagem abaixo, parabéns.</p>
+<p>Para nosso código, qualquer opção é válida, pois contém somente uma linha. Ao realizar um desses comandos pela primeira vez, uma janela de terminal será aberta com o REPL de Julia. Se você ver a mensagem abaixo em seu ambiente de desenvolvimento, parabéns.</p>
 <p><img src="img/hello.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercício de Fixação">
 <div class="callout-header d-flex align-content-center">

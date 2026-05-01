@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Variáveis – REAComp</title>
+<title>DataFrames – REAComp</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../disciplinas/julia/3-tiposnumericos.html" rel="next">
-<link href="../../disciplinas/julia/1-instalacao.html" rel="prev">
 <link href="../../img/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -122,35 +120,6 @@ gtag('js', new Date());
 gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -373,7 +342,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Variáveis</h1>
+<h1 class="title">DataFrames</h1>
 </div>
 
 
@@ -390,151 +359,12 @@ window.Quarto = {
 </header>
 
 
-<p>Variáveis são rótulos que atribuímos a valores armazenados na memória do computador. Suponha que você queira guardar os valores de largura e altura de um retângulo, digamos 4 e 8, para realizar o calculo da área, posteriormente. Neste caso, vamos escolher os rótulos <code>largura</code> e <code>altura</code> e atribuir os respectivos valores.</p>
-<div id="2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>largura <span class="op">=</span> <span class="fl">8</span>;   <span class="co"># ponto-e-vírgula opcional </span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>altura <span class="op">=</span> <span class="fl">4</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>area <span class="op">=</span> largura <span class="op">*</span> altura</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">println</span>(<span class="st">"Área = "</span>, area)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Área = 32</code></pre>
-</div>
-</div>
-<p>Usamos o sinal de igualdade para atribuir o valor da direita à variável na esquerda. Porém, na terceira linha, ao invés dos valores no lado direito, usamos as variáveis <code>largura</code> e <code>altura</code>. O programa irá acessar na memória os valores armazenados, substituí-los, efetuar a multiplicação e armazenar o produto em <code>area</code>.</p>
-<p>Em nosso tutorial inicial, aprendemos como escrever um programa que exibe um texto no console. No exemplo acima, usamos a vírgula para imprimir de forma concatenada, isto é, encadeada.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Importante
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>É importante destacar que esse símbolo de igualdade não tem o mesmo significado de quando o usamos em equações matemáticas.</p>
-<p>Na matemática, a igualdade é uma declaração de um fato:</p>
-<ul>
-<li>Estático: Uma vez que você diz que <span class="math inline">\(x = 5\)</span>, isso é uma verdade universal dentro daquele problema.</li>
-<li>Bidirecional: Se <span class="math inline">\(x = y\)</span>, então <span class="math inline">\(y = x\)</span>. A ordem não altera o sentido.</li>
-</ul>
-<p>Uma equação, por exemplo <span class="math inline">\(x + 2 = 10\)</span>, desafia você a descobrir qual valor mantém a igualdade verdadeira.</p>
-<p>Na programação, a igualdade é um comando de ação:</p>
-<ul>
-<li>Dinâmico: O valor de uma variável pode mudar ao longo do tempo. Primeiro <code>x = 5</code>, depois <code>x = 10</code>.</li>
-<li>Unidirecional: A ordem importa muito! <code>x = y</code> (copia o valor de <code>y</code> para <code>x</code>) é totalmente diferente de <code>y = x</code>.</li>
-</ul>
-<p>Na programação, escrevemos coisas como <code>x = x + 1</code>, que significa apenas:</p>
-<blockquote class="blockquote">
-<p>Pegue o valor atual de <code>x</code>, some <code>1</code> e guarde o resultado de volta em <code>x</code>.</p>
-</blockquote>
-</div>
-</div>
-<section id="caracteres-unicode" class="level1">
-<h1>Caracteres Unicode</h1>
-<p>Julia possui um mecanismo que permite escrever código usando notação matemática padrão (Unicode). O funcionamento é baseado em sequências de escape do <a href="https://www.latex-project.org/">LaTeX</a>. Quando você digita uma sequência e tecla <code>Tab</code>, o editor converte instantaneamente no caractere correspondente.</p>
-<p>Exemplos:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Você digita</th>
-<th>Pressiona</th>
-<th>Resultado</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>\alpha</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\alpha\)</span></td>
-</tr>
-<tr class="even">
-<td><code>\beta</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\beta\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>\pi</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\pi\)</span></td>
-</tr>
-<tr class="even">
-<td><code>\sum</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\sum\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>\in</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\in\)</span></td>
-</tr>
-<tr class="even">
-<td><code>\div</code></td>
-<td>Tab</td>
-<td><span class="math inline">\(\div\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>\:smile:</code></td>
-<td>Tab</td>
-<td>😄</td>
-</tr>
-</tbody>
-</table>
-<p>Exemplo de código</p>
+<p>Para usar a biblioteca Plots, certifique-se de que está instalada.</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>α <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>β <span class="op">=</span> <span class="fl">2.0</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>γ <span class="op">=</span> α <span class="op">+</span> β</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">println</span>(<span class="st">"α + β = "</span>, γ)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>α + β = 3.0</code></pre>
-</div>
-</div>
-</section>
-<section id="atribuição-múltipla" class="level1">
-<h1>Atribuição múltipla</h1>
-<p>Podemos atribuir vários valores de uma vez.</p>
-<div id="6" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>a, b, c <span class="op">=</span> <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">println</span>(<span class="st">"a = "</span>, a, <span class="st">", b = "</span>, b, <span class="st">", c = "</span>, c)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>a = 1, b = 2, c = 3</code></pre>
-</div>
-</div>
-<p>Veja como é muito simples trocar o valor de duas variáveis em Julia:</p>
-<div id="8" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a>a, b <span class="op">=</span> b, a</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">println</span>(<span class="st">"a = "</span>, a, <span class="st">", b = "</span>, b)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>a = 2, b = 1</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Nota
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Ao invés de imprimir uma mensagem usando separação por vírgulas, podemos interpolar valores dentro da string. Inclusive, operações podem ser avaliadas na interpolação.</p>
-<div id="10" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">println</span>(<span class="st">"O valor de a é </span><span class="sc">$</span>a<span class="st"> e b é </span><span class="sc">$</span>b<span class="st">"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">println</span>(<span class="st">"Soma: </span><span class="sc">$</span>(a <span class="op">+</span> b)<span class="st">"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>O valor de a é 2 e b é 1
-Soma: 3</code></pre>
-</div>
-</div>
-<p>Isso evita a necessidade de chamadas verbosas. Podemos interpolar qualquer expressão em uma string usando os parênteses.</p>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">using</span> <span class="bu">DataFrames</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
-</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -950,18 +780,6 @@ Soma: 3</code></pre>
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../../disciplinas/julia/1-instalacao.html" class="pagination-link" aria-label="Instalação e Configuração">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Instalação e Configuração</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../../disciplinas/julia/3-tiposnumericos.html" class="pagination-link" aria-label="Tipos Numéricos">
-        <span class="nav-page-text">Tipos Numéricos</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

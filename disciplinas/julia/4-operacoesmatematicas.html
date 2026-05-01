@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../disciplinas/julia/5-strings.html" rel="next">
+<link href="../../disciplinas/julia/5-arrays.html" rel="next">
 <link href="../../disciplinas/julia/3-tiposnumericos.html" rel="prev">
 <link href="../../img/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -362,16 +362,16 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 
 <p>Julia conta com um série de operações matemáticas básicas como potênciação, multiplicação, soma, subtração e divisão.</p>
-<div id="c64693ab" class="cell" data-execution_count="2">
+<div id="2" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">2</span><span class="op">^</span><span class="fl">2</span>)<span class="fu">*</span>(<span class="fl">5</span> <span class="op">+</span> <span class="fl">3</span> <span class="op">-</span> <span class="fl">1</span>)<span class="op">/</span><span class="fl">14</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="200">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>2.0</code></pre>
 </div>
 </div>
 <p>A operação de divisão sempre retorna um valor do tipo <code>Float64</code>. Também temos a divisão inteira (<code>÷</code>) e resto de divisão (<code>%</code>):</p>
-<div id="920b17ab" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">10</span> <span class="op">÷</span> <span class="fl">3</span>) <span class="op">%</span> <span class="fl">2</span> </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="201">
+<div id="4" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">10</span> <span class="op">÷</span> <span class="fl">3</span>) <span class="op">%</span> <span class="fl">2</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>1</code></pre>
 </div>
 </div>
@@ -431,7 +431,7 @@ Nota
 </div>
 <div class="callout-body-container callout-body">
 <p>Cada operador aritmético binário possui uma versão de atualização que atribui o resultado da operação de volta ao operando da esquerda. A versão de atualização do operador binário é formada colocando um sinal de igual imediatamente após o operador. Por exemplo, escrever <code>x += 1</code> é equivalente a escrever <code>x = x + 1</code>:</p>
-<div id="a574491d" class="cell" data-execution_count="4">
+<div id="6" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>x <span class="op">=</span> <span class="fl">9</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>x <span class="op">+=</span> <span class="fl">1</span> <span class="co"># x = x + 1</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="fu">println</span>(<span class="st">"x = "</span>, x)</span>
@@ -446,7 +446,7 @@ x = 20</code></pre>
 </div>
 </div>
 <p>Para arredondamento usamos a função <code>round</code>:</p>
-<div id="e966bc5b" class="cell" data-execution_count="5">
+<div id="8" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">println</span>(<span class="st">"Arredondar pi: "</span>, <span class="fu">round</span>(<span class="cn">pi</span>))</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="fu">println</span>(<span class="st">"Arredondar pi com duas casas: "</span>, <span class="fu">round</span>(<span class="cn">pi</span>; digits<span class="op">=</span><span class="fl">2</span>))</span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="fu">println</span>(<span class="st">"Arredondar pi dois digitos significativos: "</span>, <span class="fu">round</span>(<span class="cn">pi</span>; sigdigits<span class="op">=</span><span class="fl">2</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
@@ -459,11 +459,11 @@ Arredondar pi dois digitos significativos: 3.1</code></pre>
 <section id="comparações-numéricas" class="level2">
 <h2 class="anchored" data-anchor-id="comparações-numéricas">Comparações numéricas</h2>
 <p>Para verificar se duas variáveis guardam o mesmo valor, usamos operador de comparação <code>==</code>:</p>
-<div id="7b96d3db" class="cell" data-execution_count="6">
+<div id="10" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a>eixo_x <span class="op">=</span> <span class="fl">10</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>eixo_y <span class="op">=</span> <span class="fl">5</span> </span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="fu">println</span>(<span class="st">"eixo_x == eixo_y: "</span>, eixo_x <span class="op">==</span> eixo_y)</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">println</span>(<span class="st">"eixo_x == eixo_y: "</span>, eixo_x <span class="op">==</span> eixo_y<span class="op">+</span><span class="fl">5</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">println</span>(<span class="st">"eixo_x == eixo_y: "</span>, eixo_x <span class="op">==</span> eixo_y <span class="op">+</span> <span class="fl">5</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>eixo_x == eixo_y: false
 eixo_x == eixo_y: true</code></pre>
@@ -489,7 +489,7 @@ eixo_x == eixo_y: true</code></pre>
 </tr>
 <tr class="odd">
 <td><code>&lt;=</code>, <code>≤</code></td>
-<td>menor que ou igula a</td>
+<td>menor que ou igual a</td>
 </tr>
 <tr class="even">
 <td><code>&gt;</code></td>
@@ -503,9 +503,9 @@ eixo_x == eixo_y: true</code></pre>
 </table>
 </div>
 <p>As comparações podem ser arbitrariamente encadeadas:</p>
-<div id="fb8644f2" class="cell" data-execution_count="7">
+<div id="12" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a><span class="op">-</span><span class="fl">4</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">≤</span> <span class="fl">20</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="205">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>true</code></pre>
 </div>
 </div>
@@ -514,20 +514,20 @@ eixo_x == eixo_y: true</code></pre>
 <h2 class="anchored" data-anchor-id="operações-booleanas">Operações booleanas</h2>
 <p>Os tipos booleanos suportam três operações: negação, conjunção e disjunção.</p>
 <p>A negação modifica <code>true</code> para <code>false</code> e vice-versa.</p>
-<div id="5bfc3a36" class="cell" data-execution_count="8">
+<div id="14" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">println</span>(<span class="st">"!true: "</span>, !<span class="cn">true</span>) </span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">println</span>(<span class="st">"!false: "</span>, !<span class="cn">false</span>) </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">println</span>(<span class="st">"!false: "</span>, !<span class="cn">false</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>!true: false
 !false: true</code></pre>
 </div>
 </div>
 <p>A conjunção é uma operação que retorna <code>true</code> se ambos os argumentos são <code>true</code>.</p>
-<div id="883151e2" class="cell" data-execution_count="9">
+<div id="16" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">println</span>(<span class="st">"true &amp;&amp; true: "</span>, <span class="cn">true</span> <span class="op">&amp;&amp;</span> <span class="cn">true</span>) </span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="fu">println</span>(<span class="st">"true &amp;&amp; false: "</span>, <span class="cn">true</span> <span class="op">&amp;&amp;</span> <span class="cn">false</span>) </span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="fu">println</span>(<span class="st">"false &amp;&amp; true: "</span>, <span class="cn">false</span> <span class="op">&amp;&amp;</span> <span class="cn">true</span>) </span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="fu">println</span>(<span class="st">"false &amp;&amp; false: "</span>, <span class="cn">false</span> <span class="op">&amp;&amp;</span> <span class="cn">false</span>)  </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="fu">println</span>(<span class="st">"false &amp;&amp; false: "</span>, <span class="cn">false</span> <span class="op">&amp;&amp;</span> <span class="cn">false</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>true &amp;&amp; true: true
 true &amp;&amp; false: false
@@ -536,11 +536,11 @@ false &amp;&amp; false: false</code></pre>
 </div>
 </div>
 <p>Por fim, a disjunção é uma operação que retorna <code>false</code> se ambos os argumentos são <code>false</code>.</p>
-<div id="a3c70f33" class="cell" data-execution_count="10">
+<div id="18" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">println</span>(<span class="st">"true || true: "</span>, <span class="cn">true</span> <span class="op">||</span> <span class="cn">true</span>) </span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="fu">println</span>(<span class="st">"true || false: "</span>, <span class="cn">true</span> <span class="op">||</span> <span class="cn">false</span>) </span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="fu">println</span>(<span class="st">"false || true: "</span>, <span class="cn">false</span> <span class="op">||</span> <span class="cn">true</span>) </span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="fu">println</span>(<span class="st">"false || false: "</span>, <span class="cn">false</span> <span class="op">||</span> <span class="cn">false</span>)  </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="fu">println</span>(<span class="st">"false || false: "</span>, <span class="cn">false</span> <span class="op">||</span> <span class="cn">false</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>true || true: true
 true || false: true
@@ -548,7 +548,7 @@ false || true: true
 false || false: false</code></pre>
 </div>
 </div>
-<p>Podemos resumir com a sequite tabela:</p>
+<p>Podemos resumir com a seguinte tabela:</p>
 <div style="width: 60%; margin: auto;">
 <table class="caption-top table">
 <thead>
@@ -572,29 +572,6 @@ false || false: false</code></pre>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Importante
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>As operações funcionam em modo <em>short-circuiting</em> (curto-circuito). Isso significa que elas não necessariamente avaliam o segundo argumento.</p>
-<div id="878b550e" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1"></a>val <span class="op">=</span> <span class="cn">true</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>val <span class="op">||</span> <span class="fu">println</span>(<span class="st">"Acesso Negado"</span>)</span>
-<span id="cb19-3"><a href="#cb19-3"></a>val <span class="op">&amp;&amp;</span> <span class="fu">println</span>(<span class="st">"Acesso Liberado"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Acesso Liberado</code></pre>
-</div>
-</div>
-<p>No exemplo acima, como <code>val</code> é <code>true</code>, na operação <code>or</code> não é necessário avaliar o segundo argumento, pois o valor da expressão não depende mais deste argumento. Já na segundo operação <code>and</code>, é preciso avaliar o segundo argumento.</p>
-<p>Na expressão <code>x &amp;&amp; y</code>, a subexpressão <code>y</code> somente é avaliada se <code>x</code> for <code>true</code>. Já na expressão <code>x || y</code>, a subexpressão <code>y</code> somente é avaliada se <code>x</code> for <code>false</code>. Este comportamento é frequentemente usado como alternativa a pequenos controles de fluxo que usam <code>if</code>.</p>
-</div>
 </div>
 <!-- ## Operadores bit a bit
 
@@ -1044,8 +1021,8 @@ Os tipos em Julia são dividos em abstratos e concretos. Abaixo, o diagrama repr
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../disciplinas/julia/5-strings.html" class="pagination-link" aria-label="Caracteres e strings">
-        <span class="nav-page-text">Caracteres e strings</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../disciplinas/julia/5-arrays.html" class="pagination-link" aria-label="Estruturas de Dados">
+        <span class="nav-page-text">Estruturas de Dados</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

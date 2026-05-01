@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Controle de Fluxo – REAComp</title>
+<title>Caracteres e strings – REAComp</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -342,7 +342,7 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Controle de Fluxo</h1>
+<h1 class="title">Caracteres e strings</h1>
 </div>
 
 
@@ -359,200 +359,219 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<section id="expressões-compostas" class="level1">
-<h1>Expressões compostas</h1>
-<p>Com bloco <code>begin</code> quebrando linhas.</p>
-<div id="2e298001" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>z <span class="op">=</span> <span class="cf">begin</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>        a <span class="op">=</span> <span class="fl">1</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>        b <span class="op">=</span> <span class="fl">2</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>        c <span class="op">=</span> <span class="fl">5</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>        a<span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">2</span>b <span class="op">+</span> c</span>
-<span id="cb1-6"><a href="#cb1-6"></a>    <span class="cf">end</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">println</span>(<span class="st">"O valor de z é "</span>, z)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>O valor de z é 2</code></pre>
-</div>
-</div>
-<p>Usando sintaxe em cadeia.</p>
-<div id="87a7917a" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>z <span class="op">=</span> (x <span class="op">=</span> <span class="fl">1</span>; y <span class="op">=</span> <span class="fl">2</span>; x<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> y<span class="op">^</span><span class="fl">2</span>)</span>
+<section id="gráfico-de-dispersão" class="level1">
+<h1>Gráfico de dispersão</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a>x_scatter <span class="op">=</span> <span class="fu">randn</span>(<span class="fl">100</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>y_scatter <span class="op">=</span> <span class="fu">randn</span>(<span class="fl">100</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>p2 <span class="op">=</span> <span class="fu">scatter</span>(x_scatter, y_scatter, </span>
+<span id="cb1-5"><a href="#cb1-5"></a>                title<span class="op">=</span><span class="st">"Scatter Plot"</span>, </span>
+<span id="cb1-6"><a href="#cb1-6"></a>                xlabel<span class="op">=</span><span class="st">"x"</span>, </span>
+<span id="cb1-7"><a href="#cb1-7"></a>                ylabel<span class="op">=</span><span class="st">"y"</span>, </span>
+<span id="cb1-8"><a href="#cb1-8"></a>                legend<span class="op">=</span><span class="cn">false</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="múltiplos-gráficos-subgrafico" class="level1">
+<h1>Múltiplos gráficos (subgrafico)</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a>x <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">0.1</span><span class="op">:</span><span class="fl">2</span>π</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>p1 <span class="op">=</span> <span class="fu">plot</span>(x, <span class="fu">sin</span>.(x), title<span class="op">=</span><span class="st">"sin(x)"</span>, label<span class="op">=</span><span class="st">"sin(x)"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>p2 <span class="op">=</span> <span class="fu">plot</span>(x, <span class="fu">cos</span>.(x), title<span class="op">=</span><span class="st">"cos(x)"</span>, label<span class="op">=</span><span class="st">"cos(x)"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>p3 <span class="op">=</span> <span class="fu">plot</span>(x, <span class="fu">tan</span>.(x), title<span class="op">=</span><span class="st">"tan(x)"</span>, label<span class="op">=</span><span class="st">"tan(x)"</span>, ylims<span class="op">=</span>(<span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>))</span>
+<span id="cb2-6"><a href="#cb2-6"></a>p4 <span class="op">=</span> <span class="fu">plot</span>(x, <span class="fu">exp</span>.(<span class="op">-</span>x), title<span class="op">=</span><span class="st">"e^(-x)"</span>, label<span class="op">=</span><span class="st">"e^(-x)"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a>p_layout <span class="op">=</span> <span class="fu">plot</span>(p1, p2, p3, p4, layout<span class="op">=</span>(<span class="fl">2</span>,<span class="fl">2</span>), size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">600</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="histograma" class="level1">
+<h1>Histograma</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>dados <span class="op">=</span> <span class="fu">randn</span>(<span class="fl">1000</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">println</span>(<span class="st">"O valor de z é "</span>, z)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>O valor de z é 5</code></pre>
-</div>
-</div>
+<span id="cb3-3"><a href="#cb3-3"></a>p_hist <span class="op">=</span> <span class="fu">histogram</span>(dados, title<span class="op">=</span><span class="st">"Distribuição Normal"</span>, xlabel<span class="op">=</span><span class="st">"Valor"</span>, ylabel<span class="op">=</span><span class="st">"Frequência"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>                   bins<span class="op">=</span><span class="fl">30</span>, legend<span class="op">=</span><span class="cn">false</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, color<span class="op">=:</span>blue)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="avaliação-condicional" class="level1">
-<h1>Avaliação condicional</h1>
-<p>Usa a sintaxe <code>if-elseif-else</code>.</p>
-<div id="10f6ee30" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>idade <span class="op">=</span> <span class="fl">17</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="cf">if</span> idade <span class="op">&lt;</span> <span class="fl">13</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="fu">println</span>(<span class="st">"Você é uma criança"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="cf">elseif</span> idade <span class="op">&lt;</span> <span class="fl">18</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>    <span class="fu">println</span>(<span class="st">"Você é um adolescente"</span>)</span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="cf">elseif</span> idade <span class="op">&lt;</span> <span class="fl">60</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>    <span class="fu">println</span>(<span class="st">"Você é um adulto"</span>)</span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="cf">else</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>    <span class="fu">println</span>(<span class="st">"Você é um idoso"</span>)</span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Você é um adolescente</code></pre>
-</div>
-</div>
-<section id="operador-ternário" class="level2">
-<h2 class="anchored" data-anchor-id="operador-ternário">Operador ternário</h2>
-<div id="4b0c84b1" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a>status <span class="op">=</span> <span class="fl">25</span> <span class="op">&gt;</span> <span class="fl">18</span> ? <span class="st">"adulto"</span> <span class="op">:</span> <span class="st">"menor"</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">println</span>(<span class="st">"Status: "</span>, status)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Status: adulto</code></pre>
-</div>
-</div>
+<section id="gráfico-de-barra" class="level1">
+<h1>Gráfico de Barra</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a>categorias <span class="op">=</span> [<span class="st">"Python"</span>, <span class="st">"Julia"</span>, <span class="st">"R"</span>, <span class="st">"MATLAB"</span>]</span>
+<span id="cb4-2"><a href="#cb4-2"></a>velocidades <span class="op">=</span> [<span class="fl">100</span>, <span class="fl">950</span>, <span class="fl">150</span>, <span class="fl">200</span>]  <span class="co"># Relativa (Julia é ~10x mais rápida que Python)</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>p_bar <span class="op">=</span> <span class="fu">bar</span>(categorias, velocidades, title<span class="op">=</span><span class="st">"Velocidade de Execução"</span>, </span>
+<span id="cb4-5"><a href="#cb4-5"></a>            ylabel<span class="op">=</span><span class="st">"Velocidade (relativa)"</span>, legend<span class="op">=</span><span class="cn">false</span>, color<span class="op">=:</span>steelblue)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
+<section id="gráfico-com-múltiplas-linhas" class="level1">
+<h1>Gráfico com múltiplas linhas</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>x <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">0.05</span><span class="op">:</span><span class="fl">10</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>y1 <span class="op">=</span> <span class="fu">sin</span>.(x)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>y2 <span class="op">=</span> <span class="fu">cos</span>.(x)</span>
+<span id="cb5-4"><a href="#cb5-4"></a>y3 <span class="op">=</span> <span class="fu">sin</span>.(x) <span class="op">.*</span> <span class="fu">exp</span>.(<span class="op">-</span>x<span class="op">./</span><span class="fl">10</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>p_multi <span class="op">=</span> <span class="fu">plot</span>(x, y1, label<span class="op">=</span><span class="st">"sin(x)"</span>, linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="fu">plot!</span>(p_multi, x, y2, label<span class="op">=</span><span class="st">"cos(x)"</span>, linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="fu">plot!</span>(p_multi, x, y3, label<span class="op">=</span><span class="st">"sin(x)·e^(-x/10)"</span>, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a>p_multi <span class="op">=</span> <span class="fu">plot</span>(p_multi, title<span class="op">=</span><span class="st">"Múltiplas Funções"</span>, xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>, </span>
+<span id="cb5-11"><a href="#cb5-11"></a>               legend<span class="op">=:</span>topright, size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">500</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="operadores-lógicos" class="level1">
-<h1>Operadores lógicos</h1>
-<div id="21c1ac33" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a>x <span class="op">=</span> <span class="fl">10</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>y <span class="op">=</span> <span class="fl">20</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">println</span>(<span class="st">"x &gt; 5 &amp;&amp; y &lt; 30: "</span>, x <span class="op">&gt;</span> <span class="fl">5</span> <span class="op">&amp;&amp;</span> y <span class="op">&lt;</span> <span class="fl">30</span>)  <span class="co"># AND</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">println</span>(<span class="st">"x &gt; 15 || y &lt; 30: "</span>, x <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">||</span> y <span class="op">&lt;</span> <span class="fl">30</span>)  <span class="co"># OR</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="fu">println</span>(<span class="st">"!(x &gt; 15): "</span>, !(x <span class="op">&gt;</span> <span class="fl">15</span>))  <span class="co"># NOT</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>x &gt; 5 &amp;&amp; y &lt; 30: true
-x &gt; 15 || y &lt; 30: true
-!(x &gt; 15): true</code></pre>
-</div>
-</div>
+<section id="personalizando-cores-e-estilos" class="level1">
+<h1>PERSONALIZANDO CORES E ESTILOS</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a>x <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">0.1</span><span class="op">:</span><span class="fl">4</span>π</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>p_estilos <span class="op">=</span> <span class="fu">plot</span>(title<span class="op">=</span><span class="st">"Diferentes Estilos"</span>, xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>                 legend<span class="op">=:</span>bottomright, size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">500</span>))</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">plot!</span>(p_estilos, x, <span class="fu">sin</span>.(x), label<span class="op">=</span><span class="st">"sólida"</span>, color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="fu">plot!</span>(p_estilos, x, <span class="fu">sin</span>.(x <span class="op">.+</span> <span class="cn">π</span><span class="op">/</span><span class="fl">4</span>), label<span class="op">=</span><span class="st">"tracejada"</span>, color<span class="op">=:</span>blue, </span>
+<span id="cb6-8"><a href="#cb6-8"></a>      linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="fu">plot!</span>(p_estilos, x, <span class="fu">sin</span>.(x <span class="op">.+</span> <span class="cn">π</span><span class="op">/</span><span class="fl">2</span>), label<span class="op">=</span><span class="st">"pontilhada"</span>, color<span class="op">=:</span>green,</span>
+<span id="cb6-10"><a href="#cb6-10"></a>      linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dot)</span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="fu">plot!</span>(p_estilos, x, <span class="fu">sin</span>.(x <span class="op">.+</span> <span class="fl">3</span>π<span class="op">/</span><span class="fl">4</span>), label<span class="op">=</span><span class="st">"traço-ponto"</span>, color<span class="op">=:</span>purple,</span>
+<span id="cb6-12"><a href="#cb6-12"></a>      linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dashdot)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="laço-for" class="level1">
-<h1>Laço <code>FOR</code></h1>
-<section id="loop-simples" class="level2">
-<h2 class="anchored" data-anchor-id="loop-simples">Loop simples</h2>
-<div id="c897f036" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">println</span>(<span class="st">"Números de 1 a 5:"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>    <span class="fu">println</span>(i)</span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Números de 1 a 5:
-1
-2
-3
-4
-5</code></pre>
-</div>
-</div>
-<div id="c3413b6a" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">println</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Números ímpares de 1 a 5:"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">:</span><span class="fl">5</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>    <span class="fu">println</span>(i)</span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Números ímpares de 1 a 5:
-1
-3
-5</code></pre>
-</div>
-</div>
+<section id="scatter-com-cores" class="level1">
+<h1>SCATTER COM CORES</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a>n <span class="op">=</span> <span class="fl">200</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>x <span class="op">=</span> <span class="fu">randn</span>(n)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>y <span class="op">=</span> <span class="fu">randn</span>(n)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>z <span class="op">=</span> x<span class="op">.^</span><span class="fl">2</span> <span class="op">.+</span> y<span class="op">.^</span><span class="fl">2</span>  <span class="co"># Valores para colorir</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>p_scatter_color <span class="op">=</span> <span class="fu">scatter</span>(x, y, color<span class="op">=</span>z, markersize<span class="op">=</span><span class="fl">6</span>, alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>                          title<span class="op">=</span><span class="st">"Scatter com Gradiente"</span>, xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8"></a>                          colorbar<span class="op">=</span><span class="cn">true</span>, legend<span class="op">=</span><span class="cn">false</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="loop-com-coleção" class="level2">
-<h2 class="anchored" data-anchor-id="loop-com-coleção">Loop com coleção</h2>
-<div id="4bf886ec" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a>frutas <span class="op">=</span> [<span class="st">"maçã"</span>, <span class="st">"banana"</span>, <span class="st">"laranja"</span>]</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="cf">for</span> fruta <span class="kw">in</span> frutas</span>
-<span id="cb15-3"><a href="#cb15-3"></a>    <span class="fu">println</span>(<span class="st">"Fruta: "</span>, fruta)</span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Fruta: maçã
-Fruta: banana
-Fruta: laranja</code></pre>
-</div>
-</div>
+<section id="mapa-de-calor" class="level1">
+<h1>Mapa de calor</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1"></a>dados_2d <span class="op">=</span> <span class="fu">rand</span>(<span class="fl">10</span>, <span class="fl">10</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>p_heatmap <span class="op">=</span> <span class="fu">heatmap</span>(dados_2d, title<span class="op">=</span><span class="st">"Mapa de Calor"</span>, </span>
+<span id="cb8-4"><a href="#cb8-4"></a>                    xlabel<span class="op">=</span><span class="st">"Coluna"</span>, ylabel<span class="op">=</span><span class="st">"Linha"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="loop-com-índice" class="level2">
-<h2 class="anchored" data-anchor-id="loop-com-índice">Loop com índice</h2>
-<div id="828dca5b" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(frutas)</span>
-<span id="cb17-2"><a href="#cb17-2"></a>    <span class="fu">println</span>(i, <span class="st">": "</span>, frutas[i])</span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1: maçã
-2: banana
-3: laranja</code></pre>
-</div>
-</div>
+<section id="contour-plot" class="level1">
+<h1>CONTOUR PLOT</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a>x_grid <span class="op">=</span> <span class="op">-</span><span class="fl">3</span><span class="op">:</span><span class="fl">0.1</span><span class="op">:</span><span class="fl">3</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>y_grid <span class="op">=</span> <span class="op">-</span><span class="fl">3</span><span class="op">:</span><span class="fl">0.1</span><span class="op">:</span><span class="fl">3</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>z_grid <span class="op">=</span> [(x<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> y<span class="op">^</span><span class="fl">2</span>) for x <span class="kw">in</span> x_grid, y <span class="kw">in</span> y_grid]</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a>p_contour <span class="op">=</span> <span class="fu">contour</span>(x_grid, y_grid, z_grid, title<span class="op">=</span><span class="st">"Contour Plot"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>                    xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>, levels<span class="op">=</span><span class="fl">15</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="loop-aninhado" class="level2">
-<h2 class="anchored" data-anchor-id="loop-aninhado">Loop aninhado</h2>
-<div id="e526086e" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>        <span class="fu">print</span>(i, <span class="st">","</span>, j, <span class="st">"  "</span>)</span>
-<span id="cb19-4"><a href="#cb19-4"></a>    <span class="cf">end</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>    <span class="fu">println</span>()</span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1,1  1,2  1,3  
-2,1  2,2  2,3  
-3,1  3,2  3,3  </code></pre>
-</div>
-</div>
+<section id="d-surface-plot" class="level1">
+<h1>3D SURFACE PLOT</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1"></a>x_3d <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">2</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>y_3d <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">:</span><span class="fl">0.2</span><span class="op">:</span><span class="fl">2</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>z_3d <span class="op">=</span> [(x<span class="op">^</span><span class="fl">2</span> <span class="op">-</span> y<span class="op">^</span><span class="fl">2</span>) for x <span class="kw">in</span> x_3d, y <span class="kw">in</span> y_3d]</span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a>p_3d <span class="op">=</span> <span class="fu">surface</span>(x_3d, y_3d, z_3d, title<span class="op">=</span><span class="st">"Superfície 3D"</span>, </span>
+<span id="cb10-6"><a href="#cb10-6"></a>               xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>, zlabel<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7"></a>               camera<span class="op">=</span>(<span class="fl">45</span>, <span class="fl">30</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
+<section id="gráfico-com-barras-de-erro" class="level1">
+<h1>GRÁFICO COM BARRAS DE ERRO</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a>x_erro <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>y_erro <span class="op">=</span> [<span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">10</span>]</span>
+<span id="cb11-3"><a href="#cb11-3"></a>erro <span class="op">=</span> [<span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.6</span>, <span class="fl">0.9</span>, <span class="fl">0.7</span>]</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a>p_erro <span class="op">=</span> <span class="fu">scatter</span>(x_erro, y_erro, yerror<span class="op">=</span>erro, title<span class="op">=</span><span class="st">"Com Barras de Erro"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6"></a>                 xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>, legend<span class="op">=</span><span class="cn">false</span>, markersize<span class="op">=</span><span class="fl">8</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="laço-while" class="level1">
-<h1>Laço <code>WHILE</code></h1>
-<div id="afa30e1c" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1"></a>contador <span class="op">=</span> <span class="fl">1</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="cf">while</span> contador <span class="op">&lt;=</span> <span class="fl">5</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>    <span class="fu">println</span>(<span class="st">"Contador: "</span>, contador)</span>
-<span id="cb21-4"><a href="#cb21-4"></a>    contador <span class="op">+=</span> <span class="fl">1</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Contador: 1
-Contador: 2
-Contador: 3
-Contador: 4
-Contador: 5</code></pre>
-</div>
-</div>
-<section id="break-e-continue" class="level2">
-<h2 class="anchored" data-anchor-id="break-e-continue"><code>BREAK</code> e <code>CONTINUE</code></h2>
-<div id="f662b719" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">println</span>(<span class="st">"Números pares até 20 (pulando 12):"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="fl">12</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a>        <span class="cf">continue</span>  <span class="co"># Pula este valor</span></span>
-<span id="cb23-5"><a href="#cb23-5"></a>    <span class="cf">end</span></span>
-<span id="cb23-6"><a href="#cb23-6"></a>    <span class="cf">if</span> i <span class="op">&gt;</span> <span class="fl">18</span></span>
-<span id="cb23-7"><a href="#cb23-7"></a>        <span class="cf">break</span>  <span class="co"># Sai do loop</span></span>
-<span id="cb23-8"><a href="#cb23-8"></a>    <span class="cf">end</span></span>
-<span id="cb23-9"><a href="#cb23-9"></a>    <span class="cf">if</span> <span class="fu">iseven</span>(i)</span>
-<span id="cb23-10"><a href="#cb23-10"></a>        <span class="fu">println</span>(i)</span>
-<span id="cb23-11"><a href="#cb23-11"></a>    <span class="cf">end</span></span>
-<span id="cb23-12"><a href="#cb23-12"></a><span class="cf">end</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Números pares até 20 (pulando 12):
-2
-4
-6
-8
-10
-14
-16
-18</code></pre>
-</div>
-</div>
+<section id="análise-prática-plotando-dados-científicos" class="level1">
+<h1>ANÁLISE PRÁTICA: PLOTANDO DADOS CIENTÍFICOS</h1>
+</section>
+<section id="simular-dados-de-temperatura-ao-longo-do-tempo" class="level1">
+<h1>Simular dados de temperatura ao longo do tempo</h1>
+<p>using Random Random.seed!(42)</p>
+<p>dias = 1:30 temperatura = 20 .+ 5 .* sin.(2π .* dias ./ 7) .+ randn(30) .* 0.5 umidade = 60 .+ 20 .* sin.(2π .* dias ./ 10) .+ randn(30) .* 2</p>
+</section>
+<section id="plot-com-dois-eixos-y" class="level1">
+<h1>Plot com dois eixos Y</h1>
+<p>p_temp = plot(dias, temperatura, title="Temperatura vs Umidade", xlabel="Dias", ylabel="Temperatura (°C)", label="Temperatura", color=:red, linewidth=2, legend=:topleft)</p>
+<p>p_duplo = twinx(p_temp) plot!(p_duplo, dias, umidade, label="Umidade", color=:blue, linewidth=2, ylabel="Umidade (%)", legend=:topright)</p>
+<p>println("Gráfico com dois eixos Y criado")</p>
+</section>
+<section id="salvando-figuras" class="level1">
+<h1>SALVANDO FIGURAS</h1>
+<p>println("\n— SALVANDO FIGURAS —")</p>
+</section>
+<section id="criar-um-gráfico-simples" class="level1">
+<h1>Criar um gráfico simples</h1>
+<p>p_salvar = plot(1:10, (1:10).^2, title="Gráfico para Salvar", legend=false)</p>
+</section>
+<section id="salvar-em-diferentes-formatos" class="level1">
+<h1>Salvar em diferentes formatos</h1>
+<p>savefig(p_salvar, "grafico.png") savefig(p_salvar, "grafico.pdf") savefig(p_salvar, "grafico.svg")</p>
+<p>println("Figura salva em: grafico.png, grafico.pdf, grafico.svg")</p>
+</section>
+<section id="animações" class="level1">
+<h1>ANIMAÇÕES</h1>
+<p>println("\n— ANIMAÇÕES —")</p>
+</section>
+<section id="criar-uma-animação-simples" class="level1">
+<h1>Criar uma animação simples</h1>
+<p><span class="citation" data-cites="info">@info</span> "Criando animação…"</p>
+<p>anim = <span class="citation" data-cites="animate">@animate</span> for i in 1:100 plot(sin.(0:0.1:2π .+ i/10), ylim=(-1.2, 1.2), title="Onda em Movimento (frame $i)", legend=false, size=(600, 400)) end</p>
+<p>gif(anim, "onda_animada.gif", fps=30) println("Animação salva em: onda_animada.gif")</p>
+</section>
+<section id="exemplo-prático-fractal-mandelbrot" class="level1">
+<h1>EXEMPLO PRÁTICO: FRACTAL MANDELBROT</h1>
+<p>println("\n— FRACTAL DE MANDELBROT —")</p>
+<p>function mandelbrot(c, max_iter=100) z = 0 for n in 1:max_iter if abs(z) &gt; 2 return n end z = z^2 + c end return max_iter end</p>
+</section>
+<section id="gerar-grid-de-números-complexos" class="level1">
+<h1>Gerar grid de números complexos</h1>
+<p>width, height = 400, 400 xmin, xmax = -2.5, 1.0 ymin, ymax = -1.25, 1.25</p>
+<p>mandelbrot_set = zeros(height, width)</p>
+<p>for row in 1:height y = ymin + (row - 1) * (ymax - ymin) / (height - 1) for col in 1:width x = xmin + (col - 1) * (xmax - xmin) / (width - 1) c = complex(x, y) mandelbrot_set[row, col] = mandelbrot(c) end end</p>
+<p>p_mandelbrot = heatmap(mandelbrot_set, title="Conjunto de Mandelbrot", xlabel="Real", ylabel="Imaginário", legend=false)</p>
+<p>println("Fractal de Mandelbrot renderizado")</p>
+</section>
+<section id="plot-customizado-com-backend" class="level1">
+<h1>PLOT CUSTOMIZADO COM BACKEND</h1>
+<p>println("\n— CUSTOMIZAÇÃO AVANÇADA —")</p>
+</section>
+<section id="usar-plot-para-adicionar-elementos-a-um-plot-existente" class="level1">
+<h1>Usar plot! para adicionar elementos a um plot existente</h1>
+<p>p_custom = plot(size=(800, 500), margin=5Plots.mm)</p>
+</section>
+<section id="adicionar-múltiplas-linhas" class="level1">
+<h1>Adicionar múltiplas linhas</h1>
+<p>for i in 1:5 x = 0:0.1:2π y = sin.(x .+ i*π/5) plot!(p_custom, x, y, label="Fase $i", linewidth=2, alpha=0.8) end</p>
+<p>plot!(p_custom, title="Múltiplas Fases", xlabel="X", ylabel="sin(x + fase)", legend=:topright, grid=true, gridstyle=:dash, gridopacity=0.3)</p>
+<p>println("Plot customizado criado")</p>
+</section>
+<section id="exemplo-regressão-visual" class="level1">
+<h1>EXEMPLO: REGRESSÃO VISUAL</h1>
+<p>println("\n=== EXEMPLO: VISUALIZANDO REGRESSÃO ===")</p>
+</section>
+<section id="dados-com-ruído" class="level1">
+<h1>Dados com ruído</h1>
+<p>x_reg = 1:20 y_reg = 2 .* x_reg .+ 5 .+ randn(20) .* 5</p>
+</section>
+<section id="calcular-reta-de-regressão" class="level1">
+<h1>Calcular reta de regressão</h1>
+<p>x_meio = mean(x_reg) y_meio = mean(y_reg) b_reg = sum((x_reg .- x_meio) .* (y_reg .- y_meio)) / sum((x_reg .- x_meio).^2) a_reg = y_meio - b_reg * x_meio</p>
+</section>
+<section id="plot" class="level1">
+<h1>Plot</h1>
+<p>p_reg = scatter(x_reg, y_reg, title="Dados com Regressão Linear", xlabel="X", ylabel="Y", label="Dados", markersize=6, alpha=0.7)</p>
+<p>x_linha = 0:25 y_linha = a_reg .+ b_reg .* x_linha plot!(p_reg, x_linha, y_linha, label="Ajuste: y = $(round(a_reg; digits=2)) + $(round(b_reg; digits=2))x", linewidth=2, color=:red)</p>
+<p>println("Plot de regressão criado")</p>
+</section>
+<section id="limpeza-de-arquivos-temporários" class="level1">
+<h1>LIMPEZA DE ARQUIVOS TEMPORÁRIOS</h1>
+<p>println("\n— LIMPEZA —")</p>
+</section>
+<section id="remover-arquivos-de-teste-se-existirem" class="level1">
+<h1>Remover arquivos de teste se existirem</h1>
+<p>for arquivo in ["grafico.png", "grafico.pdf", "grafico.svg", "onda_animada.gif"] if isfile(arquivo) rm(arquivo) println("Arquivo deletado: $arquivo") end end</p>
+</section>
+<section id="dicas-e-recursos" class="level1">
+<h1>DICAS E RECURSOS</h1>
+<p>println("\n" * "═" ^ 70) println("\n=== DICAS SOBRE PLOTS ===") println("\n1️⃣ ATRIBUTOS PRINCIPAIS:") println(" • title: Título do gráfico") println(" • xlabel, ylabel, zlabel: Rótulos dos eixos") println(" • legend: Posição da legenda (topright, bottomleft, etc)") println(" • color: Cor da linha") println(" • linewidth: Espessura da linha") println(" • linestyle: Estilo (:solid, :dash, :dot, :dashdot)") println(" • markersize: Tamanho do marcador") println(" • alpha: Transparência (0 a 1)") println(" • size: Tamanho da figura (width, height)") println()</p>
+<p>println("2️⃣ TIPOS DE PLOTS:") println(" • plot(): Gráfico de linha") println(" • scatter(): Gráfico de dispersão") println(" • bar(): Gráfico de barras") println(" • histogram(): Histograma") println(" • heatmap(): Mapa de calor") println(" • contour(): Linhas de contorno") println(" • surface(): Superfície 3D") println(" • density(): Densidade") println()</p>
+<p>println("3️⃣ MODIFICANDO PLOTS:") println(" • plot!(): Adiciona elementos ao plot anterior") println(" • twinx(): Cria segundo eixo Y") println(" • ylims(), xlims(): Define limites dos eixos") println()</p>
+<p>println("4️⃣ SALVANDO E COMPARTILHANDO:") println(" • savefig(p, \"nome.png\"): PNG") println(" • savefig(p, \"nome.pdf\"): PDF") println(" • savefig(p, \"nome.svg\"): SVG") println(" • gif(anim, \"nome.gif\"): GIF animado") println()</p>
+<p>println("5️⃣ BACKENDS DISPONÍVEIS:") println(" • gr(): Rápido e eficiente (padrão)") println(" • pyplot(): Baseado em Python/Matplotlib") println(" • plotlyjs(): Interativo com Plotly") println(" • inspectdr(): Leve") println()</p>
+<p>println("6️⃣ LAYOUT MÚLTIPLO:") println(" • plot(p1, p2, p3, p4, layout=(2,2))") println(" • Cria grade com vários subplots") println()</p>
+<p>println("═" ^ 70) println()</p>
 
 
-</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
