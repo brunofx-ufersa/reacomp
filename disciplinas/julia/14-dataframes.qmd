@@ -1,0 +1,168 @@
+---
+title: "DataFrames"
+lang: pt
+toc-title: Conteúdo
+toc: false
+sidebar: false
+format:
+  html:
+    reference-location: margin
+execute:
+  eval: true
+  daemon: true
+  cache: true
+---
+
+Certifique-se de que as bibliotecas using `XLSX` e `DataFrames` estejam instaladas. Nesta etapa, preparamos o ambiente Julia e garantimos que as dependências necessárias para leitura de arquivos Excel e manipulação de dados estejam disponíveis.
+
+```{julia}
+#| output: false
+#| echo: false
+using Pkg
+Pkg.activate(@__DIR__)
+```
+
+Aqui carregamos as bibliotecas que serão utilizadas ao longo do tutorial.
+
+```{julia}
+#| output: false
+using XLSX, DataFrames 
+```
+
+<!--
+## Abrir um arquivo do Excel
+
+Nesta seção, vamos abrir um arquivo Excel e explorar suas planilhas disponíveis.
+
+```{julia}
+xf = XLSX.readxlsx("WorldCups.xlsx")
+XLSX.sheetnames(xf)
+```
+
+Em nosso caso, não é realmente necessário, pois vamos tranformar automaticamente nossa planilha em um `DataFrame`.
+-->
+
+## Criando um dataset
+
+Agora, criamos um `DataFrame` a partir de uma planilha específica do arquivo. Isso permite trabalhar com os dados de forma estruturada. Em seguida, visualizamos as primeiras linhas para entender o conteúdo.
+
+```{julia}
+df = DataFrame(XLSX.readtable("WorldCups.xlsx", "WorldCups"))
+first(df, 3) # Seleciona as três primeiras linhas
+```
+
+## Renomeando colunas
+
+Aqui mostramos como renomear colunas para tornar os nomes mais simples ou mais claros.
+
+```{julia}
+rename!(df, :GoalsScored => :Goals)
+last(df, 3) # Seleciona as três últimas linhas
+```
+
+
+## Selecionando colunas
+
+Nesta etapa, removemos colunas que não são necessárias para a análise. Isso ajuda a manter o dataset mais limpo e objetivo.
+
+```{julia}
+select!(df, Not([:QualifiedTeams, :Attendance]))
+names(df) # mostra os nomes das colunas
+```
+
+## Selecionando colunas
+
+Podemos derivar métricas novas a partir dos dados existentes.
+
+```{julia}
+df.GoalsPerMatch = df.Goals ./ df.MatchesPlayed
+first(df, 3)
+```
+
+
+## Ordenando
+
+Agora vamos organizar os dados com base em critérios específicos.
+
+- Por ano (decrescente):
+
+```{julia}
+sort(df, :Year, rev=true)
+```
+
+- Por gols:
+
+```{julia}
+sort(df, :Goals)
+```
+
+## Acessando linhas específicas
+
+Aqui demonstramos como acessar partes específicas do dataset.
+
+- Quarta linha:
+
+```{julia}
+df[4, :]
+```
+
+- Valor específico:
+
+```{julia}
+df[4, :Winner]
+```
+
+## Filtros
+
+Os filtros permitem selecionar subconjuntos de dados com base em condições.
+
+- Copas do século XXI:
+
+```{julia}
+filter(row -> row.Year > 2001, df)
+```
+
+ou por meio da indexação booleana 
+
+```{julia}
+df[df.Year .> 2001, :]
+```
+
+- Copas em que o Brasil foi campeão:
+
+```{julia}
+filter(row -> row.Winner == "Brazil", df)
+```
+
+
+## Agrupando 
+
+O agrupamento é útil para análises agregadas e resumidas.
+
+- Agrupar por sede:
+
+```{julia}
+groupby(df, :Country)
+```
+
+- Contagem simples (frequência):
+
+```{julia}
+combine(groupby(df, :Country), nrow)
+```
+
+- Ranking de campeões:
+
+```{julia}
+sort(combine(groupby(df, :Winner), nrow => :Titles), :Titles, rev=true)
+```
+
+## Salvar o dataset
+
+iremos salvar nosso dataset em formato CSV (Comma-Separated Values), ou Valores Separados por Vírgula.
+
+```{julia}
+#| output: false
+using CSV
+CSV.write("WorldCups.csv", df)
+```

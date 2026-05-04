@@ -19,11 +19,46 @@ Bem-vindo(a) ao curso de **{{< meta title >}}**!
 -->
 
 ::: {.callout-note collapse="true" icon="false"}
-## Iniciante
+## Fase 1
 
 ::: {.list-group .list-group-flush .mb-0 .text-decoration-none .border-0}
 
-[1. Instalação e Configuração](1-instacao.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[1. Instalação e Configuração](1-instalacao.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[2. Variáveis](2-variaveis.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[3. Números](3-tiposnumericos.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[4. Operações](4-operacoesmatematicas.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[5. Arrays](5-arrays.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[6. Caracteres](6-strings.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+
+:::
+
+:::
+
+::: {.callout-note collapse="true" icon="false"}
+## Fase 2
+
+::: {.list-group .list-group-flush .mb-0 .text-decoration-none .border-0}
+
+[1. Tuplas e Conjuntos](7-tuplas.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[2. Dicionários](8-dicionarios.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[3. Controle](9-controle.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[4. Laços](10-lacos.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[5. Funcoes](11-funcoes.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[6. Struct](12-structs.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+
+
+
+:::
+
+:::
+
+::: {.callout-note collapse="true" icon="false"}
+## Fase 3
+
+::: {.list-group .list-group-flush .mb-0 .text-decoration-none .border-0}
+
+[1. Gráficos](13-plots.qmd){.list-group-item .list-group-item-action .text-body .border-0}
+[2. DataFrames](14-dataframes.qmd){.list-group-item .list-group-item-action .text-body .border-0}
 
 :::
 

@@ -104,6 +104,7 @@ website:
         - disciplinas/julia/11-funcoes.qmd
         - disciplinas/julia/12-structs.qmd
         - disciplinas/julia/13-plots.qmd 
+        - disciplinas/julia/14-dataframes.qmd 
 format:
   html:
     highlight-style: a11y
