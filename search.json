@@ -1235,7 +1235,100 @@
     "href": "disciplinas/julia/14-dataframes.html",
     "title": "DataFrames",
     "section": "",
-    "text": "Para usar a biblioteca Plots, certifique-se de que está instalada.\n\nusing DataFrames\n\n\n\n\n De volta ao topo"
+    "text": "Certifique-se de que as bibliotecas using XLSX e DataFrames estejam instaladas. Nesta etapa, preparamos o ambiente Julia e garantimos que as dependências necessárias para leitura de arquivos Excel e manipulação de dados estejam disponíveis.\nAqui carregamos as bibliotecas que serão utilizadas ao longo do tutorial.\nusing XLSX, DataFrames",
+    "crumbs": [
+      "DataFrames"
+    ]
+  },
+  {
+    "objectID": "disciplinas/julia/14-dataframes.html#criando-um-dataset",
+    "href": "disciplinas/julia/14-dataframes.html#criando-um-dataset",
+    "title": "DataFrames",
+    "section": "Criando um dataset",
+    "text": "Criando um dataset\nAgora, criamos um DataFrame a partir de uma planilha específica do arquivo. Isso permite trabalhar com os dados de forma estruturada. Em seguida, visualizamos as primeiras linhas para entender o conteúdo.\n\ndf = DataFrame(XLSX.readtable(\"WorldCups.xlsx\", \"WorldCups\"))\nfirst(df, 3) # Seleciona as três primeiras linhas\n\n3×10 DataFrame\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoalsScored\nQualifiedTeams\nMatchesPlayed\nAttendance\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nInt64\nAny\n\n\n\n\n1\n1930\nUruguay\nUruguay\nArgentina\nUSA\nYugoslavia\n70\n13\n18\n590.549\n\n\n2\n1934\nItaly\nItaly\nCzechoslovakia\nGermany\nAustria\n70\n16\n17\n363\n\n\n3\n1938\nFrance\nItaly\nHungary\nBrazil\nSweden\n84\n15\n18\n375.7",
+    "crumbs": [
+      "DataFrames"
+    ]
+  },
+  {
+    "objectID": "disciplinas/julia/14-dataframes.html#renomeando-colunas",
+    "href": "disciplinas/julia/14-dataframes.html#renomeando-colunas",
+    "title": "DataFrames",
+    "section": "Renomeando colunas",
+    "text": "Renomeando colunas\nAqui mostramos como renomear colunas para tornar os nomes mais simples ou mais claros.\n\nrename!(df, :GoalsScored =&gt; :Goals)\nlast(df, 3) # Seleciona as três últimas linhas\n\n3×10 DataFrame\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoals\nQualifiedTeams\nMatchesPlayed\nAttendance\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nInt64\nAny\n\n\n\n\n1\n2006\nGermany\nItaly\nFrance\nGermany\nPortugal\n147\n32\n64\n3.359.439\n\n\n2\n2010\nSouth Africa\nSpain\nNetherlands\nGermany\nUruguay\n145\n32\n64\n3.178.856\n\n\n3\n2014\nBrazil\nGermany\nArgentina\nNetherlands\nBrazil\n171\n32\n64\n3.386.810",
+    "crumbs": [
+      "DataFrames"
+    ]
+  },
+  {
+    "objectID": "disciplinas/julia/14-dataframes.html#selecionando-colunas",
+    "href": "disciplinas/julia/14-dataframes.html#selecionando-colunas",
+    "title": "DataFrames",
+    "section": "Selecionando colunas",
+    "text": "Selecionando colunas\nNesta etapa, removemos colunas que não são necessárias para a análise. Isso ajuda a manter o dataset mais limpo e objetivo.\n\nselect!(df, Not([:QualifiedTeams, :Attendance]))\nnames(df) # mostra os nomes das colunas\n\n8-element Vector{String}:\n \"Year\"\n \"Country\"\n \"Winner\"\n \"Runners-Up\"\n \"Third\"\n \"Fourth\"\n \"Goals\"\n \"MatchesPlayed\"",
+    "crumbs": [
+      "DataFrames"
+    ]
+  },
+  {
+    "objectID": "disciplinas/julia/14-dataframes.html#selecionando-colunas-1",
+    "href": "disciplinas/julia/14-dataframes.html#selecionando-colunas-1",
+    "title": "DataFrames",
+    "section": "Selecionando colunas",
+    "text": "Selecionando colunas\nPodemos derivar métricas novas a partir dos dados existentes.\n\ndf.GoalsPerMatch = df.Goals ./ df.MatchesPlayed\nfirst(df, 3)\n\n3×9 DataFrame\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoals\nMatchesPlayed\nGoalsPerMatch\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nFloat64\n\n\n\n\n1\n1930\nUruguay\nUruguay\nArgentina\nUSA\nYugoslavia\n70\n18\n3.88889\n\n\n2\n1934\nItaly\nItaly\nCzechoslovakia\nGermany\nAustria\n70\n17\n4.11765\n\n\n3\n1938\nFrance\nItaly\nHungary\nBrazil\nSweden\n84\n18\n4.66667",
+    "crumbs": [
+      "DataFrames"
+    ]
+  },
+  {
+    "objectID": "disciplinas/julia/14-dataframes.html#ordenando",
+    "href": "disciplinas/julia/14-dataframes.html#ordenando",
+    "title": "DataFrames",
+    "section": "Ordenando",
+    "text": "Ordenando\nAgora vamos organizar os dados com base em critérios específicos.\n\nPor ano (decrescente):\n\n\nsort(df, :Year, rev=true)\n\n20×9 DataFrame\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoals\nMatchesPlayed\nGoalsPerMatch\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nFloat64\n\n\n\n\n1\n2014\nBrazil\nGermany\nArgentina\nNetherlands\nBrazil\n171\n64\n2.67188\n\n\n2\n2010\nSouth Africa\nSpain\nNetherlands\nGermany\nUruguay\n145\n64\n2.26562\n\n\n3\n2006\nGermany\nItaly\nFrance\nGermany\nPortugal\n147\n64\n2.29688\n\n\n4\n2002\nKorea/Japan\nBrazil\nGermany\nTurkey\nKorea Republic\n161\n64\n2.51562\n\n\n5\n1998\nFrance\nFrance\nBrazil\nCroatia\nNetherlands\n171\n64\n2.67188\n\n\n6\n1994\nUSA\nBrazil\nItaly\nSweden\nBulgaria\n141\n52\n2.71154\n\n\n7\n1990\nItaly\nGermany FR\nArgentina\nItaly\nEngland\n115\n52\n2.21154\n\n\n8\n1986\nMexico\nArgentina\nGermany FR\nFrance\nBelgium\n132\n52\n2.53846\n\n\n9\n1982\nSpain\nItaly\nGermany FR\nPoland\nFrance\n146\n52\n2.80769\n\n\n10\n1978\nArgentina\nArgentina\nNetherlands\nBrazil\nItaly\n102\n38\n2.68421\n\n\n11\n1974\nGermany\nGermany FR\nNetherlands\nPoland\nBrazil\n97\n38\n2.55263\n\n\n12\n1970\nMexico\nBrazil\nItaly\nGermany FR\nUruguay\n95\n32\n2.96875\n\n\n13\n1966\nEngland\nEngland\nGermany FR\nPortugal\nSoviet Union\n89\n32\n2.78125\n\n\n14\n1962\nChile\nBrazil\nCzechoslovakia\nChile\nYugoslavia\n89\n32\n2.78125\n\n\n15\n1958\nSweden\nBrazil\nSweden\nFrance\nGermany FR\n126\n35\n3.6\n\n\n16\n1954\nSwitzerland\nGermany FR\nHungary\nAustria\nUruguay\n140\n26\n5.38462\n\n\n17\n1950\nBrazil\nUruguay\nBrazil\nSweden\nSpain\n88\n22\n4.0\n\n\n18\n1938\nFrance\nItaly\nHungary\nBrazil\nSweden\n84\n18\n4.66667\n\n\n19\n1934\nItaly\nItaly\nCzechoslovakia\nGermany\nAustria\n70\n17\n4.11765\n\n\n20\n1930\nUruguay\nUruguay\nArgentina\nUSA\nYugoslavia\n70\n18\n3.88889\n\n\n\n\n\n\n\nPor gols:\n\n\nsort(df, :Goals)\n\n20×9 DataFrame\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoals\nMatchesPlayed\nGoalsPerMatch\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nFloat64\n\n\n\n\n1\n1930\nUruguay\nUruguay\nArgentina\nUSA\nYugoslavia\n70\n18\n3.88889\n\n\n2\n1934\nItaly\nItaly\nCzechoslovakia\nGermany\nAustria\n70\n17\n4.11765\n\n\n3\n1938\nFrance\nItaly\nHungary\nBrazil\nSweden\n84\n18\n4.66667\n\n\n4\n1950\nBrazil\nUruguay\nBrazil\nSweden\nSpain\n88\n22\n4.0\n\n\n5\n1962\nChile\nBrazil\nCzechoslovakia\nChile\nYugoslavia\n89\n32\n2.78125\n\n\n6\n1966\nEngland\nEngland\nGermany FR\nPortugal\nSoviet Union\n89\n32\n2.78125\n\n\n7\n1970\nMexico\nBrazil\nItaly\nGermany FR\nUruguay\n95\n32\n2.96875\n\n\n8\n1974\nGermany\nGermany FR\nNetherlands\nPoland\nBrazil\n97\n38\n2.55263\n\n\n9\n1978\nArgentina\nArgentina\nNetherlands\nBrazil\nItaly\n102\n38\n2.68421\n\n\n10\n1990\nItaly\nGermany FR\nArgentina\nItaly\nEngland\n115\n52\n2.21154\n\n\n11\n1958\nSweden\nBrazil\nSweden\nFrance\nGermany FR\n126\n35\n3.6\n\n\n12\n1986\nMexico\nArgentina\nGermany FR\nFrance\nBelgium\n132\n52\n2.53846\n\n\n13\n1954\nSwitzerland\nGermany FR\nHungary\nAustria\nUruguay\n140\n26\n5.38462\n\n\n14\n1994\nUSA\nBrazil\nItaly\nSweden\nBulgaria\n141\n52\n2.71154\n\n\n15\n2010\nSouth Africa\nSpain\nNetherlands\nGermany\nUruguay\n145\n64\n2.26562\n\n\n16\n1982\nSpain\nItaly\nGermany FR\nPoland\nFrance\n146\n52\n2.80769\n\n\n17\n2006\nGermany\nItaly\nFrance\nGermany\nPortugal\n147\n64\n2.29688\n\n\n18\n2002\nKorea/Japan\nBrazil\nGermany\nTurkey\nKorea Republic\n161\n64\n2.51562\n\n\n19\n1998\nFrance\nFrance\nBrazil\nCroatia\nNetherlands\n171\n64\n2.67188\n\n\n20\n2014\nBrazil\nGermany\nArgentina\nNetherlands\nBrazil\n171\n64\n2.67188",
+    "crumbs": [
+      "DataFrames"
+    ]
+  },
+  {
+    "objectID": "disciplinas/julia/14-dataframes.html#acessando-linhas-específicas",
+    "href": "disciplinas/julia/14-dataframes.html#acessando-linhas-específicas",
+    "title": "DataFrames",
+    "section": "Acessando linhas específicas",
+    "text": "Acessando linhas específicas\nAqui demonstramos como acessar partes específicas do dataset.\n\nQuarta linha:\n\n\ndf[4, :]\n\nDataFrameRow (9 columns)\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoals\nMatchesPlayed\nGoalsPerMatch\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nFloat64\n\n\n\n\n4\n1950\nBrazil\nUruguay\nBrazil\nSweden\nSpain\n88\n22\n4.0\n\n\n\n\n\n\n\nValor específico:\n\n\ndf[4, :Winner]\n\n\"Uruguay\"",
+    "crumbs": [
+      "DataFrames"
+    ]
+  },
+  {
+    "objectID": "disciplinas/julia/14-dataframes.html#filtros",
+    "href": "disciplinas/julia/14-dataframes.html#filtros",
+    "title": "DataFrames",
+    "section": "Filtros",
+    "text": "Filtros\nOs filtros permitem selecionar subconjuntos de dados com base em condições.\n\nCopas do século XXI:\n\n\nfilter(row -&gt; row.Year &gt; 2001, df)\n\n4×9 DataFrame\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoals\nMatchesPlayed\nGoalsPerMatch\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nFloat64\n\n\n\n\n1\n2002\nKorea/Japan\nBrazil\nGermany\nTurkey\nKorea Republic\n161\n64\n2.51562\n\n\n2\n2006\nGermany\nItaly\nFrance\nGermany\nPortugal\n147\n64\n2.29688\n\n\n3\n2010\nSouth Africa\nSpain\nNetherlands\nGermany\nUruguay\n145\n64\n2.26562\n\n\n4\n2014\nBrazil\nGermany\nArgentina\nNetherlands\nBrazil\n171\n64\n2.67188\n\n\n\n\n\n\nou por meio da indexação booleana\n\ndf[df.Year .&gt; 2001, :]\n\n4×9 DataFrame\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoals\nMatchesPlayed\nGoalsPerMatch\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nFloat64\n\n\n\n\n1\n2002\nKorea/Japan\nBrazil\nGermany\nTurkey\nKorea Republic\n161\n64\n2.51562\n\n\n2\n2006\nGermany\nItaly\nFrance\nGermany\nPortugal\n147\n64\n2.29688\n\n\n3\n2010\nSouth Africa\nSpain\nNetherlands\nGermany\nUruguay\n145\n64\n2.26562\n\n\n4\n2014\nBrazil\nGermany\nArgentina\nNetherlands\nBrazil\n171\n64\n2.67188\n\n\n\n\n\n\n\nCopas em que o Brasil foi campeão:\n\n\nfilter(row -&gt; row.Winner == \"Brazil\", df)\n\n5×9 DataFrame\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoals\nMatchesPlayed\nGoalsPerMatch\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nFloat64\n\n\n\n\n1\n1958\nSweden\nBrazil\nSweden\nFrance\nGermany FR\n126\n35\n3.6\n\n\n2\n1962\nChile\nBrazil\nCzechoslovakia\nChile\nYugoslavia\n89\n32\n2.78125\n\n\n3\n1970\nMexico\nBrazil\nItaly\nGermany FR\nUruguay\n95\n32\n2.96875\n\n\n4\n1994\nUSA\nBrazil\nItaly\nSweden\nBulgaria\n141\n52\n2.71154\n\n\n5\n2002\nKorea/Japan\nBrazil\nGermany\nTurkey\nKorea Republic\n161\n64\n2.51562",
+    "crumbs": [
+      "DataFrames"
+    ]
+  },
+  {
+    "objectID": "disciplinas/julia/14-dataframes.html#agrupando",
+    "href": "disciplinas/julia/14-dataframes.html#agrupando",
+    "title": "DataFrames",
+    "section": "Agrupando",
+    "text": "Agrupando\nO agrupamento é útil para análises agregadas e resumidas.\n\nAgrupar por sede:\n\n\ngroupby(df, :Country)\n\nGroupedDataFrame with 15 groups based on key: CountryFirst Group (1 row): Country = \"Uruguay\"\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoals\nMatchesPlayed\nGoalsPerMatch\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nFloat64\n\n\n\n\n1\n1930\nUruguay\nUruguay\nArgentina\nUSA\nYugoslavia\n70\n18\n3.88889\n\n\n\n⋮Last Group (1 row): Country = \"South Africa\"\n\n\n\nRow\nYear\nCountry\nWinner\nRunners-Up\nThird\nFourth\nGoals\nMatchesPlayed\nGoalsPerMatch\n\n\n\nInt64\nString\nString\nString\nString\nString\nInt64\nInt64\nFloat64\n\n\n\n\n1\n2010\nSouth Africa\nSpain\nNetherlands\nGermany\nUruguay\n145\n64\n2.26562\n\n\n\n\n\n\n\nContagem simples (frequência):\n\n\ncombine(groupby(df, :Country), nrow)\n\n15×2 DataFrame\n\n\n\nRow\nCountry\nnrow\n\n\n\nString\nInt64\n\n\n\n\n1\nUruguay\n1\n\n\n2\nItaly\n2\n\n\n3\nFrance\n2\n\n\n4\nBrazil\n2\n\n\n5\nSwitzerland\n1\n\n\n6\nSweden\n1\n\n\n7\nChile\n1\n\n\n8\nEngland\n1\n\n\n9\nMexico\n2\n\n\n10\nGermany\n2\n\n\n11\nArgentina\n1\n\n\n12\nSpain\n1\n\n\n13\nUSA\n1\n\n\n14\nKorea/Japan\n1\n\n\n15\nSouth Africa\n1\n\n\n\n\n\n\n\nRanking de campeões:\n\n\nsort(combine(groupby(df, :Winner), nrow =&gt; :Titles), :Titles, rev=true)\n\n9×2 DataFrame\n\n\n\nRow\nWinner\nTitles\n\n\n\nString\nInt64\n\n\n\n\n1\nBrazil\n5\n\n\n2\nItaly\n4\n\n\n3\nGermany FR\n3\n\n\n4\nUruguay\n2\n\n\n5\nArgentina\n2\n\n\n6\nEngland\n1\n\n\n7\nFrance\n1\n\n\n8\nSpain\n1\n\n\n9\nGermany\n1",
+    "crumbs": [
+      "DataFrames"
+    ]
+  },
+  {
+    "objectID": "disciplinas/julia/14-dataframes.html#salvar-o-dataset",
+    "href": "disciplinas/julia/14-dataframes.html#salvar-o-dataset",
+    "title": "DataFrames",
+    "section": "Salvar o dataset",
+    "text": "Salvar o dataset\niremos salvar nosso dataset em formato CSV (Comma-Separated Values), ou Valores Separados por Vírgula.\n\nusing CSV\nCSV.write(\"WorldCups.csv\", df)",
+    "crumbs": [
+      "DataFrames"
+    ]
   },
   {
     "objectID": "disciplinas/julia/2-variaveis.html",
@@ -1322,7 +1415,7 @@
     "href": "disciplinas/julia/index.html",
     "title": "Programação em Julia",
     "section": "",
-    "text": "Bem-vindo(a) ao curso de Programação em Julia!\n\n\n\n\n\n\n\nNotaFase 1\n\n\n\n\n\n\n1. Instalação e Configuração 2. Variáveis 3. Números 4. Operações 5. Arrays 6. Caracteres\n\n\n\n\n\n\n\n\n\n\nNotaFase 2\n\n\n\n\n\n\n7. Tuplas e Conjuntos 8. Dicionários 9. Controle 10. Laços 11. Funcoes 12. Struct\n\n\n\n\n\n\n\n\n\n\nNotaFase 3\n\n\n\n\n\n\n13. Gráficos\n\n\n\n\n\n\n\n De volta ao topo"
+    "text": "Bem-vindo(a) ao curso de Programação em Julia!\n\n\n\n\n\n\n\nNotaFase 1\n\n\n\n\n\n\n1. Instalação e Configuração 2. Variáveis 3. Números 4. Operações 5. Arrays 6. Caracteres\n\n\n\n\n\n\n\n\n\n\nNotaFase 2\n\n\n\n\n\n\n1. Tuplas e Conjuntos 2. Dicionários 3. Controle 4. Laços 5. Funcoes 6. Struct\n\n\n\n\n\n\n\n\n\n\nNotaFase 3\n\n\n\n\n\n\n1. Gráficos 2. DataFrames\n\n\n\n\n\n\n\n De volta ao topo"
   },
   {
     "objectID": "disciplinas/programacaoc/index.html",

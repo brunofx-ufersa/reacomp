@@ -456,7 +456,7 @@ Ponto específico: (2.0, 1.0)</code></pre>
 </div>
 </div>
 <!--
-```yalzaly
+```tnqueak
 # Exibição customizada
 function Base.show(io::IO, p::Ponto)
 
@@ -470,14 +470,14 @@ println("Ponto customizado: ", p2)
 <!-- 
 # Adicionando métodos 
 
-```yalzaly
+```tnqueak
 struct Retangulo
     largura::Float64
     altura::Float64
 end
 ```
 
-```yalzaly
+```tnqueak
 #| output: false
 # Método: calcular área
 area(r::Retangulo) = r.largura * r.altura
@@ -485,7 +485,7 @@ area(r::Retangulo) = r.largura * r.altura
 perimetro(r::Retangulo) = 2 * (r.largura + r.altura)
 ```
 
-```yalzaly
+```tnqueak
 ret = Retangulo(5.0, 3.0)
 println("Retângulo: ", ret)
 println("Área: ", area(ret))
@@ -595,7 +595,7 @@ Endereço: Rua Angicos, 123 - Fortaleza</code></pre>
 
 Vamos desenvolver um sistema simples de uma biblioteca.
 
-```yalzaly
+```tnqueak
 struct Livro
     titulo::String
     autor::String
@@ -614,7 +614,7 @@ end
 
 ## Métodos para biblioteca
 
-```yalzaly
+```tnqueak
 #| output: false
 function adicionar_livro(bib::Biblioteca, livro::Livro)
     push!(bib.livros, livro)
@@ -633,7 +633,7 @@ end
 
 ## Usando a biblioteca
 
-```yalzaly
+```tnqueak
 bib = Biblioteca("Biblioteca Central")
 
 adicionar_livro(bib, Livro("1984", "George Orwell", 1949, "978-0451524935"))
@@ -648,7 +648,7 @@ listar_livros(bib)
 # Comparação e igualdade
 
 
-```yalzaly
+```tnqueak
 p1 = Pessoa("Ana", 30, "ana@example.com")
 p2 = Pessoa("Ana", 30, "ana@example.com")
 p3 = Pessoa("Bruno", 30, "bruno@example.com")

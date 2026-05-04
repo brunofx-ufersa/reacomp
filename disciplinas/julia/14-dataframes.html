@@ -61,13 +61,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../disciplinas/julia/13-plots.html" rel="prev">
 <link href="../../img/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -119,6 +120,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -359,12 +363,1474 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
 </header>
 
 
-<p>Para usar a biblioteca Plots, certifique-se de que está instalada.</p>
+<p>Certifique-se de que as bibliotecas using <code>XLSX</code> e <code>DataFrames</code> estejam instaladas. Nesta etapa, preparamos o ambiente Julia e garantimos que as dependências necessárias para leitura de arquivos Excel e manipulação de dados estejam disponíveis.</p>
+<p>Aqui carregamos as bibliotecas que serão utilizadas ao longo do tutorial.</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">using</span> <span class="bu">DataFrames</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">using</span> <span class="bu">XLSX</span>, <span class="bu">DataFrames</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<!--
+## Abrir um arquivo do Excel
+
+Nesta seção, vamos abrir um arquivo Excel e explorar suas planilhas disponíveis.
+
+```jpakcdg
+xf = XLSX.readxlsx("WorldCups.xlsx")
+XLSX.sheetnames(xf)
+```
+
+Em nosso caso, não é realmente necessário, pois vamos tranformar automaticamente nossa planilha em um `DataFrame`.
+-->
+<section id="criando-um-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="criando-um-dataset">Criando um dataset</h2>
+<p>Agora, criamos um <code>DataFrame</code> a partir de uma planilha específica do arquivo. Isso permite trabalhar com os dados de forma estruturada. Em seguida, visualizamos as primeiras linhas para entender o conteúdo.</p>
+<div id="6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1"></a>df <span class="op">=</span> <span class="fu">DataFrame</span>(XLSX.<span class="fu">readtable</span>(<span class="st">"WorldCups.xlsx"</span>, <span class="st">"WorldCups"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">first</span>(df, <span class="fl">3</span>) <span class="co"># Seleciona as três primeiras linhas</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>3×10 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GoalsScored</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">QualifiedTeams</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Attendance</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Any">Any</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">1930</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">USA</td>
+<td style="text-align: left;">Yugoslavia</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">590.549</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">1934</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Czechoslovakia</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Austria</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">363</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">1938</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Hungary</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">375.7</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="renomeando-colunas" class="level2">
+<h2 class="anchored" data-anchor-id="renomeando-colunas">Renomeando colunas</h2>
+<p>Aqui mostramos como renomear colunas para tornar os nomes mais simples ou mais claros.</p>
+<div id="8" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">rename!</span>(df, <span class="op">:</span>GoalsScored <span class="op">=&gt;</span> <span class="op">:</span>Goals)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">last</span>(df, <span class="fl">3</span>) <span class="co"># Seleciona as três últimas linhas</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>3×10 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Goals</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">QualifiedTeams</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Attendance</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Any">Any</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: left;">3.359.439</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">145</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: left;">3.178.856</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: left;">3.386.810</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="selecionando-colunas" class="level2">
+<h2 class="anchored" data-anchor-id="selecionando-colunas">Selecionando colunas</h2>
+<p>Nesta etapa, removemos colunas que não são necessárias para a análise. Isso ajuda a manter o dataset mais limpo e objetivo.</p>
+<div id="10" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">select!</span>(df, <span class="fu">Not</span>([<span class="op">:</span>QualifiedTeams, <span class="op">:</span>Attendance]))</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">names</span>(df) <span class="co"># mostra os nomes das colunas</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>8-element Vector{String}:
+ "Year"
+ "Country"
+ "Winner"
+ "Runners-Up"
+ "Third"
+ "Fourth"
+ "Goals"
+ "MatchesPlayed"</code></pre>
+</div>
+</div>
+</section>
+<section id="selecionando-colunas-1" class="level2">
+<h2 class="anchored" data-anchor-id="selecionando-colunas-1">Selecionando colunas</h2>
+<p>Podemos derivar métricas novas a partir dos dados existentes.</p>
+<div id="12" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a>df.GoalsPerMatch <span class="op">=</span> df.Goals <span class="op">./</span> df.MatchesPlayed</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">first</span>(df, <span class="fl">3</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>3×9 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Goals</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GoalsPerMatch</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">1930</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">USA</td>
+<td style="text-align: left;">Yugoslavia</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">3.88889</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">1934</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Czechoslovakia</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Austria</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">4.11765</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">1938</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Hungary</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">4.66667</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="ordenando" class="level2">
+<h2 class="anchored" data-anchor-id="ordenando">Ordenando</h2>
+<p>Agora vamos organizar os dados com base em critérios específicos.</p>
+<ul>
+<li>Por ano (decrescente):</li>
+</ul>
+<div id="14" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">sort</span>(df, <span class="op">:</span>Year, rev<span class="op">=</span><span class="cn">true</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>20×9 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Goals</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GoalsPerMatch</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.67188</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">145</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.26562</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.29688</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">Korea/Japan</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Turkey</td>
+<td style="text-align: left;">Korea Republic</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.51562</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: right;">1998</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Croatia</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.67188</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: right;">1994</td>
+<td style="text-align: left;">USA</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">Bulgaria</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">2.71154</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">7</td>
+<td style="text-align: right;">1990</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">England</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">2.21154</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">8</td>
+<td style="text-align: right;">1986</td>
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Belgium</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">2.53846</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">9</td>
+<td style="text-align: right;">1982</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Poland</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: right;">146</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">2.80769</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">10</td>
+<td style="text-align: right;">1978</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">2.68421</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">11</td>
+<td style="text-align: right;">1974</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Poland</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">2.55263</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">12</td>
+<td style="text-align: right;">1970</td>
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">2.96875</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">13</td>
+<td style="text-align: right;">1966</td>
+<td style="text-align: left;">England</td>
+<td style="text-align: left;">England</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: left;">Soviet Union</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">2.78125</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">14</td>
+<td style="text-align: right;">1962</td>
+<td style="text-align: left;">Chile</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Czechoslovakia</td>
+<td style="text-align: left;">Chile</td>
+<td style="text-align: left;">Yugoslavia</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">2.78125</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">15</td>
+<td style="text-align: right;">1958</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">3.6</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">16</td>
+<td style="text-align: right;">1954</td>
+<td style="text-align: left;">Switzerland</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Hungary</td>
+<td style="text-align: left;">Austria</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">5.38462</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">17</td>
+<td style="text-align: right;">1950</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">18</td>
+<td style="text-align: right;">1938</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Hungary</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">4.66667</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">19</td>
+<td style="text-align: right;">1934</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Czechoslovakia</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Austria</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">4.11765</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">20</td>
+<td style="text-align: right;">1930</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">USA</td>
+<td style="text-align: left;">Yugoslavia</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">3.88889</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<ul>
+<li>Por gols:</li>
+</ul>
+<div id="16" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">sort</span>(df, <span class="op">:</span>Goals)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>20×9 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Goals</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GoalsPerMatch</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">1930</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">USA</td>
+<td style="text-align: left;">Yugoslavia</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">3.88889</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">1934</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Czechoslovakia</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Austria</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">4.11765</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">1938</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Hungary</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">4.66667</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">1950</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: right;">1962</td>
+<td style="text-align: left;">Chile</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Czechoslovakia</td>
+<td style="text-align: left;">Chile</td>
+<td style="text-align: left;">Yugoslavia</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">2.78125</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: right;">1966</td>
+<td style="text-align: left;">England</td>
+<td style="text-align: left;">England</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: left;">Soviet Union</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">2.78125</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">7</td>
+<td style="text-align: right;">1970</td>
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">2.96875</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">8</td>
+<td style="text-align: right;">1974</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Poland</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">2.55263</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">9</td>
+<td style="text-align: right;">1978</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">2.68421</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">10</td>
+<td style="text-align: right;">1990</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">England</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">2.21154</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">11</td>
+<td style="text-align: right;">1958</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">3.6</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">12</td>
+<td style="text-align: right;">1986</td>
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Belgium</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">2.53846</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">13</td>
+<td style="text-align: right;">1954</td>
+<td style="text-align: left;">Switzerland</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Hungary</td>
+<td style="text-align: left;">Austria</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">5.38462</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">14</td>
+<td style="text-align: right;">1994</td>
+<td style="text-align: left;">USA</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">Bulgaria</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">2.71154</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">15</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">145</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.26562</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">16</td>
+<td style="text-align: right;">1982</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Poland</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: right;">146</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">2.80769</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">17</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.29688</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">18</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">Korea/Japan</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Turkey</td>
+<td style="text-align: left;">Korea Republic</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.51562</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">19</td>
+<td style="text-align: right;">1998</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Croatia</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.67188</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">20</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.67188</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="acessando-linhas-específicas" class="level2">
+<h2 class="anchored" data-anchor-id="acessando-linhas-específicas">Acessando linhas específicas</h2>
+<p>Aqui demonstramos como acessar partes específicas do dataset.</p>
+<ul>
+<li>Quarta linha:</li>
+</ul>
+<div id="18" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a>df[<span class="fl">4</span>, <span class="op">:</span>]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>DataFrameRow (9 columns)</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Goals</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GoalsPerMatch</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">1950</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<ul>
+<li>Valor específico:</li>
+</ul>
+<div id="20" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1"></a>df[<span class="fl">4</span>, <span class="op">:</span>Winner]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>"Uruguay"</code></pre>
+</div>
+</div>
+</section>
+<section id="filtros" class="level2">
+<h2 class="anchored" data-anchor-id="filtros">Filtros</h2>
+<p>Os filtros permitem selecionar subconjuntos de dados com base em condições.</p>
+<ul>
+<li>Copas do século XXI:</li>
+</ul>
+<div id="22" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">filter</span>(row <span class="op">-&gt;</span> row.Year <span class="op">&gt;</span> <span class="fl">2001</span>, df)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>4×9 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Goals</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GoalsPerMatch</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">Korea/Japan</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Turkey</td>
+<td style="text-align: left;">Korea Republic</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.51562</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.29688</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">145</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.26562</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.67188</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>ou por meio da indexação booleana</p>
+<div id="24" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a>df[df.Year <span class="op">.&gt;</span> <span class="fl">2001</span>, <span class="op">:</span>]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>4×9 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Goals</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GoalsPerMatch</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">Korea/Japan</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Turkey</td>
+<td style="text-align: left;">Korea Republic</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.51562</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Portugal</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.29688</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">145</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.26562</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.67188</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<ul>
+<li>Copas em que o Brasil foi campeão:</li>
+</ul>
+<div id="26" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">filter</span>(row <span class="op">-&gt;</span> row.Winner <span class="op">==</span> <span class="st">"Brazil"</span>, df)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>5×9 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Goals</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GoalsPerMatch</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">1958</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">3.6</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">1962</td>
+<td style="text-align: left;">Chile</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Czechoslovakia</td>
+<td style="text-align: left;">Chile</td>
+<td style="text-align: left;">Yugoslavia</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">2.78125</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">1970</td>
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">2.96875</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">1994</td>
+<td style="text-align: left;">USA</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: left;">Bulgaria</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">2.71154</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">Korea/Japan</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Turkey</td>
+<td style="text-align: left;">Korea Republic</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.51562</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="agrupando" class="level2">
+<h2 class="anchored" data-anchor-id="agrupando">Agrupando</h2>
+<p>O agrupamento é útil para análises agregadas e resumidas.</p>
+<ul>
+<li>Agrupar por sede:</li>
+</ul>
+<div id="28" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">groupby</span>(df, <span class="op">:</span>Country)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<p><b>GroupedDataFrame with 15 groups based on key: Country</b></p><div><div style="float: left;"><span>First Group (1 row): Country = "Uruguay"</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Goals</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GoalsPerMatch</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">1930</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: left;">USA</td>
+<td style="text-align: left;">Yugoslavia</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">3.88889</td>
+</tr>
+</tbody>
+</table>
+</div><p>⋮</p><div><div style="float: left;"><span>Last Group (1 row): Country = "South Africa"</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Runners-Up</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Third</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Fourth</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Goals</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">MatchesPlayed</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">GoalsPerMatch</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: left;">Netherlands</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">145</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.26562</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<ul>
+<li>Contagem simples (frequência):</li>
+</ul>
+<div id="30" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">combine</span>(<span class="fu">groupby</span>(df, <span class="op">:</span>Country), nrow)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>15×2 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">nrow</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: left;">Switzerland</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: left;">Sweden</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">7</td>
+<td style="text-align: left;">Chile</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">8</td>
+<td style="text-align: left;">England</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">9</td>
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">10</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">11</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">12</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">13</td>
+<td style="text-align: left;">USA</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">14</td>
+<td style="text-align: left;">Korea/Japan</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">15</td>
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<ul>
+<li>Ranking de campeões:</li>
+</ul>
+<div id="32" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">sort</span>(<span class="fu">combine</span>(<span class="fu">groupby</span>(df, <span class="op">:</span>Winner), nrow <span class="op">=&gt;</span> <span class="op">:</span>Titles), <span class="op">:</span>Titles, rev<span class="op">=</span><span class="cn">true</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>9×2 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Winner</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Titles</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: left;">Italy</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: left;">Germany FR</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: left;">England</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">7</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">8</td>
+<td style="text-align: left;">Spain</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">9</td>
+<td style="text-align: left;">Germany</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="salvar-o-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="salvar-o-dataset">Salvar o dataset</h2>
+<p>iremos salvar nosso dataset em formato CSV (Comma-Separated Values), ou Valores Separados por Vírgula.</p>
+<div id="34" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">using</span> <span class="bu">CSV</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>CSV.<span class="fu">write</span>(<span class="st">"WorldCups.csv"</span>, df)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -780,6 +2246,15 @@ gtag('config', 'G-ECV5W1L7CB', { 'anonymize_ip': true});
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../disciplinas/julia/13-plots.html" class="pagination-link" aria-label="Gráficos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Gráficos</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
