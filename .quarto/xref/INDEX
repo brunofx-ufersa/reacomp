@@ -4,5 +4,50 @@
   },
   "index.qmd": {
     "index.html": "8e62b398"
+  },
+  "disciplinas/aed1/index.qmd": {
+    "index.html": "f14fe330"
+  },
+  "disciplinas/aed2/index.qmd": {
+    "index.html": "37bdaf7d"
+  },
+  "disciplinas/aed2/gaming/unidade2/1-ponteiros.qmd": {
+    "1-ponteiros.html": "e79e3117"
+  },
+  "disciplinas/aed2/gaming/unidade2/3-memoria.qmd": {
+    "3-memoria.html": "6dab6893"
+  },
+  "disciplinas/aed2/gaming/unidade2/2-callback.qmd": {
+    "2-callback.html": "8aafbb69"
+  },
+  "disciplinas/aed2/gaming/unidade2/fundamentos.qmd": {
+    "fundamentos.html": "380fd85a"
+  },
+  "disciplinas/aed2/gaming/index.qmd": {
+    "index.html": "3cebfefb"
+  },
+  "disciplinas/aed2/academic/unidade2/1-ponteiros.qmd": {
+    "1-ponteiros.html": "d808d092"
+  },
+  "disciplinas/aed2/academic/unidade2/3-memoria.qmd": {
+    "3-memoria.html": "a6501a60"
+  },
+  "disciplinas/aed2/academic/unidade2/2-callback.qmd": {
+    "2-callback.html": "b48a4904"
+  },
+  "disciplinas/aed2/academic/index.qmd": {
+    "index.html": "15b2e976"
+  },
+  "disciplinas/algoritmos/index.qmd": {
+    "index.html": "02956932"
+  },
+  "disciplinas/programacaoc/index.qmd": {
+    "index.html": "41bf1c0d"
+  },
+  "contribuicao.qmd": {
+    "contribuicao.html": "a65f5c5c"
+  },
+  "disciplinas.qmd": {
+    "disciplinas.html": "2c28543a"
   }
 }
