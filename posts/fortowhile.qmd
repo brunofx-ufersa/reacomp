@@ -6,10 +6,22 @@ description: "Tutorial de como transformar um laço **for** em **while**"
 author: "Bruno Xavier"
 date: "2025-10-15"
 categories:
-  - algoritmo
+    - Fundamentos C
 ---
 
 # Introdução
+
+Oi pesssoal, sim.
+
+:::{.callout-important}
+Estudem!
+:::
+
+```c
+int main(){
+    return 0;
+}
+```
 
 Os laços de repetição são ferramentas fundamentais em qualquer linguagem de programação. Eles permitem executar blocos de código várias vezes sem precisar reescrevê-los. Em C, os dois tipos mais comuns são o `for` e o `while`.
 
@@ -37,8 +49,6 @@ while (condição){
     incremento
 }
 ```
-
-💡 Exemplo prático
 
 A seguir, veja um exemplo simples que imprime uma frase 42 vezes usando `for`:
 
@@ -74,7 +84,6 @@ Laços infinitos podem parecer um erro de programação, mas eles têm usos prá
 - programas que ficam "rodando para sempre”, como servidores, jogos ou sistemas embarcados;
 - loops de espera, que ficam verificando uma condição até que algo aconteça.
 
-🔁 Exemplo com `while`
 
 A forma mais comum de criar um laço infinito em C é com `while`:
 
@@ -86,7 +95,6 @@ while (1) {
 
 Aqui, a condição é sempre verdadeira (1 significa _true_), então o loop nunca termina.
 
-🔁 Exemplo com `for`
 
 Também podemos criar um laço infinito com `for`, deixando os três argumentos vazios:
 
@@ -98,7 +106,7 @@ for (;;) {
 
 Esse é o equivalente exato ao `while(1)`. O compilador entende que não há inicialização, nem condição de parada, nem incremento, então o loop continua indefinidamente.
 
-⚠️ Cuidados importantes
+## Cuidados importantes
 
 Cuidado com _loops_ sem saída, pois se não houver um `break` ou uma condição de parada dentro do _loop_, o programa pode travar ou consumir muito processamento.
 
@@ -117,9 +125,11 @@ while (1) {
 Evite _loops_ infinitos acidentais, especialmente ao converter `for` para `while`.
 Se esquecer de atualizar a variável de controle (`i++`, por exemplo), o programa pode nunca sair do loop.
 
-💡 Dica de prática
+::: {.column-margin}
+**[Se liga!]{.text-warning}**
+Tente modificar o exemplo anterior do "cão arrependido" para rodar infinitamente, e depois adicione uma condição de saída com `break`. Assim você entende bem como o controle de fluxo funciona.
+:::
 
-Tente modificar o exemplo anterior do “Cão arrependido” para rodar infinitamente, e depois adicione uma condição de saída com `break`. Assim você entende bem como o controle de fluxo funciona.
 
 ---
 

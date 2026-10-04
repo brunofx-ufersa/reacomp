@@ -1,0 +1,141 @@
+---
+title: "Função main"
+lang: pt-BR
+toc-title: Conteúdo
+description: "Argumentos da função `main` e _parsing_ básico de linha de comando"
+author: ["Kaiky Ferreira", "Gabriel de Freitas"]
+date: "2025-11-03"
+categories: 
+  - Modularização e I/O
+  - Fundamentos C
+---
+
+# Introdução
+
+A função `main` é o ponto de partida de todo programa escrito em C, sendo responsável por iniciar a execução e, em muitos casos, receber parâmetros externos. 
+
+Quando declarada com os argumentos `argc` e `argv`, ela permite que o programa interprete informações enviadas pelo usuário através da linha de comando. Essa funcionalidade é fundamental para o desenvolvimento de aplicações que precisam processar arquivos, opções ou comandos personalizados. 
+
+Compreender o uso desses parâmetros e o processo de _parsing_ é essencial para quem deseja escrever programas robustos e adaptáveis em ambientes de terminal.
+
+# Os Argumentos
+
+
+Quando declarada como `int main(int argc, char *argv[])`, a função principal permite que o programa interprete parâmetros passados pelo usuário diretamente na linha de comando. 
+
+O parâmetro `argc` (_argument count_) indica quantos argumentos foram passados, enquanto `argv` (_argument vector_) armazena cada um deles em um vetor de *strings*. 
+
+
+O primeiro argumento (`argv[0]`) contém o nome do programa, enquanto os demais representam valores inseridos durante a execução. Por exemplo, ao executar `./programa exemplo.txt`, o valor de `argc` será dois, e `argv[1]` conterá "exemplo.txt". Esse tipo de leitura é comum em sistemas operacionais e programas utilitários, pois permite que o comportamento da aplicação varie conforme os comandos recebidos.
+
+O processo de interpretação desses argumentos é conhecido como _parsing_ de linha de comando. Ele consiste em identificar opções, valores e instruções, direcionando o programa conforme a necessidade. 
+
+## Exemplo 1
+
+Programa que conta e mostra os argumentos recebidos na linha de comando.
+
+```{.c filename="argumentos.c"}
+#include <stdio.h>
+
+int main (int argc, char *argv[]){
+
+    for (int i = 0; i < argc; count++)
+        printf("argumento %d: %s\n", i, argv[i]);
+
+    return 0;    
+}
+```
+
+Compilação
+
+```{.console code-line-numbers="false"}
+$ gcc argumentos.c -o argumentos
+```
+
+Uso (windows)
+
+```{.console code-line-numbers="false"}
+$ .\argumentos 25 A 3.9
+```
+
+Uso (linux)
+
+```{.console code-line-numbers="false"}
+$ ./argumentos 25 A 3.9
+```
+
+Saída típica
+
+```{.console code-line-numbers="false"}
+argumento 0: C:\Users\REAComp\Programas\argumentos.exe
+argumento 1: 25
+argumento 2: A
+argumento 3: 3.9
+```
+
+## Exemplo 2
+
+
+```{.c filename="multiplicacao.c"}
+#include <stdio.h>
+
+int main (int argc, char *argv[]){
+
+    int resutado, fatorA, fatorB; 
+    printf("Multiplicando valores passados na linha de comando.\n");
+
+    // atoi converte de alfanumérico para numérico
+    fatorA = atoi(argv[1]);
+    fatorB = atoi(argv[2]);
+    
+    resultado = fatorA * fatorB;
+    printf("\t%d x %d = %d\n", fatorA, fatorB, resultado);
+
+    return 0;    
+}
+```
+
+A conversão usando `atoi` é necessária porque os argumentos passados via linha de comando são armazenados em _strings_. 
+
+
+Compilação
+
+```{.console code-line-numbers="false"}
+$ gcc multiplicacao.c -o multiplicacao
+```
+
+Uso (windows)
+
+```{.console code-line-numbers="false"}
+$ .\multiplicacao 4 5
+```
+
+Uso (linux)
+
+```{.console code-line-numbers="false"}
+$ ./multiplicacao 4 5
+```
+
+Saída
+
+```{.console code-line-numbers="false"}
+Multiplicando valores passados na linha de comando.
+    4 x 5 = 20
+```
+
+
+
+O uso dos parâmetros `argc` e `argv` na função `main` representa uma das formas mais práticas de tornar programas em C interativos e configuráveis. Por meio deles, é possível capturar e interpretar informações fornecidas pelo usuário diretamente na linha de comando, o que amplia a versatilidade e o controle sobre a execução do _software_.
+
+---
+
+Nesta tutorial, você aprendeu
+
+✅ a passar argumentos para a função `main`
+
+---
+
+::: callout-note
+## Aviso da Redação
+Este artigo foi revisado e editado pela equipe do blog em **04 de novembro de 2025**. 
+:::

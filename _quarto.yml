@@ -46,6 +46,7 @@ website:
       style: "docked"
       background: light
       contents:
+        - disciplinas/aed2/academic/unidade1/0-complexidade.qmd
         - disciplinas/aed2/academic/unidade1/1-arvores.qmd
         - disciplinas/aed2/academic/unidade1/2-arvoresbinarias.qmd
         - disciplinas/aed2/academic/unidade1/3-arvoresbinariasdebusca.qmd

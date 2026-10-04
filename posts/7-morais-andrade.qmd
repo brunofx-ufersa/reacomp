@@ -1,16 +1,15 @@
 ---
 title: Tipos Estruturados
 lang: pt-BR
-description: O que são os tipos estruturados struct, union e enum e como são utilizados na programação.
+toc-title: Conteúdo
+description: Aprenda a criar novas estruturas.
 author:
   - Anderson Carlos da Silva Morais
   - Marília Fonsêca Andrade
 date: 2025-10-31
 categories:
-  - struct
-  - union
-  - enum
-  - typedef
+  - Estruturas de Dados
+  - Gerenciamento de Memória
 ---
 
 
@@ -596,5 +595,5 @@ Nesta tutorial, você aprendeu
 
 ::: callout-note
 ## Aviso da Redação
-Este artigo foi revisado e editado pela equipe do blog em **04 de Novembro de 2025**. 
+Este artigo foi revisado e editado pela equipe do blog em **04 de novembro de 2025**. 
 :::

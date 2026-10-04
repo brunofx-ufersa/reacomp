@@ -3,12 +3,11 @@ title: "Compilar Programas em C - Linux"
 lang: pt-BR
 toc-title: Conteúdo
 description: "Tutorial de **compilação** de programas em C no Linux"
-author: "Bruno Xavier"
+author: ["Bruno Xavier","ADAA"]
 date: "2025-10-14"
 categories:
-  - compilação
-  - linux
-  - make
+  - Desempenho e Compilação
+  - Modularização e I/O
 image: ../img-blog/GCC.svg  
 ---
 

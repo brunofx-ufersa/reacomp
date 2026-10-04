@@ -1,0 +1,247 @@
+---
+title: "Bibliotecas em C"
+lang: pt-BR
+toc-title: Conteúdo
+description: Criando e usando bibliotecas estáticas e dinâmicas
+author:
+  - Moisés Lucarelly
+  - João Victtor
+date: 2025-11-04
+categories:
+  - Bibliotecas C
+  - Desempenho e Compilação
+---
+
+## Introdução
+
+Ao programar em C, especialmente em projetos maiores, é comum querermos reutilizar código. Funções que usamos em vários programas, como rotinas matemáticas ou de manipulação de dados, não precisam ser copiadas e coladas. A solução para isso é o uso de **bibliotecas**: coleções de código pré-compilado que podem ser "linkadas" (ligadas) ao seu programa principal.
+
+Existem dois tipos principais de bibliotecas em C: **estáticas** e **dinâmicas**. Este artigo explica a diferença conceitual entre elas e mostra, na prática, como criar e usar cada uma.
+
+## Contextualização e Motivação
+
+Imagine que você criou um conjunto de funções matemáticas incríveis em arquivos `mat.c` e `mat.h`. Agora, cinco programas diferentes no seu projeto precisam usar essas funções.
+
+Sem bibliotecas, você teria que compilar o `mat.c` junto com cada um desses cinco programas. Se você encontrar um bug em `mat.c`, precisará recompilar *todos os cinco programas* após corrigi-lo.
+
+Bibliotecas resolvem isso. Elas encapsulam o código de `mat.c` em um único arquivo. Seus programas principais apenas "usam" essa biblioteca. Isso melhora a organização, a manutenção e a reutilização do código.
+
+## Explicação Conceitual
+
+A principal diferença entre bibliotecas estáticas e dinâmicas está em *quando* e *como* o código da biblioteca é incorporado ao seu programa executável.
+
+### Bibliotecas Estáticas
+
+Uma biblioteca estática (arquivo `.a`, de *archive*) é um pacote de arquivos objeto (`.o`).
+
+Durante o processo de compilação (especificamente, na fase de *linkagem*), o "linker" (ligador) identifica quais funções da biblioteca seu programa utiliza e **copia** o código binário dessas funções para dentro do seu arquivo executável final.
+```{mermaid}
+flowchart LR
+    A["01010101
+       11111110
+       10000001"] --> B["10101010
+                         00000001
+                         10001111
+                         10011001
+                         11000010"]
+    A --o n1["biblioteca"]
+    B --> C["01010101
+            11111110
+            10000001
+            10101010
+            00000001
+            10001111
+            10011001
+            11000010"]
+    B --o n2["binario"]
+    C --o n3["executável final"]
+
+    n1@{ shape: text}
+    n2@{ shape: text}
+    n3@{ shape: text}
+     A:::etapa1
+     B:::etapa2
+     C:::etapa3
+    classDef etapa1 fill:#dff0ff,stroke:#0074D9,stroke-width:2px,color:#000,font-weight:bold;   %% Azul
+    classDef etapa2 fill:#fff8dc,stroke:#ffb400,stroke-width:2px,color:#000,font-weight:bold;  %% Amarelo
+    classDef etapa3 fill:#d9fdd3,stroke:#2ecc71,stroke-width:2px,color:#000,font-weight:bold;  %% Verde
+    classDef label fill:none,stroke:none,color:#333,font-style:italic;
+```
+
+
+Dessa maneira, o executável se torna autossuficiente no sentido em que ele contém todo o código necessário para rodar, incluindo o seu próprio código e o código das bibliotecas estáticas que utilizou.
+
+Como vantagem de usarmos bibliotecas estáticas é que o executável pode ser distribuído sozinho, pois não depende de arquivos de biblioteca externos no sistema do usuário, aumentando a portabilidade. Porém, o executável final é maior, pois o código da biblioteca é replicado dentro dele. Outra desvantagem é que se a biblioteca for atualizada, todos os programas que a utilizam precisam ser recompilados e linkados novamente.
+
+### Bibliotecas Dinâmicas
+
+Uma biblioteca dinâmica (arquivo `.so`, de *shared object* ou objeto compartilhado), além de ter um pacote de arquivos `.o`, possui metadados adicionais e seções especiais que permitem ligação e carregamento dinâmico.
+
+Neste caso, linker não copia o código da biblioteca para o executável. Em vez disso, ele apenas insere uma "referência" ou um "aviso" no executável, dizendo: 
+
+> "Quando você for executado, você precisará carregar a biblioteca `libexemplo.so`". 
+
+Dessa maneira, quando você executa o programa, o *sistema operacional* (ou um *dynamic linker/loader*) encontra o arquivo `.so` necessário no sistema, o carrega na memória e só então o programa começa a rodar.
+
+Isso é vantajoso, pois o executável final é muito menor. Além disso, se a biblioteca `.so` for atualizada no sistema, todos os programas que a utilizam dinamicamente passam a usar a nova versão automaticamente, sem precisarem ser recompilados.
+
+No entanto, com bibliotecas dinâmicas, perdemos a autosuficiência, ou seja, o executável não roda sozinho. O arquivo `.so` correspondente (e da versão correta) deve estar presente no sistema onde o programa será executado.
+
+:::{.callout-note}
+No _Windows_, a biblioteca estática tem a extensão `.lib`, e a dinâmica `.dll`. 
+:::
+
+## Mão na massa
+
+Vamos criar uma biblioteca simples chamada `soma` com uma função para somar dois inteiros e usá-la em um programa principal.
+
+#### Arquivos da biblioteca
+
+Primeiro, criamos os arquivos da nossa biblioteca.
+
+```{.c code-line-numbers="false" filename="soma.h"}
+#ifndef SOMA_H
+#define SOMA_H
+
+int somar(int a, int b);
+
+#endif
+```
+
+```{.c code-line-numbers="false" filename="soma.c"}
+int somar(int a, int b){
+  return a + b;
+};
+```
+
+#### Criando a biblioteca estática
+
+Primeiro precisamos compilar o código-fonte para um arquivo objeto:
+
+```{.console code-line-numbers="false"}
+$ gcc -c soma.c -o soma.o
+```
+
+O comando `gcc -c` apenas compila, mas não linka.
+
+Agora precisamos empacotar o objeto em um biblioteca estática:
+
+```{.console code-line-numbers="false"}
+$ ar rcs libsoma.a soma.o
+```
+
+O comando `ar` (_archiver_) cria a biblioteca. É necessário frisar que o nome da biblioteca deve conter o prefixo "lib". Desse modo, acabamos de gerar o arquivo `libsoma.a`.
+
+#### Criando a biblioteca dinâmica
+
+O processo para gerarmos `.so` é um pouco diferente, pois precisamos compilar o código-fonte para um arquivo objeto usando a flag `-fPIC`:
+
+```{.console code-line-numbers="false"}
+$ gcc -c -fPIC soma.c -o soma.o
+```
+
+A flag `-fPIC` (_Position Independent Code_) é **obrigatória** para bibliotecas dinâmicas, pois elas podem ser carregadas em diferentes endereços de memória. 
+
+Para criarmos a biblioteca dinâmica a partir do objeto usamos `-shared`. Dessa forma, informamos ao gcc para criar um objeto compartilhado (_shared object_).
+
+```{.console code-line-numbers="false"}
+$ gcc -shared -o libsoma.so soma.o
+```
+
+Como resultado, obtemos o arquivo `libsoma.so`.
+
+
+#### Usando as bibliotecas
+
+Agora, vamos criar nosso programa principal que usa a função `somar`.
+
+```{.c code-line-numbers="false" filename="main.c"}
+#include <stdio.h>
+#include "minhalib.h" // Inclui nossa definição
+
+int main() {
+    int resultado = somar(10, 5);
+    printf("O resultado da soma é: %d\n", resultado);
+    return 0;
+}
+```
+
+#### Compilando e linkando com a biblioteca estática
+
+Executamos o seguinte comando:
+
+```{.console code-line-numbers="false"}
+$ gcc main.c -L. -lsoma -o soma_estatica
+```
+
+- -L.: indica ao linker para procurar bibliotecas no diretório atual
+- -lsoma: indica ao linker para usar a biblioteca `libsoma.a`. 
+
+Agora temos o executável `soma_estatica`. Ele já contém o código da função `somar`, pois a biblioteca é copiada para dentro do executável.
+
+::: {.callout-note}
+Se você for distribuir seu programa, usar linkagem estática torna o executável independente e mais fácil de "instalar" (copiar e colar).
+:::
+
+#### Compilando e linkando com a biblioteca dinãmica
+
+O comando de compilação é idêntico.
+
+```{.console code-line-numbers="false"}
+$ gcc main.c -L. -lsoma -o soma_dinamica
+```
+
+::: {.callout-important}
+Se no mesmo diretório estiverem duas versões da biblioteca (estática e dinâmica), o gcc vai escolher a dinâmica. Primeiro ele procura por `.so`, se não existir, então procura por `.a`.
+
+As bibliotecas em Linux quase sempre começam com `lib` e terminam com `.a` ou `.so`. O linker procura por `libNOME.so` ou `libNOME.a` quando você usa a flag `-lNOME`.
+:::
+
+Acabamos de gerar o execultável `soma_dinamica`, mas diferentemente da estática, ele não carrega o código da biblioteca dentro dele, ele apenas guarda uma referência. Quando o programa roda, o loader do sistema carrega `libsoma.so` dinamicamente.
+
+É muito provável que vamos obter um erro se rodarmos o executável `soma_dinamica`. Isso porque o loader dinâmico do sistema não procura a biblioteca automaticamente no diretório atual. Por padrão, ele procura em diretórios como:
+
+- `/lib`
+- `/usr/lib`
+- `/usr/local/lib`
+
+As alternativas mais simples para contornar isso são copiar nossa biblioteca para `/usr/local/lib/` ou indicar ao sistema onde procurar executando o comando:
+
+```{.console code-line-numbers="false"}
+$ export LD_LIBRARY_PATH=.
+```
+
+O `.` no final indica o diretório atual. Vale salientar que o comando acima funciona temporariamente, isto é, até fechar o terminal.
+
+Dessa forma, podemos executar `soma_dinamica` sem problemas. 
+
+
+::: {.callout-note}
+Ao usarmos a linkagem dinâmica, nossa programa depende que o usuário tenha a versão correta daquela biblioteca instalada no local certo (como `/usr/lib`).
+:::
+
+Existe uma opção mais elegante que consiste em fixar o caminho da `.so` dentro do executável no momento da compilação:
+
+```{.console code-line-numbers="false"}
+$ gcc main.c -L. -lsoma -Wl,-rpath=. -o soma_dinamica
+```
+
+O `-rpath` (_run-time search path_) indica o diretório onde o sistema devo procurar a biblioteca dinâmica. Essa flag não é reconhecida pelo compilador, mas pelo linker. Por essa razão, usamos a flag `-Wl` que significa que o que vem depois da vírgula deve ser passado para o linker. Ou seja, estamos chamando o linker indiretamente via gcc.
+
+
+---
+
+Nesta tutorial, você aprendeu
+
+✅ como gerar bibiotecas estáticas e dinâmicas em C
+
+✅ como fazer a linkagem das bibliotecas aos programas clientes
+
+✅ a executar programas que usam bibliotecas 
+
+---
+
+::: callout-note
+## Aviso da Redação
+Este artigo foi revisado e editado pela equipe do blog em **07 de novembro de 2025**. 
+:::

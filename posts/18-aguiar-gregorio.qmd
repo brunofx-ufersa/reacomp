@@ -1,14 +1,13 @@
 ---
-title: "Funções em C"
+title: "Funções"
 lang: pt-BR
 toc-title: Conteúdo
 description: "Passagem por valor e por referência"
 author: ["Guilherme Silva Aguiar", "Frederico Gregório Emidio Santos Ferreira"]
 date: "2025-11-02"
 categories:
-  - C
-  - pass-by-value
-  - pass-by-reference
+  - Gerenciamento de Memória
+  - Fundamentos C
 ---
 
 
@@ -246,5 +245,5 @@ Nesta tutorial, você aprendeu
 
 ::: callout-note
 ## Aviso da Redação
-Este artigo foi revisado e editado pela equipe do blog em **04 de Novembro de 2025**. 
+Este artigo foi revisado e editado pela equipe do blog em **04 de novembro de 2025**. 
 :::

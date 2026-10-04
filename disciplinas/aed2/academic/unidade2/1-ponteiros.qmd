@@ -140,7 +140,10 @@ Uma operação importante com ponteiros é a **desreferenciação** (ou derefere
 ```{.c}
 double meta = 7.5;
 double *meta_ptr = &meta; // O operador & retorna o endereço na memória
-printf("*meta_ptr: %.2f\n", *meta_ptr); // *meta_ptr: 7.50
+printf("*meta_ptr: %.2f\n", *meta_ptr);
+```
+```{.console code-line-numbers="false"}
+*meta_ptr: 7.50
 ```
 
 Na segunda linha, criamos um ponteiro que aponta para `meta`. Na linha 3, o operador `*` serve para desreferenciar, ou seja, ao usar `*meta_ptr` na impressão, o C acessa o valor armazenado no endereço que `meta_ptr` aponta, isto é, `7.5`. 
@@ -170,6 +173,13 @@ printf("&idade: %x\n", &idade);
 printf("&idade_ptr: %x\n", &idade_ptr); // Endereço do ponteiro
 printf("idade_ptr: %x\n", idade_ptr);   // Endereço de idade
 printf("*idade_ptr: %d\n", *idade_ptr); // Conteúdo de idade
+```
+```{.console code-line-numbers="false"}
+idade: 12
+&idade: 237ff90c
+&idade_ptr: 237ff900
+idade_ptr: 237ff90c
+*idade_ptr: 12
 ```
 
 Para fixação, observe o diagrama de sequência que ilustra os processos de declação e desreferenciação. 
@@ -214,11 +224,13 @@ double meta = 7.5;
 double *meta_ptr = &meta; 
 
 *meta_ptr = 10;
-printf("meta: %.2f\n", meta); // meta: 10.00
+printf("meta: %.2f\n", meta); 
 ```
+```{.console code-line-numbers="false"}
+meta: 10.00
+```
+
 Mudamos o valor de `meta` sem acessá-la diretamente. Isso é o poder dos ponteiros!
-
-
 
 ::: {.callout-note icon="false" title="🎯 Desafio de Código"}
 
@@ -299,8 +311,6 @@ dobrar_meta(meta);
 printf("meta: %.2f\n", meta);
 ```
 
-Saída:
-
 ```{.console code-line-numbers="false"}
 meta: 7.50
 meta: 7.50
@@ -326,13 +336,11 @@ double meta = 7.5;
 printf("main &meta: %x\n", &meta);
 dobrar_meta(meta);
 ```
-
-Saída:
-
 ```{.console code-line-numbers="false"}
 main &meta: 0xe8
 local &meta: 0xc0
 ```
+
 Os endereços são diferentes. Logo, não são as mesmas variáveis que estamos manipulando
 
 A variável interna em `dobrar_meta` é criada em outra região de memória e recebe uma cópia do valor passado como argumento. Esse valor é dobrado em seguida, mas não reflete na variável da função `main`, pois ela está alocada em outra posição.
@@ -382,8 +390,6 @@ int main (){
     return 0;
 }
 ```
-
-Saída:
 
 ```{.console code-line-numbers="false"}
 meta: 7.50
@@ -460,6 +466,40 @@ int *p = &x;
 
 > Se você quer alterar o valor, passe um ponteiro.
 > Se você quer alterar para onde o ponteiro aponta, passe o endereço do ponteiro.
+:::
+
+::: {.callout-note icon="false" title="🎯 Desafio de Código"}
+Implemente uma função `soma` com três parâmetros. O terceiro parâmetro deve armazenar a soma dos dois primeiros. Considere todos eles inteiros. Teste na `main` com:
+
+```{.c code-line-numbers="false"}
+int x = 10, y = 20;
+int z;
+// use a função soma aqui
+printf("%d + %d = %d\n", x, y, z);
+```
+
+Saída esperada: `10 + 20 = 30`
+:::
+
+
+::: {.callout-tip title="Solução (clique para ver)" collapse="true"}
+```{.c}
+#include <stdio.h>
+
+void soma(int x, int y, int* z){
+	*z = x + y;
+}
+
+int  main(){
+	int x = 10, y = 20;
+	int z;
+	soma(x, y, &z);
+	printf("%d + %d = %d\n", x, y, z);
+	return 0;
+}
+```
+
+Caso você não use ponteiros, o valor de `z` em `soma` é descartado quando a função finaliza e o valor impresso será o valor de `z` declarado na função `main`. Como não incializamos essa variável, o valor impresso será algum lixo de memória.
 :::
 
 ::: {.callout-note icon="false" title="🎯 Desafio de Código"}

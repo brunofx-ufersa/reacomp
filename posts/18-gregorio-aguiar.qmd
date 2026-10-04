@@ -1,13 +1,13 @@
 ---
-title: "Funções em C"
+title: "Funções"
 lang: pt-BR
 toc-title: Conteúdo
-description: "Protótipos de funções"
+description: "Classificação e protótipos de funções"
 author: ["Frederico Gregório Emidio Santos Ferreira", "Guilherme Silva Aguiar"]
 date: "2025-11-02"
 categories:
-  - C
-  - funções
+  - Fundamentos C
+  - Modularização e I/O
 ---
 
 # Introdução 
@@ -218,5 +218,5 @@ Nesta tutorial, você aprendeu
 
 ::: callout-note
 ## Aviso da Redação
-Este artigo foi revisado e editado pela equipe do blog em **03 de Novembro de 2025**. 
+Este artigo foi revisado e editado pela equipe do blog em **03 de novembro de 2025**. 
 :::

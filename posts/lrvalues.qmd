@@ -6,7 +6,8 @@ description: "Entendendo o que são lvalue e rvalue em C"
 author: "Bruno Xavier"
 date: "2025-10-18"
 categories:
-  - algoritmo
+  - Gerenciamento de Memória
+  - Fundamentos C
 ---
 
 
@@ -65,7 +66,7 @@ int a, b;
 a = b + 2;
 ```
 
-(`a` é lvalue, `b + 2` é rvalue)
+`a` é lvalue e `b + 2` é rvalue.
 
 ❌ Exemplo errado:
 
@@ -82,16 +83,16 @@ error: lvalue required as left operand of assignment
 
 Porque `a + b` não é um "lugar" da memória, mas apenas o resultado de uma soma.
 
-🧠 Mais exemplos rápidos
+## Mais exemplos
 
-| Código	| Pode compilar?	| Por quê |
-|---------|-----------------|---------|
-| `x = 5;` |	✅	| `x` é lvalue, `5` é rvalue |
-| `5 = x;` |	❌	| Literal `5` não pode receber valor |
-| `*ptr = 10;` |	✅	| `*ptr` é um lvalue (aponta pra um endereço) |
-| `ptr + 1 = x;` |	❌	| Resultado de `ptr + 1` é temporário |
-| `++x;` |	✅	| `x` tem endereço, pode ser alterado |
-| `++(x + 1);` |	❌	| `x + 1` é rvalue, não existe na memória |
+| Código	       | Pode compilar?	 | Por quê |
+|----------------|-----------------|---------|
+| `x = 5;`       | ✅              | `x` é lvalue, `5` é rvalue |
+| `5 = x;`       | ❌ | Literal `5` não pode receber valor |
+| `*ptr = 10;`   | ✅ | `*ptr` é um lvalue (aponta pra um endereço) |
+| `ptr + 1 = x;` | ❌ | Resultado de `ptr + 1` é temporário |
+| `++x;`         | ✅ | `x` tem endereço, pode ser alterado |
+| `++(x + 1);`   | ❌ | `x + 1` é rvalue, não existe na memória |
 
 
 
@@ -99,8 +100,8 @@ Resumindo
 
 | Tipo	| Pode estar à esquerda do =?	| Tem endereço? |
 |-------|-----------------------------|----------------|
-| lvalue |	✅ Sim	| ✅ Sim |
-| rvalue |	❌ Não	| ⚠️ Não acessível |
+| lvalue |	Sim	| Sim |
+| rvalue |	Não	| Não acessível |
 
 
 ---
